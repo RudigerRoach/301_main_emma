@@ -12,26 +12,62 @@
 		Johan Esterhuyse 10043285}
 \date{}
 \begin{document}
-  \begin{center}
-  \advance\leftskip-5.0cm
-	\includegraphics{Pictures/TopBorder.png}
-  \end{center}
 \maketitle
 \begin{center}
 Version 1.0 \\
 GitHub link: https://github.com/RudigerRoach/301\textunderscore main\textunderscore emma.git \\
 \vspace*{5\baselineskip}
-\includegraphics[scale=0.5]{Pictures/Logo.png}
+\includegraphics[scale=0.35]{Pictures/Logo.png}
 \end{center}
-  \begin{center}
-  \advance\leftskip-5.0cm
-	\includegraphics{Pictures/BottomBorder.png}
-  \end{center}
 \pagebreak
 \tableofcontents
 \pagebreak
 \section{Overview, Vision and Scope}
 \section{Architecture requirements}
+\subsection{Architecture requirements}
+\subsubsection{Architectural scope}
+\subsubsection{Quality requirements}
+\begin{itemize}
+\item Security
+\paragraph{}
+The systems functionality should be only available to users who can be authenticated through the EMMA system. If it is new user should be able to create new account.
+\item Usability
+\paragraph{}
+99 percent of users should be able to easily learn how to use system without prior training.
+\item Testability
+\paragraph{}
+All services offered by the system must be testable through unit tests which test when all pre-conditions are met that the service is provided and that all post-conditions hold true when service has been provided.
+\item Performance requirements
+\item Scalability
+\paragraph{}
+The deployed system must be able to operate effectively under the load of 30 concurrent users on single event.
+\item Installability
+\paragraph{}
+It should be easy to install the server side component and the effort to get it running each club night should be minimal.
+\end{itemize}
+\subsubsection{Integration and access channel requirements}
+\begin{itemize}
+\item Integration requirement
+\paragraph{}
+The production version of this application will need to integrate with EMMA(Entry and Member Management Application). EMMA is Java based application.
+\item Access channels
+\paragraph{}
+The mobile application will have to go through a web-service which will be and interface for the server side. 
+\end{itemize}
+\subsubsection{Architectural constraints}
+\begin{itemize}
+\item The mobile application should run on Android and iOS operating systems.
+\item The PC's that will be running the server side of the application and EMMA component will generally not be the latest technology(limited memory and processing power).
+\item There will be limited to no internet connection.
+\item The communication between the mobile device and server PC will be done over wifi network.
+\item The server side component of this project should be able to run on Windows and OS X operating systems.
+\end{itemize}
+\subsection{Use of reference architectures and frameworks}
+\subsection{Technologies}
+\begin{itemize}
+\item Java
+\item
+\end{itemize}
 \section{Functional requirements and application design}
 \subsection{Introduction}
 \subsection{Required Functionality}
