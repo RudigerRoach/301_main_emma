@@ -5,6 +5,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+
 \title{COS 301 Software Documentation}
 \author{Dieter Doman 11002566 \\
 		Melany Barnes 12030466 \\
@@ -43,6 +44,12 @@ Create a software solution that:
 \item Can notify a judge of outstanding scores.
 \end{itemize}
 
+\begin{figure}  
+\includegraphics[scale=0.4]{Pictures/High-level-use-case.png}
+\caption[Long caption]{High Level Use Case Diagram}
+\label{pic-a}
+\end{figure}
+\pagebreak
 \section{Architecture requirements}
 \subsection{Architecture requirements}
 \subsubsection{Architectural scope}
@@ -50,17 +57,19 @@ Create a software solution that:
 \begin{itemize}
 \item Security
 \paragraph{}
-The systems functionality should be only available to users who can be authenticated through the EMMA system. If it is new user should be able to create new account.
+The systems functionality should be only available to users who can be authenticated through the EMMA system. New users have to create an account before being granted access to the application.
 \item Usability
 \paragraph{}
+[Users should be able to use the system with little to no prior training]
 99 percent of users should be able to easily learn how to use system without prior training.
 \item Testability
 \paragraph{}
+[All services offered must be accompanied by unit tests. The tests should ensure that all pre-conditions are met before the service is delivered and that all post-conditions are met after the service has been delivered.]
 All services offered by the system must be testable through unit tests which test when all pre-conditions are met that the service is provided and that all post-conditions hold true when service has been provided.
 \item Performance requirements
 \item Scalability
 \paragraph{}
-The deployed system must be able to operate effectively under the load of 30 concurrent users on single event.
+The deployed system must be able to operate effectively under the load of 30 concurrent users[ on single event --is hierdie nie redundant nie?].
 \item Installability
 \paragraph{}
 It should be easy to install the server side component and the effort to get it running each club night should be minimal.
@@ -69,10 +78,10 @@ It should be easy to install the server side component and the effort to get it 
 \begin{itemize}
 \item Integration requirement
 \paragraph{}
-The production version of this application will need to integrate with EMMA(Entry and Member Management Application). EMMA is Java based application.
+The production version of this application will need to integrate with EMMA(Entry and Member Management Application). EMMA is Java a based application.
 \item Access channels
 \paragraph{}
-The mobile application will have to go through a web-service which will be and interface for the server side. 
+The mobile application will have to go through a web-service which will be the public interface for the server-side component. 
 \end{itemize}
 \subsubsection{Architectural constraints}
 \begin{itemize}
@@ -92,8 +101,8 @@ The mobile application will have to go through a web-service which will be and i
 \subsection{Introduction}
 \subsection{Required Functionality}
 \subsubsection{Functional requirements for registration and login}
-A first time user will be required to register by filling in his/her email address and password, as well as confirm password.
-To login for the first time a user will have to enter his/her email address and password. The credentials provided will be tested against the database to determine if it is valid.  If login fails the user will be directed to the register screen. If login is successful the device's unique identifier will be sent to the server to remember the device on the system. The user will then be able to use the rest of the system.
+A first time user will be required to register by filling in his/her email address and password, as well as confirming the password.
+To login for the first time a user will have to enter his/her email address and password. The credentials provided will be tested against the database to determine if it is valid. If login fails the user will be directed to the register screen. If login is successful the device's unique identifier will be sent to the server to remember the device on the system. The user will then be able to use the rest of the system.
 
 \subsection{Use case prioritization}
 \subsection{Use case/Services contracts}
