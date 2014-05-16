@@ -53,6 +53,10 @@ Create a software solution that:
 \section{Architecture requirements}
 \subsection{Architecture requirements}
 \subsubsection{Architectural scope}
+\begin{itemize}
+\item Providing an infrastructure for the judge to rate photos on mobile device.
+\item 
+\end{itemize}
 \subsubsection{Quality requirements}
 \begin{itemize}
 \item Security
@@ -60,16 +64,16 @@ Create a software solution that:
 The systems functionality should be only available to users who can be authenticated through the EMMA system. New users have to create an account before being granted access to the application.
 \item Usability
 \paragraph{}
-[Users should be able to use the system with little to no prior training]
-99 percent of users should be able to easily learn how to use system without prior training.
+99 \% of users should be able to use the system with little to no prior training.
 \item Testability
 \paragraph{}
-[All services offered must be accompanied by unit tests. The tests should ensure that all pre-conditions are met before the service is delivered and that all post-conditions are met after the service has been delivered.]
-All services offered by the system must be testable through unit tests which test when all pre-conditions are met that the service is provided and that all post-conditions hold true when service has been provided.
+All services offered must be accompanied by unit tests. The tests should ensure that all pre-conditions are met before the service is delivered and that all post-conditions are met after the service has been delivered.
 \item Performance requirements
+\paragraph{}
+ All operations on application should respond within less than 1 second.
 \item Scalability
 \paragraph{}
-The deployed system must be able to operate effectively under the load of 30 concurrent users[ on single event --is hierdie nie redundant nie?].
+The deployed system must be able to operate effectively under the load of 50 concurrent users.
 \item Installability
 \paragraph{}
 It should be easy to install the server side component and the effort to get it running each club night should be minimal.
@@ -92,10 +96,14 @@ The mobile application will have to go through a web-service which will be the p
 \item The server side component of this project should be able to run on Windows and OS X operating systems.
 \end{itemize}
 \subsection{Use of reference architectures and frameworks}
-\subsection{Technologies}
+\begin{itemize}
+\item We are using JIRA Framework for our SCRUM agile method
+\item 
+\end{itemize}
+\subsection{Technologies and languages}
 \begin{itemize}
 \item Java
-\item
+\item JavaScript
 \end{itemize}
 \section{Functional requirements and application design}
 \subsection{Introduction}
