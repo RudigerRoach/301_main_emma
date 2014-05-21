@@ -107,8 +107,22 @@ This section discusses the functional requirements for the mobile judging system
 \subsection{Required Functionality}
 \subsubsection{Login}
 To login for the first time a user will have to enter his email address. The email provided will be authenticated by EMMA. If login fails the user will be informed that he is not registered to be a judge for the current session. If login is successful the device's unique identifier will be sent to the server to be stored in the database so that the device can be remembered on the system. This will allow for auto login - if a user attends a session where he is able to judge his phone will automatically be logged into the system. The user will then be able to use the rest of the system.
+
+\begin{center}
+\advance\leftskip-1.3cm
+\includegraphics[width=160mm]{Pictures/Login.jpg} 
+Login Use Case Diagram 
+\end{center}
+
 \subsubsection{Judging Session}
 When the server is started, it will request that the sessions photos be sent to it as well as all the competition constraints be sent to it. The constraints will contain the type of session (Open event, Closed event, Yes/No, Winner) and the range for a valid score.
+
+\begin{center}
+\advance\leftskip-1.3cm
+\includegraphics[width=130mm]{Pictures/CreateJudgingSession.jpg} 
+CreateJudgingSession Use Case Diagram 
+\end{center}
+
 \subsection{Use case prioritization}
 Critical Use Cases are the main cases that the system is made up of namely: Login, CreateJudgingSession. Without these cases the system will have limited to no functionality which will lead to a system that is not required by anyone.
 \\ \\
