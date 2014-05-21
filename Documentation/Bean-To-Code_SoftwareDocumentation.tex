@@ -7,10 +7,10 @@
 \usepackage{graphicx}
 
 \title{COS 301 Software Documentation}
-\author{Dieter Doman 11002566 \\
-		Melany Barnes 12030466 \\
-		Rudiger Roach 11004322 \\
-		Johan Esterhuyse 10043285}
+\author{Melany Barnes 12030466 \\
+		Dieter Doman 11002566 \\
+		Johan Esterhuyse 10043285 \\
+		Rudiger Roach 11004322 }
 \date{}
 \begin{document}
 \maketitle
@@ -26,7 +26,7 @@ GitHub link: https://github.com/RudigerRoach/301\textunderscore main\textundersc
 \section{Vision and Scope}
 
 \subsection{Vision}
-Our client creates software for camera club event management. A big part of an event comprises of an image judging process. Currently the process is completed by us Infra-red remotes and receivers but this configuration is limiting in terms of usability and the amount of judges that can judge concurrently.\\\\
+Our client creates software for camera club event management. A big part of an event comprises of an image judging process. Currently the process is completed by using Infra-red remotes and receivers but this configuration is limited in terms of usability and the amount of judges that can judge concurrently.\\\\
 The proposed solution will replace the hardware remote with a software application to run on a mobile device. The mobile application should alleviate all of the issues caused by the current setup and should be developed with a server component that plugs into the existing EMMA system.  
 
 \subsection{Scope}
@@ -54,37 +54,29 @@ Create a software solution that:
 \subsection{Architecture requirements}
 \subsubsection{Architectural scope}
 \begin{itemize}
-\item Providing an infrastructure for a judge to rate photos on mobile device.
-\item Providing a database to link a judge's phone id to his email address.
+\item Provide an infrastructure for a judge to rate photos on mobile device.
+\item Provide a database to link a judge's phone id to his email address.
 \end{itemize}
 \subsubsection{Quality requirements}
 \begin{itemize}
-\item Security
-\paragraph{}
+\item Security \\
 The systems functionality should be only available to users who can be authenticated through the EMMA system. New users have to create an account before being granted access to the application.
-\item Usability
-\paragraph{}
+\item Usability \\
 99 \% of users should be able to use the system with little to no prior training.
-\item Testability
-\paragraph{}
+\item Testability \\
 All services offered must be accompanied by unit tests. The tests should ensure that all pre-conditions are met before the service is delivered and that all post-conditions are met after the service has been delivered.
-\item Performance requirements
-\paragraph{}
+\item Performance requirements \\
  All operations on application should respond within less than 1 second.
-\item Scalability
-\paragraph{}
+\item Scalability \\
 The deployed system must be able to operate effectively under the load of 50 concurrent users.
-\item Installability
-\paragraph{}
+\item Installability \\
 It should be easy to install the server side component and the effort to get it running each club night should be minimal.
 \end{itemize}
 \subsubsection{Integration and access channel requirements}
 \begin{itemize}
-\item Integration requirement
-\paragraph{}
-The production version of this application will need to integrate with EMMA(Entry and Member Management Application). EMMA is Java a based application.
-\item Access channels
-\paragraph{}
+\item Integration requirement \\
+The production version of this application will need to integrate with EMMA. EMMA is Java a based application.
+\item Access channels \\
 The mobile application will have to go through a web-service which will be the public interface for the server-side component. 
 \end{itemize}
 \subsubsection{Architectural constraints}
@@ -111,15 +103,25 @@ The mobile application will have to go through a web-service which will be the p
 \end{itemize}
 \section{Functional requirements and application design}
 \subsection{Introduction}
+This section discusses the functional requirements for the mobile judging system.
 \subsection{Required Functionality}
-\subsubsection{Functional requirements for registration and login}
-A first time user will be required to register by filling in his/her email address and password, as well as confirming the password.
-To login for the first time a user will have to enter his/her email address and password. The credentials provided will be tested against the database to determine if it is valid. If login fails the user will be directed to the register screen. If login is successful the device's unique identifier will be sent to the server to remember the device on the system. The user will then be able to use the rest of the system.
-
+\subsubsection{Login}
+To login for the first time a user will have to enter his email address. The email provided will be authenticated by EMMA. If login fails the user will be informed that he is not registered to be a judge for the current session. If login is successful the device's unique identifier will be sent to the server to be stored in the database so that the device can be remembered on the system. This will allow for auto login - if a user attends a session where he is able to judge his phone will automatically be logged into the system. The user will then be able to use the rest of the system.
+\subsubsection{Judging Session}
+When the server is started, it will request that the sessions photos be sent to it as well as all the competition constraints be sent to it. The constraints will contain the type of session (Open event, Closed event, Yes/No, Winner) and the range for a valid score.
 \subsection{Use case prioritization}
+Critical Use Cases are the main cases that the system is made up of namely: Login, CreateJudgingSession. Without these cases the system will have limited to no functionality which will lead to a system that is not required by anyone.
+\\ \\
+Important Use Cases are the cases that improves the critical use cases and introduces a wider variety of functionality. These cases are AutoLogin.
+
+%Nice-To-Have Use Cases make the system more user friendly and provides a better user experience. This case is: 
+
 \subsection{Use case/Services contracts}
 \subsection{Process specifications}
 Activity sequence diagrams
 \subsection{Domain objects}
 \section{Glossary}
+EMMA - Entry and Member Management Application
+His - Refers to his/her
+He - Refers to he/she
 \end{document}
