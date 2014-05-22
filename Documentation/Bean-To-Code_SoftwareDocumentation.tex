@@ -70,7 +70,7 @@ All services offered must be accompanied by unit tests. The tests should ensure 
 \item Scalability \\
 The deployed system must be able to operate effectively under the load of 50 concurrent users.
 \item Installability \\
-It should be easy to install the server side component and the effort to get it running each club night should be minimal.
+It should be easy to install the server side component and the effort to get it running each club night should be minimal. The application should also be easy to download and install.
 \end{itemize}
 \subsubsection{Integration and access channel requirements}
 \begin{itemize}
@@ -89,7 +89,7 @@ The mobile application will have to go through a web-service which will be the p
 \end{itemize}
 \subsection{Use of reference architectures and frameworks}
 \begin{itemize}
-\item We are using JIRA Framework for our SCRUM agile method.
+\item JIRA Framework for the SCRUM agile method.
 \item Appcelerator Titanium framework which is an open-source software development kit for cross-platform mobile development.
 \item Jetty for virtual hosting.
 \item Drillbit framework to run javascript unit  testing in Titanium framework.
@@ -115,27 +115,47 @@ Login Use Case Diagram
 \end{center}
 
 \subsubsection{Judging Session}
-When the server is started, it will request that the sessions photos be sent to it as well as all the competition constraints be sent to it. The constraints will contain the type of session (Open event, Closed event, Yes/No, Winner) and the range for a valid score.
+When the server is started, it will request that the session's photos as well as all the competition constraints be sent to it. The constraints will contain the type of session (Open event, Closed event, Yes/No, Winner), the range for a valid score and if comments are enabled.
 
 \begin{center}
 \advance\leftskip-1.3cm
 \includegraphics[width=130mm]{Pictures/CreateJudgingSession.jpg} 
-CreateJudgingSession Use Case Diagram 
+Create Judging Session Use Case Diagram 
 \end{center}
 
 \subsection{Use case prioritization}
-Critical Use Cases are the main cases that the system is made up of namely: Login, CreateJudgingSession. Without these cases the system will have limited to no functionality which will lead to a system that is not required by anyone.
+Critical Use Cases are the main cases that the system is made up of namely: Login, Create Judging Session. Without these cases the system will have limited to no functionality which will lead to a system that is not required by anyone.
 \\ \\
-Important Use Cases are the cases that improves the critical use cases and introduces a wider variety of functionality. These cases are AutoLogin.
+Important Use Cases are the cases that improves the critical use cases and introduces a wider variety of functionality. These cases are Auto Login.
 
 %Nice-To-Have Use Cases make the system more user friendly and provides a better user experience. This case is: 
 
 \subsection{Use case/Services contracts}
+\begin{center}
+\advance\leftskip-1.3cm
+\includegraphics[width=160mm]{Pictures/servicesContractLogin.jpg} 
+Services contract for Login
+\end{center}
+
+\begin{center}
+\advance\leftskip-1.3cm
+\includegraphics[width=160mm]{Pictures/servicesContractCreateJudgingSession.jpg} 
+Services contract for Create Judging Session
+\end{center}
 \subsection{Process specifications}
-Activity sequence diagrams
+\begin{center}
+\advance\leftskip-1.3cm
+\includegraphics[width=160mm]{Pictures/LoginActivityDiagram.jpg} 
+Login Activity Diagram 
+\end{center}
+\begin{center}
+\advance\leftskip-1.3cm
+\includegraphics[width=160mm]{Pictures/createJudgingSessionActivityDiagram.jpg} 
+Create Judging Session Activity Diagram 
+\end{center}
 \subsection{Domain objects}
 \section{Glossary}
-EMMA - Entry and Member Management Application
-His - Refers to his/her
+EMMA - Entry and Member Management Application\\
+His - Refers to his/her\\
 He - Refers to he/she
 \end{document}
