@@ -1,18 +1,10 @@
-Welcome to your Appcelerator Titanium Mobile Project
+CommonJS API:
 
-This is a blank project.  Start by editing your application's app.js to 
-make your first mobile project using Titanium.
+==============
+Authentication
+==============
 
-
-
-----------------------------------
-Stuff our legal folk make us say:
-
-Appcelerator, Appcelerator Titanium and associated marks and logos are 
-trademarks of Appcelerator, Inc. 
-
-Titanium is Copyright (c) 2008-2013 by Appcelerator, Inc. All Rights Reserved.
-
-Titanium is licensed under the Apache Public License (Version 2). Please
-see the LICENSE file for the full license.
-
+boolean autoLogin()
+	-> returns TRUE if the device is recognized or FALSE if the device has not yet connected to the server before.
+boolean login(string emailAddress)
+	-> returns TRUE if the device was succesfuly logged in and the person is allowed to judge.
