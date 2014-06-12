@@ -9,3 +9,8 @@
 // object. For example:
 //
 // Alloy.Globals.someGlobalFunction = function(){};
+
+if (Ti.App.deployType !== 'production') {
+     Alloy.CFG.environment = 'test';
+     require('testRunner').run();
+}
