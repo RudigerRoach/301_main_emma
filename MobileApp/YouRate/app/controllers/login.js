@@ -1,3 +1,12 @@
+function doLogin()
+{
+	var textareaValue = $.textArea.value;
+	alert(textareaValue);
+	var service=require('../lib/authentication');
+	Ti.App.log(service);
+	//service.login('Melany@gmail.com');
+}
+
 function doClickMenu(evt) 
 {
     alert(evt.source.title);

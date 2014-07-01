@@ -1,6 +1,6 @@
 <Alloy>
     <Window id="startPage" backgroundColor="white">
-        <ImageView id="loadingImage" image="/loadingImage.gif" />
-        <Button id="button" onClick="autoLogin" title="Login" top="50" width="100" height="50" />
+        <ImageView id="loadingImage" image="loadingImage" />
+        <Button id="button" onClick="displayLoginPage" title="Login" top="50" width="100" height="50" />
     </Window>
 </Alloy>
