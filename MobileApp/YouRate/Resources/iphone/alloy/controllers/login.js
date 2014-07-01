@@ -25,6 +25,7 @@ function Controller() {
         padding: "10",
         borderTop: false,
         borderBottom: true,
+        height: "100",
         id: "toolbar"
     });
     $.__views.mainWindow.add($.__views.toolbar);
@@ -36,6 +37,16 @@ function Controller() {
     });
     $.__views.toolbar.add($.__views.wintitle);
     $.__views.emailLabel = Ti.UI.createLabel({
+        width: "200",
+        height: "50",
+        color: "black",
+        top: "50",
+        left: "10",
+        font: {
+            fontSize: 20,
+            fontFamily: "Helvetica Neue"
+        },
+        textAlign: "left",
         text: "Email Address:",
         id: "emailLabel"
     });
@@ -48,12 +59,29 @@ function Controller() {
         color: "#888",
         textAlign: "left",
         value: "",
-        top: "200",
-        width: "300",
-        height: "70",
+        top: "100",
+        width: "200",
+        height: "40",
         id: "textArea"
     });
     $.__views.mainWindow.add($.__views.textArea);
+    $.__views.login = Ti.UI.createButton({
+        borderWidth: "1",
+        borderColor: "black",
+        borderRadius: "5",
+        color: "black",
+        textAlign: "center",
+        font: {
+            fontSize: 20,
+            fontFamily: "Helvetica Neue"
+        },
+        top: "160",
+        width: "100",
+        height: "40",
+        title: "Login",
+        id: "login"
+    });
+    $.__views.mainWindow.add($.__views.login);
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.mainWindow.open();
