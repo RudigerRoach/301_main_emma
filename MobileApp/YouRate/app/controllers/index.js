@@ -1,4 +1,4 @@
-function autoLogin(e){
+function displayLoginPage(e){
     var win=Alloy.createController('login').getView();
  	win.open();
 };
