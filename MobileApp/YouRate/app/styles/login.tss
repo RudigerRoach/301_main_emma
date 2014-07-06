@@ -1,5 +1,5 @@
 ".container": {
-	backgroundColor: "white",
+	backgroundColor: "#D6EBFF",
 	exitOnClose: true,
 	navBarHidden: false
 },
@@ -18,21 +18,16 @@
 	title: 'YouRate - Login',
 	showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS
 },
-'#menu2[platform=android]': {
-	title: 'Help',
-	showAsAction: Ti.Andoid.SHOW_AS_ACTION_NEVER
-},
 "#emailLabel": {
 	width: "200",
 	height: "50",
 	color: "black",
 	top: "50",
-	left: "10",
 	font: {
 		fontSize: 20,
 		fontFamily: 'Helvetica Neue'
 	},
-	textAlign: 'left'
+	textAlign: 'center'
 },
 "#textArea": 
 {
@@ -40,11 +35,15 @@
 	borderColor: "#bbb", 
 	borderRadius: "5",
     color: "#888", 
-    textAlign: "left", 
+    textAlign: "center", 
     value: "",
     top: "100", 
-    width: "200", 
-    height: "40"
+    width: "250", 
+    height: "40",
+	font: {
+		fontSize: 16,
+		fontFamily: 'Helvetica Neue'
+	}
 },
 "#login": 
 {

@@ -7,12 +7,11 @@
 		
 		<!-- Android menu -->
 		<Menu id="manu" platform="android">
-			<MenuItem id="menu1" onClick="doClickMenu"/>
-			<MenuItem id="menu2" onClick="doClickMenu"/>
+			<MenuItem id="menu1" title="YouRate - Login" onClick="doClickMenu"/>
 		</Menu>
 		
 		<!-- iOS and Android -->
-		<Label id="emailLabel" onClick="lblClick">Email Address:</Label>	
+		<Label id="emailLabel">Email Address:</Label>	
         <TextArea id="textArea"/>
 		<Button id="login" onClick="doLogin">Login</Button>
     </Window>

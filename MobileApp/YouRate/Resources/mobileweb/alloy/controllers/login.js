@@ -16,39 +16,24 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.mainWindow = Ti.UI.createWindow({
-        backgroundColor: "#D6EBFF",
+        backgroundColor: "white",
         exitOnClose: true,
         navBarHidden: false,
         id: "mainWindow"
     });
     $.__views.mainWindow && $.addTopLevelView($.__views.mainWindow);
     setActionBar ? $.__views.mainWindow.addEventListener("open", setActionBar) : __defers["$.__views.mainWindow!open!setActionBar"] = true;
-    $.__views.toolbar = Ti.UI.iOS.createToolbar({
-        top: "0",
-        padding: "10",
-        borderTop: false,
-        borderBottom: true,
-        height: "100",
-        id: "toolbar"
-    });
-    $.__views.mainWindow.add($.__views.toolbar);
-    $.__views.wintitle = Ti.UI.createButton({
-        style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
-        color: "black",
-        title: "YouRate - Login",
-        id: "wintitle"
-    });
-    $.__views.toolbar.add($.__views.wintitle);
     $.__views.emailLabel = Ti.UI.createLabel({
         width: "200",
         height: "50",
         color: "black",
         top: "50",
+        left: "10",
         font: {
             fontSize: 20,
             fontFamily: "Helvetica Neue"
         },
-        textAlign: "center",
+        textAlign: "left",
         text: "Email Address:",
         id: "emailLabel"
     });
@@ -58,15 +43,11 @@ function Controller() {
         borderColor: "#bbb",
         borderRadius: "5",
         color: "#888",
-        textAlign: "center",
+        textAlign: "left",
         value: "",
         top: "100",
-        width: "250",
+        width: "200",
         height: "40",
-        font: {
-            fontSize: 16,
-            fontFamily: "Helvetica Neue"
-        },
         id: "textArea"
     });
     $.__views.mainWindow.add($.__views.textArea);
