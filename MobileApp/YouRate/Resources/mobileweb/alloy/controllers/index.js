@@ -24,7 +24,7 @@ function Controller() {
         width: "100",
         height: "100",
         id: "loadingImage",
-        image: "/loadingImage"
+        image: "loadingImage.gif"
     });
     $.__views.startPage.add($.__views.loadingImage);
     $.__views.button = Ti.UI.createButton({

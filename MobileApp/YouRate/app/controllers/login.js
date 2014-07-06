@@ -19,7 +19,7 @@ function setActionBar(evt)
     	try
     	{
     		var actionBar = $.mainWindow.activity.actionBar; 	//get a handle to the action bar
-    		actionBar.title = 'Mella';							//change the App Title
+    		actionBar.title = 'YouRate';						//change the App Title
     		actionBar.displayHomeAsUp=false;					//show the "angle" pointing back
     		actionBar.onHomeIconItemSelected = function()		//what to do when the "home" icon is pressed
     		{
@@ -32,13 +32,6 @@ function setActionBar(evt)
     		//
     	}
     }
-}
-
-function lblClick(evt)
-{
-	//var win2=Alloy.createController('win2').getView();
-	//win2.open();
-	alert("Label works");
 }
 
 $.mainWindow.open();
