@@ -73,7 +73,7 @@ public class MinimalServerTest
         mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
         
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("email", "asdf"));
+        urlParameters.add(new BasicNameValuePair("email", "asdfq"));
         urlParameters.add(new BasicNameValuePair("deviceUID", "123"));
         mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
         HttpResponse mockResponse = client.execute(mockRequest);

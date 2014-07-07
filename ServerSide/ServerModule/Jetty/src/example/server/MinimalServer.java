@@ -1,6 +1,7 @@
 package example.server;
  
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -59,44 +60,49 @@ public class MinimalServer
             //test if no parameters are sent
             if(user != null)
             {
-//            	FileReader inputFile = new FileReader("data.txt");
-//            	BufferedReader buffer = new BufferedReader(inputFile);
-//            	String line;
-//            	boolean boolEmail = false, booldeviceID = false;
-//            	while((line = buffer.readLine()) != null)
-//            	{
-//            		String [] values = line.split(",");
-//            		if(values[0].equals(user))
-//            		{
-//            			boolEmail = true;
-//            			if(values[1].equals(id))
-//            			{
-//            				booldeviceID = true;
-//            			}
-//            			//break;
-//            		}
-//            		else if (values[1].equals(id))
-//            		{
-//            			booldeviceID = true;
-//            			//break;
-//            		}
-//            	}
-//            	if ((booldeviceID == true) && (boolEmail == true))
-//            	{
-//            		System.out.println("Remembered");
-//            	}
-//            	else if (booldeviceID == true)
-//            	{
-//            		System.out.println("New email on same device");
-//            	}
-//            	else if (boolEmail == true)
-//            	{
-//            		System.out.println("Ne device on this email");
-//            	}
-//            	else
-//            	{
-//            		System.out.println("Don't remember device");
-//            	}
+            	File file = new File("src/example/server/Data.txt");
+            	FileReader inputFile = new FileReader(file);
+            	BufferedReader bf = new BufferedReader(inputFile);
+            	boolean boolEmail = false, booldeviceID = false;
+            	
+            	String line = null;
+            	while((line = bf.readLine()) != null)
+            	{
+            		String [] values = line.split(",");
+            		if(values[0].equals(user) == true)
+                	{
+                		boolEmail = true;
+                		if(values[1].equals(id) == true)
+                		{
+                			booldeviceID = true;
+                		}
+                		//break;
+                	}
+                	else if (values[1].equals(id) == true)
+                	{
+                		booldeviceID = true;
+                		//break;
+                	}
+            	}
+            	
+            	bf.close();
+            	
+            	if ((booldeviceID == true) && (boolEmail == true))
+            	{
+            		System.out.println("Remembered");
+            	}
+            	else if (booldeviceID == true)
+            	{
+            		System.out.println("New email on same device");
+            	}
+            	else if (boolEmail == true)
+            	{
+            		System.out.println("New device on this email");
+            	}
+            	else
+            	{
+            		System.out.println("Don't remember device");
+            	}
             	
             	//login successful need to do database with user id's and plug in with Emma dummy
             	emma = new EMMASimulator();
