@@ -12,10 +12,11 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.startPage = Ti.UI.createWindow({
-        id: "startPage",
-        backgroundColor: "white"
+        backgroundColor: "#DFE4E7",
+        id: "startPage"
     });
     $.__views.startPage && $.addTopLevelView($.__views.startPage);
+    displayLoginPage ? $.__views.startPage.addEventListener("open", displayLoginPage) : __defers["$.__views.startPage!open!displayLoginPage"] = true;
     $.__views.loadingImage = Ti.UI.createImageView({
         borderWidth: "2",
         borderColor: "#bbb",
@@ -24,22 +25,15 @@ function Controller() {
         width: "100",
         height: "100",
         id: "loadingImage",
-        image: "/loadingImage"
+        image: "loadingImage.gif"
     });
     $.__views.startPage.add($.__views.loadingImage);
-    $.__views.button = Ti.UI.createButton({
-        id: "button",
-        title: "Login",
-        top: "50",
-        width: "100",
-        height: "50"
-    });
-    $.__views.startPage.add($.__views.button);
-    displayLoginPage ? $.__views.button.addEventListener("click", displayLoginPage) : __defers["$.__views.button!click!displayLoginPage"] = true;
+    displayLoginPage ? $.__views.loadingImage.addEventListener("click", displayLoginPage) : __defers["$.__views.loadingImage!click!displayLoginPage"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.startPage.open();
-    __defers["$.__views.button!click!displayLoginPage"] && $.__views.button.addEventListener("click", displayLoginPage);
+    __defers["$.__views.startPage!open!displayLoginPage"] && $.__views.startPage.addEventListener("open", displayLoginPage);
+    __defers["$.__views.loadingImage!click!displayLoginPage"] && $.__views.loadingImage.addEventListener("click", displayLoginPage);
     _.extend($, exports);
 }
 
