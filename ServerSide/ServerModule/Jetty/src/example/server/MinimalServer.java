@@ -155,5 +155,4 @@ public class MinimalServer
             	System.out.println("Parameter is null..");
         }
     }
-
 }

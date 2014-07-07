@@ -47,6 +47,7 @@ public class MinimalServerTest
 		server.stop();
 	}
 
+	@SuppressWarnings("resource")
 	@Test
 	public void testLoginSuccessful() throws Exception
 	{
@@ -65,6 +66,7 @@ public class MinimalServerTest
 	        assertEquals("Testing if login was succesful",true,stringResponse.contains("success"));
     }
 	
+	@SuppressWarnings("resource")
 	@Test
 	public void testLoginFailure() throws Exception
 	{
