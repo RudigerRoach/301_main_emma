@@ -34,4 +34,4 @@ function setActionBar(evt)
     }
 }
 
-$.mainWindow.open();
+$.loginPage.open();

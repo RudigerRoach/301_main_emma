@@ -1,3 +1,6 @@
+"#startPage": {
+	backgroundColor: "#DFE4E7"
+},
 "#loadingImage": 
 {
 	borderWidth: "2",

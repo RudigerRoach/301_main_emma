@@ -15,25 +15,29 @@ function Controller() {
     var $ = this;
     var exports = {};
     var __defers = {};
-    $.__views.mainWindow = Ti.UI.createWindow({
-        backgroundColor: "#D6EBFF",
+    $.__views.loginPage = Ti.UI.createWindow({
+        backgroundColor: "#DFE4E7",
         exitOnClose: true,
         navBarHidden: false,
-        id: "mainWindow"
+        id: "loginPage"
     });
-    $.__views.mainWindow && $.addTopLevelView($.__views.mainWindow);
-    setActionBar ? $.__views.mainWindow.addEventListener("open", setActionBar) : __defers["$.__views.mainWindow!open!setActionBar"] = true;
+    $.__views.loginPage && $.addTopLevelView($.__views.loginPage);
+    setActionBar ? $.__views.loginPage.addEventListener("open", setActionBar) : __defers["$.__views.loginPage!open!setActionBar"] = true;
     $.__views.toolbar = Ti.UI.iOS.createToolbar({
+        backgroundColor: "black",
         top: "0",
         padding: "10",
         borderTop: false,
         borderBottom: true,
+        font: {
+            fontSize: 20,
+            fontFamily: "Helvetica Neue"
+        },
         height: "100",
         id: "toolbar"
     });
-    $.__views.mainWindow.add($.__views.toolbar);
+    $.__views.loginPage.add($.__views.toolbar);
     $.__views.wintitle = Ti.UI.createButton({
-        style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
         color: "black",
         title: "YouRate - Login",
         id: "wintitle"
@@ -52,7 +56,7 @@ function Controller() {
         text: "Email Address:",
         id: "emailLabel"
     });
-    $.__views.mainWindow.add($.__views.emailLabel);
+    $.__views.loginPage.add($.__views.emailLabel);
     $.__views.textArea = Ti.UI.createTextArea({
         borderWidth: "2",
         borderColor: "#bbb",
@@ -69,11 +73,12 @@ function Controller() {
         },
         id: "textArea"
     });
-    $.__views.mainWindow.add($.__views.textArea);
+    $.__views.loginPage.add($.__views.textArea);
     $.__views.login = Ti.UI.createButton({
         borderWidth: "1",
-        borderColor: "black",
+        borderColor: "#bbb",
         borderRadius: "5",
+        backgroundColor: "#bbb",
         color: "black",
         textAlign: "center",
         font: {
@@ -81,17 +86,17 @@ function Controller() {
             fontFamily: "Helvetica Neue"
         },
         top: "160",
-        width: "100",
-        height: "40",
+        width: "140",
+        height: "35",
         title: "Login",
         id: "login"
     });
-    $.__views.mainWindow.add($.__views.login);
+    $.__views.loginPage.add($.__views.login);
     doLogin ? $.__views.login.addEventListener("click", doLogin) : __defers["$.__views.login!click!doLogin"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.mainWindow.open();
-    __defers["$.__views.mainWindow!open!setActionBar"] && $.__views.mainWindow.addEventListener("open", setActionBar);
+    $.loginPage.open();
+    __defers["$.__views.loginPage!open!setActionBar"] && $.__views.loginPage.addEventListener("open", setActionBar);
     __defers["$.__views.login!click!doLogin"] && $.__views.login.addEventListener("click", doLogin);
     _.extend($, exports);
 }
