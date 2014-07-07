@@ -26,6 +26,7 @@ import org.junit.Test;
 public class MinimalServerTest 
 {	
 	private static Server server = null;
+	
 	@Before
 	public void testSetup() throws Exception
 	{

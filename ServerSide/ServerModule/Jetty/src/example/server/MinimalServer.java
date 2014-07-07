@@ -17,6 +17,7 @@ import org.json.JSONObject;
 public class MinimalServer 
 {
 	private static Server server = null;
+	private EMMASimulator emma = null;
 	
 //	public MinimalServer(int port) throws Exception
 //	{
@@ -98,7 +99,18 @@ public class MinimalServer
 //            	}
             	
             	//login successful need to do database with user id's and plug in with Emma dummy
-            	if ((user).equals("test")== true)
+            	emma = new EMMASimulator();
+            	String [] judges = emma.getJudges();
+            	boolean loginSuccess = false;
+            	for(int i = 0; i < judges.length;i++)
+            	{
+            		if(user.equals(judges[i]))
+            		{
+            			loginSuccess = true;
+            		}
+            	}
+            	
+            	if (loginSuccess == true)
             	{
             		JSONObject jsonResponse = new JSONObject();
             		try 
@@ -137,4 +149,5 @@ public class MinimalServer
             	System.out.println("Parameter is null..");
         }
     }
+
 }
