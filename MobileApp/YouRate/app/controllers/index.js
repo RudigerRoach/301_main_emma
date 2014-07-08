@@ -1,35 +1,6 @@
-function doClickMenu(evt) 
-{
-    alert(evt.source.title);
-}
+function autoLogin(e){
+    var win=Alloy.createController('login').getView();
+ 	win.open();
+};
 
-function setActionBar(evt) 
-{
-    if (OS_ANDROID) 
-    {
-    	try
-    	{
-    		var actionBar = $.mainWindow.activity.actionBar; 	//get a handle to the action bar
-    		actionBar.title = 'Mella';							//change the App Title
-    		actionBar.displayHomeAsUp=false;					//show the "angle" pointing back
-    		actionBar.onHomeIconItemSelected = function()		//what to do when the "home" icon is pressed
-    		{
-    			alert("Home icon clicked!");
-    		};  
-    		$.mainWindow.activity.invalidateOptionsMenu();		//makes sure the menu is visible  		
-    	}
-    	catch(e)
-    	{
-    		//
-    	}
-    }
-}
-
-function lblClick(evt)
-{
-	//var win2=Alloy.createController('win2').getView();
-	//win2.open();
-	alert("Label works");
-}
-
-$.mainWindow.open();
+$.startPage.open();
