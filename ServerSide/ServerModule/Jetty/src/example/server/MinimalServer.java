@@ -64,6 +64,17 @@ public class MinimalServer
             	FileReader inputFile = new FileReader(file);
             	BufferedReader bf = new BufferedReader(inputFile);
             	boolean boolEmail = false, booldeviceID = false;
+            	boolean loginSuccess = false;
+            	
+            	emma = new EMMASimulator();
+                String [] judges = emma.getJudges();
+	            for(int i = 0; i < judges.length;i++)
+	            {
+	            	if(user.equals(judges[i]))
+	            	{
+	            		loginSuccess = true;
+	            	}
+	            }
             	
             	String line = null;
             	while((line = bf.readLine()) != null)
@@ -86,7 +97,7 @@ public class MinimalServer
             	}
             	
             	bf.close();
-            	
+
             	if ((booldeviceID == true) && (boolEmail == true))
             	{
             		System.out.println("Remembered");
@@ -105,16 +116,7 @@ public class MinimalServer
             	}
             	
             	//login successful need to do database with user id's and plug in with Emma dummy
-            	emma = new EMMASimulator();
-            	String [] judges = emma.getJudges();
-            	boolean loginSuccess = false;
-            	for(int i = 0; i < judges.length;i++)
-            	{
-            		if(user.equals(judges[i]))
-            		{
-            			loginSuccess = true;
-            		}
-            	}
+            	
             	
             	if (loginSuccess == true)
             	{
