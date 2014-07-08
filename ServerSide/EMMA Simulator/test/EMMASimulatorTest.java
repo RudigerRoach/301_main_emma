@@ -34,13 +34,30 @@ public class EMMASimulatorTest extends TestCase {
         String[] temp = instance.getJudges();
         for(int i = 0; i < judges.length; i++)
             assertEquals(judges[i], temp[i]);
-        // TODO review the generated test code and remove the default call to fail.
         
     }
 
     /**
+     * Test of testGetSessionType() method, of class EMMASimulator.
+     */
+    
+    public void testGetSessionType() {
+        System.out.println("sessionType");
+        
+        EMMASimulator instance = new EMMASimulator();
+        
+        instance.setJudges(null);
+        String[] temp = instance.getJudges();  
+        assertTrue(instance.getSessionType());
+        
+    }
+    
+    
+    
+    /**
      * Test of getJudges method, of class EMMASimulator.
      */
+
     public void testGetJudges() {
         System.out.println("getJudges");
         String[] judges = new String[5];
@@ -108,9 +125,7 @@ public class EMMASimulatorTest extends TestCase {
         instance.setControll(false);
         result = instance.getControll();
         assertEquals(expResult, result);
-        
-        
-        
+
     }
     
     
@@ -131,11 +146,99 @@ public class EMMASimulatorTest extends TestCase {
         assertEquals(expResult, result);
     }
     
-    
-    
-    
+
+    /**
+     * Test of setAllImageDetails method, of class EMMASimulator.
+     */
+
+    public void testSetAllImageDetails() {
+        System.out.println("setAllImageDetails");
+        
+        EMMASimulator instance = new EMMASimulator();
+        
+        String[] test = new String[5];
+        test[0] = "Photo of a big bird";
+        test[1] = "Photo of a surfer";
+        test[2] = "Photo of a rock";
+        test[3] = "Photo of a girl";
+        test[4] = "Photo of a stick";
+        
+        instance.setAllImageDetails(test);
+        String[] ret = instance.getAllImageDetails();    
+        for(int i = 0; i < 5; i++)
+            assertEquals(test[i], instance.getImageDetails(i));
+        
+        
+    }
     
     /**
+     * Test of getAllImageDetails method, of class EMMASimulator.
+     */
+
+    public void testGetAllImageDetails() {
+        System.out.println("getAllImageDetails");
+        
+        EMMASimulator instance = new EMMASimulator();
+        
+        String[] test = new String[5];
+        test[0] = "Photo of a big bird";
+        test[1] = "Photo of a surfer";
+        test[2] = "Photo of a rock";
+        test[3] = "Photo of a girl";
+        test[4] = "Photo of a stick";
+        
+        instance.setAllImageDetails(test);
+        String[] ret = instance.getAllImageDetails();    
+        for(int i = 0; i < 5; i++)
+            assertEquals(ret[i], test[i]);
+        
+    }
+    
+    /**
+     * Test of setImageDetails method, of class EMMASimulator.
+     */
+
+    public void testSetImageDetails() {
+        System.out.println("setImageDetails");
+        
+        EMMASimulator instance = new EMMASimulator();
+        
+        String[] test = new String[5];
+        test[0] = "Photo of a big bird";
+        test[1] = "Photo of a surfer";
+        test[2] = "Photo of a rock";
+        test[3] = "Photo of a girl";
+        test[4] = "Photo of a stick";
+        
+        instance.setAllImageDetails(test);
+        instance.setImageDetails(1, "testing"); 
+        assertEquals("testing", instance.getImageDetails(1));
+        
+    }
+    
+    /**
+     * Test of getImageDetails method, of class EMMASimulator.
+     */
+
+    public void testGetImageDetails() {
+        System.out.println("getImageDetails");
+        EMMASimulator instance = new EMMASimulator();
+        String[] test = new String[5];
+        test[0] = "Photo of a big bird";
+        test[1] = "Photo of a surfer";
+        test[2] = "Photo of a rock";
+        test[3] = "Photo of a girl";
+        test[4] = "Photo of a stick";
+        
+        instance.setAllImageDetails(test);
+        String[] ret = instance.getAllImageDetails();    
+        for(int i = 0; i < 5; i++)
+            assertEquals(test[i], instance.getImageDetails(i));
+        
+    }
+    
+    
+     /**
      * Test of loadImages method, of class EMMASimulator.
      */
     
@@ -144,6 +247,9 @@ public class EMMASimulatorTest extends TestCase {
         EMMASimulator instance = new EMMASimulator();
         instance.loadImages();
         // TODO review the generated test code and remove the default call to fail.
+        
+        
+        
         fail("The test case is a prototype.");
     }
 
@@ -159,9 +265,6 @@ public class EMMASimulatorTest extends TestCase {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of main method, of class EMMASimulator.
-     */
-
+    
+    
 }

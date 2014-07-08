@@ -17,6 +17,7 @@ public class EMMASimulator {
     int botRange = 0;
     Boolean openSession = false;
     Boolean controlledSession = true;
+    String[] imageDetails;
     
     public EMMASimulator()
     {
@@ -34,6 +35,13 @@ public class EMMASimulator {
         if(judges == null)
             openSession = true;
         else openSession = false;
+    }
+    
+    public Boolean getSessionType()
+    {
+        if (openSession)
+            return true;
+        return false;
     }
     
     public String[] getJudges()
@@ -109,14 +117,48 @@ public class EMMASimulator {
                 count++;
                 
             } 
-            catch (IOException e) {System.out.println("This exeption is handled: "+e);}
+            catch (IOException e) {System.out.println("The following exeption was handled: "+e);}
         }
+        imageDetails = new String[count];
     }
     
     public BufferedImage[] getImages()
     {
         return Images;
     }
+    
+    
+    public void setAllImageDetails(String[] details)
+    {
+        imageDetails = details;
+    }
+    
+    public String[] getAllImageDetails()
+    {
+        return imageDetails;
+    }
+    
+    public void setImageDetails(int image, String details)
+    {
+        try
+        {
+            imageDetails[image] = details;
+        }
+        catch(Exception x){}
+    }
+    
+    public String getImageDetails(int image)
+    {
+        
+        try
+        {
+            return imageDetails[image];
+        }
+        catch(Exception x){}
+        
+        return null;
+    }
+    
     
    
 }
