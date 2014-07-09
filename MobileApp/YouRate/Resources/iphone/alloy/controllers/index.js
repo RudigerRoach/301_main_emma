@@ -13,6 +13,7 @@ function Controller() {
     var __defers = {};
     $.__views.startPage = Ti.UI.createWindow({
         backgroundColor: "#DFE4E7",
+        exitOnClose: true,
         id: "startPage"
     });
     $.__views.startPage && $.addTopLevelView($.__views.startPage);

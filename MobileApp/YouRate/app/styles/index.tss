@@ -1,5 +1,6 @@
 "#startPage": {
-	backgroundColor: "#DFE4E7"
+	backgroundColor: "#DFE4E7",
+	exitOnClose: true
 },
 "#loadingImage": 
 {

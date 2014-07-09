@@ -1,7 +1,6 @@
 "#loginPage": {
 	backgroundColor: "#DFE4E7",
-	exitOnClose: true,
-	navBarHidden: false
+	exitOnClose: true
 },
 "#toolbar[platform=ios]": {
 	backgroundColor: "black",
