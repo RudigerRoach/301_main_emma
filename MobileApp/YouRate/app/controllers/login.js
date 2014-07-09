@@ -1,10 +1,23 @@
 function doLogin()
 {
-	var textareaValue = $.textArea.value;
-	alert(textareaValue);
-	var service=require('../lib/authentication');
-	Ti.App.log(service);
-	//service.login('Melany@gmail.com');
+	//Gets email address from user input
+	var email = $.textArea.value;
+	alert(email);
+	//Calls login function to determine if user is allowed to access the rest of the application
+	//var service=require('../lib/authentication');
+	//Ti.App.log(service);
+	//var success = service.login(email);
+	//if (success == true)
+	//{
+		//The user is allowed to use the rest of the application, thus display the next page
+		var win=Alloy.createController('vote').getView();
+	 	win.open();
+	//}
+	//else
+	//{
+		//The user is  not allowed to use the rest of the application
+		//alert('Login failed');
+	//}
 }
 
 function doClickMenu(evt) 
