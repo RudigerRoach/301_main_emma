@@ -1,9 +1,9 @@
 function Controller() {
     function doLogin() {
-        var textareaValue = $.textArea.value;
-        alert(textareaValue);
-        var service = require("../lib/authentication");
-        Ti.App.log(service);
+        var email = $.textArea.value;
+        alert(email);
+        var win = Alloy.createController("vote").getView();
+        win.open();
     }
     function setActionBar() {
     }
@@ -18,7 +18,6 @@ function Controller() {
     $.__views.loginPage = Ti.UI.createWindow({
         backgroundColor: "#DFE4E7",
         exitOnClose: true,
-        navBarHidden: false,
         id: "loginPage"
     });
     $.__views.loginPage && $.addTopLevelView($.__views.loginPage);
