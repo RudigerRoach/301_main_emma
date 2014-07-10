@@ -1,19 +1,6 @@
 <Alloy>
-	<Window id="mainWindow" class="container" onOpen="setActionBar">
-		<!-- iOS toolbar -->
-		<Toolbar id="toolbar" platform="ios">
-			<Button id="wintitle">YouRate - Login</Button>
-		</Toolbar>
-		
-		<!-- Android menu -->
-		<Menu id="manu" platform="android">
-			<MenuItem id="menu1" onClick="doClickMenu"/>
-			<MenuItem id="menu2" onClick="doClickMenu"/>
-		</Menu>
-		
-		<!-- iOS and Android -->
-		<Label id="emailLabel" onClick="lblClick">Email Address:</Label>	
-        <TextArea id="textArea"/>
-		<Button id="login">Login</Button>
+    <Window id="startPage" backgroundColor="white">
+        <ImageView id="loadingImage" image="/loadingImage.gif" />
+        <Button id="button" onClick="autoLogin" title="Login" top="50" width="100" height="50" />
     </Window>
 </Alloy>
