@@ -4,9 +4,9 @@ function doLogin()
 	var email = $.textArea.value;
 	alert(email);
 	//Calls login function to determine if user is allowed to access the rest of the application
-	//var service=require('../lib/authentication');
+	var service=require('authentication');
 	//Ti.App.log(service);
-	//var success = service.login(email);
+	var success = service.login(email);
 	//if (success == true)
 	//{
 		//The user is allowed to use the rest of the application, thus display the next page
