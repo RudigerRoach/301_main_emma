@@ -7,11 +7,13 @@ var xhr = new XHR();
 var sessionID = -1;
 var UDID = Titanium.Platform.id;
 var error = -1;
+var returnStatus = false;
+
+exports.loginStatus = function(){
+	return returnStatus;
+};
 
 exports.login = function(email){
-	var mayReturn = false;
-	var returnStatus = false;
-	
 	//TODO unit test fail, die test wag nie vir die xhr callback nie - make it wait!
 	
 	/*
@@ -23,6 +25,13 @@ exports.login = function(email){
 		    }
 		}
 	*/
+	
+	if(email.toString().length < 6) //shortest possible email address "a@b.c" is of length 5
+	{
+		error = "Invalid email address entered, please revise your email address.";
+		returnStatus = false;
+		return;
+	}
 	
 	var url='http://www.posttestserver.com/post.php'; //verander na server address en port
 	 
@@ -37,8 +46,6 @@ exports.login = function(email){
 	   //e.data
 	   //e.status
 	   //e.code
-	   //s
-	   Ti.API.info(e.data); //just log the message
 	   
 	   //-----------------------------------------
 	   //response = JSON.parse(e.data); //remove comment at integration
@@ -51,7 +58,7 @@ exports.login = function(email){
 		    }
 		};
 		//------------------------------------
-		alert("succ: "+response.session.status);
+		
 	   if(response.session.status == "success")
 	   {
 	   		this.sessionID = response.session.session_id;
@@ -63,21 +70,24 @@ exports.login = function(email){
 	};
 	 
 	var onErrorCallback = function (e) {
-		//TODO Handle device offline errors - do in seperate module for app-wide use.
 	   // you'll receive
 	   // e.data
 	   // e.status
 	   // e.code
-	   //
-	   error = "A network error occured";
-	   Ti.API.info(e.status);
+	   
+	   if(e.status == 'error')
+	   {
+	   		error = "Device cannot reach the voting network";
+	   }
+	   else
+	   {
+	   		error = "An error occured: "+e.data;
+	   }
 	   returnStatus = false; //Login failed
 	};
 	 
 	xhr.post(url, payload , onSuccessCallback, onErrorCallback);
-	//return false; //Login failed
-
-	return returnStatus;
+	
 };
 
 exports.autoLogin = function(){
@@ -88,7 +98,8 @@ exports.error = function(){
 	if(error != -1)
 	{
 		return error;
-	}else
+	}
+	else
 	{
 		return "Everything seems fine here";
 	}
