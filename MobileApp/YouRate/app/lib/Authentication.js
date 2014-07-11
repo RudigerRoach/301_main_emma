@@ -8,6 +8,7 @@ var sessionID = -1;
 var UDID = Titanium.Platform.id;
 var error = -1;
 var returnStatus = false;
+var url='http://www.posttestserver.com/post.php'; //verander na server address en port
 
 exports.loginStatus = function(){
 	return returnStatus;
@@ -33,7 +34,7 @@ exports.login = function(email){
 		return;
 	}
 	
-	var url='http://www.posttestserver.com/post.php'; //verander na server address en port
+	
 	 
 	// this is the data you'll send to the web service
 	var payload={
@@ -61,7 +62,7 @@ exports.login = function(email){
 		
 	   if(response.session.status == "success")
 	   {
-	   		this.sessionID = response.session.session_id;
+	   		sessionID = response.session.session_id;
 	   		returnStatus = true;
 	   }else{
 	   		error = "Invalid Login cridentials";
@@ -91,7 +92,49 @@ exports.login = function(email){
 };
 
 exports.autoLogin = function(){
-	return false; //Login failed
+	
+	var payload={
+	    deviceUID:UDID
+	};
+	
+	var onSuccessCallback = function (e) {
+	   //-----------------------------------------
+	   //response = JSON.parse(e.data); //remove comment at integration
+	   
+	   //remove response overwrite at integration
+	   response = {
+		    "session": {
+		        "status": "success",
+		        "session_id": "xxyyzz"
+		    }
+		};
+		//------------------------------------
+		
+	   if(response.session.status == "success")
+	   {
+	   		sessionID = response.session.session_id;
+	   		returnStatus = true;
+	   }else{
+	   		error = "Autologin not yet available for this device.";
+	   		returnStatus = false;
+	   }
+	   
+	};
+	
+	var onErrorCallback = function (e) {
+	   if(e.status == 'error')
+	   {
+	   		error = "Device cannot reach the voting network";
+	   }
+	   else
+	   {
+	   		error = "An unknown error occured: "+e.data;
+	   }
+	   returnStatus = false; //Login failed
+	};
+	
+	xhr.post(url, payload , onSuccessCallback, onErrorCallback);
+	returnStatus = false; //Login failed
 };
 
 exports.error = function(){
