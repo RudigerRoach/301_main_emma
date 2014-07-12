@@ -1,38 +1,37 @@
-".container": {
-	backgroundColor: "white",
-	exitOnClose: true,
-	navBarHidden: false
+"#loginPage": {
+	backgroundColor: "#DFE4E7",
+	exitOnClose: true
 },
 "#toolbar[platform=ios]": {
+	backgroundColor: "black",
 	top: "0",
 	padding: "10",
 	borderTop: false,
 	borderBottom: true,
+	font: {
+		fontSize: 20,
+		fontFamily: 'Helvetica Neue'
+	},
 	height: "100"
 }
 "#wintitle[platform=ios]": {
-	style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
 	color: 'black'
 },
-'#menu1[platform=android]': {
+'#menu[platform=android]': {
+	backgroundColor: "#bbb",
 	title: 'YouRate - Login',
 	showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS
-},
-'#menu2[platform=android]': {
-	title: 'Help',
-	showAsAction: Ti.Andoid.SHOW_AS_ACTION_NEVER
 },
 "#emailLabel": {
 	width: "200",
 	height: "50",
 	color: "black",
 	top: "50",
-	left: "10",
 	font: {
 		fontSize: 20,
 		fontFamily: 'Helvetica Neue'
 	},
-	textAlign: 'left'
+	textAlign: 'center'
 },
 "#textArea": 
 {
@@ -40,17 +39,23 @@
 	borderColor: "#bbb", 
 	borderRadius: "5",
     color: "#888", 
-    textAlign: "left", 
+    textAlign: "center", 
     value: "",
     top: "100", 
-    width: "200", 
-    height: "40"
+    width: "250", 
+    height: "40",
+	font: {
+		fontSize: 16,
+		fontFamily: 'Helvetica Neue'
+	}
 },
 "#login": 
 {
 	borderWidth: "1",
-	borderColor: "black", 
+	borderColor: "#bbb", 
 	borderRadius: "5",
+	backgroundColor: "#bbb",
+	//backgroundColor: "#E5E5E9",
     color: "black", 
     textAlign: "center",
 	font: {
@@ -58,6 +63,6 @@
 		fontFamily: 'Helvetica Neue'
 	}, 
     top: "160", 
-    width: "100", 
-    height: "40"
+    width: "140", 
+    height: "35"
 }
