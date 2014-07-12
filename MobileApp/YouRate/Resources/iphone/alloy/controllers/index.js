@@ -17,6 +17,7 @@ function Controller() {
         id: "startPage"
     });
     $.__views.startPage && $.addTopLevelView($.__views.startPage);
+    displayLoginPage ? $.__views.startPage.addEventListener("open", displayLoginPage) : __defers["$.__views.startPage!open!displayLoginPage"] = true;
     $.__views.loadingImage = Ti.UI.createImageView({
         borderWidth: "2",
         borderColor: "#bbb",
@@ -32,6 +33,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.startPage.open();
+    __defers["$.__views.startPage!open!displayLoginPage"] && $.__views.startPage.addEventListener("open", displayLoginPage);
     __defers["$.__views.loadingImage!click!displayLoginPage"] && $.__views.loadingImage.addEventListener("click", displayLoginPage);
     _.extend($, exports);
 }

@@ -1,11 +1,16 @@
 function Controller() {
     function doLogin() {
         var email = $.textArea.value;
-        alert(email);
         var service = require("authentication");
         service.login(email);
-        var win = Alloy.createController("vote").getView();
-        win.open();
+        var success = service.loginStatus();
+        if (true == success) {
+            var win = Alloy.createController("vote").getView();
+            win.open();
+        } else {
+            var error = service.error();
+            1 != error && alert(error);
+        }
     }
     function setActionBar() {
     }
