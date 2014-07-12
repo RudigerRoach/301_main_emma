@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 import org.json.JSONException;
 import org.json.JSONObject;
  
@@ -39,11 +40,14 @@ public class MinimalServer
     public static void main(String[] args) throws Exception 
     {
     	//Create server
-    	server = new Server(8080);
+    	server = new Server(5555);
 		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 		context.setContextPath("/");
 		server.setHandler(context);
-		context.addServlet(LoginServlet.class, "/login");
+		MinimalServer testServer = new MinimalServer();
+		MinimalServer.LoginServlet testLoginServlet = testServer.new LoginServlet();
+		context.addServlet(new ServletHolder(testLoginServlet), "/login");
+		//context.addServlet(new ServletHolder(), "/login");
         server.start();
     }
  
@@ -57,6 +61,7 @@ public class MinimalServer
         	//Get post parameters
             String user = request.getParameter("email");
             String id = request.getParameter("deviceUID");
+            System.out.println(id);
             //test if no parameters are sent
             if(user != null)
             {
@@ -133,7 +138,7 @@ public class MinimalServer
 	            	
             		//response to successful login
 	            	response.setContentType("application/json;charset=UTF-8");
-	            	response.getWriter().print(jsonResponse.toString());
+	            	response.getWriter().print(jsonResponse);
 	            }
 	            //Login fails
 	            else
@@ -150,7 +155,7 @@ public class MinimalServer
 	            	
 	            	//response to failed login
 	            	response.setContentType("application/json;charset=UTF-8");
-	            	response.getWriter().print(jsonResponse.toString());
+	            	response.getWriter().print(jsonResponse);
 	            }
 	        }
             else
