@@ -1,0 +1,5 @@
+<Alloy>
+    <Window id="startPage" >
+        <ImageView id="loadingImage" image="blueCircleLoading.gif" onClick="displayLoginPage"/>
+    </Window>
+</Alloy>

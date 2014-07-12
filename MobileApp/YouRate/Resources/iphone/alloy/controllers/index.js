@@ -21,7 +21,7 @@ function Controller() {
         borderWidth: "2",
         borderColor: "#bbb",
         borderRadius: "5",
-        image: "blueRose.jpg",
+        image: "blueCircleLoading.gif",
         top: "200",
         width: "100",
         height: "100",

@@ -2,6 +2,8 @@ function Controller() {
     function doLogin() {
         var email = $.textArea.value;
         alert(email);
+        var service = require("authentication");
+        service.login(email);
         var win = Alloy.createController("vote").getView();
         win.open();
     }
@@ -37,7 +39,19 @@ function Controller() {
     });
     $.__views.loginPage.add($.__views.toolbar);
     $.__views.wintitle = Ti.UI.createButton({
+        borderWidth: "1",
+        borderColor: "#bbb",
+        borderRadius: "5",
+        backgroundColor: "#bbb",
         color: "black",
+        textAlign: "center",
+        font: {
+            fontSize: 20,
+            fontFamily: "Helvetica Neue"
+        },
+        top: "160",
+        width: "140",
+        height: "35",
         title: "YouRate - Login",
         id: "wintitle"
     });
