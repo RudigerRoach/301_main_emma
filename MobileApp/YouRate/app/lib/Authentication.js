@@ -8,7 +8,7 @@ var sessionID = -1;
 var UDID = Titanium.Platform.id;
 var error = -1;
 var returnStatus = false;
-var url='http://www.posttestserver.com/post.php'; //verander na server address en port
+var url='http://192.168.0.101:5555/login'; //verander na server address en port
 
 exports.loginStatus = function(){
 	return returnStatus;
@@ -20,22 +20,18 @@ exports.login = function(email){
 	/*
 	   expected response:
 	   {
-		    "session": {
 		        "status": "success",
 		        "session_id": "xxyyzz"
-		    }
 		}
 	*/
 	
-	if(email.toString().length < 6) //shortest possible email address "a@b.c" is of length 5
+	if(email.toString().length < 1) //shortest possible email address "a@b.c" is of length 5
 	{
 		error = "Invalid email address entered, please revise your email address.";
 		returnStatus = false;
 		return;
 	}
-	
-	
-	 
+
 	// this is the data you'll send to the web service
 	var payload={
 	    email:email,
@@ -49,25 +45,16 @@ exports.login = function(email){
 	   //e.code
 	   
 	   //-----------------------------------------
-	   //response = JSON.parse(e.data); //remove comment at integration
-	   
-	   //remove response overwrite at integration
-	   response = {
-		    "session": {
-		        "status": "success",
-		        "session_id": "xxyyzz"
-		    }
-		};
-		//------------------------------------
+	   response = JSON.parse(e.data); //remove comment at integration
 		
-	   if(response.session.status == "success")
+	   if(response.status == "success")
 	   {
-	   		sessionID = response.session.session_id;
+	   		sessionID = response.session_id;
 	   		returnStatus = true;
 	   }else{
 	   		error = "Invalid Login cridentials";
+	   		returnStatus = false;
 	   }
-	   
 	};
 	 
 	var onErrorCallback = function (e) {
@@ -88,37 +75,27 @@ exports.login = function(email){
 	};
 	 
 	xhr.post(url, payload , onSuccessCallback, onErrorCallback);
-	
+
 };
 
 exports.autoLogin = function(){
-	
 	var payload={
 	    deviceUID:UDID
 	};
 	
 	var onSuccessCallback = function (e) {
-	   //-----------------------------------------
-	   //response = JSON.parse(e.data); //remove comment at integration
-	   
-	   //remove response overwrite at integration
-	   response = {
-		    "session": {
-		        "status": "success",
-		        "session_id": "xxyyzz"
-		    }
-		};
-		//------------------------------------
-		
-	   if(response.session.status == "success")
+
+	   response = JSON.parse(e.data); //remove comment at integration
+
+	   if(responsestatus == "success")
 	   {
-	   		sessionID = response.session.session_id;
+	   		sessionID = response.session_id;
 	   		returnStatus = true;
 	   }else{
 	   		error = "Autologin not yet available for this device.";
 	   		returnStatus = false;
 	   }
-	   
+
 	};
 	
 	var onErrorCallback = function (e) {
