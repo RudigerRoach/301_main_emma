@@ -2,6 +2,7 @@ function doLogin()
 {
 	//Gets email address from user input
 	var email = $.textArea.value;
+
 	//Calls login function to determine if user is allowed to access the rest of the application
 	var service=require('authentication');
 	service.login(email);
@@ -21,6 +22,7 @@ function doLogin()
 			alert(error);
 		}
 	}
+
 }
 
 function doClickMenu(evt) 

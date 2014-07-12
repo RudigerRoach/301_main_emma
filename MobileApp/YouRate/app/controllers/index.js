@@ -1,5 +1,6 @@
 function displayLoginPage(e){
 	//Call autoLogin
+
 	var service=require('authentication');
 	service.autoLogin();
 	var success = service.loginStatus();
@@ -16,6 +17,7 @@ function displayLoginPage(e){
 	    var win=Alloy.createController('login').getView();
 	 	win.open();
  	}
+
 };
 
 $.startPage.open();
