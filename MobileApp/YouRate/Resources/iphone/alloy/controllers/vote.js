@@ -1,0 +1,61 @@
+function Controller() {
+    function doLogout() {
+        var win = Alloy.createController("login").getView();
+        win.open();
+    }
+    require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "vote";
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    var $ = this;
+    var exports = {};
+    var __defers = {};
+    $.__views.votePage = Ti.UI.createWindow({
+        backgroundColor: "#DFE4E7",
+        exitOnClose: true,
+        id: "votePage"
+    });
+    $.__views.votePage && $.addTopLevelView($.__views.votePage);
+    $.__views.underConstruction = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "black",
+        font: {
+            fontSize: 20,
+            fontFamily: "Helvetica Neue"
+        },
+        textAlign: "center",
+        text: "Page under construction",
+        id: "underConstruction"
+    });
+    $.__views.votePage.add($.__views.underConstruction);
+    $.__views.logout = Ti.UI.createButton({
+        borderWidth: "1",
+        borderColor: "#bbb",
+        borderRadius: "5",
+        backgroundColor: "#bbb",
+        color: "black",
+        textAlign: "center",
+        font: {
+            fontSize: 20,
+            fontFamily: "Helvetica Neue"
+        },
+        top: "160",
+        width: "140",
+        height: "35",
+        title: "Logout",
+        id: "logout"
+    });
+    $.__views.votePage.add($.__views.logout);
+    doLogout ? $.__views.logout.addEventListener("click", doLogout) : __defers["$.__views.logout!click!doLogout"] = true;
+    exports.destroy = function() {};
+    _.extend($, $.__views);
+    $.votePage.open();
+    __defers["$.__views.logout!click!doLogout"] && $.__views.logout.addEventListener("click", doLogout);
+    _.extend($, exports);
+}
+
+var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._;
+
+module.exports = Controller;
