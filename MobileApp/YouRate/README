@@ -4,7 +4,11 @@ CommonJS API:
 Authentication
 ==============
 
-boolean autoLogin()
-	-> returns TRUE if the device is recognized or FALSE if the device has not yet connected to the server before.
-boolean login(string emailAddress)
-	-> returns TRUE if the device was succesfuly logged in and the person is allowed to judge.
+void autoLogin()
+	-> sets loginStatus TRUE if the device is recognized or FALSE if the device has not yet connected to the server before.
+void login(string emailAddress)
+	-> sets loginStatus TRUE if the device was successfully logged in and the person is allowed to judge.
+boolean loginStatus
+	-> true if login has been successful.
+string error
+	-> a string description of any error that might have occured, or -1 if everything went fine.

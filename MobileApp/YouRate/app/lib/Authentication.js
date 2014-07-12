@@ -6,6 +6,13 @@ var XHR = require("xhr");
 var xhr = new XHR();
 var sessionID = -1;
 var UDID = Titanium.Platform.id;
+var error = -1;
+var returnStatus = false;
+var url='http://192.168.0.101:5555/login'; //verander na server address en port
+
+exports.loginStatus = function(){
+	return returnStatus;
+};
 
 exports.login = function(email){
 	//TODO unit test fail, die test wag nie vir die xhr callback nie - make it wait!
@@ -13,15 +20,18 @@ exports.login = function(email){
 	/*
 	   expected response:
 	   {
-		    "session": {
 		        "status": "success",
 		        "session_id": "xxyyzz"
-		    }
 		}
 	*/
 	
-	var url='http://www.posttestserver.com/post.php'; //verander na server address en port
-	 
+	if(email.toString().length < 1) //shortest possible email address "a@b.c" is of length 5
+	{
+		error = "Invalid email address entered, please revise your email address.";
+		returnStatus = false;
+		return;
+	}
+
 	// this is the data you'll send to the web service
 	var payload={
 	    email:email,
@@ -33,42 +43,84 @@ exports.login = function(email){
 	   //e.data
 	   //e.status
 	   //e.code
-	   //
-	   Ti.API.info(e.data); //just log the message
-	   //response = JSON.parse(e.data); //remove comment at integration
 	   
-	   //remove response overwrite at integration
-	   response = {
-		    "session": {
-		        "status": "success",
-		        "session_id": "xxyyzz"
-		    }
-		};
-	   if(response.session.status == "success")
+	   //-----------------------------------------
+	   response = JSON.parse(e.data); //remove comment at integration
+		
+	   if(response.status == "success")
 	   {
-	   		this.sessionID = response.session.session_id;
-	   		return true;
-	   }else
-	   {
-	   		return false;
+	   		sessionID = response.session_id;
+	   		returnStatus = true;
+	   }else{
+	   		error = "Invalid Login cridentials";
+	   		returnStatus = false;
 	   }
 	};
 	 
 	var onErrorCallback = function (e) {
-		//TODO Handle device offline errors - do in seperate module for app-wide use.
 	   // you'll receive
 	   // e.data
 	   // e.status
 	   // e.code
-	   //
-	   Ti.API.info(e.status);
-	   return false; //Login failed
+	   
+	   if(e.status == 'error')
+	   {
+	   		error = "Device cannot reach the voting network";
+	   }
+	   else
+	   {
+	   		error = "An error occured: "+e.data;
+	   }
+	   returnStatus = false; //Login failed
 	};
 	 
 	xhr.post(url, payload , onSuccessCallback, onErrorCallback);
-	//return false; //Login failed
+
 };
 
 exports.autoLogin = function(){
-	return false; //Login failed
+	var payload={
+	    deviceUID:UDID
+	};
+	
+	var onSuccessCallback = function (e) {
+
+	   response = JSON.parse(e.data); //remove comment at integration
+
+	   if(responsestatus == "success")
+	   {
+	   		sessionID = response.session_id;
+	   		returnStatus = true;
+	   }else{
+	   		error = "Autologin not yet available for this device.";
+	   		returnStatus = false;
+	   }
+
+	};
+	
+	var onErrorCallback = function (e) {
+	   if(e.status == 'error')
+	   {
+	   		error = "Device cannot reach the voting network";
+	   }
+	   else
+	   {
+	   		error = "An unknown error occured: "+e.data;
+	   }
+	   returnStatus = false; //Login failed
+	};
+	
+	xhr.post(url, payload , onSuccessCallback, onErrorCallback);
+	returnStatus = false; //Login failed
+};
+
+exports.error = function(){
+	if(error != -1)
+	{
+		return error;
+	}
+	else
+	{
+		return "Everything seems fine here";
+	}
 };
