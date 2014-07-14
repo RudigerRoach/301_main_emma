@@ -61,14 +61,10 @@ public class MinimalServer
         	//Get post parameters
             String user = request.getParameter("email");
             String id = request.getParameter("deviceUID");
-            System.out.println(id);
             //test if no parameters are sent
             if(user != null)
             {
-            	File file = new File("src/example/server/Data.txt");
-            	FileReader inputFile = new FileReader(file);
-            	BufferedReader bf = new BufferedReader(inputFile);
-            	boolean boolEmail = false, booldeviceID = false;
+            	
             	boolean loginSuccess = false;
             	
             	emma = new EMMASimulator();
@@ -81,44 +77,7 @@ public class MinimalServer
 	            	}
 	            }
             	
-            	String line = null;
-            	while((line = bf.readLine()) != null)
-            	{
-            		String [] values = line.split(",");
-            		if(values[0].equals(user) == true)
-                	{
-                		boolEmail = true;
-                		if(values[1].equals(id) == true)
-                		{
-                			booldeviceID = true;
-                		}
-                		//break;
-                	}
-                	else if (values[1].equals(id) == true)
-                	{
-                		booldeviceID = true;
-                		//break;
-                	}
-            	}
             	
-            	bf.close();
-
-            	if ((booldeviceID == true) && (boolEmail == true))
-            	{
-            		System.out.println("Remembered");
-            	}
-            	else if (booldeviceID == true)
-            	{
-            		System.out.println("New email on same device");
-            	}
-            	else if (boolEmail == true)
-            	{
-            		System.out.println("New device on this email");
-            	}
-            	else
-            	{
-            		System.out.println("Don't remember device");
-            	}
             	
             	//login successful need to do database with user id's and plug in with Emma dummy
             	
@@ -159,7 +118,77 @@ public class MinimalServer
 	            }
 	        }
             else
-            	System.out.println("Parameter is null..");
+            {
+            	File file = new File("src/example/server/Data.txt");
+            	FileReader inputFile = new FileReader(file);
+            	BufferedReader bf = new BufferedReader(inputFile);
+            	String line = null;
+            	String userAuto = "";
+            	boolean loginSuccess = false;
+            	
+            	while((line = bf.readLine()) != null)
+            	{
+            		String [] values = line.split(",");
+            		if(values[1].equals(id) == true)
+                	{
+            			userAuto = values[0];
+                		break;
+                	}
+            	}
+            	
+            	
+            	bf.close();
+
+            	emma = new EMMASimulator();
+                String [] judges = emma.getJudges();
+	            for(int i = 0; i < judges.length;i++)
+	            {
+	            	if(userAuto.equals(judges[i]))
+	            	{
+	            		loginSuccess = true;
+	            	}
+	            }
+            	
+            	
+            	
+            	//login successful need to do database with user id's and plug in with Emma dummy
+            	
+            	
+            	if (loginSuccess == true)
+            	{
+            		JSONObject jsonResponse = new JSONObject();
+            		try 
+	            	{
+	            		jsonResponse.put("status", "success");
+	            		jsonResponse.put("session_id", request.getSession().getId());
+					} 
+	            	catch (JSONException e) 
+	            	{
+						e.printStackTrace();
+					}
+	            	
+            		//response to successful login
+	            	response.setContentType("application/json;charset=UTF-8");
+	            	response.getWriter().print(jsonResponse);
+	            }
+	            //Login fails
+	            else
+	            {
+	            	JSONObject jsonResponse = new JSONObject();
+	            	try 
+	            	{
+	            		jsonResponse.put("status", "failed");
+					} 
+	            	catch (JSONException e) 
+	            	{
+						e.printStackTrace();
+					}
+	            	
+	            	//response to failed login
+	            	response.setContentType("application/json;charset=UTF-8");
+	            	response.getWriter().print(jsonResponse);
+	            }
+            }
         }
     }
 }

@@ -68,6 +68,42 @@ public class MinimalServerTest
 	
 	@SuppressWarnings("resource")
 	@Test
+	public void testAutoLoginSuccessful() throws Exception
+	{
+			HttpClient client = new DefaultHttpClient();
+	        HttpPost mockRequest = new HttpPost("http://localhost:9090/login");
+	        mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
+	        
+	        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+	        urlParameters.add(new BasicNameValuePair("deviceUID", "BD655C43-3A73-4DFB-AA1F-074A4F0B0DCE"));
+	        mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
+	        HttpResponse mockResponse = client.execute(mockRequest);
+			
+			BufferedReader rd = new BufferedReader(new InputStreamReader(mockResponse.getEntity().getContent()));
+			String stringResponse = rd.readLine();
+	        assertEquals("Testing if auto login was succesful",true,stringResponse.contains("success"));
+    }
+	
+	@SuppressWarnings("resource")
+	@Test
+	public void testAutoLoginFailure() throws Exception
+	{
+			HttpClient client = new DefaultHttpClient();
+	        HttpPost mockRequest = new HttpPost("http://localhost:9090/login");
+	        mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
+	        
+	        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+	        urlParameters.add(new BasicNameValuePair("deviceUID", "123"));
+	        mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
+	        HttpResponse mockResponse = client.execute(mockRequest);
+			
+			BufferedReader rd = new BufferedReader(new InputStreamReader(mockResponse.getEntity().getContent()));
+			String stringResponse = rd.readLine();
+	        assertEquals("Testing if auto login has failed",true,stringResponse.contains("failed"));
+    }
+	
+	@SuppressWarnings("resource")
+	@Test
 	public void testLoginFailure() throws Exception
 	{
 		HttpClient client = new DefaultHttpClient();
