@@ -150,15 +150,14 @@ public class EMMASimulator {
     public String getImageDetails(int image)
     {
         
-        try
-        {
-            return imageDetails[image];
-        }
-        catch(Exception x){}
-        
+        if(image < Images.length)
+            return imageDetails[image];  
         return null;
     }
     
-    
+    public static void main(String args[])
+    {
+        
+    }
    
 }
