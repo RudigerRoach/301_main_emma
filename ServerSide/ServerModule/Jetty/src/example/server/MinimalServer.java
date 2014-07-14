@@ -21,35 +21,38 @@ public class MinimalServer
 	private static Server server = null;
 	private EMMASimulator emma = null;
 	
-//	public MinimalServer(int port) throws Exception
-//	{
-//		server = new Server(port);
-//    	ServletHandler handler = new ServletHandler();
-//    	handler.addServletWithMapping(LoginServlet.class, "/login");//Set the servlet to run.
-//    	server.setHandler(handler);
-//    	server.start();
-//    	server.join();
-//	}
-//	
-//	public void close() throws Exception
-//	{
-//		if (server != null)
-//			server.stop();
-//	}
-	
-    public static void main(String[] args) throws Exception 
-    {
-    	//Create server
+	public MinimalServer() throws Exception
+	{
+		//Create server
     	server = new Server(5555);
 		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 		context.setContextPath("/");
 		server.setHandler(context);
-		MinimalServer testServer = new MinimalServer();
-		MinimalServer.LoginServlet testLoginServlet = testServer.new LoginServlet();
+		LoginServlet testLoginServlet = new LoginServlet();
 		context.addServlet(new ServletHolder(testLoginServlet), "/login");
 		//context.addServlet(new ServletHolder(), "/login");
         server.start();
-    }
+	}
+	
+	public void close() throws Exception
+	{
+		if (server != null)
+			server.stop();
+	}
+	
+//    public static void main(String[] args) throws Exception 
+//    {
+//    	//Create server
+//    	server = new Server(5555);
+//		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+//		context.setContextPath("/");
+//		server.setHandler(context);
+//		MinimalServer testServer = new MinimalServer();
+//		MinimalServer.LoginServlet testLoginServlet = testServer.new LoginServlet();
+//		context.addServlet(new ServletHolder(testLoginServlet), "/login");
+//		//context.addServlet(new ServletHolder(), "/login");
+//        server.start();
+//    }
  
     @SuppressWarnings("serial")
     public class LoginServlet extends HttpServlet 

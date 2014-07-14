@@ -14,9 +14,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
@@ -25,26 +22,18 @@ import org.junit.Test;
 @SuppressWarnings("deprecation")
 public class MinimalServerTest 
 {	
-	private static Server server = null;
+	private static MinimalServer server = null;
 	
 	@Before
 	public void testSetup() throws Exception
 	{
-		server = new Server(9090);
-		server.setStopAtShutdown(true);
-		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-		context.setContextPath("/");
-		server.setHandler(context);
-		MinimalServer testServer = new MinimalServer();
-		MinimalServer.LoginServlet testLoginServlet = testServer.new LoginServlet();
-		context.addServlet(new ServletHolder(testLoginServlet), "/login");
-        server.start();
+		server = new MinimalServer();
 	}
 
 	@After
 	public void testCleanup() throws Exception
 	{
-		server.stop();
+		server.close();
 	}
 
 	@SuppressWarnings("resource")
@@ -52,7 +41,7 @@ public class MinimalServerTest
 	public void testLoginSuccessful() throws Exception
 	{
 			HttpClient client = new DefaultHttpClient();
-	        HttpPost mockRequest = new HttpPost("http://localhost:9090/login");
+	        HttpPost mockRequest = new HttpPost("http://localhost:5555/login");
 	        mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
 	        
 	        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
@@ -71,7 +60,7 @@ public class MinimalServerTest
 	public void testAutoLoginSuccessful() throws Exception
 	{
 			HttpClient client = new DefaultHttpClient();
-	        HttpPost mockRequest = new HttpPost("http://localhost:9090/login");
+	        HttpPost mockRequest = new HttpPost("http://localhost:5555/login");
 	        mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
 	        
 	        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
@@ -89,7 +78,7 @@ public class MinimalServerTest
 	public void testAutoLoginFailure() throws Exception
 	{
 			HttpClient client = new DefaultHttpClient();
-	        HttpPost mockRequest = new HttpPost("http://localhost:9090/login");
+	        HttpPost mockRequest = new HttpPost("http://localhost:5555/login");
 	        mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
 	        
 	        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
@@ -107,7 +96,7 @@ public class MinimalServerTest
 	public void testLoginFailure() throws Exception
 	{
 		HttpClient client = new DefaultHttpClient();
-        HttpPost mockRequest = new HttpPost("http://localhost:9090/login");
+        HttpPost mockRequest = new HttpPost("http://localhost:5555/login");
         mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
         
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
@@ -128,7 +117,7 @@ public class MinimalServerTest
 	public void testSingleSignOnSuccess() throws Exception
 	{
 		HttpClient client = new DefaultHttpClient();
-	    HttpPost mockRequest = new HttpPost("http://localhost:9090/login");
+	    HttpPost mockRequest = new HttpPost("http://localhost:5555/login");
 	    mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
 	    
 	    List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
@@ -151,8 +140,8 @@ public class MinimalServerTest
 	{
 		HttpClient client = new DefaultHttpClient();
 		HttpClient client1 = new DefaultHttpClient();
-	    HttpPost mockRequest = new HttpPost("http://localhost:9090/login");
-	    HttpPost mockRequest1 = new HttpPost("http://localhost:9090/login");
+	    HttpPost mockRequest = new HttpPost("http://localhost:5555/login");
+	    HttpPost mockRequest1 = new HttpPost("http://localhost:5555/login");
 	    mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
 	    mockRequest1.setHeader("Content-type", "application/x-www-form-urlencoded");
 	    
