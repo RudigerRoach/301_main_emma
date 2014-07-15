@@ -22,7 +22,11 @@ function Controller() {
         borderWidth: "2",
         borderColor: "#bbb",
         borderRadius: "5",
+<<<<<<< HEAD
         image: "blueCircleLoading.gif",
+=======
+        image: "blueRose.jpg",
+>>>>>>> a5b2cd10cf1f6dc0b11d1e767c8ffb4094bc65a5
         top: "200",
         width: "100",
         height: "100",
@@ -33,7 +37,10 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.startPage.open();
+<<<<<<< HEAD
     __defers["$.__views.startPage!open!displayLoginPage"] && $.__views.startPage.addEventListener("open", displayLoginPage);
+=======
+>>>>>>> a5b2cd10cf1f6dc0b11d1e767c8ffb4094bc65a5
     __defers["$.__views.loadingImage!click!displayLoginPage"] && $.__views.loadingImage.addEventListener("click", displayLoginPage);
     _.extend($, exports);
 }
