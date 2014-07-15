@@ -1,5 +1,14 @@
-package example.server;
- 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Dieter
+ */
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,7 +28,7 @@ import org.json.JSONObject;
 public class MinimalServer 
 {
 	private static Server server = null;
-	private EMMASimulator emma = null;
+	//private EMMASimulator emma = null;
 	
 	/**
 	 * Constructor for the server
@@ -27,14 +36,14 @@ public class MinimalServer
 	 */
 	public MinimalServer() throws Exception
 	{
-		//Create server
-    	server = new Server(5555);
-		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-		context.setContextPath("/");
-		server.setHandler(context);
-		LoginServlet testLoginServlet = new LoginServlet();
-		context.addServlet(new ServletHolder(testLoginServlet), "/login");
-        server.start();
+            //Create server
+            server = new Server(5555);
+            ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+            context.setContextPath("/");
+            server.setHandler(context);
+            LoginServlet testLoginServlet = new LoginServlet();
+            context.addServlet(new ServletHolder(testLoginServlet), "/login");
+            server.start();
 	}
 	
 	/**
@@ -43,8 +52,8 @@ public class MinimalServer
 	 */
 	public void close() throws Exception
 	{
-		if (server != null)
-			server.stop();
+            if (server != null)
+                    server.stop();
 	}
 	
 //    public static void main(String[] args) throws Exception 
@@ -60,22 +69,21 @@ public class MinimalServer
 //		//context.addServlet(new ServletHolder(), "/login");
 //        server.start();
 //    }
-	/**
-	 * Login servlet class
-	 * @author Dieter
-	 *
-	 */
-    @SuppressWarnings("serial")
+
     public class LoginServlet extends HttpServlet 
     {
     	/**
     	 * Overrides the post method to do post communication
+             * @param request
+             * @param response
+             * @throws javax.servlet.ServletException
+             * @throws java.io.IOException
     	 */
         @Override
         //Handle post requests
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
         {
-        	//Get post parameters
+            //Get post parameters
             String user = request.getParameter("email");
             String id = request.getParameter("deviceUID");
             //test if new login
@@ -86,15 +94,17 @@ public class MinimalServer
             	
             	//Getting judges from emma
             	//will get this through session object that johan will send me
-            	emma = new EMMASimulator();
-                String [] judges = emma.getJudges();
-	            for(int i = 0; i < judges.length;i++)
-	            {
-	            	if(user.equals(judges[i]))
-	            	{
-	            		loginSuccess = true;
-	            	}
-	            }
+            	//emma = new EMMASimulator();
+                //String [] judges = emma.getJudges();
+                String [] judges = new String[1];
+                judges[0] = "test";
+                for (String judge : judges) 
+                {
+                    if (user.equals(judge)) 
+                    {
+                        loginSuccess = true;
+                    }
+                }
 	            
 	            //Successful login
             	if (loginSuccess == true)
@@ -110,8 +120,8 @@ public class MinimalServer
 					} 
 	            	catch (JSONException e) 
 	            	{
-						e.printStackTrace();
-					}
+                            e.printStackTrace();
+			}
 	            	
             		//response to successful login
 	            	response.setContentType("application/json;charset=UTF-8");
@@ -123,12 +133,12 @@ public class MinimalServer
 	            	JSONObject jsonResponse = new JSONObject();
 	            	try 
 	            	{
-	            		jsonResponse.put("status", "failed");
-					} 
+                            jsonResponse.put("status", "failed");
+			} 
 	            	catch (JSONException e) 
 	            	{
-						e.printStackTrace();
-					}
+                            e.printStackTrace();
+			}
 	            	
 	            	//response to failed login
 	            	response.setContentType("application/json;charset=UTF-8");
@@ -136,43 +146,45 @@ public class MinimalServer
 	            }
 	        }
             else //test if it is auto login
-            {
+                        {
             	//if no parameters are sent through
             	if(id == null)
             	{
-            		id = "";
+                    id = "";
             	}
-            	File file = new File("src/example/server/Data.txt");
+            	File file = new File("Data.txt");
             	FileReader inputFile = new FileReader(file);
-            	BufferedReader bf = new BufferedReader(inputFile);
-            	String line = null;
-            	String userAuto = "";
-            	boolean loginSuccess = false;
-            	
-            	//searches for user corresponding to device id
-            	while((line = bf.readLine()) != null)
-            	{
-            		String [] values = line.split(",");
-            		if(values[1].equals(id) == true)
-                	{
-            			userAuto = values[0];
-                		break;
-                	}
-            	}
-            	
-            	
-            	bf.close();
+                String userAuto;
+                boolean loginSuccess;
+                try (BufferedReader bf = new BufferedReader(inputFile)) 
+                {
+                    String line;
+                    userAuto = "";
+                    loginSuccess = false;
+                    //searches for user corresponding to device id
+                    while((line = bf.readLine()) != null)
+                    {
+                        String [] values = line.split(",");
+                        if(values[1].equals(id) == true)
+                        {
+                            userAuto = values[0];
+                            break;
+                        }
+                    }
+                }
             	
             	//get the judges from emma
-            	emma = new EMMASimulator();
-                String [] judges = emma.getJudges();
-	            for(int i = 0; i < judges.length;i++)
-	            {
-	            	if(userAuto.equals(judges[i]))
-	            	{
-	            		loginSuccess = true;
-	            	}
-	            }
+            	//emma = new EMMASimulator();
+                //String [] judges = emma.getJudges();
+                String [] judges = new String[1];
+                judges[0] = "test";
+                for (String judge : judges) 
+                {
+                    if (userAuto.equals(judge)) 
+                    {
+                        loginSuccess = true;
+                    }
+                }
 	            
 	            //successFull autoLogin
             	if (loginSuccess == true)
@@ -185,8 +197,8 @@ public class MinimalServer
 					} 
 	            	catch (JSONException e) 
 	            	{
-						e.printStackTrace();
-					}
+                            e.printStackTrace();
+			}
 	            	
             		//response to successful auto login
 	            	response.setContentType("application/json;charset=UTF-8");
@@ -202,8 +214,8 @@ public class MinimalServer
 					} 
 	            	catch (JSONException e) 
 	            	{
-						e.printStackTrace();
-					}
+                            e.printStackTrace();
+			}
 	            	
 	            	//response to failed auto login
 	            	response.setContentType("application/json;charset=UTF-8");
