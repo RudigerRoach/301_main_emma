@@ -21,6 +21,10 @@ public class MinimalServer
 	private static Server server = null;
 	private EMMASimulator emma = null;
 	
+	/**
+	 * Constructor for the server
+	 * @throws Exception
+	 */
 	public MinimalServer() throws Exception
 	{
 		//Create server
@@ -30,10 +34,13 @@ public class MinimalServer
 		server.setHandler(context);
 		LoginServlet testLoginServlet = new LoginServlet();
 		context.addServlet(new ServletHolder(testLoginServlet), "/login");
-		//context.addServlet(new ServletHolder(), "/login");
         server.start();
 	}
 	
+	/**
+	 * Closes and stops the server
+	 * @throws Exception
+	 */
 	public void close() throws Exception
 	{
 		if (server != null)
@@ -53,10 +60,17 @@ public class MinimalServer
 //		//context.addServlet(new ServletHolder(), "/login");
 //        server.start();
 //    }
- 
+	/**
+	 * Login servlet class
+	 * @author Dieter
+	 *
+	 */
     @SuppressWarnings("serial")
     public class LoginServlet extends HttpServlet 
     {
+    	/**
+    	 * Overrides the post method to do post communication
+    	 */
         @Override
         //Handle post requests
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
@@ -64,12 +78,14 @@ public class MinimalServer
         	//Get post parameters
             String user = request.getParameter("email");
             String id = request.getParameter("deviceUID");
-            //test if no parameters are sent
+            //test if new login
             if(user != null)
             {
             	
             	boolean loginSuccess = false;
             	
+            	//Getting judges from emma
+            	//will get this through session object that johan will send me
             	emma = new EMMASimulator();
                 String [] judges = emma.getJudges();
 	            for(int i = 0; i < judges.length;i++)
@@ -79,14 +95,13 @@ public class MinimalServer
 	            		loginSuccess = true;
 	            	}
 	            }
-            	
-            	
-            	
-            	//login successful need to do database with user id's and plug in with Emma dummy
-            	
-            	
+	            
+	            //Successful login
             	if (loginSuccess == true)
             	{
+            		//moet email en device id add as geen remembered is nie
+            		//moet email verander as deviceid gevind is
+            		//moet deviceid verander as email gevind is
             		JSONObject jsonResponse = new JSONObject();
             		try 
 	            	{
@@ -120,8 +135,13 @@ public class MinimalServer
 	            	response.getWriter().print(jsonResponse);
 	            }
 	        }
-            else
+            else //test if it is auto login
             {
+            	//if no parameters are sent through
+            	if(id == null)
+            	{
+            		id = "";
+            	}
             	File file = new File("src/example/server/Data.txt");
             	FileReader inputFile = new FileReader(file);
             	BufferedReader bf = new BufferedReader(inputFile);
@@ -129,6 +149,7 @@ public class MinimalServer
             	String userAuto = "";
             	boolean loginSuccess = false;
             	
+            	//searches for user corresponding to device id
             	while((line = bf.readLine()) != null)
             	{
             		String [] values = line.split(",");
@@ -141,7 +162,8 @@ public class MinimalServer
             	
             	
             	bf.close();
-
+            	
+            	//get the judges from emma
             	emma = new EMMASimulator();
                 String [] judges = emma.getJudges();
 	            for(int i = 0; i < judges.length;i++)
@@ -151,12 +173,8 @@ public class MinimalServer
 	            		loginSuccess = true;
 	            	}
 	            }
-            	
-            	
-            	
-            	//login successful need to do database with user id's and plug in with Emma dummy
-            	
-            	
+	            
+	            //successFull autoLogin
             	if (loginSuccess == true)
             	{
             		JSONObject jsonResponse = new JSONObject();
@@ -170,7 +188,7 @@ public class MinimalServer
 						e.printStackTrace();
 					}
 	            	
-            		//response to successful login
+            		//response to successful auto login
 	            	response.setContentType("application/json;charset=UTF-8");
 	            	response.getWriter().print(jsonResponse);
 	            }
@@ -187,7 +205,7 @@ public class MinimalServer
 						e.printStackTrace();
 					}
 	            	
-	            	//response to failed login
+	            	//response to failed auto login
 	            	response.setContentType("application/json;charset=UTF-8");
 	            	response.getWriter().print(jsonResponse);
 	            }
