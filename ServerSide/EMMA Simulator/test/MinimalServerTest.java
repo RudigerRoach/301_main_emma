@@ -35,7 +35,16 @@ public class MinimalServerTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        server = new MinimalServer();
+        //creates mew session for unit tests
+        Session tmp = new Session();
+        String[] _judges = new String[5];
+        _judges[0]= "Johan";
+        _judges[1]= "test";
+        _judges[2]= "Test2";
+        _judges[3]= "Test3";
+        _judges[4]= "Test4"; 
+        tmp.setJudges(_judges);
+        server = new MinimalServer(tmp);
     }
     
     @Override

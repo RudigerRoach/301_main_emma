@@ -27,49 +27,43 @@ import org.json.JSONObject;
  
 public class MinimalServer 
 {
-	private static Server server = null;
-	//private EMMASimulator emma = null;
-	
-	/**
-	 * Constructor for the server
-	 * @throws Exception
-	 */
-	public MinimalServer() throws Exception
-	{
-            //Create server
-            server = new Server(5555);
-            ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-            context.setContextPath("/");
-            server.setHandler(context);
-            LoginServlet testLoginServlet = new LoginServlet();
-            context.addServlet(new ServletHolder(testLoginServlet), "/login");
-            server.start();
-	}
-	
-	/**
-	 * Closes and stops the server
-	 * @throws Exception
-	 */
-	public void close() throws Exception
-	{
-            if (server != null)
-                    server.stop();
-	}
-	
-//    public static void main(String[] args) throws Exception 
-//    {
-//    	//Create server
-//    	server = new Server(5555);
-//		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-//		context.setContextPath("/");
-//		server.setHandler(context);
-//		MinimalServer testServer = new MinimalServer();
-//		MinimalServer.LoginServlet testLoginServlet = testServer.new LoginServlet();
-//		context.addServlet(new ServletHolder(testLoginServlet), "/login");
-//		//context.addServlet(new ServletHolder(), "/login");
-//        server.start();
-//    }
+    private static Server server = null;
+    private Session session = null;
 
+    /**
+     * Constructor for the server
+     * @param _session
+     * @throws Exception
+     */
+    public MinimalServer(Session _session) throws Exception
+    {
+        //Create server
+        session = _session;
+        server = new Server(5555);
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+        LoginServlet testLoginServlet = new LoginServlet();
+        context.addServlet(new ServletHolder(testLoginServlet), "/login");
+        server.start();
+    }
+
+    /**
+     * Closes and stops the server
+     * @throws Exception
+     */
+    public void close() throws Exception
+    {
+        if (server != null)
+            server.stop();
+    }
+
+    public void startSession()
+    {
+        //still need to implement
+    }
+
+    //HttpSession session = req.getSession(false)
     public class LoginServlet extends HttpServlet 
     {
     	/**
@@ -93,60 +87,59 @@ public class MinimalServer
             	boolean loginSuccess = false;
             	
             	//Getting judges from emma
-            	//will get this through session object that johan will send me
-            	//emma = new EMMASimulator();
-                //String [] judges = emma.getJudges();
-                String [] judges = new String[1];
-                judges[0] = "test";
-                for (String judge : judges) 
+                String [] judges = session.getJudges();
+                if (judges != null)
                 {
-                    if (user.equals(judge)) 
+                    for (String judge : judges) 
                     {
-                        loginSuccess = true;
+                        if (user.equals(judge)) 
+                        {
+                            loginSuccess = true;
+                        }
                     }
                 }
 	            
 	            //Successful login
             	if (loginSuccess == true)
             	{
-            		//moet email en device id add as geen remembered is nie
-            		//moet email verander as deviceid gevind is
-            		//moet deviceid verander as email gevind is
-            		JSONObject jsonResponse = new JSONObject();
-            		try 
-	            	{
-	            		jsonResponse.put("status", "success");
-	            		jsonResponse.put("session_id", request.getSession().getId());
-					} 
-	            	catch (JSONException e) 
-	            	{
-                            e.printStackTrace();
-			}
-	            	
-            		//response to successful login
-	            	response.setContentType("application/json;charset=UTF-8");
-	            	response.getWriter().print(jsonResponse);
-	            }
-	            //Login fails
-	            else
-	            {
-	            	JSONObject jsonResponse = new JSONObject();
-	            	try 
-	            	{
-                            jsonResponse.put("status", "failed");
-			} 
-	            	catch (JSONException e) 
-	            	{
-                            e.printStackTrace();
-			}
-	            	
-	            	//response to failed login
-	            	response.setContentType("application/json;charset=UTF-8");
-	            	response.getWriter().print(jsonResponse);
-	            }
-	        }
+                    //moet email en device id add as geen remembered is nie
+                    //moet email verander as deviceid gevind is
+                    //moet deviceid verander as email gevind is
+                    JSONObject jsonResponse = new JSONObject();
+                    try 
+                    {
+                        jsonResponse.put("status", "success");
+                        jsonResponse.put("session_id", request.getSession().getId());
+                    } 
+                    catch (JSONException e) 
+                    {
+                        e.printStackTrace();
+                    }
+
+                    //response to successful login
+                    response.setContentType("application/json;charset=UTF-8");
+                    response.getWriter().print(jsonResponse);
+                }
+                //Login fails
+                else
+                {
+                    JSONObject jsonResponse = new JSONObject();
+                    try 
+                    {
+                        jsonResponse.put("status", "failed");
+                    } 
+                    catch (JSONException e) 
+                    {
+                        e.printStackTrace();
+                    }
+
+                    //response to failed login
+                    response.setContentType("application/json;charset=UTF-8");
+                    response.getWriter().print(jsonResponse);
+                }
+	    }
             else //test if it is auto login
-                        {
+            {
             	//if no parameters are sent through
             	if(id == null)
             	{
@@ -174,53 +167,53 @@ public class MinimalServer
                 }
             	
             	//get the judges from emma
-            	//emma = new EMMASimulator();
-                //String [] judges = emma.getJudges();
-                String [] judges = new String[1];
-                judges[0] = "test";
-                for (String judge : judges) 
+                String [] judges = session.getJudges();
+                if (judges != null)
                 {
-                    if (userAuto.equals(judge)) 
+                    for (String judge : judges) 
                     {
-                        loginSuccess = true;
+                        if (userAuto.equals(judge)) 
+                        {
+                            loginSuccess = true;
+                        }
                     }
                 }
-	            
-	            //successFull autoLogin
+                
+	        //successFull autoLogin
             	if (loginSuccess == true)
             	{
-            		JSONObject jsonResponse = new JSONObject();
-            		try 
-	            	{
-	            		jsonResponse.put("status", "success");
-	            		jsonResponse.put("session_id", request.getSession().getId());
-					} 
-	            	catch (JSONException e) 
-	            	{
-                            e.printStackTrace();
-			}
-	            	
-            		//response to successful auto login
-	            	response.setContentType("application/json;charset=UTF-8");
-	            	response.getWriter().print(jsonResponse);
-	            }
-	            //Login fails
-	            else
-	            {
-	            	JSONObject jsonResponse = new JSONObject();
-	            	try 
-	            	{
-	            		jsonResponse.put("status", "failed");
-					} 
-	            	catch (JSONException e) 
-	            	{
-                            e.printStackTrace();
-			}
-	            	
-	            	//response to failed auto login
-	            	response.setContentType("application/json;charset=UTF-8");
-	            	response.getWriter().print(jsonResponse);
-	            }
+                    JSONObject jsonResponse = new JSONObject();
+                    try 
+                    {
+                            jsonResponse.put("status", "success");
+                            jsonResponse.put("session_id", request.getSession().getId());
+                                    } 
+                    catch (JSONException e) 
+                    {
+                        e.printStackTrace();
+                    }
+
+                    //response to successful auto login
+                    response.setContentType("application/json;charset=UTF-8");
+                    response.getWriter().print(jsonResponse);
+	        }
+                //Login fails
+                else
+                {
+                    JSONObject jsonResponse = new JSONObject();
+                    try 
+                    {
+                            jsonResponse.put("status", "failed");
+                                    } 
+                    catch (JSONException e) 
+                    {
+                        e.printStackTrace();
+                    }
+
+                    //response to failed auto login
+                    response.setContentType("application/json;charset=UTF-8");
+                    response.getWriter().print(jsonResponse);
+                }
             }
         }
     }
