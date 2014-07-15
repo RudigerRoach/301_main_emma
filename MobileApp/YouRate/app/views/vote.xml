@@ -1,5 +1,6 @@
 <Alloy>
     <Window id="votePage">
 		<Label id="underConstruction">Page under construction</Label>	
+		<Button id="logout" onClick="doLogout">Logout</Button>
     </Window>
 </Alloy>

@@ -2,22 +2,27 @@ function doLogin()
 {
 	//Gets email address from user input
 	var email = $.textArea.value;
-	alert(email);
+
 	//Calls login function to determine if user is allowed to access the rest of the application
 	var service=require('authentication');
-	//Ti.App.log(service);
-	var success = service.login(email);
-	//if (success == true)
-	//{
+	service.login(email);
+	var success = service.loginStatus();
+	if (success == true)
+	{
 		//The user is allowed to use the rest of the application, thus display the next page
 		var win=Alloy.createController('vote').getView();
 	 	win.open();
-	//}
-	//else
-	//{
+	}
+	else
+	{
 		//The user is  not allowed to use the rest of the application
-		//alert('Login failed');
-	//}
+		var error = service.error();
+		if(error != 1)
+		{
+			alert(error);
+		}
+	}
+
 }
 
 function doClickMenu(evt) 

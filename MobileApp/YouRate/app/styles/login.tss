@@ -49,7 +49,7 @@
 		fontFamily: 'Helvetica Neue'
 	}
 },
-"#login": 
+"Button": 
 {
 	borderWidth: "1",
 	borderColor: "#bbb", 

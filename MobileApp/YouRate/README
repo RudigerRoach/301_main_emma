@@ -7,7 +7,7 @@ Authentication
 void autoLogin()
 	-> sets loginStatus TRUE if the device is recognized or FALSE if the device has not yet connected to the server before.
 void login(string emailAddress)
-	-> sets loginStatus TRUE if the device was succesfuly logged in and the person is allowed to judge.
+	-> sets loginStatus TRUE if the device was successfully logged in and the person is allowed to judge.
 boolean loginStatus
 	-> true if login has been successful.
 string error
