@@ -3,6 +3,7 @@ function displayLoginPage(e){
 	var service=require('authentication');
 	service.autoLogin();
 	var success = service.loginStatus();
+	
 	//If autoLogin successful
 	if (success == true)
 	{
