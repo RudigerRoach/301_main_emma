@@ -1,7 +1,7 @@
 function displayLoginPage(e){
 	//Call autoLogin
 
-	var service=require('authentication');
+	var service=require('Authentication');
 	service.autoLogin();
 	var success = service.loginStatus();
 	//If autoLogin successful

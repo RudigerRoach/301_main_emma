@@ -4,7 +4,7 @@ function doLogin()
 	var email = $.textArea.value;
 
 	//Calls login function to determine if user is allowed to access the rest of the application
-	var service=require('authentication');
+	var service=require('Authentication');
 	service.login(email);
 	var success = service.loginStatus();
 	if (success == true)
