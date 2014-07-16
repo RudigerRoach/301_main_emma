@@ -85,7 +85,7 @@ exports.autoLogin = function(){
 	
 	var onSuccessCallback = function (e) {
 
-	   response = JSON.parse(e.data); //remove comment at integration
+	   response = JSON.parse(e.data);
 
 	   if(responsestatus == "success")
 	   {
@@ -111,7 +111,6 @@ exports.autoLogin = function(){
 	};
 	
 	xhr.post(url, payload , onSuccessCallback, onErrorCallback);
-	returnStatus = false; //Login failed
 };
 
 exports.error = function(){
