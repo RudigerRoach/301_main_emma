@@ -25,7 +25,7 @@ exports.login = function(email){
 		}
 	*/
 	
-	if(email.toString().length < 1) //shortest possible email address "a@b.c" is of length 5
+	if(email.toString().length < 5) //shortest possible email address "a@b.c" is of length 5
 	{
 		error = "Invalid email address entered, please revise your email address.";
 		returnStatus = false;
@@ -69,13 +69,12 @@ exports.login = function(email){
 	   }
 	   else
 	   {
-	   		error = "An error occured: "+e.data;
+	   		error = "An unknown error occured: "+e.data;
 	   }
 	   returnStatus = false; //Login failed
 	};
 	 
 	xhr.post(url, payload , onSuccessCallback, onErrorCallback);
-
 };
 
 exports.autoLogin = function(){
