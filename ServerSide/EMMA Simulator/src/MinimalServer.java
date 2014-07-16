@@ -13,11 +13,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.eclipse.jetty.continuation.Continuation;
+import org.eclipse.jetty.continuation.ContinuationSupport;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -29,6 +33,7 @@ public class MinimalServer
 {
     private static Server server = null;
     private Session session = null;
+    private boolean start = false;
 
     /**
      * Constructor for the server
@@ -43,8 +48,10 @@ public class MinimalServer
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         server.setHandler(context);
-        LoginServlet testLoginServlet = new LoginServlet();
-        context.addServlet(new ServletHolder(testLoginServlet), "/login");
+        LoginServlet loginServlet = new LoginServlet();
+        StartServlet startServlet = new StartServlet();
+        context.addServlet(new ServletHolder(loginServlet), "/login");
+        context.addServlet(new ServletHolder(startServlet), "/start");
         server.start();
     }
 
@@ -60,9 +67,47 @@ public class MinimalServer
 
     public void startSession()
     {
-        //still need to implement
+        start = true;
     }
+    
+    public class StartServlet extends HttpServlet
+    {
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+        {
+            if (request.getSession(false) != null)
+            {
+                //moet nog async calls uit figure anders gaan ons polling moet gebruik
+                JSONObject jsonResponse = new JSONObject();
+                try 
+                {
+                    jsonResponse.put("start", "true");
+                } 
+                catch (JSONException ex) 
+                {
+                    Logger.getLogger(MinimalServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                response.setContentType("application/json;charset=UTF-8");
+                response.getWriter().print(jsonResponse);
+            }
+            else
+            {
+                JSONObject jsonResponse = new JSONObject();
+                    try 
+                    {
+                        jsonResponse.put("status", "failed");
+                    } 
+                    catch (JSONException e) 
+                    {
+                        e.printStackTrace();
+                    }
 
+                    //response to failed login
+                    response.setContentType("application/json;charset=UTF-8");
+                    response.getWriter().print(jsonResponse);
+            }
+        }
+    }
     //HttpSession session = req.getSession(false)
     public class LoginServlet extends HttpServlet 
     {
@@ -185,9 +230,9 @@ public class MinimalServer
                     JSONObject jsonResponse = new JSONObject();
                     try 
                     {
-                            jsonResponse.put("status", "success");
-                            jsonResponse.put("session_id", request.getSession().getId());
-                                    } 
+                        jsonResponse.put("status", "success");
+                        jsonResponse.put("session_id", request.getSession().getId());
+                    } 
                     catch (JSONException e) 
                     {
                         e.printStackTrace();
@@ -203,8 +248,8 @@ public class MinimalServer
                     JSONObject jsonResponse = new JSONObject();
                     try 
                     {
-                            jsonResponse.put("status", "failed");
-                                    } 
+                        jsonResponse.put("status", "failed");
+                    } 
                     catch (JSONException e) 
                     {
                         e.printStackTrace();

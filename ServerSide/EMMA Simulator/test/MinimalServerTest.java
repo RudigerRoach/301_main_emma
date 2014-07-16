@@ -6,6 +6,7 @@
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import static junit.framework.Assert.assertEquals;
@@ -13,11 +14,16 @@ import junit.framework.TestCase;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 import org.json.JSONObject;
 
 /**
@@ -189,5 +195,34 @@ public class MinimalServerTest extends TestCase {
         rd = new BufferedReader(new InputStreamReader(mockResponse1.getEntity().getContent()));
         String stringResponse1 = rd.readLine();
         assertEquals("Testing if there are different session ids",false,stringResponse.equals(stringResponse1));
+    }
+    
+    public void testNotification() throws Exception
+    {
+        //Create client
+	HttpClient client = new DefaultHttpClient();
+        HttpPost mockRequest = new HttpPost("http://localhost:5555/login");
+        CookieStore cookieStore = new BasicCookieStore();
+        HttpContext httpContext = new BasicHttpContext();
+        httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+        mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
+        
+        //Add parameters
+        List<NameValuePair> urlParameters = new ArrayList<>();
+        urlParameters.add(new BasicNameValuePair("email", "test"));
+        urlParameters.add(new BasicNameValuePair("deviceUID", "123"));
+        mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
+        //Execute the request
+        HttpResponse mockResponse = client.execute(mockRequest,httpContext);
+		
+        //Test if normal login is successful
+        BufferedReader rd = new BufferedReader(new InputStreamReader(mockResponse.getEntity().getContent()));
+        rd.close();
+        mockRequest.setURI(new URI("http://localhost:5555/start"));
+        mockResponse = client.execute(mockRequest,httpContext);
+        rd = new BufferedReader(new InputStreamReader(mockResponse.getEntity().getContent()));
+        JSONObject jsonTest = new JSONObject();
+        jsonTest.put("start", "true");
+        assertEquals("Testing if login was correctly failed due to incorrect username",jsonTest.toString(),rd.readLine());
     }
 }
