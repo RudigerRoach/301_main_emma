@@ -10,9 +10,9 @@ import junit.framework.TestCase;
  *
  * @author Endzeit
  */
-public class EMMASimulatorTest extends TestCase {
+public class SessionTest extends TestCase {
     
-    public EMMASimulatorTest(String testName) {
+    public SessionTest(String testName) {
         super(testName);
     }
 
@@ -29,7 +29,7 @@ public class EMMASimulatorTest extends TestCase {
         judges[4]= "Test4";
         
         
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         instance.setJudges(judges);
         String[] temp = instance.getJudges();
         for(int i = 0; i < judges.length; i++)
@@ -44,7 +44,7 @@ public class EMMASimulatorTest extends TestCase {
     public void testGetSessionType() {
         System.out.println("sessionType");
         
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         
         instance.setJudges(null);
         String[] temp = instance.getJudges();  
@@ -66,7 +66,7 @@ public class EMMASimulatorTest extends TestCase {
         judges[2]= "Test2";
         judges[3]= "Test3";
         judges[4]= "Test4";
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         instance.setJudges(judges);
         String[] temp = instance.getJudges();
         for(int i = 0; i < judges.length; i++)
@@ -80,7 +80,7 @@ public class EMMASimulatorTest extends TestCase {
         System.out.println("setRanges");
         int bot = 0;
         int top = 0;
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         instance.setRanges(bot, top);
         assertEquals(bot, instance.getBotRange());
         assertEquals(top, instance.getTopRange());
@@ -91,7 +91,7 @@ public class EMMASimulatorTest extends TestCase {
      */
     public void testGetTopRange() {
         System.out.println("getTopRange");
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         int expResult = 1000;
         instance.setRanges(10, 1000);
         int result = instance.getTopRange();
@@ -103,7 +103,7 @@ public class EMMASimulatorTest extends TestCase {
      */
     public void testGetBotRange() {
         System.out.println("getBotRange");
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         int expResult = -1111;
         instance.setRanges(-1111, 1000);
         int result = instance.getBotRange();
@@ -115,7 +115,7 @@ public class EMMASimulatorTest extends TestCase {
      */
     public void testSetControll() {
         System.out.println("SetControll");
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         Boolean expResult = true;
         instance.setControll(true);
         Boolean result = instance.getControll();
@@ -134,7 +134,7 @@ public class EMMASimulatorTest extends TestCase {
      */
     public void testGetControll() {
         System.out.println("GetControll");
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         Boolean expResult = true;
         instance.setControll(true);
         Boolean result = instance.getControll();
@@ -145,40 +145,17 @@ public class EMMASimulatorTest extends TestCase {
         result = instance.getControll();
         assertEquals(expResult, result);
     }
-    
 
-    /**
-     * Test of setAllImageDetails method, of class EMMASimulator.
-     */
-
-    public void testSetAllImageDetails() {
-        System.out.println("setAllImageDetails");
-        
-        EMMASimulator instance = new EMMASimulator();
-        
-        String[] test = new String[5];
-        test[0] = "Photo of a big bird";
-        test[1] = "Photo of a surfer";
-        test[2] = "Photo of a rock";
-        test[3] = "Photo of a girl";
-        test[4] = "Photo of a stick";
-        
-        instance.setAllImageDetails(test);
-        String[] ret = instance.getAllImageDetails();    
-        for(int i = 0; i < 5; i++)
-            assertEquals(test[i], instance.getImageDetails(i));
-        
-        
-    }
     
-    /**
+    
+      /**
      * Test of getAllImageDetails method, of class EMMASimulator.
      */
 
     public void testGetAllImageDetails() {
         System.out.println("getAllImageDetails");
         
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         
         String[] test = new String[5];
         test[0] = "Photo of a big bird";
@@ -201,7 +178,7 @@ public class EMMASimulatorTest extends TestCase {
     public void testSetImageDetails() {
         System.out.println("setImageDetails");
         
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         
         String[] test = new String[5];
         test[0] = "Photo of a big bird";
@@ -222,7 +199,7 @@ public class EMMASimulatorTest extends TestCase {
 
     public void testGetImageDetails() {
         System.out.println("getImageDetails");
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         String[] test = new String[5];
         test[0] = "Photo of a big bird";
         test[1] = "Photo of a surfer";
@@ -244,7 +221,7 @@ public class EMMASimulatorTest extends TestCase {
     
     public void testLoadImages() throws Exception {
         System.out.println("loadImages");
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
         instance.loadImages();
         // TODO review the generated test code and remove the default call to fail.
         
@@ -258,11 +235,12 @@ public class EMMASimulatorTest extends TestCase {
      */
     public void testGetImages() {
         System.out.println("getImages");
-        EMMASimulator instance = new EMMASimulator();
+        Session instance = new Session();
+        BufferedImage[] expResult = null;
         BufferedImage[] result = instance.getImages();
-        assertNotNull(result);
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
-    
     
 }
