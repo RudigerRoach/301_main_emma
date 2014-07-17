@@ -25,6 +25,8 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.sql.*;
+import org.eclipse.jetty.continuation.Continuation;
+import org.eclipse.jetty.continuation.ContinuationSupport;
  
 public class MinimalServer 
 {
@@ -62,8 +64,9 @@ public class MinimalServer
             server.stop();
     }
 
-    public void startSession()
+    public void startSession() throws InterruptedException
     {
+        System.out.println("Start session is geroep");
         start = true;
     }
     
@@ -72,9 +75,12 @@ public class MinimalServer
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
         {
-            if (request.getSession(false) != null)
-            {
-                //moet nog async calls uit figure anders gaan ons polling moet gebruik
+//            if (request.getSession(false) != null)
+//            {
+                System.out.println("before start");
+                while(start == false){}
+                System.out.println("before end");
+                
                 JSONObject jsonResponse = new JSONObject();
                 try 
                 {
@@ -86,23 +92,23 @@ public class MinimalServer
                 }
                 response.setContentType("application/json;charset=UTF-8");
                 response.getWriter().print(jsonResponse);
-            }
-            else
-            {
-                JSONObject jsonResponse = new JSONObject();
-                    try 
-                    {
-                        jsonResponse.put("status", "failed");
-                    } 
-                    catch (JSONException e) 
-                    {
-                        e.printStackTrace();
-                    }
-
-                    //response to failed login
-                    response.setContentType("application/json;charset=UTF-8");
-                    response.getWriter().print(jsonResponse);
-            }
+//            }
+//            else
+//            {
+//                JSONObject jsonResponse = new JSONObject();
+//                    try 
+//                    {
+//                        jsonResponse.put("status", "failed");
+//                    } 
+//                    catch (JSONException e) 
+//                    {
+//                        e.printStackTrace();
+//                    }
+//
+//                    //response to failed login
+//                    response.setContentType("application/json;charset=UTF-8");
+//                    response.getWriter().print(jsonResponse);
+//            }
         }
     }
 
