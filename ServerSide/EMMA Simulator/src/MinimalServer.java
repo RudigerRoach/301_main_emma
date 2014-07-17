@@ -9,9 +9,7 @@
  * @author Dieter
  */
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,14 +18,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.eclipse.jetty.continuation.Continuation;
-import org.eclipse.jetty.continuation.ContinuationSupport;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.sql.*;
  
 public class MinimalServer 
 {
@@ -108,7 +105,7 @@ public class MinimalServer
             }
         }
     }
-    //HttpSession session = req.getSession(false)
+
     public class LoginServlet extends HttpServlet 
     {
     	/**
@@ -128,7 +125,68 @@ public class MinimalServer
             //test if new login
             if(user != null)
             {
-            	
+                try
+                {
+                    File data = new File("youRateSystem.accdb");
+                    Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+                    String database = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=" + data.getAbsolutePath() + ";";
+                    Connection conn = DriverManager.getConnection(database,"","");
+                    Statement s = conn.createStatement();
+
+                    String table = "SELECT * FROM AutoLogin WHERE email='" + user + "';";
+                    s.execute(table);
+                    ResultSet rs = s.getResultSet();
+                    
+                    if(rs == null)
+                    {
+                        Statement s3 = conn.createStatement();
+                        s3.execute("SELECT * FROM AutoLogin WHERE deviceUID='" + id +"';");
+                        rs = s3.getResultSet();
+                        if(rs == null)
+                        {
+                            System.out.println("Don't Remember Device...");
+                            String sql = "INSERT INTO AutoLogin (email , deviceUID) VALUES (?,?);";
+                            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+                            preparedStatement.setString(2, user);
+                            preparedStatement.setString(3, id);
+                            preparedStatement.executeUpdate();
+                            preparedStatement.close();
+                        }
+                        else
+                        {
+                            System.out.println("Remember DeviceUID...");
+                            Statement s2 = conn.createStatement();
+                            s2.executeUpdate("UPDATE AutoLogin SET deviceUID='" + id + "'  WHERE email= '" + user + "';");
+                            s2.close();
+                        }
+                        s3.close();
+                    }
+                    else
+                    {
+                        Statement s3 = conn.createStatement();
+                        s3.execute("SELECT * FROM AutoLogin WHERE deviceUID='" + id +"' AND email= '" + user + "';");
+                        rs = s3.getResultSet();
+                        
+                        if(rs == null)
+                        {
+                            System.out.println("Remember user...");
+                            Statement s2 = conn.createStatement();
+                            s2.executeUpdate("UPDATE AutoLogin SET deviceUID='" + id + "'  WHERE email= '" + user + "';");
+                            s2.close();
+                        }
+                        else
+                        {
+                            System.out.println("Remember Device...");
+                        }
+                        s3.close();
+                    }
+                    s.close();
+                    conn.close();
+                } 
+                catch (ClassNotFoundException | SQLException ex)
+                {
+                    Logger.getLogger(MinimalServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
             	boolean loginSuccess = false;
             	
             	//Getting judges from emma
@@ -147,9 +205,7 @@ public class MinimalServer
 	            //Successful login
             	if (loginSuccess == true)
             	{
-                    //moet email en device id add as geen remembered is nie
-                    //moet email verander as deviceid gevind is
-                    //moet deviceid verander as email gevind is
+                    
                     JSONObject jsonResponse = new JSONObject();
                     try 
                     {
@@ -190,25 +246,34 @@ public class MinimalServer
             	{
                     id = "";
             	}
-            	File file = new File("Data.txt");
-            	FileReader inputFile = new FileReader(file);
-                String userAuto;
-                boolean loginSuccess;
-                try (BufferedReader bf = new BufferedReader(inputFile)) 
+                String userAuto= "";
+                boolean loginSuccess = false;
+                
+                try 
                 {
-                    String line;
-                    userAuto = "";
-                    loginSuccess = false;
-                    //searches for user corresponding to device id
-                    while((line = bf.readLine()) != null)
+                    File data = new File("youRateSystem.accdb");
+                    Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+                    String database = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=" + data.getAbsolutePath() + ";";
+                    Connection conn = DriverManager.getConnection(database,"","");
+                    Statement s = conn.createStatement();
+                    
+                    String table = "SELECT * FROM AutoLogin";
+                    s.execute(table);
+                    ResultSet rs = s.getResultSet();
+                    while((rs != null)&&(rs.next()))
                     {
-                        String [] values = line.split(",");
-                        if(values[1].equals(id) == true)
+                        if (rs.getString(3).equals(id))
                         {
-                            userAuto = values[0];
-                            break;
+                            userAuto = rs.getString(2);
                         }
                     }
+                    
+                    s.close();
+                    conn.close();
+                } 
+                catch (SQLException | ClassNotFoundException ex) 
+                {
+                    Logger.getLogger(MinimalServer.class.getName()).log(Level.SEVERE, null, ex);
                 }
             	
             	//get the judges from emma

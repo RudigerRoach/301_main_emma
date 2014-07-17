@@ -69,7 +69,7 @@ public class MinimalServerTest extends TestCase {
         //Add parameters
         List<NameValuePair> urlParameters = new ArrayList<>();
         urlParameters.add(new BasicNameValuePair("email", "test"));
-        urlParameters.add(new BasicNameValuePair("deviceUID", "123"));
+        urlParameters.add(new BasicNameValuePair("deviceUID", "BD655C43-3A73-4DFB-AA1F-074A4F0B0DCE"));
         mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
         //Execute the request
         HttpResponse mockResponse = client.execute(mockRequest);
@@ -152,7 +152,7 @@ public class MinimalServerTest extends TestCase {
         //Add parameters
         List<NameValuePair> urlParameters = new ArrayList<>();
         urlParameters.add(new BasicNameValuePair("email", "test"));
-        urlParameters.add(new BasicNameValuePair("deviceUID", "123"));
+        urlParameters.add(new BasicNameValuePair("deviceUID", "BD655C43-3A73-4DFB-AA1F-074A4F0B0DCE"));
         mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
         //Execute request
         HttpResponse mockResponse = client.execute(mockRequest);
@@ -181,7 +181,7 @@ public class MinimalServerTest extends TestCase {
         //Add parameters to clients
         List<NameValuePair> urlParameters = new ArrayList<>();
         urlParameters.add(new BasicNameValuePair("email", "test"));
-        urlParameters.add(new BasicNameValuePair("deviceUID", "123"));
+        urlParameters.add(new BasicNameValuePair("deviceUID", "BD655C43-3A73-4DFB-AA1F-074A4F0B0DCE"));
         mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
         mockRequest1.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
         //execute the first client
@@ -210,7 +210,7 @@ public class MinimalServerTest extends TestCase {
         //Add parameters
         List<NameValuePair> urlParameters = new ArrayList<>();
         urlParameters.add(new BasicNameValuePair("email", "test"));
-        urlParameters.add(new BasicNameValuePair("deviceUID", "123"));
+        urlParameters.add(new BasicNameValuePair("deviceUID","BD655C43-3A73-4DFB-AA1F-074A4F0B0DCE"));
         mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
         //Execute the request
         HttpResponse mockResponse = client.execute(mockRequest,httpContext);
