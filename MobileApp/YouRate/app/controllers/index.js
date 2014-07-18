@@ -1,6 +1,9 @@
 function displayLoginPage(e){
+	//Makes loading image move
+	var number = 1;
+	setInterval(function(){$.loadingImage.image=number+".png"; number++; if (number > 8){number=1;}},500);
+		
 	//Call autoLogin
-
 	var service=require('authentication');
 	service.autoLogin();
 	var success = service.loginStatus();

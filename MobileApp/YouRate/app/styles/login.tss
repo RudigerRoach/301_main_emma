@@ -15,6 +15,7 @@
 	height: "100"
 }
 "#wintitle[platform=ios]": {
+	title: 'YouRate - Login',
 	color: 'black'
 },
 '#menu[platform=android]': {
