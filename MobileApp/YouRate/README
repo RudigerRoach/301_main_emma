@@ -12,3 +12,7 @@ boolean loginStatus
 	-> true if login has been successful.
 string error
 	-> a string description of any error that might have occured, or -1 if everything went fine.
+boolean autologinDone
+	-> returns true when the asynchronous autologin function has completed exicution.
+boolean loginDone
+	-> returns true when the asynchronous login function has completed exicution.
