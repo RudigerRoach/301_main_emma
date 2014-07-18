@@ -1,16 +1,26 @@
 function Controller() {
     function doLogin() {
         var email = $.textArea.value;
-        var service = require("authentication");
+        service = require("Authentication");
         service.login(email);
+        testStatus(service);
+    }
+    function goForward(service) {
         var success = service.loginStatus();
         if (true == success) {
             var win = Alloy.createController("vote").getView();
             win.open();
-        } else {
-            var error = service.error();
-            1 != error && alert(error);
-        }
+        } else alert("err: " + service.error());
+    }
+    function testStatus(service) {
+        var done = false;
+        var timer = setInterval(function() {
+            done = service.autologinDone();
+            if (done) {
+                goForward(service);
+                clearInterval(timer);
+            }
+        }, 1e3);
     }
     function setActionBar() {
     }

@@ -6,8 +6,11 @@ function Controller() {
             number++;
             number > 8 && (number = 1);
         }, 500);
-        var service = require("authentication");
+        service = require("Authentication");
         service.autoLogin();
+        testStatus(service);
+    }
+    function goForward(service) {
         var success = service.loginStatus();
         if (true == success) {
             var win = Alloy.createController("vote").getView();
@@ -16,6 +19,16 @@ function Controller() {
             var win = Alloy.createController("login").getView();
             win.open();
         }
+    }
+    function testStatus(service) {
+        var done = false;
+        var timer = setInterval(function() {
+            done = service.autologinDone();
+            if (done) {
+                goForward(service);
+                clearInterval(timer);
+            }
+        }, 1e3);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";

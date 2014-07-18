@@ -12,7 +12,7 @@ describe("Authentication tests", function() {
 		var flag = false;
 		
 		runs(function(){
-			auth.login('test');
+			auth.login('test@mail.com');
 			setTimeout(function() {
 				flag = true;
 			}, goodTime-100);

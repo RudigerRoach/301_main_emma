@@ -8,6 +8,9 @@ var sessionID = -1;
 var UDID = Titanium.Platform.id;
 var error = -1;
 var returnStatus = false;
+var loginIsDone = false;
+var autologinIsDone = false;
+
 var url='http://192.168.0.101:5555/login'; //verander na server address en port
 
 exports.loginStatus = function(){
@@ -25,7 +28,7 @@ exports.login = function(email){
 		}
 	*/
 	
-	if(email.toString().length < 1) //shortest possible email address "a@b.c" is of length 5
+	if(email.toString().length < 5) //shortest possible email address "a@b.c" is of length 5
 	{
 		error = "Invalid email address entered, please revise your email address.";
 		returnStatus = false;
@@ -55,6 +58,7 @@ exports.login = function(email){
 	   		error = "Invalid Login cridentials";
 	   		returnStatus = false;
 	   }
+	   loginIsDone = true;
 	};
 	 
 	var onErrorCallback = function (e) {
@@ -69,13 +73,13 @@ exports.login = function(email){
 	   }
 	   else
 	   {
-	   		error = "An error occured: "+e.data;
+	   		error = "An unknown error occured: "+e.data;
 	   }
 	   returnStatus = false; //Login failed
+	   loginIsDone = true;
 	};
 	 
 	xhr.post(url, payload , onSuccessCallback, onErrorCallback);
-
 };
 
 exports.autoLogin = function(){
@@ -84,8 +88,7 @@ exports.autoLogin = function(){
 	};
 	
 	var onSuccessCallback = function (e) {
-
-	   response = JSON.parse(e.data); //remove comment at integration
+	   response = JSON.parse(e.data);
 
 	   if(responsestatus == "success")
 	   {
@@ -95,7 +98,7 @@ exports.autoLogin = function(){
 	   		error = "Autologin not yet available for this device.";
 	   		returnStatus = false;
 	   }
-
+		autologinIsDone = true;
 	};
 	
 	var onErrorCallback = function (e) {
@@ -108,19 +111,21 @@ exports.autoLogin = function(){
 	   		error = "An unknown error occured: "+e.data;
 	   }
 	   returnStatus = false; //Login failed
+	   autologinIsDone = true;
 	};
 	
 	xhr.post(url, payload , onSuccessCallback, onErrorCallback);
-	returnStatus = false; //Login failed
+
 };
 
 exports.error = function(){
-	if(error != -1)
-	{
 		return error;
-	}
-	else
-	{
-		return "Everything seems fine here";
-	}
+};
+
+exports.loginDone = function(){
+	return loginIsDone;
+};
+
+exports.autologinDone = function(){
+	return autologinIsDone;
 };

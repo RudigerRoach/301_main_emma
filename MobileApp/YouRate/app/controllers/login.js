@@ -1,12 +1,18 @@
 function doLogin()
-{
+{		
 	//Gets email address from user input
 	var email = $.textArea.value;
-
-	//Calls login function to determine if user is allowed to access the rest of the application
-	var service=require('authentication');
+	
+	//Call login
+	service=require('Authentication');
 	service.login(email);
+	testStatus(service);
+};
+
+function goForward(service){
 	var success = service.loginStatus();
+	
+	//If login successful
 	if (success == true)
 	{
 		//The user is allowed to use the rest of the application, thus display the next page
@@ -14,15 +20,21 @@ function doLogin()
 	 	win.open();
 	}
 	else
-	{
-		//The user is  not allowed to use the rest of the application
-		var error = service.error();
-		if(error != 1)
-		{
-			alert(error);
-		}
-	}
+	{	
+		//If login not successful
+		alert("Error: "+service.error());
+ 	}
+}
 
+function testStatus(service){
+		var done = false;
+		var timer = setInterval(function(){ //poll every 1s and stop when autologinDone() returns true
+		    done = service.autologinDone();
+		    if (done) {
+		    	goForward(service);
+		        clearInterval(timer);
+		    }
+		}, 1000);
 }
 
 function doClickMenu(evt) 

@@ -10,6 +10,10 @@ var error = -1;
 
 var returnStatus = false;
 
+var loginIsDone = false;
+
+var autologinIsDone = false;
+
 var url = "http://192.168.0.101:5555/login";
 
 exports.loginStatus = function() {
@@ -17,7 +21,7 @@ exports.loginStatus = function() {
 };
 
 exports.login = function(email) {
-    if (1 > email.toString().length) {
+    if (5 > email.toString().length) {
         error = "Invalid email address entered, please revise your email address.";
         returnStatus = false;
         return;
@@ -35,10 +39,12 @@ exports.login = function(email) {
             error = "Invalid Login cridentials";
             returnStatus = false;
         }
+        loginIsDone = true;
     };
     var onErrorCallback = function(e) {
-        error = "error" == e.status ? "Device cannot reach the voting network" : "An error occured: " + e.data;
+        error = "error" == e.status ? "Device cannot reach the voting network" : "An unknown error occured: " + e.data;
         returnStatus = false;
+        loginIsDone = true;
     };
     xhr.post(url, payload, onSuccessCallback, onErrorCallback);
 };
@@ -56,15 +62,24 @@ exports.autoLogin = function() {
             error = "Autologin not yet available for this device.";
             returnStatus = false;
         }
+        autologinIsDone = true;
     };
     var onErrorCallback = function(e) {
         error = "error" == e.status ? "Device cannot reach the voting network" : "An unknown error occured: " + e.data;
         returnStatus = false;
+        autologinIsDone = true;
     };
     xhr.post(url, payload, onSuccessCallback, onErrorCallback);
-    returnStatus = false;
 };
 
 exports.error = function() {
-    return -1 != error ? error : "Everything seems fine here";
+    return error;
+};
+
+exports.loginDone = function() {
+    return loginIsDone;
+};
+
+exports.autologinDone = function() {
+    return autologinIsDone;
 };
