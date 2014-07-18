@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import junit.framework.TestCase;
 
-/**
- *
- * @author Endzeit
- */
 public class SessionTest extends TestCase {
     
     public SessionTest(String testName) {
@@ -17,7 +9,7 @@ public class SessionTest extends TestCase {
     }
 
     /**
-     * Test of setJudges method, of class EMMASimulator.
+     * Test of setJudges method, of class Session.
      */
     public void testSetJudges() {
         System.out.println("setJudges");
@@ -38,7 +30,7 @@ public class SessionTest extends TestCase {
     }
 
     /**
-     * Test of testGetSessionType() method, of class EMMASimulator.
+     * Test of testGetSessionType() method, of class Session.
      */
     
     public void testGetSessionType() {
@@ -55,7 +47,7 @@ public class SessionTest extends TestCase {
     
     
     /**
-     * Test of getJudges method, of class EMMASimulator.
+     * Test of getJudges method, of class Session.
      */
 
     public void testGetJudges() {
@@ -74,7 +66,7 @@ public class SessionTest extends TestCase {
     }
 
     /**
-     * Test of setRanges method, of class EMMASimulator.
+     * Test of setRanges method, of class Session.
      */
     public void testSetRanges() {
         System.out.println("setRanges");
@@ -87,7 +79,7 @@ public class SessionTest extends TestCase {
     }
 
     /**
-     * Test of getTopRange method, of class EMMASimulator.
+     * Test of getTopRange method, of class Session.
      */
     public void testGetTopRange() {
         System.out.println("getTopRange");
@@ -99,7 +91,7 @@ public class SessionTest extends TestCase {
     }
 
     /**
-     * Test of getBotRange method, of class EMMASimulator.
+     * Test of getBotRange method, of class Session.
      */
     public void testGetBotRange() {
         System.out.println("getBotRange");
@@ -111,7 +103,7 @@ public class SessionTest extends TestCase {
     }
 
     /**
-     * Test of getTopRange method, of class EMMASimulator.
+     * Test of getTopRange method, of class Session.
      */
     public void testSetControll() {
         System.out.println("SetControll");
@@ -130,7 +122,7 @@ public class SessionTest extends TestCase {
     
     
     /**
-     * Test of getTopRange method, of class EMMASimulator.
+     * Test of getTopRange method, of class Session.
      */
     public void testGetControll() {
         System.out.println("GetControll");
@@ -149,7 +141,7 @@ public class SessionTest extends TestCase {
     
     
       /**
-     * Test of getAllImageDetails method, of class EMMASimulator.
+     * Test of getAllImageDetails method, of class Session.
      */
 
     public void testGetAllImageDetails() {
@@ -172,7 +164,7 @@ public class SessionTest extends TestCase {
     }
     
     /**
-     * Test of setImageDetails method, of class EMMASimulator.
+     * Test of setImageDetails method, of class Session.
      */
 
     public void testSetImageDetails() {
@@ -194,7 +186,7 @@ public class SessionTest extends TestCase {
     }
     
     /**
-     * Test of getImageDetails method, of class EMMASimulator.
+     * Test of getImageDetails method, of class Session.
      */
 
     public void testGetImageDetails() {
@@ -216,31 +208,26 @@ public class SessionTest extends TestCase {
     
     
      /**
-     * Test of loadImages method, of class EMMASimulator.
+     * Test of loadImages method, of class Session.
      */
     
     public void testLoadImages() throws Exception {
         System.out.println("loadImages");
-        Session instance = new Session();
+        Session instance = new Session();        
         instance.loadImages();
-        // TODO review the generated test code and remove the default call to fail.
+        assertNotNull(instance.getImages());
         
-        
-        
-        fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getImages method, of class EMMASimulator.
+     * Test of getImages method, of class Session.
      */
-    public void testGetImages() {
+    public void testGetImages() throws Exception {
         System.out.println("getImages");
         Session instance = new Session();
-        BufferedImage[] expResult = null;
-        BufferedImage[] result = instance.getImages();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.loadImages();
+        assertNotNull(instance.getImages());
+        
     }
     
 }

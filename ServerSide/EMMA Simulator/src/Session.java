@@ -1,5 +1,6 @@
-
 import java.awt.image.BufferedImage;
+import java.io.*;
+import javax.imageio.ImageIO;
 
 public class Session 
 {
@@ -108,12 +109,52 @@ public class Session
         return null;
     }
 
-    BufferedImage[] getImages() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public BufferedImage[] getImages()
+    {
+        return images;
     }
 
-    void loadImages() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public void loadImages() throws FileNotFoundException, IOException
+    {
+        BufferedReader br = new BufferedReader(new FileReader("Photos.txt"));
+        String line;
+        imageNames = new linkedList();
+        int count = 0;
+        while ((line = br.readLine()) != null) 
+        {
+                count++;
+                linkedList a = new linkedList();
+                a.info = line;
+                a.next = null;
+            if(imageNames == null)
+                imageNames = a;
+            else    
+            {
+                linkedList current = imageNames;
+                while(current.next != null)
+                    current = current.next;
+
+                current.next = a;
+            }
+        }
+        br.close();
+        images = new BufferedImage[count];
+        
+        linkedList temp = imageNames;
+        count = 0;
+        
+        while(temp != null)
+        {
+            temp = temp.next;
+            try 
+            {
+                images[count] = ImageIO.read(new File(temp.info));
+                count++;
+                
+            } 
+            catch (IOException e) {System.out.println("The following exeption was handled: "+e);}
+        }
+        imageDetails = new String[count];
     }
     
     
