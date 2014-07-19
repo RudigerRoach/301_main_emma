@@ -1,0 +1,14 @@
+"#startPage": {
+	backgroundColor: "#DFE4E7",
+	exitOnClose: true
+},
+"#loadingImage": 
+{
+	borderWidth: "2",
+	borderColor: "#bbb", 
+	borderRadius: "5",
+	image: "blueRose.jpg",
+    top: "200", 
+    width: "100", 
+    height: "100"
+}

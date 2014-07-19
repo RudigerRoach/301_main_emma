@@ -1,0 +1,10 @@
+CommonJS API:
+
+==============
+Authentication
+==============
+
+boolean autoLogin()
+	-> returns TRUE if the device is recognized or FALSE if the device has not yet connected to the server before.
+boolean login(string emailAddress)
+	-> returns TRUE if the device was succesfuly logged in and the person is allowed to judge.

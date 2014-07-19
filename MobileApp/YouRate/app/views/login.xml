@@ -1,0 +1,18 @@
+<Alloy>
+	<Window id="loginPage" onOpen="setActionBar">
+		<!-- iOS toolbar -->
+		<Toolbar id="toolbar" platform="ios">
+			<Button id="wintitle">YouRate - Login</Button>
+		</Toolbar>
+		
+		<!-- Android menu -->
+		<Menu id="menu" platform="android">
+			<MenuItem id="menu1" title="YouRate - Login" onClick="doClickMenu"/>
+		</Menu>
+		
+		<!-- iOS and Android -->
+		<Label id="emailLabel">Email Address:</Label>	
+        <TextArea id="textArea"/>
+		<Button id="login" onClick="doLogin">Login</Button>
+    </Window>
+</Alloy>
