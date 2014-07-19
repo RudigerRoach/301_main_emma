@@ -1,5 +1,10 @@
 function doLogin()
 {		
+	//Make loading image move
+	$.loadingImage.opacity=1.0;
+	var number = 1;
+	setInterval(function(){$.loadingImage.image=number+".png"; number++; if (number > 8){number=1;}},500);
+	
 	//Gets email address from user input
 	var email = $.textArea.value;
 	
@@ -22,6 +27,7 @@ function goForward(service){
 	else
 	{	
 		//If login not successful
+		$.loadingImage.opacity=0.0;
 		alert("Error: "+service.error());
  	}
 }

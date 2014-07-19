@@ -1,5 +1,12 @@
 function Controller() {
     function doLogin() {
+        $.loadingImage.opacity = 1;
+        var number = 1;
+        setInterval(function() {
+            $.loadingImage.image = number + ".png";
+            number++;
+            number > 8 && (number = 1);
+        }, 500);
         var email = $.textArea.value;
         service = require("Authentication");
         service.login(email);
@@ -10,7 +17,10 @@ function Controller() {
         if (true == success) {
             var win = Alloy.createController("vote").getView();
             win.open();
-        } else alert("err: " + service.error());
+        } else {
+            $.loadingImage.opacity = 0;
+            alert("Error: " + service.error());
+        }
     }
     function testStatus(service) {
         var done = false;
@@ -121,6 +131,14 @@ function Controller() {
     });
     $.__views.loginPage.add($.__views.login);
     doLogin ? $.__views.login.addEventListener("click", doLogin) : __defers["$.__views.login!click!doLogin"] = true;
+    $.__views.loadingImage = Ti.UI.createImageView({
+        top: "220",
+        width: "100",
+        height: "100",
+        opacity: 0,
+        id: "loadingImage"
+    });
+    $.__views.loginPage.add($.__views.loadingImage);
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.loginPage.open();
