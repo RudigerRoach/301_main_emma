@@ -105,8 +105,8 @@ The mobile application will have to go through a web-service which will be the p
 \subsection{Introduction}
 This section discusses the functional requirements for the mobile judging system.
 \subsection{Required Functionality}
-\subsubsection{Login}
-To login for the first time a user will have to enter his email address. The email provided will be authenticated by EMMA. If login fails the user will be informed that he is not registered to be a judge for the current session. If login is successful the device's unique identifier will be sent to the server to be stored in the database so that the device can be remembered on the system. This will allow for auto login - if a user attends a session where he is able to judge his phone will automatically be logged into the system. The user will then be able to use the rest of the system.
+\subsubsection{Login and Auto Login}
+To login for the first time a user will have to enter his email address. The email provided will be authenticated by EMMA. If login fails the user will be informed that he is not registered to be a judge for the current session. If login is successful the device's unique identifier will be sent to the server to be stored in the database so that the device can be remembered on the system. This will allow for auto login - if a user attends a session where he is able to judge his phone will automatically be logged into the system when he enters the application. The user will then be able to use the rest of the system.
 
 \begin{center}
 \advance\leftskip-1.3cm
@@ -114,7 +114,7 @@ To login for the first time a user will have to enter his email address. The ema
 Login Use Case Diagram 
 \end{center}
 
-\subsubsection{Judging Session}
+\subsubsection{Create Judging Session}
 When the server is started, it will request that the session's photos as well as all the competition constraints be sent to it. The constraints will contain the type of session (Open event, Closed event, Yes/No, Winner), the range for a valid score and if comments are enabled.
 
 \begin{center}
@@ -122,6 +122,9 @@ When the server is started, it will request that the session's photos as well as
 \includegraphics[width=130mm]{Pictures/CreateJudgingSession.jpg} 
 Create Judging Session Use Case Diagram 
 \end{center}
+
+\subsubsection{Voting}
+If a user logs in before the event starts, a loading screen will be displayed until the event starts. The server will inform the user's application when the event starts. The server will then pass through the first image.
 
 \subsection{Use case prioritization}
 Critical Use Cases are the main cases that the system is made up of namely: Login, Create Judging Session. Without these cases the system will have limited to no functionality which will lead to a system that is not required by anyone.
@@ -144,13 +147,12 @@ Services contract for Create Judging Session
 \end{center}
 \subsection{Process specifications}
 \begin{center}
-\advance\leftskip-1.3cm
-\includegraphics[width=160mm]{Pictures/LoginActivityDiagram.jpg} 
+\includegraphics[width=120mm]{Pictures/LoginActivityDiagram.jpg} 
 Login Activity Diagram 
 \end{center}
 \begin{center}
-\advance\leftskip-1.3cm
-\includegraphics[width=160mm]{Pictures/createJudgingSessionActivityDiagram.jpg} 
+\advance\leftskip-2cm
+\includegraphics[width=170mm]{Pictures/createJudgingSessionActivityDiagram.jpg} 
 Create Judging Session Activity Diagram 
 \end{center}
 \subsection{Domain objects}
