@@ -1,9 +1,36 @@
 function Controller() {
     function doLogin() {
+        $.loadingImage.opacity = 1;
+        var number = 1;
+        setInterval(function() {
+            $.loadingImage.image = number + ".png";
+            number++;
+            number > 8 && (number = 1);
+        }, 500);
         var email = $.textArea.value;
-        alert(email);
-        var win = Alloy.createController("vote").getView();
-        win.open();
+        service = require("Authentication");
+        service.login(email);
+        testStatus(service);
+    }
+    function goForward(service) {
+        var success = service.loginStatus();
+        if (true == success) {
+            var win = Alloy.createController("vote").getView();
+            win.open();
+        } else {
+            $.loadingImage.opacity = 0;
+            alert("Error: " + service.error());
+        }
+    }
+    function testStatus(service) {
+        var done = false;
+        var timer = setInterval(function() {
+            done = service.autologinDone();
+            if (done) {
+                goForward(service);
+                clearInterval(timer);
+            }
+        }, 1e3);
     }
     function setActionBar() {
     }
@@ -37,7 +64,19 @@ function Controller() {
     });
     $.__views.loginPage.add($.__views.toolbar);
     $.__views.wintitle = Ti.UI.createButton({
+        borderWidth: "1",
+        borderColor: "#bbb",
+        borderRadius: "5",
+        backgroundColor: "#bbb",
         color: "black",
+        textAlign: "center",
+        font: {
+            fontSize: 20,
+            fontFamily: "Helvetica Neue"
+        },
+        top: "160",
+        width: "140",
+        height: "35",
         title: "YouRate - Login",
         id: "wintitle"
     });
@@ -92,6 +131,14 @@ function Controller() {
     });
     $.__views.loginPage.add($.__views.login);
     doLogin ? $.__views.login.addEventListener("click", doLogin) : __defers["$.__views.login!click!doLogin"] = true;
+    $.__views.loadingImage = Ti.UI.createImageView({
+        top: "220",
+        width: "100",
+        height: "100",
+        opacity: 0,
+        id: "loadingImage"
+    });
+    $.__views.loginPage.add($.__views.loadingImage);
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.loginPage.open();

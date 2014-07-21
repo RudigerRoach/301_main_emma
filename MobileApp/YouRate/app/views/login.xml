@@ -14,5 +14,6 @@
 		<Label id="emailLabel">Email Address:</Label>	
         <TextArea id="textArea"/>
 		<Button id="login" onClick="doLogin">Login</Button>
+		<ImageView id="loadingImage"/>
     </Window>
 </Alloy>

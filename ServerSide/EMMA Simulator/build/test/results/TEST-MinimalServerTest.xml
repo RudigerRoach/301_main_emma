@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="1" failures="2" hostname="Dieter-PC" name="EMMASimulatorTest" skipped="0" tests="14" time="0.078" timestamp="2014-07-17T12:16:10">
+<testsuite errors="0" failures="0" hostname="Dieter-PC" name="MinimalServerTest" skipped="0" tests="7" time="1.841" timestamp="2014-07-17T12:16:11">
   <properties>
     <property name="netbeans.autoupdate.country" value="US" />
     <property name="nb.wait.for.caches" value="true" />
@@ -39,7 +39,7 @@
     <property name="user.name" value="Dieter" />
     <property name="copylibs.rebase" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner EMMASimulatorTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\test\results\TEST-EMMASimulatorTest.xml crashfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junitvmwatcher3370149195395152022.properties propsfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junit3967931203080724856.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner MinimalServerTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\test\results\TEST-MinimalServerTest.xml crashfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junitvmwatcher1009775389447359137.properties propsfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junit1170664954329957589.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -171,6 +171,7 @@
     <property name="org.openide.major.version" value="IDE/1" />
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
     <property name="netbeans.user" value="C:\Users\Dieter\AppData\Roaming\NetBeans\8.0" />
+    <property name="tests.failed" value="true" />
     <property name="javadoc.additionalparam" value="" />
     <property name="java.io.tmpdir" value="C:\Users\Dieter\AppData\Local\Temp\" />
     <property name="java.vendor.url" value="http://java.oracle.com/" />
@@ -306,87 +307,50 @@
     <property name="libs.junit.src" value="" />
     <property name="annotation.processing.source.output" value="build/generated-sources/ap-source-output" />
     <property name="main.class" value="EMMASimulator" />
-    <property name="libs.CopyLibs.src" value="" />
     <property name="build.dir" value="build" />
+    <property name="libs.CopyLibs.src" value="" />
     <property name="ant.version" value="Apache Ant(TM) version 1.9.2 compiled on July 8 2013" />
-    <property name="build.classes.excludes" value="**/*.java,**/*.form" />
     <property name="file.encoding" value="Cp1252" />
+    <property name="build.classes.excludes" value="**/*.java,**/*.form" />
     <property name="jdkBug6558476" value="false" />
     <property name="javadoc.nonavbar" value="false" />
     <property name="platform.active" value="default_platform" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
   </properties>
-  <testcase classname="EMMASimulatorTest" name="testGetSessionType" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testGetJudges" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testSetJudges" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testSetControll" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testGetBotRange" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testGetTopRange" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testSetRanges" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testGetControll" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testSetAllImageDetails" time="0.0">
-    <failure message="expected:&lt;Photo of a rock&gt; but was:&lt;null&gt;" type="junit.framework.ComparisonFailure">junit.framework.ComparisonFailure: expected:&lt;Photo of a rock&gt; but was:&lt;null&gt;
-	at EMMASimulatorTest.testSetAllImageDetails(EMMASimulatorTest.java:169)
-</failure>
-  </testcase>
-  <testcase classname="EMMASimulatorTest" name="testGetAllImageDetails" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testSetImageDetails" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testGetImageDetails" time="0.0">
-    <failure message="expected:&lt;Photo of a rock&gt; but was:&lt;null&gt;" type="junit.framework.ComparisonFailure">junit.framework.ComparisonFailure: expected:&lt;Photo of a rock&gt; but was:&lt;null&gt;
-	at EMMASimulatorTest.testGetImageDetails(EMMASimulatorTest.java:236)
-</failure>
-  </testcase>
-  <testcase classname="EMMASimulatorTest" name="testLoadImages" time="0.0">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at java.io.File.&lt;init&gt;(File.java:251)
-	at EMMASimulator.loadImages(EMMASimulator.java:116)
-	at EMMASimulatorTest.testLoadImages(EMMASimulatorTest.java:248)
-</error>
-  </testcase>
-  <testcase classname="EMMASimulatorTest" name="testGetImages" time="0.0" />
-  <system-out><![CDATA[sessionType
-Test yields:stellies.jpg
-Problem loading images
-getJudges
-Test yields:stellies.jpg
-Problem loading images
-setJudges
-Test yields:stellies.jpg
-Problem loading images
-SetControll
-Test yields:stellies.jpg
-Problem loading images
-getBotRange
-Test yields:stellies.jpg
-Problem loading images
-getTopRange
-Test yields:stellies.jpg
-Problem loading images
-setRanges
-Test yields:stellies.jpg
-Problem loading images
-GetControll
-Test yields:stellies.jpg
-Problem loading images
-setAllImageDetails
-Test yields:stellies.jpg
-Problem loading images
-getAllImageDetails
-Test yields:stellies.jpg
-Problem loading images
-setImageDetails
-Test yields:stellies.jpg
-Problem loading images
-getImageDetails
-Test yields:stellies.jpg
-Problem loading images
-loadImages
-Test yields:stellies.jpg
-Problem loading images
-Test yields:stellies.jpg
-getImages
-Test yields:stellies.jpg
-Problem loading images
+  <testcase classname="MinimalServerTest" name="testLoginSuccessful" time="0.63" />
+  <testcase classname="MinimalServerTest" name="testAutoLoginFailure" time="0.161" />
+  <testcase classname="MinimalServerTest" name="testAutoLoginSuccessful" time="0.157" />
+  <testcase classname="MinimalServerTest" name="testLoginFailure" time="0.158" />
+  <testcase classname="MinimalServerTest" name="testSingleSignOnSuccess" time="0.268" />
+  <testcase classname="MinimalServerTest" name="testSingleSignOnFailure" time="0.208" />
+  <testcase classname="MinimalServerTest" name="testNotification" time="0.194" />
+  <system-out><![CDATA[Remember Device...
+Remember Device...
+Remember Device...
+Remember Device...
+Remember Device...
+Remember Device...
+Remember Device...
+Start session is geroep
+before start
+before end
+Done
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[2014-07-17 14:16:11.762:INFO::Logging to StdErrLog::DEBUG=false via org.eclipse.jetty.util.log.StdErrLog
+2014-07-17 14:16:11.793:INFO::jetty-7.0.2.v20100331
+2014-07-17 14:16:11.871:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-07-17 14:16:12.360:INFO::jetty-7.0.2.v20100331
+2014-07-17 14:16:12.392:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-07-17 14:16:12.522:INFO::jetty-7.0.2.v20100331
+2014-07-17 14:16:12.539:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-07-17 14:16:12.679:INFO::jetty-7.0.2.v20100331
+2014-07-17 14:16:12.697:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-07-17 14:16:12.838:INFO::jetty-7.0.2.v20100331
+2014-07-17 14:16:12.855:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-07-17 14:16:13.106:WARN::2 threads could not be stopped
+2014-07-17 14:16:13.107:INFO::jetty-7.0.2.v20100331
+2014-07-17 14:16:13.124:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-07-17 14:16:13.316:INFO::jetty-7.0.2.v20100331
+2014-07-17 14:16:13.317:INFO::Started SelectChannelConnector@0.0.0.0:5555
+]]></system-err>
 </testsuite>
