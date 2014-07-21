@@ -10,6 +10,10 @@ function Controller() {
         service.autoLogin();
         testStatus(service);
     }
+    function goVote() {
+        var win = Alloy.createController("vote").getView();
+        win.open();
+    }
     function goForward(service) {
         var success = service.loginStatus();
         if (true == success) {
@@ -52,10 +56,12 @@ function Controller() {
         id: "loadingImage"
     });
     $.__views.startPage.add($.__views.loadingImage);
+    goVote ? $.__views.loadingImage.addEventListener("click", goVote) : __defers["$.__views.loadingImage!click!goVote"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.startPage.open();
     __defers["$.__views.startPage!open!displayLoginPage"] && $.__views.startPage.addEventListener("open", displayLoginPage);
+    __defers["$.__views.loadingImage!click!goVote"] && $.__views.loadingImage.addEventListener("click", goVote);
     _.extend($, exports);
 }
 

@@ -9,6 +9,12 @@ function displayLoginPage(e){
 	testStatus(service);
 };
 
+function goVote(){
+	//For offline testing of vote page - to be taken out!
+	var win=Alloy.createController('vote').getView();
+	win.open();
+}
+
 $.startPage.open();
 
 function goForward(service){
