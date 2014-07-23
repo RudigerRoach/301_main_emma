@@ -1,5 +1,11 @@
 function Controller() {
     function goVote() {
+        var number = 1;
+        setInterval(function() {
+            $.loadingImage.image = number + ".png";
+            number++;
+            number > 8 && (number = 1);
+        }, 500);
         var win = Alloy.createController("wait").getView();
         win.open();
     }

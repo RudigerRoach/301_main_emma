@@ -1,4 +1,4 @@
-function displayLoginPage(e){
+function displayLoginPage(){
 	//Make loading image move
 	var number = 1;
 	setInterval(function(){$.loadingImage.image=number+".png"; number++; if (number > 8){number=1;}},500);
@@ -41,6 +41,9 @@ function testStatus(service){
 
 function goVote(){
 	//For offline testing of vote page - to be taken out!
+	//Make loading image move
+	var number = 1;
+	setInterval(function(){$.loadingImage.image=number+".png"; number++; if (number > 8){number=1;}},500);
 	var win=Alloy.createController('wait').getView();
 	win.open();
 }
