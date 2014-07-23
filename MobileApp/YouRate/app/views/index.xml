@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="startPage" <!--onOpen="displayLoginPage"--> >
-        <ImageView id="loadingImage" onClick="goVote"/>
+    <Window id="startPage">
+        <ImageView id="loadingImage" image="1.png" onClick="goVote"/>
     </Window>
 </Alloy>

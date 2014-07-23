@@ -9,14 +9,6 @@ function displayLoginPage(e){
 	testStatus(service);
 };
 
-function goVote(){
-	//For offline testing of vote page - to be taken out!
-	var win=Alloy.createController('vote').getView();
-	win.open();
-}
-
-$.startPage.open();
-
 function goForward(service){
 	var success = service.loginStatus();
 	
@@ -46,3 +38,11 @@ function testStatus(service){
 		    }
 		}, 1000);
 }
+
+function goVote(){
+	//For offline testing of vote page - to be taken out!
+	var win=Alloy.createController('wait').getView();
+	win.open();
+}
+
+$.startPage.open();
