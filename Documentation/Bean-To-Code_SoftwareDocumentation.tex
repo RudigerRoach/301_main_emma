@@ -59,25 +59,25 @@ Create a software solution that:
 \end{itemize}
 \subsubsection{Quality requirements}
 \begin{itemize}
-\item Security \\
-The systems functionality should be only available to users who can be authenticated through the EMMA system. New users have to create an account before being granted access to the application.
 \item Usability \\
 99 \% of users should be able to use the system with little to no prior training.
-\item Testability \\
-All services offered must be accompanied by unit tests. The tests should ensure that all pre-conditions are met before the service is delivered and that all post-conditions are met after the service has been delivered.
+\item Scalability \\
+The deployed system must be able to operate effectively under the load of 50 concurrent users. The 50 users will be handled by Jetty which creates a thread for each person that connects to certain servlet at a point in time thus it will be able to handle the concurrency. It will be tested by creating a thread pool of 50 threads and doing 50 unit tests concurrently.
+\item Installability \\
+It should be easy to install the server side component and the effort to get it running each club night should be minimal. There will be a computer at the event running the EMMA server component and our server should be installed on it. The application should also be easy to download and install on the judges phone.
 \item Performance requirements \\
  All operations on application should respond within less than 1 second.
-\item Scalability \\
-The deployed system must be able to operate effectively under the load of 50 concurrent users.
-\item Installability \\
-It should be easy to install the server side component and the effort to get it running each club night should be minimal. The application should also be easy to download and install.
+\item Testability \\
+All services offered must be accompanied by unit tests. The tests should ensure that all pre-conditions are met before the service is delivered and that all post-conditions are met after the service has been delivered.
+\item Security \\
+The systems functionality should be only available to users who can be authenticated through the EMMA system. The users email address will only be used with no password. New users have to create an account before being granted access to the application if the sessions is closed. If the session is opened any person should be allowed to use it.
 \end{itemize}
 \subsubsection{Integration and access channel requirements}
 \begin{itemize}
 \item Integration requirement \\
 The production version of this application will need to integrate with EMMA. EMMA is Java a based application.
 \item Access channels \\
-The mobile application will have to go through a web-service which will be the public interface for the server-side component. 
+The mobile application will have to go through a web-service which will be the public interface for the server-side component. It uses HTTP communication between then mobile and the server Jetty component.
 \end{itemize}
 \subsubsection{Architectural constraints}
 \begin{itemize}
@@ -92,7 +92,7 @@ The mobile application will have to go through a web-service which will be the p
 \item JIRA Framework for the SCRUM agile method.
 \item Appcelerator Titanium framework which is an open-source software development kit for cross-platform mobile development.
 \item Jetty for hosting server and servlet handling.
-\item Drillbit framework to run javascript unit  testing in the Titanium framework.
+\item Jasmine framework to run javascript unit  testing in the Titanium framework.
 \item JUnit for java unit testing framework.
 \end{itemize}
 \subsection{Technologies and languages}
@@ -100,7 +100,7 @@ The mobile application will have to go through a web-service which will be the p
 \item Java
 \item JavaScript
 \item XML
-\item MySQL Database
+\item Microsoft Access Database
 \end{itemize}
 \section{Functional requirements and application design}
 \subsection{Introduction}
