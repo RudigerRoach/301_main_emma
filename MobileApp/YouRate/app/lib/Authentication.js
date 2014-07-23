@@ -78,7 +78,7 @@ exports.login = function(email){
 	   loginIsDone = true;
 	};
 	 
-	net.post(payload , onSuccessCallback, onErrorCallback);
+	net.loginPost(payload , onSuccessCallback, onErrorCallback);
 };
 
 exports.autoLogin = function(){
@@ -114,7 +114,7 @@ exports.autoLogin = function(){
 	   autologinIsDone = true;
 	};
 	
-	net.post(payload , onSuccessCallback, onErrorCallback);
+	net.loginPost(payload , onSuccessCallback, onErrorCallback);
 
 };
 
