@@ -1,11 +1,5 @@
 function Controller() {
     function goVote() {
-        var number = 1;
-        setInterval(function() {
-            $.loadingImage.image = number + ".png";
-            number++;
-            number > 8 && (number = 1);
-        }, 500);
         var win = Alloy.createController("wait").getView();
         win.open();
     }
@@ -24,7 +18,7 @@ function Controller() {
     });
     $.__views.startPage && $.addTopLevelView($.__views.startPage);
     $.__views.loadingImage = Ti.UI.createImageView({
-        top: "200",
+        top: "180",
         width: "100",
         height: "100",
         id: "loadingImage",
