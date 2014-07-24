@@ -1,0 +1,41 @@
+"#waitPage": {
+	backgroundColor: "#DFE4E7",
+	exitOnClose: true
+},
+"#loadingImage": {
+  	image:'1.png',
+    top: "150", 
+    width: "100", 
+    height: "100"
+},
+"#label1": {
+	width: "250",
+	height: "500",
+	color: "black",
+	top: "50",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	textAlign: 'center',
+	text: 'Waiting for all scores'
+},
+"#toolbar[platform=ios]": {
+	backgroundColor: "black",
+	top: "0",
+	padding: "10",
+	borderTop: false,
+	borderBottom: true,
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: "100"
+}
+"#wintitle[platform=ios]": {
+	color: 'black'
+},
+'#menu[platform=android]': {
+	backgroundColor: "#bbb",
+	showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS
+}

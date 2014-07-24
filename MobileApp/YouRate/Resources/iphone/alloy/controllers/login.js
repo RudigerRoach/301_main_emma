@@ -56,7 +56,7 @@ function Controller() {
         borderTop: false,
         borderBottom: true,
         font: {
-            fontSize: 20,
+            fontSize: 24,
             fontFamily: "Helvetica Neue"
         },
         height: "100",
@@ -71,7 +71,7 @@ function Controller() {
         color: "black",
         textAlign: "center",
         font: {
-            fontSize: 20,
+            fontSize: 24,
             fontFamily: "Helvetica Neue"
         },
         top: "160",
@@ -87,7 +87,7 @@ function Controller() {
         color: "black",
         top: "50",
         font: {
-            fontSize: 20,
+            fontSize: 24,
             fontFamily: "Helvetica Neue"
         },
         textAlign: "center",
@@ -106,7 +106,7 @@ function Controller() {
         width: "250",
         height: "40",
         font: {
-            fontSize: 16,
+            fontSize: 20,
             fontFamily: "Helvetica Neue"
         },
         id: "textArea"
@@ -120,7 +120,7 @@ function Controller() {
         color: "black",
         textAlign: "center",
         font: {
-            fontSize: 20,
+            fontSize: 24,
             fontFamily: "Helvetica Neue"
         },
         top: "160",

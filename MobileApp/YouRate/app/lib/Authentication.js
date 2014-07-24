@@ -1,23 +1,21 @@
 /**
  * @author Rudiger Roach
  */
-var XHR = require("xhr");
-
-var xhr = new XHR();
+var net = require("Network");
 var sessionID = -1;
 var UDID = Titanium.Platform.id;
 var error = -1;
 var returnStatus = false;
 var loginIsDone = false;
 var autologinIsDone = false;
-
-var url='http://192.168.0.101:5555/login'; //verander na server address en port
+var sessionObj = require('alloy').Globals.sessionObj;
 
 exports.loginStatus = function(){
 	return returnStatus;
 };
 
 exports.login = function(email){
+	out("login called");
 	//TODO unit test fail, die test wag nie vir die xhr callback nie - make it wait!
 	
 	/*
@@ -54,10 +52,11 @@ exports.login = function(email){
 	   {
 	   		sessionID = response.session_id;
 	   		returnStatus = true;
+	   		sessionObj.id = sessionID;
 	   }else{
 	   		error = "Invalid Login cridentials";
 	   		returnStatus = false;
-	   }
+	   } 
 	   loginIsDone = true;
 	};
 	 
@@ -79,7 +78,7 @@ exports.login = function(email){
 	   loginIsDone = true;
 	};
 	 
-	xhr.post(url, payload , onSuccessCallback, onErrorCallback);
+	net.loginPost(payload , onSuccessCallback, onErrorCallback);
 };
 
 exports.autoLogin = function(){
@@ -94,6 +93,7 @@ exports.autoLogin = function(){
 	   {
 	   		sessionID = response.session_id;
 	   		returnStatus = true;
+	   		sessionObj.id = sessionID;
 	   }else{
 	   		error = "Autologin not yet available for this device.";
 	   		returnStatus = false;
@@ -114,7 +114,7 @@ exports.autoLogin = function(){
 	   autologinIsDone = true;
 	};
 	
-	xhr.post(url, payload , onSuccessCallback, onErrorCallback);
+	net.loginPost(payload , onSuccessCallback, onErrorCallback);
 
 };
 
@@ -128,4 +128,8 @@ exports.loginDone = function(){
 
 exports.autologinDone = function(){
 	return autologinIsDone;
+};
+
+function out(msg){
+	Ti.API.info(msg);
 };

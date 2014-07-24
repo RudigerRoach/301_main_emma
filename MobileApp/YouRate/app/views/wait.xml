@@ -1,0 +1,17 @@
+<Alloy>
+    <Window id="waitPage" onOpen="loadImage">
+		<!-- iOS toolbar -->
+		<Toolbar id="toolbar" platform="ios">
+			<Button id="wintitle">YouRate - Waiting...</Button>
+		</Toolbar>
+		
+		<!-- Android menu -->
+		<Menu id="menu" platform="android">
+			<MenuItem id="menu1" title="YouRate - Waiting..." onClick="doClickMenu"/>
+		</Menu>
+		
+		<!-- iOS and Android -->
+        <ImageView id="loadingImage" image="1.png"/>
+		<Label id="label1">Waiting for all scores</Label>	
+    </Window>
+</Alloy>

@@ -16,3 +16,29 @@ boolean autologinDone
 	-> returns true when the asynchronous autologin function has completed exicution.
 boolean loginDone
 	-> returns true when the asynchronous login function has completed exicution.
+	
+===========
+VoteSession
+===========
+
+void getImage()
+	-> an asyncronous function to request the next image. this should be called in a timeout-loop directly after successfull login untill a status of 2 is encountered.
+string imagePath()
+	-> returns a path to the remote image that should be displayed.
+number rangeBottom()
+	-> returns the lowest value of the voting range.
+number rangeTop()
+	-> returns the highest value of the voting range.
+string description()
+	-> returns a string description of the image.
+boolean commentsEnabled()
+	-> returns true if comments are enabled or false if not.
+string sessionType()
+	-> returns a string description of the session type (normal|Yes/No|Winner).
+integer status()
+	-> returns an integer value indicating the status of the network return.
+	-> 0 = the app should keep waiting, 1 = a new image path was recieved, 2 = the voting session is no longer in progress.
+boolean getImgDone()
+	-> a status indicator to determine if the asyncronous network call has finished exicution.
+	-> returns true if the call has finished exicuting and false if the app is still waiting for a response.
+

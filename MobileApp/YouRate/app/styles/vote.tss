@@ -1,17 +1,56 @@
-"Window": {
+"#votePage": {
 	backgroundColor: "#DFE4E7",
 	exitOnClose: true
 },
-"Label": {
-	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE,
-	color: "black",
+"#currentImage": 
+{
+    top: "50", 
+    width: "250", 
+    height: "250",
+    image: "1.png"
+},
+"#sliderLabel": {
+	width: "200",
+	height: "50",
+	color: "blue",
+	top: "330",
 	font: {
 		fontSize: 20,
 		fontFamily: 'Helvetica Neue'
 	},
-	textAlign: 'center'
+	textAlign: 'center',
+	shadowColor: "#aaa"
 },
+"#slider": {
+	top:"310",
+	min:"0",
+	max:"100",
+	width:"300",
+	value:"50"
+}
+"#commentLabel": {
+	width: "200",
+	height: "50",
+	color: "blue",
+	top: "360",
+	font: {
+		fontSize: 20,
+		fontFamily: 'Helvetica Neue'
+	},
+	textAlign: 'center',
+	shadowColor: "pink"
+},
+"#commentArea": {
+    borderWidth:"2",
+    borderColor:"#bbb",
+    borderRadius:"5",
+    color:"#888",
+    textAlign:"left",
+    value:"",
+    top:"400",
+    width:"300",
+    height:"70"
+ }
 "Button": 
 {
 	borderWidth: "1",

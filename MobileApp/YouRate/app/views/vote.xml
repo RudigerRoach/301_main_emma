@@ -1,6 +1,10 @@
 <Alloy>
     <Window id="votePage">
-		<Label id="underConstruction">Page under construction</Label>	
-		<Button id="logout" onClick="doLogout">Logout</Button>
+		<ImageView id="currentImage"/>
+        <Slider id="slider" onChange="updateLabel"/>
+        <Label id="sliderLabel"/>
+		<Label id="commentLabel">Comments:</Label>	
+        <TextArea id="commentArea"/>
+		<Button id="logout" onClick="doLogout">Logout</Button>            
     </Window>
 </Alloy>
