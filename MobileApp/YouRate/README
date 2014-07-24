@@ -22,7 +22,7 @@ VoteSession
 ===========
 
 void getImage()
-	-> an asyncronous function to request the next image. this should be called in a timeout-loop directly after successfull login untill a status of 2 is encountered.
+	-> an asyncronous function to request the next image. This should be called in a timeout-loop directly after successful login until a status of 2 is encountered.
 string imagePath()
 	-> returns a path to the remote image that should be displayed.
 number rangeBottom()

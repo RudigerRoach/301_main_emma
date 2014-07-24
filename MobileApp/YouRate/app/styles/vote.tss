@@ -4,25 +4,26 @@
 },
 "#currentImage": 
 {
-    top: "50", 
-    width: "250", 
-    height: "250",
-    image: "1.png"
+	top: 50,
+    width: "200", 
+    height: "200",
+    image: "brownLabrador.jpg"
 },
 "#sliderLabel": {
 	width: "200",
 	height: "50",
-	color: "blue",
-	top: "330",
+	color: "black",
+	top: "280",
 	font: {
-		fontSize: 20,
+		fontSize: 24,
 		fontFamily: 'Helvetica Neue'
 	},
 	textAlign: 'center',
 	shadowColor: "#aaa"
 },
 "#slider": {
-	top:"310",
+	top:"260",
+	color: "black",
 	min:"0",
 	max:"100",
 	width:"300",
@@ -31,14 +32,13 @@
 "#commentLabel": {
 	width: "200",
 	height: "50",
-	color: "blue",
-	top: "360",
+	color: "black",
+	top: "310",
 	font: {
-		fontSize: 20,
+		fontSize: 24,
 		fontFamily: 'Helvetica Neue'
 	},
-	textAlign: 'center',
-	shadowColor: "pink"
+	textAlign: 'center'
 },
 "#commentArea": {
     borderWidth:"2",
@@ -47,9 +47,13 @@
     color:"#888",
     textAlign:"left",
     value:"",
-    top:"400",
+    top:"350",
     width:"300",
-    height:"70"
+    height:"70",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	}
  }
 "Button": 
 {
@@ -61,10 +65,29 @@
     color: "black", 
     textAlign: "center",
 	font: {
-		fontSize: 20,
+		fontSize: 24,
 		fontFamily: 'Helvetica Neue'
 	}, 
-    top: "160", 
-    width: "140", 
+    top: "430", 
+    width: "170", 
     height: "35"
+},
+"#toolbar[platform=ios]": {
+	backgroundColor: "black",
+	top: "0",
+	padding: "10",
+	borderTop: false,
+	borderBottom: true,
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: "100"
+}
+"#wintitle[platform=ios]": {
+	color: 'black'
+},
+'#menu[platform=android]': {
+	backgroundColor: "#bbb",
+	showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS
 }

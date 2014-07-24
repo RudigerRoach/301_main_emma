@@ -1,10 +1,9 @@
 function Controller() {
-    function doLogout() {
-        var win = Alloy.createController("login").getView();
-        win.open();
+    function doSubmit() {
+        alert("Score successfully submitted");
     }
     function updateLabel(e) {
-        $.sliderLabel.text = "Score: " + String.format("%3.1f", e.value);
+        $.sliderLabel.text = "Score: " + String.format("%3.0f", e.value);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "vote";
@@ -20,16 +19,49 @@ function Controller() {
         id: "votePage"
     });
     $.__views.votePage && $.addTopLevelView($.__views.votePage);
+    $.__views.toolbar = Ti.UI.iOS.createToolbar({
+        backgroundColor: "black",
+        top: "0",
+        padding: "10",
+        borderTop: false,
+        borderBottom: true,
+        font: {
+            fontSize: 24,
+            fontFamily: "Helvetica Neue"
+        },
+        height: "100",
+        id: "toolbar"
+    });
+    $.__views.votePage.add($.__views.toolbar);
+    $.__views.wintitle = Ti.UI.createButton({
+        borderWidth: "1",
+        borderColor: "#bbb",
+        borderRadius: "5",
+        backgroundColor: "#bbb",
+        color: "black",
+        textAlign: "center",
+        font: {
+            fontSize: 24,
+            fontFamily: "Helvetica Neue"
+        },
+        top: "430",
+        width: "170",
+        height: "35",
+        title: "YouRate - Voting",
+        id: "wintitle"
+    });
+    $.__views.toolbar.add($.__views.wintitle);
     $.__views.currentImage = Ti.UI.createImageView({
-        top: "50",
-        width: "250",
-        height: "250",
-        image: "1.png",
+        top: 50,
+        width: "200",
+        height: "200",
+        image: "brownLabrador.jpg",
         id: "currentImage"
     });
     $.__views.votePage.add($.__views.currentImage);
     $.__views.slider = Ti.UI.createSlider({
-        top: "310",
+        top: "260",
+        color: "black",
         min: "0",
         max: "100",
         width: "300",
@@ -41,10 +73,10 @@ function Controller() {
     $.__views.sliderLabel = Ti.UI.createLabel({
         width: "200",
         height: "50",
-        color: "blue",
-        top: "330",
+        color: "black",
+        top: "280",
         font: {
-            fontSize: 20,
+            fontSize: 24,
             fontFamily: "Helvetica Neue"
         },
         textAlign: "center",
@@ -55,14 +87,13 @@ function Controller() {
     $.__views.commentLabel = Ti.UI.createLabel({
         width: "200",
         height: "50",
-        color: "blue",
-        top: "360",
+        color: "black",
+        top: "310",
         font: {
-            fontSize: 20,
+            fontSize: 24,
             fontFamily: "Helvetica Neue"
         },
         textAlign: "center",
-        shadowColor: "pink",
         text: "Comments:",
         id: "commentLabel"
     });
@@ -74,9 +105,13 @@ function Controller() {
         color: "#888",
         textAlign: "left",
         value: "",
-        top: "400",
+        top: "350",
         width: "300",
         height: "70",
+        font: {
+            fontSize: 24,
+            fontFamily: "Helvetica Neue"
+        },
         id: "commentArea"
     });
     $.__views.votePage.add($.__views.commentArea);
@@ -88,23 +123,23 @@ function Controller() {
         color: "black",
         textAlign: "center",
         font: {
-            fontSize: 20,
+            fontSize: 24,
             fontFamily: "Helvetica Neue"
         },
-        top: "160",
-        width: "140",
+        top: "430",
+        width: "170",
         height: "35",
-        title: "Logout",
+        title: "Submit score",
         id: "logout"
     });
     $.__views.votePage.add($.__views.logout);
-    doLogout ? $.__views.logout.addEventListener("click", doLogout) : __defers["$.__views.logout!click!doLogout"] = true;
+    doSubmit ? $.__views.logout.addEventListener("click", doSubmit) : __defers["$.__views.logout!click!doSubmit"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.slider.text = $.slider.value;
     $.votePage.open();
     __defers["$.__views.slider!change!updateLabel"] && $.__views.slider.addEventListener("change", updateLabel);
-    __defers["$.__views.logout!click!doLogout"] && $.__views.logout.addEventListener("click", doLogout);
+    __defers["$.__views.logout!click!doSubmit"] && $.__views.logout.addEventListener("click", doSubmit);
     _.extend($, exports);
 }
 

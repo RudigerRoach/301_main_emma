@@ -1,6 +1,8 @@
-var XHR = require("xhr");
+function out(msg) {
+    Ti.API.info(msg);
+}
 
-var xhr = new XHR();
+var net = require("Network");
 
 var sessionID = -1;
 
@@ -14,13 +16,14 @@ var loginIsDone = false;
 
 var autologinIsDone = false;
 
-var url = "http://192.168.0.101:5555/login";
+var sessionObj = require("alloy").Globals.sessionObj;
 
 exports.loginStatus = function() {
     return returnStatus;
 };
 
 exports.login = function(email) {
+    out("login called");
     if (5 > email.toString().length) {
         error = "Invalid email address entered, please revise your email address.";
         returnStatus = false;
@@ -35,6 +38,7 @@ exports.login = function(email) {
         if ("success" == response.status) {
             sessionID = response.session_id;
             returnStatus = true;
+            sessionObj.id = sessionID;
         } else {
             error = "Invalid Login cridentials";
             returnStatus = false;
@@ -46,7 +50,7 @@ exports.login = function(email) {
         returnStatus = false;
         loginIsDone = true;
     };
-    xhr.post(url, payload, onSuccessCallback, onErrorCallback);
+    net.loginPost(payload, onSuccessCallback, onErrorCallback);
 };
 
 exports.autoLogin = function() {
@@ -58,6 +62,7 @@ exports.autoLogin = function() {
         if ("success" == responsestatus) {
             sessionID = response.session_id;
             returnStatus = true;
+            sessionObj.id = sessionID;
         } else {
             error = "Autologin not yet available for this device.";
             returnStatus = false;
@@ -69,7 +74,7 @@ exports.autoLogin = function() {
         returnStatus = false;
         autologinIsDone = true;
     };
-    xhr.post(url, payload, onSuccessCallback, onErrorCallback);
+    net.loginPost(payload, onSuccessCallback, onErrorCallback);
 };
 
 exports.error = function() {

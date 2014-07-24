@@ -1,6 +1,10 @@
 function Controller() {
     function doLogin() {
+        $.emailLabel.opacity = 0;
+        $.textArea.opacity = 0;
+        $.loginButton.opacity = 0;
         $.loadingImage.opacity = 1;
+        $.textArea.blur();
         var number = 1;
         setInterval(function() {
             $.loadingImage.image = number + ".png";
@@ -19,6 +23,9 @@ function Controller() {
             win.open();
         } else {
             $.loadingImage.opacity = 0;
+            $.emailLabel.opacity = 1;
+            $.textArea.opacity = 1;
+            $.loginButton.opacity = 1;
             alert("Error: " + service.error());
         }
     }
@@ -112,7 +119,7 @@ function Controller() {
         id: "textArea"
     });
     $.__views.loginPage.add($.__views.textArea);
-    $.__views.login = Ti.UI.createButton({
+    $.__views.loginButton = Ti.UI.createButton({
         borderWidth: "1",
         borderColor: "#bbb",
         borderRadius: "5",
@@ -127,12 +134,12 @@ function Controller() {
         width: "140",
         height: "35",
         title: "Login",
-        id: "login"
+        id: "loginButton"
     });
-    $.__views.loginPage.add($.__views.login);
-    doLogin ? $.__views.login.addEventListener("click", doLogin) : __defers["$.__views.login!click!doLogin"] = true;
+    $.__views.loginPage.add($.__views.loginButton);
+    doLogin ? $.__views.loginButton.addEventListener("click", doLogin) : __defers["$.__views.loginButton!click!doLogin"] = true;
     $.__views.loadingImage = Ti.UI.createImageView({
-        top: "220",
+        top: "180",
         width: "100",
         height: "100",
         opacity: 0,
@@ -143,7 +150,7 @@ function Controller() {
     _.extend($, $.__views);
     $.loginPage.open();
     __defers["$.__views.loginPage!open!setActionBar"] && $.__views.loginPage.addEventListener("open", setActionBar);
-    __defers["$.__views.login!click!doLogin"] && $.__views.login.addEventListener("click", doLogin);
+    __defers["$.__views.loginButton!click!doLogin"] && $.__views.loginButton.addEventListener("click", doLogin);
     _.extend($, exports);
 }
 

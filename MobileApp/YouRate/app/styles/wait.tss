@@ -12,7 +12,7 @@
 	width: "250",
 	height: "500",
 	color: "black",
-	top: "50",
+	top: "30",
 	font: {
 		fontSize: 24,
 		fontFamily: 'Helvetica Neue'
@@ -38,4 +38,21 @@
 '#menu[platform=android]': {
 	backgroundColor: "#bbb",
 	showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS
+},
+"Button": 
+{
+	borderWidth: "1",
+	borderColor: "#bbb", 
+	borderRadius: "5",
+	backgroundColor: "#bbb",
+	//backgroundColor: "#E5E5E9",
+    color: "black", 
+    textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	}, 
+    top: "310", 
+    width: "140", 
+    height: "35"
 }

@@ -1,10 +1,21 @@
 <Alloy>
     <Window id="votePage">
+		<!-- iOS toolbar -->
+		<Toolbar id="toolbar" platform="ios">
+			<Button id="wintitle">YouRate - Voting</Button>
+		</Toolbar>
+		
+		<!-- Android menu -->
+		<Menu id="menu" platform="android">
+			<MenuItem id="menu1" title="YouRate - Voting" onClick="doClickMenu"/>
+		</Menu>
+		
+		<!-- iOS and Android -->
 		<ImageView id="currentImage"/>
         <Slider id="slider" onChange="updateLabel"/>
         <Label id="sliderLabel"/>
 		<Label id="commentLabel">Comments:</Label>	
         <TextArea id="commentArea"/>
-		<Button id="logout" onClick="doLogout">Logout</Button>            
+		<Button id="logout" onClick="doSubmit">Submit score</Button>            
     </Window>
 </Alloy>
