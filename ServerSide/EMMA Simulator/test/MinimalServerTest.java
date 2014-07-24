@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import javax.imageio.ImageIO;
 import static junit.framework.Assert.assertEquals;
 import junit.framework.TestCase;
 import org.apache.http.HttpResponse;
@@ -24,7 +27,6 @@ import org.apache.http.client.fluent.Content;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.ClientContext;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -49,14 +51,19 @@ public class MinimalServerTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         //creates mew session for unit tests
-        Session tmp = new Session();
-        String[] _judges = new String[5];
+         String[] _judges = new String[5];
         _judges[0]= "Johan";
         _judges[1]= "test";
-        _judges[2]= "Test2";
+        _judges[2]= "test123";
         _judges[3]= "Test3";
-        _judges[4]= "Test4"; 
-        tmp.setJudges(_judges);
+        _judges[4]= "Test4";
+        String [] tmp1 = new String[1];
+        tmp1[0] = "helo";
+        linkedList tmp2 = new linkedList();
+        tmp2.info = "stellies.jpg";
+        BufferedImage[] tmp3 = new BufferedImage[1];
+        tmp3[0] = ImageIO.read(new File("stellies.jpg"));
+        Session tmp = new Session(tmp2, tmp3, _judges,10,0,true,true,tmp1);
         server = new MinimalServer(tmp);
     }
     
@@ -75,8 +82,8 @@ public class MinimalServerTest extends TestCase {
         
         //Add parameters
         List<NameValuePair> urlParameters = new ArrayList<>();
-        urlParameters.add(new BasicNameValuePair("email", "test"));
-        urlParameters.add(new BasicNameValuePair("deviceUID", "BD655C43-3A73-4DFB-AA1F-074A4F0B0DCE"));
+        urlParameters.add(new BasicNameValuePair("email", "test123"));
+        urlParameters.add(new BasicNameValuePair("deviceUID", "123"));
         mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
         //Execute the request
         HttpResponse mockResponse = client.execute(mockRequest);
@@ -138,7 +145,7 @@ public class MinimalServerTest extends TestCase {
         
         //Add parameters
         List<NameValuePair> urlParameters = new ArrayList<>();
-        urlParameters.add(new BasicNameValuePair("deviceUID", "123"));
+        urlParameters.add(new BasicNameValuePair("deviceUID", "123123141241212"));
         mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
         //Execute the request
         HttpResponse mockResponse = client.execute(mockRequest);
@@ -248,7 +255,12 @@ public class MinimalServerTest extends TestCase {
         server.startSession();
         String asyncResponse = future.get().asString();
         JSONObject jsonTest = new JSONObject();
-        jsonTest.put("start", "true");
+        jsonTest.put("status", "1");
+        jsonTest.put("rangeBottom", "0");
+        jsonTest.put("rangeTop", "10");
+        jsonTest.put("description", "helo");
+        jsonTest.put("comments", "true");
+        jsonTest.put("imgPath","stellies.jpg");
         assertEquals("Testing if login was correctly failed due to incorrect username",jsonTest.toString(),asyncResponse);
     }
 }
