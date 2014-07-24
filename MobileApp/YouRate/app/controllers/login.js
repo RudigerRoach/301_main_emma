@@ -1,7 +1,11 @@
 function doLogin()
 {		
 	//Make loading image move
+	$.emailLabel.opacity=0.0;
+	$.textArea.opacity=0.0;
+	$.loginButton.opacity=0.0;
 	$.loadingImage.opacity=1.0;
+	$.textArea.blur();
 	var number = 1;
 	setInterval(function(){$.loadingImage.image=number+".png"; number++; if (number > 8){number=1;}},500);
 	
@@ -28,6 +32,9 @@ function goForward(service){
 	{	
 		//If login not successful
 		$.loadingImage.opacity=0.0;
+		$.emailLabel.opacity=1.0;
+		$.textArea.opacity=1.0;
+		$.loginButton.opacity=1.0;
 		alert("Error: "+service.error());
  	}
 }
