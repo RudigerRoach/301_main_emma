@@ -89,7 +89,7 @@ exports.autoLogin = function(){
 	var onSuccessCallback = function (e) {
 	   response = JSON.parse(e.data);
 
-	   if(responsestatus == "success")
+	   if(response.status == "success")
 	   {
 	   		sessionID = response.session_id;
 	   		returnStatus = true;
