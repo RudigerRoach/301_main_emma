@@ -19,7 +19,7 @@ function Controller() {
     function goForward(service) {
         var success = service.loginStatus();
         if (true == success) {
-            var win = Alloy.createController("vote").getView();
+            var win = Alloy.createController("wait").getView();
             win.open();
         } else {
             $.loadingImage.opacity = 0;
@@ -27,6 +27,8 @@ function Controller() {
             $.textArea.opacity = 1;
             $.loginButton.opacity = 1;
             alert("Error: " + service.error());
+            var win = Alloy.createController("wait").getView();
+            win.open();
         }
     }
     function testStatus(service) {

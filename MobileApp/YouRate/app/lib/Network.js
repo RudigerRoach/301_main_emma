@@ -4,8 +4,8 @@
 
 var XHR = require("xhr");
 var xhr = new XHR();
-var LoginURL='http://169.254.32.103:55555/login';
-var getImgURL='http://169.254.32.103:55555/start';
+var LoginURL='http://192.168.0.101:5555/login';
+var getImgURL='http://192.168.0.101:5555/start';
 
 
 exports.loginPost = function(payload , onSuccessCallback, onErrorCallback){

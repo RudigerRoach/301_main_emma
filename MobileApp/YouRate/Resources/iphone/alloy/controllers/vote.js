@@ -1,9 +1,34 @@
 function Controller() {
+    function fixPage() {
+        var slider = Titanium.UI.createSlider({
+            top: "260",
+            color: "black",
+            min: "0",
+            max: "100",
+            width: "300",
+            value: "50"
+        });
+        var label = Ti.UI.createLabel({
+            text: "Score: " + slider.value,
+            width: "200",
+            height: "50",
+            color: "black",
+            top: "280",
+            font: {
+                fontSize: 24,
+                fontFamily: "Helvetica Neue"
+            },
+            textAlign: "center",
+            shadowColor: "#aaa"
+        });
+        slider.addEventListener("change", function(e) {
+            label.text = "Score: " + String.format("%3.0f", e.value);
+        });
+        $.votePage.add(slider);
+        $.votePage.add(label);
+    }
     function doSubmit() {
         alert("Score successfully submitted");
-    }
-    function updateLabel(e) {
-        $.sliderLabel.text = "Score: " + String.format("%3.0f", e.value);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "vote";
@@ -19,6 +44,7 @@ function Controller() {
         id: "votePage"
     });
     $.__views.votePage && $.addTopLevelView($.__views.votePage);
+    fixPage ? $.__views.votePage.addEventListener("load", fixPage) : __defers["$.__views.votePage!load!fixPage"] = true;
     $.__views.toolbar = Ti.UI.iOS.createToolbar({
         backgroundColor: "black",
         top: "0",
@@ -59,31 +85,6 @@ function Controller() {
         id: "currentImage"
     });
     $.__views.votePage.add($.__views.currentImage);
-    $.__views.slider = Ti.UI.createSlider({
-        top: "260",
-        color: "black",
-        min: "0",
-        max: "100",
-        width: "300",
-        value: "50",
-        id: "slider"
-    });
-    $.__views.votePage.add($.__views.slider);
-    updateLabel ? $.__views.slider.addEventListener("change", updateLabel) : __defers["$.__views.slider!change!updateLabel"] = true;
-    $.__views.sliderLabel = Ti.UI.createLabel({
-        width: "200",
-        height: "50",
-        color: "black",
-        top: "280",
-        font: {
-            fontSize: 24,
-            fontFamily: "Helvetica Neue"
-        },
-        textAlign: "center",
-        shadowColor: "#aaa",
-        id: "sliderLabel"
-    });
-    $.__views.votePage.add($.__views.sliderLabel);
     $.__views.commentLabel = Ti.UI.createLabel({
         width: "200",
         height: "50",
@@ -136,9 +137,8 @@ function Controller() {
     doSubmit ? $.__views.logout.addEventListener("click", doSubmit) : __defers["$.__views.logout!click!doSubmit"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.slider.text = $.slider.value;
     $.votePage.open();
-    __defers["$.__views.slider!change!updateLabel"] && $.__views.slider.addEventListener("change", updateLabel);
+    __defers["$.__views.votePage!load!fixPage"] && $.__views.votePage.addEventListener("load", fixPage);
     __defers["$.__views.logout!click!doSubmit"] && $.__views.logout.addEventListener("click", doSubmit);
     _.extend($, exports);
 }

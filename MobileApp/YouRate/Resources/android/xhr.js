@@ -45,7 +45,7 @@ XHR.prototype.get = function(url, onSuccess, onError, extraParams) {
 };
 
 XHR.prototype.post = function(url, data, onSuccess, onError, extraParams) {
-    Titanium.API.info(url + " " + JSON.stringify(data));
+    Titanium.API.info("XHR out: " + url + " " + JSON.stringify(data));
     var onSuccess = onSuccess || function() {};
     var onError = onError || function() {};
     var extraParams = extraParams || {};
@@ -58,6 +58,8 @@ XHR.prototype.post = function(url, data, onSuccess, onError, extraParams) {
     var result = {};
     xhr.open("POST", url, extraParams.async);
     xhr.setRequestHeader("Content-Type", extraParams.contentType);
+    var sessionObj = require("alloy").Globals.sessionObj;
+    0 != sessionObj.id && xhr.setRequestHeader("Cookie", "session_id=" + sessionObj.id);
     if (extraParams.shouldAuthenticate) {
         var authstr = "Basic " + Titanium.Utils.base64encode(extraParams.username + ":" + extraParams.password);
         xhr.setRequestHeader("Authorization", authstr);

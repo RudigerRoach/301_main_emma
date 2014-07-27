@@ -12,7 +12,6 @@
 		
 		<!-- iOS and Android -->
         <ImageView id="loadingImage" image="1.png"/>
-		<Label id="label1">Waiting for session to start</Label>	
-		<Button id="logout" onClick="doLogout">Logout</Button>  
+		<Label id="label1">Waiting for session to start...</Label>	
     </Window>
 </Alloy>

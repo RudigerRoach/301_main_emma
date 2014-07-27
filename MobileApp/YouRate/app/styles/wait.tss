@@ -9,7 +9,7 @@
     height: "100"
 },
 "#label1": {
-	width: "250",
+	width: "200",
 	height: "500",
 	color: "black",
 	top: "30",
@@ -17,8 +17,7 @@
 		fontSize: 24,
 		fontFamily: 'Helvetica Neue'
 	},
-	textAlign: 'center',
-	text: 'Waiting for all scores'
+	textAlign: 'center'
 },
 "#toolbar[platform=ios]": {
 	backgroundColor: "black",
