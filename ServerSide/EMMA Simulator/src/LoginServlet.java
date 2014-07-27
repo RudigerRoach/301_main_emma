@@ -46,68 +46,6 @@ public class LoginServlet extends HttpServlet
         //test if new login
         if(user != null)
         {
-            try
-            {
-                File data = new File("youRateSystem.accdb");
-                Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-                String database = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=" + data.getAbsolutePath() + ";";
-                Connection conn = DriverManager.getConnection(database,"","");
-                Statement s = conn.createStatement();
-
-                String table = "SELECT * FROM AutoLogin WHERE email='" + user + "';";
-                s.execute(table);
-                ResultSet rs = s.getResultSet();
-
-                if(rs == null)
-                {
-                    Statement s3 = conn.createStatement();
-                    s3.execute("SELECT * FROM AutoLogin WHERE deviceUID='" + id +"';");
-                    rs = s3.getResultSet();
-                    if(rs == null)
-                    {
-                        System.out.println("Don't Remember Device...");
-                        String sql = "INSERT INTO AutoLogin (email , deviceUID) VALUES (?,?);";
-                        PreparedStatement preparedStatement = conn.prepareStatement(sql);
-                        preparedStatement.setString(2, user);
-                        preparedStatement.setString(3, id);
-                        preparedStatement.executeUpdate();
-                        preparedStatement.close();
-                    }
-                    else
-                    {
-                        System.out.println("Remember DeviceUID...");
-                        Statement s2 = conn.createStatement();
-                        s2.executeUpdate("UPDATE AutoLogin SET deviceUID='" + id + "'  WHERE email= '" + user + "';");
-                        s2.close();
-                    }
-                    s3.close();
-                }
-                else
-                {
-                    Statement s3 = conn.createStatement();
-                    s3.execute("SELECT * FROM AutoLogin WHERE deviceUID='" + id +"' AND email= '" + user + "';");
-                    rs = s3.getResultSet();
-
-                    if(rs == null)
-                    {
-                        System.out.println("Remember user...");
-                        Statement s2 = conn.createStatement();
-                        s2.executeUpdate("UPDATE AutoLogin SET deviceUID='" + id + "'  WHERE email= '" + user + "';");
-                        s2.close();
-                    }
-                    else
-                    {
-                        System.out.println("Remember Device...");
-                    }
-                    s3.close();
-                }
-                s.close();
-                conn.close();
-            } 
-            catch (ClassNotFoundException | SQLException ex)
-            {
-                Logger.getLogger(MinimalServer.class.getName()).log(Level.SEVERE, null, ex);
-            }
             boolean loginSuccess = false;
 
             //Getting judges from emma
@@ -123,10 +61,71 @@ public class LoginServlet extends HttpServlet
                 }
             }
 
-                //Successful login
+            //Successful login
             if (loginSuccess == true)
             {
+                try
+                {
+                    File data = new File("youRateSystem.accdb");
+                    Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+                    String database = "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=" + data.getAbsolutePath() + ";";
+                    Connection conn = DriverManager.getConnection(database,"","");
+                    Statement s = conn.createStatement();
 
+                    String table = "SELECT * FROM AutoLogin WHERE email='" + user + "';";
+                    s.execute(table);
+                    ResultSet rs = s.getResultSet();
+
+                    if((rs != null)&&(rs.next()==false))
+                    {
+                        Statement s3 = conn.createStatement();
+                        s3.execute("SELECT * FROM AutoLogin WHERE deviceUID='" + id +"';");
+                        rs = s3.getResultSet();
+                        if((rs != null)&&(rs.next()==false))
+                        {
+                            System.out.println("Don't Remember Device...");
+                            String sql = "INSERT INTO AutoLogin (email , deviceUID) VALUES (?,?);";
+                            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+                            preparedStatement.setString(1, user);
+                            preparedStatement.setString(2, id);
+                            preparedStatement.executeUpdate();
+                            preparedStatement.close();
+                        }
+                        else
+                        {
+                            System.out.println("Remember DeviceUID...");
+                            Statement s2 = conn.createStatement();
+                            s2.executeUpdate("UPDATE AutoLogin SET deviceUID='" + id + "'  WHERE email= '" + user + "';");
+                            s2.close();
+                        }
+                        s3.close();
+                    }
+                    else
+                    {
+                        Statement s3 = conn.createStatement();
+                        s3.execute("SELECT * FROM AutoLogin WHERE deviceUID='" + id +"' AND email= '" + user + "';");
+                        rs = s3.getResultSet();
+
+                        if((rs != null)&&(rs.next()==false))
+                        {
+                            System.out.println("Remember user...");
+                            Statement s2 = conn.createStatement();
+                            s2.executeUpdate("UPDATE AutoLogin SET deviceUID='" + id + "'  WHERE email= '" + user + "';");
+                            s2.close();
+                        }
+                        else
+                        {
+                            System.out.println("Remember Device...");
+                        }
+                        s3.close();
+                    }
+                    s.close();
+                    conn.close();
+                } 
+                catch (ClassNotFoundException | SQLException ex)
+                {
+                    Logger.getLogger(MinimalServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 JSONObject jsonResponse = new JSONObject();
                 try 
                 {

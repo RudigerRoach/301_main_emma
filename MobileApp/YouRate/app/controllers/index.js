@@ -13,7 +13,7 @@ function goForward(service){
 	var success = service.loginStatus();
 	
 	//If autoLogin successful
-	if (success == true)
+	if (success == true) 
 	{
 		//The user is allowed to use the rest of the application, thus display the next page
 		var win=Alloy.createController('vote').getView();
