@@ -5,7 +5,7 @@ function Controller() {
             $.loadingImage.image = number + ".png";
             number++;
             number > 8 && (number = 1);
-        }, 500);
+        }, 300);
         service = require("Authentication");
         service.autoLogin();
         testStatus(service);

@@ -12,8 +12,6 @@
 		
 		<!-- iOS and Android -->
 		<ImageView id="currentImage"/>
-		<Label id="commentLabel">Comments:</Label>	
-        <TextArea id="commentArea"/>
-		<Button id="logout" onClick="doSubmit">Submit score</Button>            
+		<Button id="submit" onClick="doSubmit">Submit score</Button>            
     </Window>
 </Alloy>

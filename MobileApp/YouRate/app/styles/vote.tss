@@ -9,52 +9,6 @@
     height: "200",
     image: "brownLabrador.jpg"
 },
-"#sliderLabel": {
-	width: "200",
-	height: "50",
-	color: "black",
-	top: "280",
-	font: {
-		fontSize: 24,
-		fontFamily: 'Helvetica Neue'
-	},
-	textAlign: 'center',
-	shadowColor: "#aaa"
-},
-"#slider": {
-	top:"260",
-	color: "black",
-	min:"0",
-	max:"100",
-	width:"300",
-	value:"50"
-}
-"#commentLabel": {
-	width: "200",
-	height: "50",
-	color: "black",
-	top: "310",
-	font: {
-		fontSize: 24,
-		fontFamily: 'Helvetica Neue'
-	},
-	textAlign: 'center'
-},
-"#commentArea": {
-    borderWidth:"2",
-    borderColor:"#bbb",
-    borderRadius:"5",
-    color:"#888",
-    textAlign:"left",
-    value:"",
-    top:"350",
-    width:"300",
-    height:"70",
-	font: {
-		fontSize: 24,
-		fontFamily: 'Helvetica Neue'
-	}
- }
 "Button": 
 {
 	borderWidth: "1",
