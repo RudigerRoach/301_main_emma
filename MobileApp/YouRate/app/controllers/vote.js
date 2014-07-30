@@ -35,8 +35,78 @@ function fixPage()
 		});
 		$.votePage.add(slider);
 		$.votePage.add(sliderLabel);
+		
+		/*var submitButton = Titanium.UI.createButton(
+		{		   
+			borderWidth: "1",
+			borderColor: "#bbb", 
+			borderRadius: "5",
+			backgroundColor: "#bbb",
+		    color: "black", 
+		    textAlign: "center",
+			font: {
+				fontSize: 24,
+				fontFamily: 'Helvetica Neue'
+			}, 
+		    top: "430", 
+		    width: "170", 
+		    height: "35"
+		});
+		submitButton.addEventListener('click',function(e)
+		{
+		   doSubmit();
+		});
+		$.votePage.add(submitButton);*/
 	//}
-	
+	//else if(service.sessionType() == "yesNo")
+	//{
+		var yesButton = Titanium.UI.createButton(
+		{		  
+			title: "Yes", 
+			borderWidth: "1",
+			borderColor: "#bbb", 
+			borderRadius: "5",
+			backgroundColor: "#bbb",
+		    color: "black", 
+		    textAlign: "center",
+			font: {
+				fontSize: 24,
+				fontFamily: 'Helvetica Neue'
+			}, 
+		    top: "255", 
+		    width: "170", 
+		    height: "30"
+		});
+		yesButton.addEventListener('click',function(e)
+		{
+		   doSubmit();
+		});
+		$.votePage.add(yesButton);
+		
+		var noButton = Titanium.UI.createButton(
+		{		  
+			title: "No", 
+			borderWidth: "1",
+			borderColor: "#bbb", 
+			borderRadius: "5",
+			backgroundColor: "#bbb",
+		    color: "black", 
+		    textAlign: "center",
+			font: {
+				fontSize: 24,
+				fontFamily: 'Helvetica Neue'
+			}, 
+		    top: "290", 
+		    width: "170", 
+		    height: "30"
+		});
+		noButton.addEventListener('click',function(e)
+		{
+		   
+		});
+		$.votePage.add(noButton);
+	//}
+		
 	//If comments are enabled create comment box
 	//if(service.commentsEnabled() == "true")
 	//{		

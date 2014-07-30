@@ -26,6 +26,44 @@ function Controller() {
         });
         $.votePage.add(slider);
         $.votePage.add(sliderLabel);
+        var yesButton = Titanium.UI.createButton({
+            title: "Yes",
+            borderWidth: "1",
+            borderColor: "#bbb",
+            borderRadius: "5",
+            backgroundColor: "#bbb",
+            color: "black",
+            textAlign: "center",
+            font: {
+                fontSize: 24,
+                fontFamily: "Helvetica Neue"
+            },
+            top: "255",
+            width: "170",
+            height: "30"
+        });
+        yesButton.addEventListener("click", function() {
+            doSubmit();
+        });
+        $.votePage.add(yesButton);
+        var noButton = Titanium.UI.createButton({
+            title: "No",
+            borderWidth: "1",
+            borderColor: "#bbb",
+            borderRadius: "5",
+            backgroundColor: "#bbb",
+            color: "black",
+            textAlign: "center",
+            font: {
+                fontSize: 24,
+                fontFamily: "Helvetica Neue"
+            },
+            top: "290",
+            width: "170",
+            height: "30"
+        });
+        noButton.addEventListener("click", function() {});
+        $.votePage.add(noButton);
         var commentArea = Ti.UI.createTextArea({
             borderWidth: "2",
             borderColor: "#bbb",
