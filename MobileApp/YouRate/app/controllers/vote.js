@@ -113,9 +113,9 @@ function fixPage()
 			title: "Winner", 
 			borderWidth: "1",
 			borderColor: "#bbb", 
-			borderRadius: "5",
+			borderRadius: "5", 
 			backgroundColor: "#bbb",
-		    color: "black", 
+		    color: "black",  
 		    textAlign: "center",
 			font: {
 				fontSize: 24,
