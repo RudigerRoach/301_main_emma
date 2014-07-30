@@ -25,8 +25,8 @@ public class StartServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         System.out.println("A");
-//        if (request.getSession(false) != null)
-//        {
+        if (request.getSession(false) != null)
+        {
             System.out.println("before start");
             while(MinimalServer.start == false){}
             System.out.println("before end");
@@ -42,6 +42,7 @@ public class StartServlet extends HttpServlet
 //		        "comments": "True",  //True if comments are allowed, False if not
 //		        "imgPath": "path/to/image.jpg" //the path where the image resides on the server
                 jsonResponse.put("status", "1");
+                jsonResponse.put("sessionType","normal");
                 jsonResponse.put("rangeBottom", MinimalServer.session.getBotRange());
                 jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
                 jsonResponse.put("description", MinimalServer.session.getImageDetails(0));
@@ -54,22 +55,22 @@ public class StartServlet extends HttpServlet
             }
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print(jsonResponse);
-//        }
-//        else
-//        {
-//            JSONObject jsonResponse = new JSONObject();
-//                try 
-//                {
-//                    jsonResponse.put("status", "failed");
-//                } 
-//                catch (JSONException e) 
-//                {
-//                    e.printStackTrace();
-//                }
-//
-//                //response to failed login
-//                response.setContentType("application/json;charset=UTF-8");
-//                response.getWriter().print(jsonResponse);
-//        }
+        }
+        else
+        {
+            JSONObject jsonResponse = new JSONObject();
+                try 
+                {
+                    jsonResponse.put("status", "failed");
+                } 
+                catch (JSONException e) 
+                {
+                    e.printStackTrace();
+                }
+
+                //response to failed login
+                response.setContentType("application/json;charset=UTF-8");
+                response.getWriter().print(jsonResponse);
+        }
     }
 }

@@ -49,14 +49,21 @@ public class LoginServlet extends HttpServlet
             boolean loginSuccess = false;
 
             //Getting judges from emma
-            String [] judges = MinimalServer.session.getJudges();
-            if (judges != null)
+            if(MinimalServer.session.getSessionType() == true)
             {
-                for (String judge : judges) 
+                loginSuccess = true;
+            }
+            else
+            {
+                String [] judges = MinimalServer.session.getJudges();
+                if (judges != null)
                 {
-                    if (user.equals(judge)) 
+                    for (String judge : judges) 
                     {
-                        loginSuccess = true;
+                        if (user.equals(judge)) 
+                        {
+                            loginSuccess = true;
+                        }
                     }
                 }
             }
@@ -197,14 +204,21 @@ public class LoginServlet extends HttpServlet
             }
 
             //get the judges from emma
-            String [] judges = MinimalServer.session.getJudges();
-            if (judges != null)
+            if(MinimalServer.session.getSessionType() == true)
             {
-                for (String judge : judges) 
+                loginSuccess = true;
+            }
+            else
+            {
+                String [] judges = MinimalServer.session.getJudges();
+                if (judges != null)
                 {
-                    if (userAuto.equals(judge)) 
+                    for (String judge : judges) 
                     {
-                        loginSuccess = true;
+                        if (userAuto.equals(judge)) 
+                        {
+                            loginSuccess = true;
+                        }
                     }
                 }
             }

@@ -63,7 +63,7 @@ public class MinimalServerTest extends TestCase {
         tmp2.info = "stellies.jpg";
         BufferedImage[] tmp3 = new BufferedImage[1];
         tmp3[0] = ImageIO.read(new File("stellies.jpg"));
-        Session tmp = new Session(tmp2, tmp3, _judges,10,0,true,true,tmp1);
+        Session tmp = new Session(tmp2, tmp3, _judges,10,0,false,true,tmp1);
         server = new MinimalServer(tmp);
     }
     
