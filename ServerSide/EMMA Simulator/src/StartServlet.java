@@ -42,11 +42,12 @@ public class StartServlet extends HttpServlet
 //		        "comments": "True",  //True if comments are allowed, False if not
 //		        "imgPath": "path/to/image.jpg" //the path where the image resides on the server
                 jsonResponse.put("status", "1");
+                jsonResponse.put("sessionType","normal");
                 jsonResponse.put("rangeBottom", MinimalServer.session.getBotRange());
                 jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
                 jsonResponse.put("description", MinimalServer.session.getImageDetails(0));
                 jsonResponse.put("comments", "true");
-                jsonResponse.put("imgPath","stellies.jpg");
+                jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[0].getName());
             } 
             catch (JSONException ex) 
             {

@@ -63,7 +63,7 @@ public class MinimalServerTest extends TestCase {
         tmp2.info = "stellies.jpg";
         BufferedImage[] tmp3 = new BufferedImage[1];
         tmp3[0] = ImageIO.read(new File("stellies.jpg"));
-        Session tmp = new Session(tmp2, tmp3, _judges,10,0,true,true,tmp1);
+        Session tmp = new Session(tmp2, tmp3, _judges,10,0,false,true,tmp1);
         server = new MinimalServer(tmp);
     }
     
@@ -255,12 +255,20 @@ public class MinimalServerTest extends TestCase {
         server.startSession();
         String asyncResponse = future.get().asString();
         JSONObject jsonTest = new JSONObject();
+        //                "status": "1", //0 if the app should keep waiting, 1 for success, 2 if the votong session has fininshed
+//		        "sessionType": "normal", //alternatively Yes/No or winner
+//		        "rangeBottom": "0",
+//		        "rangeTop": "15",
+//		        "description": "image discription here",
+//		        "comments": "True",  //True if comments are allowed, False if not
+//		        "imgPath": "path/to/image.jpg" //the path where the image resides on the server
         jsonTest.put("status", "1");
-        jsonTest.put("rangeBottom", "0");
-        jsonTest.put("rangeTop", "10");
+        jsonTest.put("sessionType","normal");
+        jsonTest.put("rangeBottom", 0);
+        jsonTest.put("rangeTop", 10);
         jsonTest.put("description", "helo");
         jsonTest.put("comments", "true");
-        jsonTest.put("imgPath","stellies.jpg");
+        jsonTest.put("imgPath","temp/1.jpg");
         assertEquals("Testing if login was correctly failed due to incorrect username",jsonTest.toString(),asyncResponse);
     }
 }

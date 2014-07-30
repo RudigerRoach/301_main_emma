@@ -64,6 +64,26 @@ function Controller() {
         });
         noButton.addEventListener("click", function() {});
         $.votePage.add(noButton);
+        var winnerButton = Titanium.UI.createButton({
+            title: "Winner",
+            borderWidth: "1",
+            borderColor: "#bbb",
+            borderRadius: "5",
+            backgroundColor: "#bbb",
+            color: "black",
+            textAlign: "center",
+            font: {
+                fontSize: 24,
+                fontFamily: "Helvetica Neue"
+            },
+            top: "275",
+            width: "170",
+            height: "30"
+        });
+        winnerButton.addEventListener("click", function() {
+            doSubmit();
+        });
+        $.votePage.add(winnerButton);
         var commentArea = Ti.UI.createTextArea({
             borderWidth: "2",
             borderColor: "#bbb",
