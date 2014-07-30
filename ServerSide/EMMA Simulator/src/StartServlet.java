@@ -25,8 +25,8 @@ public class StartServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         System.out.println("A");
-        if (request.getSession(false) != null)
-        {
+//        if (request.getSession(false) != null)
+//        {
             System.out.println("before start");
             while(MinimalServer.start == false){}
             System.out.println("before end");
@@ -47,7 +47,7 @@ public class StartServlet extends HttpServlet
                 jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
                 jsonResponse.put("description", MinimalServer.session.getImageDetails(0));
                 jsonResponse.put("comments", "true");
-                jsonResponse.put("imgPath","stellies.jpg");
+                jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[0].getName());
             } 
             catch (JSONException ex) 
             {
@@ -55,22 +55,22 @@ public class StartServlet extends HttpServlet
             }
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print(jsonResponse);
-        }
-        else
-        {
-            JSONObject jsonResponse = new JSONObject();
-                try 
-                {
-                    jsonResponse.put("status", "failed");
-                } 
-                catch (JSONException e) 
-                {
-                    e.printStackTrace();
-                }
-
-                //response to failed login
-                response.setContentType("application/json;charset=UTF-8");
-                response.getWriter().print(jsonResponse);
-        }
+//        }
+//        else
+//        {
+//            JSONObject jsonResponse = new JSONObject();
+//                try 
+//                {
+//                    jsonResponse.put("status", "failed");
+//                } 
+//                catch (JSONException e) 
+//                {
+//                    e.printStackTrace();
+//                }
+//
+//                //response to failed login
+//                response.setContentType("application/json;charset=UTF-8");
+//                response.getWriter().print(jsonResponse);
+//        }
     }
 }
