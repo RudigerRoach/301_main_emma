@@ -12,8 +12,16 @@
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
+import javax.imageio.stream.ImageOutputStream;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -42,8 +50,7 @@ public class MinimalServer
         tmpCompressedImage = new File[totaalImages];
         for(int i = 0; i < totaalImages;i++)
         {
-            tmpCompressedImage[i] = new File("temp/" + (i+1) + ".jpg");
-            ImageIO.write(images[i], "jpg", tmpCompressedImage[i]);
+            tmpCompressedImage[i] = saveCompressedImage(images[i],"temp/" + (i+1) + ".jpg");
         }
         server = new Server(5555);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
@@ -54,8 +61,7 @@ public class MinimalServer
         context.addServlet(new ServletHolder(loginServlet), "/login");
         context.addServlet(new ServletHolder(startServlet), "/start");
         server.start();
-    }
-    
+    }    
 //    public static void main(String[] args) throws Exception
 //    {
 //        //Create server
@@ -84,6 +90,37 @@ public class MinimalServer
 //        context.addServlet(new ServletHolder(startServlet), "/start");
 //        server.start();
 //    }
+    
+    private static File saveCompressedImage(BufferedImage image, String toFileName)
+    {
+        try 
+        {
+            Iterator iter = ImageIO.getImageWritersByFormatName("jpg");
+            ImageWriter writer;
+            writer = (ImageWriter) iter.next();
+            
+            File tmpFile = new File(toFileName);
+            ImageOutputStream ios = ImageIO.createImageOutputStream(tmpFile);
+            writer.setOutput(ios);
+
+            ImageWriteParam iwparam = new JPEGImageWriteParam(Locale.getDefault());
+
+            iwparam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+            iwparam.setCompressionQuality(0.7F);
+
+            writer.write(null, new IIOImage(image, null, null), iwparam);
+
+            ios.flush();
+            writer.dispose();
+            ios.close();
+            return tmpFile;
+        }
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * Closes and stops the server
