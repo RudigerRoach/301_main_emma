@@ -5,23 +5,36 @@ function loadImage(){
 	
 	//Check if next image is ready	
 	service=require('VoteSession');
-	
-	do
-	{
-		service.getImage();
-		while(service.getImgDone() == false){ }; //And server reachable!!!!!! Infinite loop...
-	}
-	while (service.status() == "0"); //And server reachable!!!!!! Infinite loop... 
-	
-	var rangeBottom = service.rangeBottom();
-	var rangeTop = service.rangeTop();
-	var description = service.description(); 
-	var comments = service.comments();
-	var imagePath = service.imagePath();
-	var sessionType = service.sessionType();
-	
-	//setTimeout(function(){var win=Alloy.createController('vote').getView();
-	 							//win.open();},2000);
+	service.getImage();
+	testDone(service);	
+}
+
+function testDone(service){
+		var done = false;
+		var timer = setInterval(function(){ //poll every 1s and stop when getImgDone() returns true
+		    done = service.getImgDone();
+		    if (done) {
+		    	testStatus(service);
+		        clearInterval(timer);
+		    }
+		}, 1000);
+}
+
+function testStatus(service){
+		var done = false;
+		var timer = setInterval(function(){ //poll every 1s and stop when loginStatus() returns 1
+		    status = service.status();
+		    if (status == "1") {
+		    	goForward(service);
+		        clearInterval(timer);
+		    }
+		}, 1000);
+}
+
+function goForward(service)
+{
+	var win=Alloy.createController('vote').getView();
+ 	win.open();
 }
 
 $.waitPage.open();

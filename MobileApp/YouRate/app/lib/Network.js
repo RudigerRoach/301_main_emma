@@ -11,7 +11,7 @@ var LoginURL= netAddress+':'+port+'/login';
 var getImgURL=netAddress+':'+port+'/start';
 
 exports.serverPath = function(){
-	return netAddress;
+	return netAddress+":"+port;
 };
 
 exports.loginPost = function(payload , onSuccessCallback, onErrorCallback){

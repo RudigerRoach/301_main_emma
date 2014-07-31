@@ -13,7 +13,7 @@ function Controller() {
     function goForward(service) {
         var success = service.loginStatus();
         if (true == success) {
-            var win = Alloy.createController("vote").getView();
+            var win = Alloy.createController("wait").getView();
             win.open();
         } else {
             var win = Alloy.createController("login").getView();

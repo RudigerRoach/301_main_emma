@@ -1,10 +1,17 @@
 function Controller() {
     function fixPage() {
+        service = require("VoteSession");
+        var rangeBottom = 0;
+        var rangeTop = 100;
+        var imagePath = "brownLabrador.jpg";
+        imagePath = service.imagePath();
+        alert(imagePath);
+        $.currentImage.image = imagePath;
         var slider = Titanium.UI.createSlider({
             top: "260",
             color: "black",
-            min: "0",
-            max: "100",
+            min: rangeBottom,
+            max: rangeTop,
             width: "300",
             value: "50"
         });
@@ -26,64 +33,6 @@ function Controller() {
         });
         $.votePage.add(slider);
         $.votePage.add(sliderLabel);
-        var yesButton = Titanium.UI.createButton({
-            title: "Yes",
-            borderWidth: "1",
-            borderColor: "#bbb",
-            borderRadius: "5",
-            backgroundColor: "#bbb",
-            color: "black",
-            textAlign: "center",
-            font: {
-                fontSize: 24,
-                fontFamily: "Helvetica Neue"
-            },
-            top: "255",
-            width: "170",
-            height: "30"
-        });
-        yesButton.addEventListener("click", function() {
-            doSubmit();
-        });
-        $.votePage.add(yesButton);
-        var noButton = Titanium.UI.createButton({
-            title: "No",
-            borderWidth: "1",
-            borderColor: "#bbb",
-            borderRadius: "5",
-            backgroundColor: "#bbb",
-            color: "black",
-            textAlign: "center",
-            font: {
-                fontSize: 24,
-                fontFamily: "Helvetica Neue"
-            },
-            top: "290",
-            width: "170",
-            height: "30"
-        });
-        noButton.addEventListener("click", function() {});
-        $.votePage.add(noButton);
-        var winnerButton = Titanium.UI.createButton({
-            title: "Winner",
-            borderWidth: "1",
-            borderColor: "#bbb",
-            borderRadius: "5",
-            backgroundColor: "#bbb",
-            color: "black",
-            textAlign: "center",
-            font: {
-                fontSize: 24,
-                fontFamily: "Helvetica Neue"
-            },
-            top: "275",
-            width: "170",
-            height: "30"
-        });
-        winnerButton.addEventListener("click", function() {
-            doSubmit();
-        });
-        $.votePage.add(winnerButton);
         var commentArea = Ti.UI.createTextArea({
             borderWidth: "2",
             borderColor: "#bbb",
@@ -131,7 +80,7 @@ function Controller() {
         id: "votePage"
     });
     $.__views.votePage && $.addTopLevelView($.__views.votePage);
-    fixPage ? $.__views.votePage.addEventListener("load", fixPage) : __defers["$.__views.votePage!load!fixPage"] = true;
+    fixPage ? $.__views.votePage.addEventListener("focus", fixPage) : __defers["$.__views.votePage!focus!fixPage"] = true;
     $.__views.toolbar = Ti.UI.iOS.createToolbar({
         backgroundColor: "black",
         top: "0",
@@ -194,7 +143,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.votePage.open();
-    __defers["$.__views.votePage!load!fixPage"] && $.__views.votePage.addEventListener("load", fixPage);
+    __defers["$.__views.votePage!focus!fixPage"] && $.__views.votePage.addEventListener("focus", fixPage);
     __defers["$.__views.submit!click!doSubmit"] && $.__views.submit.addEventListener("click", doSubmit);
     _.extend($, exports);
 }

@@ -60,7 +60,6 @@ exports.getImage = function(){
 	};
 	
 	var onSuccessCallback1 = function (e) {
-		Ti.API.info("getImage success");
 	   response = JSON.parse(e.data);
 	   responsestatus = response.status;
 	   if(responsestatus == "0") //device should wait
@@ -90,7 +89,6 @@ exports.getImage = function(){
 	};
 	
 	var onErrorCallback1 = function (e) {
-		Ti.API.info("getImage failure");
 	   if(e.status == 'error')
 	   {
 	   		error = "Device cannot reach the voting network";
@@ -102,7 +100,6 @@ exports.getImage = function(){
 	   getImgDone = true;
 	   status = -1;
 	};
-	Ti.API.info("calling net");
 	net.getImgPost(payload , onSuccessCallback1, onErrorCallback1);
 };
 
