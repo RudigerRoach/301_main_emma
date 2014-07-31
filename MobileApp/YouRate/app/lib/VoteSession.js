@@ -14,7 +14,8 @@ var sessionType = "normal";
 var status = -1;
 
 exports.imagePath = function(){
-	return imgPath;
+	var net = require("Network");
+	return net.serverPath()+"/"+imgPath;
 };
 exports.rangeBottom = function(){
 	return rangeBottom;
@@ -58,7 +59,8 @@ exports.getImage = function(){
 	    session_id:sessionObj.id 
 	};
 	
-	var onSuccessCallback = function (e) {
+	var onSuccessCallback1 = function (e) {
+		Ti.API.info("getImage success");
 	   response = JSON.parse(e.data);
 	   responsestatus = response.status;
 	   if(responsestatus == "0") //device should wait
@@ -87,7 +89,8 @@ exports.getImage = function(){
 	   status = responsestatus;
 	};
 	
-	var onErrorCallback = function (e) {
+	var onErrorCallback1 = function (e) {
+		Ti.API.info("getImage failure");
 	   if(e.status == 'error')
 	   {
 	   		error = "Device cannot reach the voting network";
@@ -99,6 +102,7 @@ exports.getImage = function(){
 	   getImgDone = true;
 	   status = -1;
 	};
-	net.getImgPost(payload , onSuccessCallback, onErrorCallback);
+	Ti.API.info("calling net");
+	net.getImgPost(payload , onSuccessCallback1, onErrorCallback1);
 };
 
