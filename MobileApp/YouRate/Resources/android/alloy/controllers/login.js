@@ -1,23 +1,14 @@
 function Controller() {
-    function __alloyId2() {
-        $.__views.mainWindow.removeEventListener("open", __alloyId2);
-        if ($.__views.mainWindow.activity) $.__views.mainWindow.activity.onCreateOptionsMenu = function(e) {
+    function __alloyId1() {
+        $.__views.loginPage.removeEventListener("open", __alloyId1);
+        if ($.__views.loginPage.activity) $.__views.loginPage.activity.onCreateOptionsMenu = function(e) {
             var __alloyId0 = {
-                title: "YouRate - Login",
-                showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS,
-                id: "menu1"
+                id: "menu1",
+                title: "YouRate - Login"
             };
             $.__views.menu1 = e.menu.add(_.pick(__alloyId0, Alloy.Android.menuItemCreateArgs));
             $.__views.menu1.applyProperties(_.omit(__alloyId0, Alloy.Android.menuItemCreateArgs));
             doClickMenu ? $.__views.menu1.addEventListener("click", doClickMenu) : __defers["$.__views.menu1!click!doClickMenu"] = true;
-            var __alloyId1 = {
-                title: "Help",
-                showAsAction: Ti.Andoid.SHOW_AS_ACTION_NEVER,
-                id: "menu2"
-            };
-            $.__views.menu2 = e.menu.add(_.pick(__alloyId1, Alloy.Android.menuItemCreateArgs));
-            $.__views.menu2.applyProperties(_.omit(__alloyId1, Alloy.Android.menuItemCreateArgs));
-            doClickMenu ? $.__views.menu2.addEventListener("click", doClickMenu) : __defers["$.__views.menu2!click!doClickMenu"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
@@ -25,8 +16,44 @@ function Controller() {
         }
     }
     function doLogin() {
-        var service = require("../lib/authentication");
-        Ti.App.log(service);
+        $.emailLabel.opacity = 0;
+        $.textArea.opacity = 0;
+        $.loginButton.opacity = 0;
+        $.loadingImage.opacity = 1;
+        $.textArea.blur();
+        var number = 1;
+        setInterval(function() {
+            $.loadingImage.image = number + ".png";
+            number++;
+            number > 8 && (number = 1);
+        }, 500);
+        var email = $.textArea.value;
+        service = require("Authentication");
+        service.login(email);
+        testStatus(service);
+    }
+    function goForward(service) {
+        var success = service.loginStatus();
+        if (true == success) {
+            var win = Alloy.createController("vote").getView();
+            win.open();
+        } else {
+            $.loadingImage.opacity = 0;
+            $.emailLabel.opacity = 1;
+            $.textArea.opacity = 1;
+            $.loginButton.opacity = 1;
+            alert("Error: " + service.error());
+        }
+    }
+    function testStatus(service) {
+        var done = false;
+        var timer = setInterval(function() {
+            done = service.autologinDone();
+            if (done) {
+                goForward(service);
+                clearInterval(timer);
+            }
+        }, 1e3);
     }
     function doClickMenu(evt) {
         alert(evt.source.title);
@@ -34,16 +61,13 @@ function Controller() {
     function setActionBar() {
         try {
             var actionBar = $.mainWindow.activity.actionBar;
-            actionBar.title = "Mella";
+            actionBar.title = "YouRate";
             actionBar.displayHomeAsUp = false;
             actionBar.onHomeIconItemSelected = function() {
                 alert("Home icon clicked!");
             };
             $.mainWindow.activity.invalidateOptionsMenu();
         } catch (e) {}
-    }
-    function lblClick() {
-        alert("Label works");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "login";
@@ -53,70 +77,78 @@ function Controller() {
     var $ = this;
     var exports = {};
     var __defers = {};
-    $.__views.mainWindow = Ti.UI.createWindow({
-        backgroundColor: "white",
+    $.__views.loginPage = Ti.UI.createWindow({
+        backgroundColor: "#DFE4E7",
         exitOnClose: true,
-        navBarHidden: false,
-        id: "mainWindow"
+        id: "loginPage"
     });
-    $.__views.mainWindow && $.addTopLevelView($.__views.mainWindow);
-    setActionBar ? $.__views.mainWindow.addEventListener("open", setActionBar) : __defers["$.__views.mainWindow!open!setActionBar"] = true;
-    $.__views.mainWindow.addEventListener("open", __alloyId2);
+    $.__views.loginPage && $.addTopLevelView($.__views.loginPage);
+    setActionBar ? $.__views.loginPage.addEventListener("open", setActionBar) : __defers["$.__views.loginPage!open!setActionBar"] = true;
+    $.__views.loginPage.addEventListener("open", __alloyId1);
     $.__views.emailLabel = Ti.UI.createLabel({
         width: "200",
         height: "50",
         color: "black",
         top: "50",
-        left: "10",
         font: {
-            fontSize: 20,
+            fontSize: 24,
             fontFamily: "Helvetica Neue"
         },
-        textAlign: "left",
+        textAlign: "center",
         text: "Email Address:",
         id: "emailLabel"
     });
-    $.__views.mainWindow.add($.__views.emailLabel);
-    lblClick ? $.__views.emailLabel.addEventListener("click", lblClick) : __defers["$.__views.emailLabel!click!lblClick"] = true;
+    $.__views.loginPage.add($.__views.emailLabel);
     $.__views.textArea = Ti.UI.createTextArea({
         borderWidth: "2",
         borderColor: "#bbb",
         borderRadius: "5",
         color: "#888",
-        textAlign: "left",
+        textAlign: "center",
         value: "",
         top: "100",
-        width: "200",
+        width: "250",
         height: "40",
-        id: "textArea"
-    });
-    $.__views.mainWindow.add($.__views.textArea);
-    $.__views.login = Ti.UI.createButton({
-        borderWidth: "1",
-        borderColor: "black",
-        borderRadius: "5",
-        color: "black",
-        textAlign: "center",
         font: {
             fontSize: 20,
             fontFamily: "Helvetica Neue"
         },
-        top: "160",
-        width: "100",
-        height: "40",
-        title: "Login",
-        id: "login"
+        id: "textArea"
     });
-    $.__views.mainWindow.add($.__views.login);
-    doLogin ? $.__views.login.addEventListener("click", doLogin) : __defers["$.__views.login!click!doLogin"] = true;
+    $.__views.loginPage.add($.__views.textArea);
+    $.__views.loginButton = Ti.UI.createButton({
+        borderWidth: "1",
+        borderColor: "#bbb",
+        borderRadius: "5",
+        backgroundColor: "#bbb",
+        color: "black",
+        textAlign: "center",
+        font: {
+            fontSize: 24,
+            fontFamily: "Helvetica Neue"
+        },
+        top: "160",
+        width: "140",
+        height: "35",
+        title: "Login",
+        id: "loginButton"
+    });
+    $.__views.loginPage.add($.__views.loginButton);
+    doLogin ? $.__views.loginButton.addEventListener("click", doLogin) : __defers["$.__views.loginButton!click!doLogin"] = true;
+    $.__views.loadingImage = Ti.UI.createImageView({
+        top: "180",
+        width: "100",
+        height: "100",
+        opacity: 0,
+        id: "loadingImage"
+    });
+    $.__views.loginPage.add($.__views.loadingImage);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.mainWindow.open();
-    __defers["$.__views.mainWindow!open!setActionBar"] && $.__views.mainWindow.addEventListener("open", setActionBar);
+    $.loginPage.open();
+    __defers["$.__views.loginPage!open!setActionBar"] && $.__views.loginPage.addEventListener("open", setActionBar);
     __defers["$.__views.menu1!click!doClickMenu"] && $.__views.menu1.addEventListener("click", doClickMenu);
-    __defers["$.__views.menu2!click!doClickMenu"] && $.__views.menu2.addEventListener("click", doClickMenu);
-    __defers["$.__views.emailLabel!click!lblClick"] && $.__views.emailLabel.addEventListener("click", lblClick);
-    __defers["$.__views.login!click!doLogin"] && $.__views.login.addEventListener("click", doLogin);
+    __defers["$.__views.loginButton!click!doLogin"] && $.__views.loginButton.addEventListener("click", doLogin);
     _.extend($, exports);
 }
 

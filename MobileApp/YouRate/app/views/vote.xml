@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="votePage">
+    <Window id="votePage" onLoad="fixPage">
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
 			<Button id="wintitle">YouRate - Voting</Button>
@@ -12,10 +12,6 @@
 		
 		<!-- iOS and Android -->
 		<ImageView id="currentImage"/>
-        <Slider id="slider" onChange="updateLabel"/>
-        <Label id="sliderLabel"/>
-		<Label id="commentLabel">Comments:</Label>	
-        <TextArea id="commentArea"/>
-		<Button id="logout" onClick="doSubmit">Submit score</Button>            
+		<Button id="submit" onClick="doSubmit">Submit score</Button>            
     </Window>
 </Alloy>

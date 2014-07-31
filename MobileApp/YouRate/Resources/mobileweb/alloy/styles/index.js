@@ -1,1 +1,0 @@
-module.exports = [{"isId":true,"priority":100000.0002,"key":"loadingImage","style":{borderWidth:"2",borderColor:"#bbb",borderRadius:"5",top:"200",width:"100",height:"100",}}];
