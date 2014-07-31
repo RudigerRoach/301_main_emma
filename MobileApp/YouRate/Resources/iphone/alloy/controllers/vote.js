@@ -1,10 +1,14 @@
 function Controller() {
     function fixPage() {
+        service = require("VoteSession");
+        var rangeBottom = 0;
+        var rangeTop = 100;
+        $.currentImage.image = "whiteLabrador.jpg";
         var slider = Titanium.UI.createSlider({
             top: "260",
             color: "black",
-            min: "0",
-            max: "100",
+            min: rangeBottom,
+            max: rangeTop,
             width: "300",
             value: "50"
         });
@@ -26,64 +30,6 @@ function Controller() {
         });
         $.votePage.add(slider);
         $.votePage.add(sliderLabel);
-        var yesButton = Titanium.UI.createButton({
-            title: "Yes",
-            borderWidth: "1",
-            borderColor: "#bbb",
-            borderRadius: "5",
-            backgroundColor: "#bbb",
-            color: "black",
-            textAlign: "center",
-            font: {
-                fontSize: 24,
-                fontFamily: "Helvetica Neue"
-            },
-            top: "255",
-            width: "170",
-            height: "30"
-        });
-        yesButton.addEventListener("click", function() {
-            doSubmit();
-        });
-        $.votePage.add(yesButton);
-        var noButton = Titanium.UI.createButton({
-            title: "No",
-            borderWidth: "1",
-            borderColor: "#bbb",
-            borderRadius: "5",
-            backgroundColor: "#bbb",
-            color: "black",
-            textAlign: "center",
-            font: {
-                fontSize: 24,
-                fontFamily: "Helvetica Neue"
-            },
-            top: "290",
-            width: "170",
-            height: "30"
-        });
-        noButton.addEventListener("click", function() {});
-        $.votePage.add(noButton);
-        var winnerButton = Titanium.UI.createButton({
-            title: "Winner",
-            borderWidth: "1",
-            borderColor: "#bbb",
-            borderRadius: "5",
-            backgroundColor: "#bbb",
-            color: "black",
-            textAlign: "center",
-            font: {
-                fontSize: 24,
-                fontFamily: "Helvetica Neue"
-            },
-            top: "275",
-            width: "170",
-            height: "30"
-        });
-        winnerButton.addEventListener("click", function() {
-            doSubmit();
-        });
-        $.votePage.add(winnerButton);
         var commentArea = Ti.UI.createTextArea({
             borderWidth: "2",
             borderColor: "#bbb",

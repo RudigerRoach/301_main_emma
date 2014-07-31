@@ -1,15 +1,37 @@
 function fixPage()
 {
 	//If normal event create a slider for scoring
-	//service=require('VoteSession');
-	//if(service.sessionType() == "normal")
+	service=require('VoteSession');	
+	var rangeBottom = 0;
+	//rangeBottom = service.rangeBottom();
+	var rangeTop = 100;
+	//rangeTop = service.rangeTop();
+	var description = "My description";
+	//description = service.description();  
+	var comments = true; 
+	//comments = service.commentsEnabled();
+	var imagePath = "brownLabrador.jpg";
+	//imagePath = service.imagePath();
+	var sessionType = "default";
+	//sessionType = service.sessionType();
+		
+	/*var im = Ti.UI.createImageView(
+	{
+		top: 50,
+	    width: "200", 
+	    height: "200",
+	    image: imagePath
+	});*/
+	$.currentImage.image = "whiteLabrador.jpg";
+	
+	//if(sessionType == "normal" || sessionType == "default")
 	//{
 		var slider = Titanium.UI.createSlider(
 		{
 			top:"260",
 			color: "black",
-			min:"0",
-			max:"100",
+			min:rangeBottom,
+			max:rangeTop,
 			width:"300",
 			value:"50"
 	    });
@@ -57,9 +79,9 @@ function fixPage()
 		   doSubmit();
 		});
 		$.votePage.add(submitButton);*/
-	//}
-	//else if(service.sessionType() == "yesNo")
-	//{
+	/*}
+	else if(sessionType == "yesNo")
+	{
 		var yesButton = Titanium.UI.createButton(
 		{		  
 			title: "Yes", 
@@ -105,9 +127,9 @@ function fixPage()
 		   
 		});
 		$.votePage.add(noButton);
-	//}
-	//else if(service.sessionType() == "winner")
-	//{
+	}
+	else if(sessionType == "winner")
+	{
 		var winnerButton = Titanium.UI.createButton(
 		{		  
 			title: "Winner", 
@@ -130,10 +152,10 @@ function fixPage()
 		   doSubmit();
 		});
 		$.votePage.add(winnerButton);
-	//}
+	}*/
 		
 	//If comments are enabled create comment box
-	//if(service.commentsEnabled() == "true")
+	//if(comments == "true")
 	//{		
 		var commentArea = Ti.UI.createTextArea(
 		{
