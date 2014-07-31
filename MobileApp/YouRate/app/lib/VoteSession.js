@@ -75,7 +75,7 @@ exports.getImage = function(){
 				comments = response.comments;
 				imgPath = response.imgPath;
 				sessionType = response.sessionType;
-			}else if(response.sessionType == "Y/N"){
+			}else if(response.sessionType == "yesNo"){
 				//TODO add support for other session types
 			}
 	   }
