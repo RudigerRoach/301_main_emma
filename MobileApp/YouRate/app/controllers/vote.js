@@ -21,7 +21,7 @@ function fixPage()
 			height: "50",
 			color: "black",
 			top: "280",
-			font: {
+			font: { 
 				fontSize: 24,
 				fontFamily: 'Helvetica Neue'
 			},
