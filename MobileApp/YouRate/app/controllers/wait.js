@@ -15,7 +15,7 @@ function loadImage(){
 	
 	var rangeBottom = service.rangeBottom();
 	var rangeTop = service.rangeTop();
-	var description = service.description();
+	var description = service.description(); 
 	var comments = service.comments();
 	var imagePath = service.imagePath();
 	var sessionType = service.sessionType();
