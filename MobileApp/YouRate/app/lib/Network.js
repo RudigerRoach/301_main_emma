@@ -9,6 +9,7 @@ var netAddress = 'http://192.168.0.100';
 var port = "5555";
 var LoginURL= netAddress+':'+port+'/login';
 var getImgURL=netAddress+':'+port+'/start';
+var submitVoteURL=netAddress+':'+port+'/vote';
 
 exports.serverPath = function(){
 	return netAddress+":"+port;
@@ -20,4 +21,8 @@ exports.loginPost = function(payload , onSuccessCallback, onErrorCallback){
 
 exports.getImgPost = function(payload , onSuccessCallback, onErrorCallback){
 	xhr.post(getImgURL, payload , onSuccessCallback, onErrorCallback);
+};
+
+exports.resultPost = function(payload , onSuccessCallback, onErrorCallback){
+	xhr.post(submitVoteURL, payload , onSuccessCallback, onErrorCallback);
 };
