@@ -41,4 +41,5 @@ integer status()
 boolean getImgDone()
 	-> a status indicator to determine if the asyncronous network call has finished exicution.
 	-> returns true if the call has finished exicuting and false if the app is still waiting for a response.
-
+void submitResult(String photoPath, String result)
+	-> submit the users score of a specific photo to the server
