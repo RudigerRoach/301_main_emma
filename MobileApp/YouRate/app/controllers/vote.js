@@ -1,40 +1,40 @@
+var commentArea = "";
+var photoPath = "";
+var slider;
+
 function fixPage()
 {
 	//If normal event create a slider for scoring
 	service=require('VoteSession');	
 	var rangeBottom = 0;
 	//rangeBottom = service.rangeBottom();
-	var rangeTop = 100;
+	var rangeTop = 50;
 	//rangeTop = service.rangeTop();
 	var description = "My description";
 	//description = service.description();  
-	var comments = true; 
+	var comments = "true"; 
 	//comments = service.commentsEnabled();
 	var imagePath = "brownLabrador.jpg";
-	imagePath = service.imagePath();
-	alert(imagePath);
+	//imagePath = service.imagePath();
+	photoPath = imagePath; //For yesNo winner events
+	//alert(imagePath);
 	var sessionType = "default";
 	//sessionType = service.sessionType();
 		
-	/*var im = Ti.UI.createImageView(
-	{
-		top: 50,
-	    width: "200", 
-	    height: "200",
-	    image: imagePath
-	});*/
+	//Change image to path received from server	
 	$.currentImage.image = imagePath;
 	
-	//if(sessionType == "normal" || sessionType == "default")
-	//{
-		var slider = Titanium.UI.createSlider(
+	//Display interface according to type of session
+	if(sessionType == "normal" || sessionType == "default") //Default for offline testing purposes, to be taken out
+	{
+		slider = Titanium.UI.createSlider(
 		{
 			top:"260",
 			color: "black",
 			min:rangeBottom,
 			max:rangeTop,
 			width:"300",
-			value:"50"
+			value:"30"
 	    });
 	    
 		var sliderLabel = Ti.UI.createLabel(
@@ -80,7 +80,7 @@ function fixPage()
 		   doSubmit();
 		});
 		$.votePage.add(submitButton);*/
-	/*}
+	}
 	else if(sessionType == "yesNo")
 	{
 		var yesButton = Titanium.UI.createButton(
@@ -153,12 +153,12 @@ function fixPage()
 		   doSubmit();
 		});
 		$.votePage.add(winnerButton);
-	}*/
+	}
 		
 	//If comments are enabled create comment box
-	//if(comments == "true")
-	//{		
-		var commentArea = Ti.UI.createTextArea(
+	if(comments == "true")
+	{		
+		commentArea = Ti.UI.createTextArea(
 		{
 	  		borderWidth:"2",
 		    borderColor:"#bbb",
@@ -191,12 +191,19 @@ function fixPage()
 	
 		$.votePage.add(commentArea);
 		$.votePage.add(commentLabel);
-	//}
+	}
 }
 
 function doSubmit(e){
-	//Submit score
-    alert("Score successfully submitted");
+	//Submit result	
+	service=require('VoteSession');	
+	alert(photoPath + "," + slider.value + "," + commentArea.value);
+	//service.submitResult(photoPath,slider.value,commentArea.value);	
+    alert("Result successfully submitted");
+    
+    //Go to wait page
+	//var win=Alloy.createController('wait').getView();
+ 	//win.open();
 };
 
 $.votePage.open();
