@@ -27,7 +27,7 @@ function Controller() {
             $.textArea.opacity = 1;
             $.loginButton.opacity = 1;
             alert("Error: " + service.error());
-            var win = Alloy.createController("wait").getView();
+            var win = Alloy.createController("vote").getView();
             win.open();
         }
     }
