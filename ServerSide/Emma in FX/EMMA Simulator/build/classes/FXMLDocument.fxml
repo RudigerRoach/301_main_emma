@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="577.0" prefWidth="675.0" style="-fx-background-color: Cyan;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="FXMLDocumentController">
+    <children>
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <Label layoutX="168.0" layoutY="20.0" text="EMMA Simulator">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Pane layoutX="61.0" layoutY="100.0" prefHeight="131.0" prefWidth="219.0" style="-fx-background-color: white; -fx-border-color: black;">
+         <children>
+            <CheckBox id="controlledSession" layoutX="12.0" layoutY="40.0" mnemonicParsing="false" text="Controlled Session" />
+            <CheckBox id="openSession" layoutX="12.0" layoutY="66.0" mnemonicParsing="false" text="Open Session(Anyone can Judge)" />
+            <CheckBox id="commentsEnabled" layoutX="12.0" layoutY="91.0" mnemonicParsing="false" text="Comments Enabled" />
+            <Label layoutX="14.0" layoutY="14.0" text="Session Constraints">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="308.0" layoutY="100.0" prefHeight="131.0" prefWidth="316.0" style="-fx-background-color: white; -fx-border-color: black;">
+         <children>
+            <TextField id="minimumScore" layoutX="116.0" layoutY="59.0" prefHeight="30.0" prefWidth="39.0" text="0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="14.0" layoutY="14.0" text="Scoring Constraints">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="63.0" prefHeight="20.0" prefWidth="100.0" text="Minimum Score">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="206.0" layoutY="63.0" text="Maximum Score">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField id="maximumScore" layoutX="165.0" layoutY="59.0" prefHeight="30.0" prefWidth="39.0" text="10">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+         </children>
+      </Pane>
+      <TableView id="judges" layoutX="61.0" layoutY="247.0" prefHeight="200.0" prefWidth="219.0" style="-fx-border-color: Black;">
+        <columns>
+          <TableColumn prefWidth="199.0" text="Judges" />
+        </columns>
+      </TableView>
+      <TableView id="images" layoutX="308.0" layoutY="247.0" prefHeight="200.0" prefWidth="316.0" style="-fx-border-color: black;">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Image" />
+          <TableColumn prefWidth="240.0" text="Description" />
+        </columns>
+      </TableView>
+      <Button id="addJudge" layoutX="61.0" layoutY="464.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Add Judge" />
+      <Button id="removeJudge" layoutX="180.0" layoutY="464.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Remove Judge" />
+      <Button id="addImage" layoutX="309.0" layoutY="464.0" mnemonicParsing="false" text="Add Image" />
+      <Button id="editDescription" layoutX="407.0" layoutY="464.0" mnemonicParsing="false" text="Edit Description" />
+      <Button id="removeImage" layoutX="528.0" layoutY="464.0" mnemonicParsing="false" text="Remove Image" />
+      <Button id="start" layoutX="61.0" layoutY="507.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="565.0" text="Start Session" onAction="#handleStartButtonAction">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Hyperlink id="emmaHyper" layoutX="478.0" layoutY="34.0" text="Emma Website" />
+    </children>
+</AnchorPane>

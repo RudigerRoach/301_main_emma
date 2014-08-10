@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="519.0" prefWidth="616.0" style="-fx-background-color: Cyan;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller=".FXMLrunningSessionController">
+   <children>
+      <Pane layoutX="27.0" layoutY="94.0" prefHeight="337.0" prefWidth="340.0" style="-fx-background-color: white; -fx-border-color: black;">
+         <children>
+            <ImageView fitHeight="255.0" fitWidth="417.0" layoutX="14.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@emmaPhoto.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="14.0" layoutY="14.0" text="Current Image">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button layoutX="27.0" layoutY="440.0" mnemonicParsing="false" text="Previous">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <Button layoutX="215.0" layoutY="440.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="152.0" text="Next">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <Label layoutX="178.0" layoutY="30.0" text="EMMA Simulator">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Pane layoutX="384.0" layoutY="283.0" prefHeight="147.0" prefWidth="219.0" style="-fx-background-color: white; -fx-border-color: black;">
+         <children>
+            <CheckBox id="controlledSession" layoutX="12.0" layoutY="40.0" mnemonicParsing="false" text="Controlled Session" />
+            <CheckBox id="openSession" layoutX="12.0" layoutY="66.0" mnemonicParsing="false" text="Open Session(Anyone can Judge)" />
+            <CheckBox id="commentsEnabled" layoutX="12.0" layoutY="91.0" mnemonicParsing="false" text="Comments Enabled" />
+            <Label layoutX="14.0" layoutY="14.0" text="Session Constraints">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <CheckBox id="yesNo" layoutX="12.0" layoutY="121.0" mnemonicParsing="false" text="Yes/no vote" />
+         </children>
+      </Pane>
+      <Pane layoutX="384.0" layoutY="94.0" prefHeight="179.0" prefWidth="219.0" style="-fx-background-color: white; -fx-border-color: black;">
+         <children>
+            <TableView layoutX="12.0" layoutY="59.0" prefHeight="102.0" prefWidth="191.0">
+              <columns>
+                <TableColumn prefWidth="199.0" text="Image" />
+              </columns>
+            </TableView>
+            <Label layoutX="14.0" layoutY="14.0" text="Images left">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -3,16 +3,21 @@
   <information>
     <title>EMMA Simulator</title>
     <vendor>Endzeit</vendor>
-    <description>Sample JavaFX 2.0 application.</description>
+    <description>null</description>
     <offline-allowed/>
   </information>
-  <resources os="Windows">
-    <jfx:javafx-runtime version="2.0+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+  <resources>
+    <jfx:javafx-runtime version="2.2+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
   </resources>
-  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="EMMA Simulator" />
+<security>
+  <all-permissions/>
+</security>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="EMMA Simulator" >
+    <param name="requiredFXVersion" value="2.2+"/>
+  </applet-desc>
   <jfx:javafx-desc  width="800" height="600" main-class="EMMASimulator"  name="EMMA Simulator" />
-  <update check="background"/>
+  <update check="always"/>
 </jnlp>
