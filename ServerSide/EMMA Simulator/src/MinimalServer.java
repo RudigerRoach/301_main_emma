@@ -60,36 +60,52 @@ public class MinimalServer
         StartServlet startServlet = new StartServlet();
         context.addServlet(new ServletHolder(loginServlet), "/login");
         context.addServlet(new ServletHolder(startServlet), "/start");
+        for(int i = 1; i < totaalImages+1;i++)
+        {
+            getImage imageServlet = new getImage();
+            context.addServlet(new ServletHolder(imageServlet),"/temp/" + i + ".jpg");
+        }
         server.start();
     }    
-//    public static void main(String[] args) throws Exception
-//    {
-//        //Create server
-//        start = true;
-//        String[] _judges = new String[5];
-//        _judges[0]= "Johan";
-//        _judges[1]= "test";
-//        _judges[2]= "test123@test.com";
-//        _judges[3]= "Test3";
-//        _judges[4]= "Test4";
-//        String [] tmp = new String[1];
-//        tmp[0] = "helo";
-//        linkedList tmp2 = new linkedList();
-//        tmp2.info = "stellies.jpg";
-//        BufferedImage[] tmp3 = new BufferedImage[1];
-//        tmp3[0] = ImageIO.read(new File("stellies.jpg"));
-//        session = new Session(tmp2, tmp3, _judges,10,0,false,true,tmp);     
-//        images = session.getImages();
-//        server = new Server(5555);
-//        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-//        context.setContextPath("/");
-//        server.setHandler(context);
-//        LoginServlet loginServlet = new LoginServlet();
-//        StartServlet startServlet = new StartServlet();
-//        context.addServlet(new ServletHolder(loginServlet), "/login");
-//        context.addServlet(new ServletHolder(startServlet), "/start");
-//        server.start();
-//    }
+    public static void main(String[] args) throws Exception
+    {
+        //Create server
+        start = true;
+        String[] _judges = new String[5];
+        _judges[0]= "Johan";
+        _judges[1]= "test";
+        _judges[2]= "test123@test.com";
+        _judges[3]= "Test3";
+        _judges[4]= "Test4";
+        String [] tmp = new String[1];
+        tmp[0] = "helo";
+        linkedList tmp2 = new linkedList();
+        tmp2.info = "stellies.jpg";
+        BufferedImage[] tmp3 = new BufferedImage[1];
+        tmp3[0] = ImageIO.read(new File("stellies.jpg"));
+        session = new Session(tmp2, tmp3, _judges,10,0,false,true,tmp);     
+        images = session.getImages();
+        totaalImages = images.length;
+        tmpCompressedImage = new File[totaalImages];
+        for(int i = 0; i < totaalImages;i++)
+        {
+            tmpCompressedImage[i] = saveCompressedImage(images[i],"temp/" + (i+1) + ".jpg");
+        }
+        server = new Server(5555);
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+        LoginServlet loginServlet = new LoginServlet();
+        StartServlet startServlet = new StartServlet();
+        for(int i = 1; i < totaalImages+1;i++)
+        {
+            getImage imageServlet = new getImage();
+            context.addServlet(new ServletHolder(imageServlet),"/temp/" + i + ".jpg");
+        }
+        context.addServlet(new ServletHolder(loginServlet), "/login");
+        context.addServlet(new ServletHolder(startServlet), "/start");
+        server.start();
+    }
     
     private static File saveCompressedImage(BufferedImage image, String toFileName)
     {

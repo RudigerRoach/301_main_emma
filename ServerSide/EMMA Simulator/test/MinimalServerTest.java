@@ -211,7 +211,7 @@ public class MinimalServerTest extends TestCase {
         assertEquals("Testing if there are different session ids",false,stringResponse.equals(stringResponse1));
     }
     
-    public void testNotification() throws Exception
+    public void testStartOfSession() throws Exception
     {
         //Create client
 	HttpClient client = new DefaultHttpClient();
