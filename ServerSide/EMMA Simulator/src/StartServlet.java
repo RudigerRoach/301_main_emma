@@ -24,8 +24,8 @@ public class StartServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        if (request.getSession(false) != null)
-        {
+//        if (request.getSession(false) != null)
+//        {
             System.out.println("before start");
             while(MinimalServer.start == false){}
             System.out.println("before end");
@@ -55,7 +55,7 @@ public class StartServlet extends HttpServlet
             }
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print(jsonResponse);
-        }
+//        }
 //        else
 //        {
 //            JSONObject jsonResponse = new JSONObject();

@@ -13,7 +13,9 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.imageio.IIOImage;
@@ -34,7 +36,8 @@ public class MinimalServer
     public static BufferedImage [] images = null;
     public static File [] tmpCompressedImage = null;
     public static int totaalImages = 0;
-    public AtomicInteger currentPhoto = new AtomicInteger(1);
+    public static AtomicInteger currentPhoto = new AtomicInteger(1);
+    public static List<Judge> judgesList = new ArrayList<Judge>();
 
     /**
      * Constructor for the server
@@ -62,8 +65,10 @@ public class MinimalServer
         server.setHandler(context);
         LoginServlet loginServlet = new LoginServlet();
         StartServlet startServlet = new StartServlet();
+        NextImageServlet nextImageServlet = new NextImageServlet();
         context.addServlet(new ServletHolder(loginServlet), "/login");
         context.addServlet(new ServletHolder(startServlet), "/start");
+        context.addServlet(new ServletHolder(nextImageServlet), "/nextImage");
         for(int i = 1; i < totaalImages+1;i++)
         {
             getImage imageServlet = new getImage();
@@ -104,6 +109,7 @@ public class MinimalServer
         server.setHandler(context);
         LoginServlet loginServlet = new LoginServlet();
         StartServlet startServlet = new StartServlet();
+        NextImageServlet nextImageServlet = new NextImageServlet();
         for(int i = 1; i < totaalImages+1;i++)
         {
             getImage imageServlet = new getImage();
@@ -111,6 +117,7 @@ public class MinimalServer
         }
         context.addServlet(new ServletHolder(loginServlet), "/login");
         context.addServlet(new ServletHolder(startServlet), "/start");
+        context.addServlet(new ServletHolder(nextImageServlet), "/nextImage");
         server.start();
     }
     
@@ -164,7 +171,12 @@ public class MinimalServer
     public int [] nextImage()
     {
         System.out.println("Next image is geroep");
+        int [] temp = new int[judgesList.size()];
+        for (int i=0; i < temp.length;i++)
+        {
+            temp[i] = judgesList.get(i).getCurrentScore();
+        }
         currentPhoto.getAndIncrement();
-        return null;
+        return temp;
     }
 }
