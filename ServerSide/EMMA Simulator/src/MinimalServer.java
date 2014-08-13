@@ -34,7 +34,7 @@ public class MinimalServer
     public static BufferedImage [] images = null;
     public static File [] tmpCompressedImage = null;
     public static int totaalImages = 0;
-    public AtomicInteger currentPhoto = new AtomicInteger(0);
+    public AtomicInteger currentPhoto = new AtomicInteger(1);
 
     /**
      * Constructor for the server
@@ -51,6 +51,10 @@ public class MinimalServer
         for(int i = 0; i < totaalImages;i++)
         {
             tmpCompressedImage[i] = saveCompressedImage(images[i],"temp/" + (i+1) + ".jpg");
+        }
+        if(session.getControll() == false)
+        {
+            start = true;
         }
         server = new Server(5555);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
@@ -70,7 +74,6 @@ public class MinimalServer
     public static void main(String[] args) throws Exception
     {
         //Create server
-        start = true;
         String[] _judges = new String[5];
         _judges[0]= "Johan";
         _judges[1]= "test";
@@ -83,13 +86,17 @@ public class MinimalServer
         tmp2.info = "stellies.jpg";
         BufferedImage[] tmp3 = new BufferedImage[1];
         tmp3[0] = ImageIO.read(new File("stellies.jpg"));
-        session = new Session(tmp2, tmp3, _judges,10,0,false,true,tmp);     
+        session = new Session(tmp2, tmp3, _judges,10,0,false,false,tmp);     
         images = session.getImages();
         totaalImages = images.length;
         tmpCompressedImage = new File[totaalImages];
         for(int i = 0; i < totaalImages;i++)
         {
             tmpCompressedImage[i] = saveCompressedImage(images[i],"temp/" + (i+1) + ".jpg");
+        }
+        if(session.getControll() == false)
+        {
+            start = true;
         }
         server = new Server(5555);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
@@ -154,9 +161,10 @@ public class MinimalServer
         start = true;
     }
     
-//    public void nextImage()
-//    {
-//        System.out.println("Next image is geroep");
-//        currentPhoto.getAndIncrement();
-//    }
+    public int [] nextImage()
+    {
+        System.out.println("Next image is geroep");
+        currentPhoto.getAndIncrement();
+        return null;
+    }
 }
