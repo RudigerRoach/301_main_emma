@@ -9,6 +9,20 @@
     height: "200",
     image: "brownLabrador.jpg"
 },
+"#prev": 
+{
+	top: 100,
+    width: "50", 
+    height: "100",
+    image: "prev.jpg"
+},
+"#next": 
+{
+	top: 100,
+    width: "50", 
+    height: "100",
+    image: "next.jpg"
+},
 "Button": 
 {
 	borderWidth: "1",

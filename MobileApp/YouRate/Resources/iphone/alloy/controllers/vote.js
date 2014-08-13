@@ -1,5 +1,9 @@
 function Controller() {
     function fixPage() {
+        var screenWidth = Ti.Platform.displayCaps.platformWidth;
+        var screenHeight = Ti.Platform.displayCaps.platformHeight;
+        alert(screenWidth);
+        alert(screenHeight);
         service = require("VoteSession");
         var rangeBottom = 0;
         var rangeTop = 50;
@@ -8,6 +12,8 @@ function Controller() {
         photoPath = imagePath;
         var sessionType = "default";
         $.currentImage.image = imagePath;
+        $.prev.left = screenWidth / 2 - 160;
+        $.next.right = screenWidth / 2 - 160;
         if ("normal" == sessionType || "default" == sessionType) {
             slider = Titanium.UI.createSlider({
                 top: "260",
@@ -180,6 +186,14 @@ function Controller() {
         id: "wintitle"
     });
     $.__views.toolbar.add($.__views.wintitle);
+    $.__views.prev = Ti.UI.createImageView({
+        top: 100,
+        width: "50",
+        height: "100",
+        image: "prev.jpg",
+        id: "prev"
+    });
+    $.__views.votePage.add($.__views.prev);
     $.__views.currentImage = Ti.UI.createImageView({
         top: 50,
         width: "200",
@@ -188,6 +202,14 @@ function Controller() {
         id: "currentImage"
     });
     $.__views.votePage.add($.__views.currentImage);
+    $.__views.next = Ti.UI.createImageView({
+        top: 100,
+        width: "50",
+        height: "100",
+        image: "next.jpg",
+        id: "next"
+    });
+    $.__views.votePage.add($.__views.next);
     $.__views.submit = Ti.UI.createButton({
         borderWidth: "1",
         borderColor: "#bbb",
