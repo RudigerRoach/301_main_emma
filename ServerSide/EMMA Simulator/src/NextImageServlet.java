@@ -32,7 +32,7 @@ public class NextImageServlet extends HttpServlet
                 if (judgesList.getJudgeName().equals(judge) == true)
                 {
                     judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
-                    if (MinimalServer.currentPhoto.get() < MinimalServer.totaalImages)
+                    if (judgesList.getCurrentImage() < MinimalServer.totaalImages)
                     {
                         JSONObject jsonResponse = new JSONObject();
                         try 
