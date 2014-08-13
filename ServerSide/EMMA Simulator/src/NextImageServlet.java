@@ -23,10 +23,10 @@ public class NextImageServlet extends HttpServlet
     {
         if(MinimalServer.session.getControll() == false)
         {
+            System.out.println("Next image is called");
             String previousImageScore = request.getParameter("result");
             String previousImageComment = request.getParameter("comment");
             String judge = request.getParameter("email");
-            
             for (Judge judgesList : MinimalServer.judgesList) 
             {
                 if (judgesList.getJudgeName().equals(judge) == true)

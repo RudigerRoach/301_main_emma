@@ -296,11 +296,6 @@ public class MinimalServerTest extends TestCase {
         HttpPost mockRequest2 = new HttpPost("http://localhost:5555/start");
         mockRequest2.setHeader("Content-type", "application/x-www-form-urlencoded");
         //Add parameters
-        List<NameValuePair> urlParameters2 = new ArrayList<>();
-        urlParameters2.add(new BasicNameValuePair("email", "test"));
-        urlParameters2.add(new BasicNameValuePair("comment","asdf"));
-        urlParameters2.add(new BasicNameValuePair("result","3"));
-        mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters2,"UTF-8"));
         HttpResponse mockResponse2 = client.execute(mockRequest2,httpContext);
         rd = new BufferedReader(new InputStreamReader(mockResponse2.getEntity().getContent()));
         rd.close();
@@ -311,10 +306,10 @@ public class MinimalServerTest extends TestCase {
         urlParameters1.add(new BasicNameValuePair("email", "test"));
         urlParameters1.add(new BasicNameValuePair("comment","asdf"));
         urlParameters1.add(new BasicNameValuePair("result","3"));
-        mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters1,"UTF-8"));
+        mockRequest1.setEntity(new UrlEncodedFormEntity(urlParameters1,"UTF-8"));
         HttpResponse mockResponse1 = client.execute(mockRequest1,httpContext);
         rd = new BufferedReader(new InputStreamReader(mockResponse1.getEntity().getContent()));
-        System.out.println(rd.readLine());
+        System.out.println("++++ " + rd.readLine());
         //                "status": "1", //0 if the app should keep waiting, 1 for success, 2 if the votong session has fininshed
 //		        "sessionType": "normal", //alternatively Yes/No or winner
 //		        "rangeBottom": "0",

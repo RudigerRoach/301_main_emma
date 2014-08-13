@@ -203,7 +203,6 @@ public class LoginServlet extends HttpServlet
             {
                 Logger.getLogger(MinimalServer.class.getName()).log(Level.SEVERE, null, ex);
             }
-
             //get the judges from emma
             if(MinimalServer.session.getSessionType() == true)
             {
@@ -232,7 +231,7 @@ public class LoginServlet extends HttpServlet
                 {
                     jsonResponse.put("status", "success");
                     jsonResponse.put("session_id", request.getSession().getId());
-                    MinimalServer.judgesList.add(new Judge(user));
+                    MinimalServer.judgesList.add(new Judge(userAuto));
                 } 
                 catch (JSONException e) 
                 {

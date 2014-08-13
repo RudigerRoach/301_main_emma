@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Dieter-PC" name="MinimalServerTest" skipped="0" tests="8" time="2.043" timestamp="2014-08-13T12:11:08">
+<testsuite errors="0" failures="0" hostname="Dieter-PC" name="MinimalServerTest" skipped="0" tests="8" time="28.065" timestamp="2014-08-13T18:33:46">
   <properties>
     <property name="netbeans.autoupdate.country" value="US" />
     <property name="nb.wait.for.caches" value="true" />
@@ -39,7 +39,7 @@
     <property name="user.name" value="Dieter" />
     <property name="copylibs.rebase" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner MinimalServerTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\test\results\TEST-MinimalServerTest.xml crashfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junitvmwatcher2689042068097187788.properties propsfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junit7685964341673327446.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner MinimalServerTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\test\results\TEST-MinimalServerTest.xml crashfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junitvmwatcher1486303744024966600.properties propsfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junit3020760101178938469.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -189,7 +189,6 @@
     <property name="javadoc.encoding.used" value="UTF-8" />
     <property name="dist.jar" value="dist/EMMA_Simulator.jar" />
     <property name="libs.spring-framework400.maven-pom" value="" />
-    <property name="netbeans.automatic.build" value="true" />
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
     <property name="ant.project.name" value="EMMA_Simulator" />
     <property name="ant.file.type.EMMA_Simulator-impl" value="file" />
@@ -307,24 +306,24 @@
     <property name="libs.junit.src" value="" />
     <property name="annotation.processing.source.output" value="build/generated-sources/ap-source-output" />
     <property name="main.class" value="MinimalServer" />
-    <property name="build.dir" value="build" />
     <property name="libs.CopyLibs.src" value="" />
+    <property name="build.dir" value="build" />
     <property name="ant.version" value="Apache Ant(TM) version 1.9.2 compiled on July 8 2013" />
-    <property name="file.encoding" value="Cp1252" />
     <property name="build.classes.excludes" value="**/*.java,**/*.form" />
+    <property name="file.encoding" value="Cp1252" />
     <property name="jdkBug6558476" value="false" />
     <property name="javadoc.nonavbar" value="false" />
     <property name="platform.active" value="default_platform" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
   </properties>
-  <testcase classname="MinimalServerTest" name="testLoginSuccessful" time="0.712" />
-  <testcase classname="MinimalServerTest" name="testAutoLoginFailure" time="0.162" />
-  <testcase classname="MinimalServerTest" name="testAutoLoginSuccessful" time="0.132" />
-  <testcase classname="MinimalServerTest" name="testLoginFailure" time="0.122" />
-  <testcase classname="MinimalServerTest" name="testSingleSignOnSuccess" time="0.231" />
-  <testcase classname="MinimalServerTest" name="testSingleSignOnFailure" time="0.212" />
-  <testcase classname="MinimalServerTest" name="testStartOfSession" time="0.211" />
-  <testcase classname="MinimalServerTest" name="testEndOfSession" time="0.181" />
+  <testcase classname="MinimalServerTest" name="testLoginSuccessful" time="25.931" />
+  <testcase classname="MinimalServerTest" name="testAutoLoginFailure" time="0.262" />
+  <testcase classname="MinimalServerTest" name="testAutoLoginSuccessful" time="0.142" />
+  <testcase classname="MinimalServerTest" name="testLoginFailure" time="0.118" />
+  <testcase classname="MinimalServerTest" name="testSingleSignOnSuccess" time="0.222" />
+  <testcase classname="MinimalServerTest" name="testSingleSignOnFailure" time="0.193" />
+  <testcase classname="MinimalServerTest" name="testStartOfSession" time="0.952" />
+  <testcase classname="MinimalServerTest" name="testEndOfSession" time="0.163" />
   <system-out><![CDATA[login
 Remember Device...
 login
@@ -343,54 +342,31 @@ Remember Device...
 Start session is geroep
 before start
 before end
-in try
 Done
 login
 Remember Device...
 before start
 before end
-in try
-<html>
+asdf 3 test
+++++ {"status":"2"}
 ]]></system-out>
-  <system-err><![CDATA[2014-08-13 14:11:08.239:INFO::Logging to StdErrLog::DEBUG=false via org.eclipse.jetty.util.log.StdErrLog
-2014-08-13 14:11:08.269:INFO::jetty-7.0.2.v20100331
-2014-08-13 14:11:08.369:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-08-13 14:11:08.882:INFO::jetty-7.0.2.v20100331
-2014-08-13 14:11:08.902:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-08-13 14:11:09.015:INFO::jetty-7.0.2.v20100331
-2014-08-13 14:11:09.035:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-08-13 14:11:09.178:INFO::jetty-7.0.2.v20100331
-2014-08-13 14:11:09.198:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-08-13 14:11:09.311:INFO::jetty-7.0.2.v20100331
-2014-08-13 14:11:09.331:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-08-13 14:11:09.524:INFO::jetty-7.0.2.v20100331
-2014-08-13 14:11:09.544:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-08-13 14:11:09.748:INFO::jetty-7.0.2.v20100331
-2014-08-13 14:11:09.768:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-08-13 14:11:09.951:INFO::jetty-7.0.2.v20100331
-2014-08-13 14:11:09.971:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-08-13 14:11:10.041:WARN::/nextImage
-java.lang.NullPointerException
-	at NextImageServlet.doPost(NextImageServlet.java:32)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
-	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:530)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:426)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:227)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:931)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:361)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:186)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:867)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:113)
-	at org.eclipse.jetty.server.Server.handle(Server.java:337)
-	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:581)
-	at org.eclipse.jetty.server.HttpConnection$RequestHandler.headerComplete(HttpConnection.java:1005)
-	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:560)
-	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:222)
-	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:417)
-	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.run(SelectChannelEndPoint.java:474)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:437)
-	at java.lang.Thread.run(Thread.java:722)
+  <system-err><![CDATA[2014-08-13 20:33:50.346:INFO::Logging to StdErrLog::DEBUG=false via org.eclipse.jetty.util.log.StdErrLog
+2014-08-13 20:33:50.986:INFO::jetty-7.0.2.v20100331
+2014-08-13 20:33:53.016:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-13 20:34:12.636:WARN::3 threads could not be stopped
+2014-08-13 20:34:12.737:INFO::jetty-7.0.2.v20100331
+2014-08-13 20:34:12.757:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-13 20:34:12.981:INFO::jetty-7.0.2.v20100331
+2014-08-13 20:34:13.001:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-13 20:34:13.134:INFO::jetty-7.0.2.v20100331
+2014-08-13 20:34:13.154:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-13 20:34:13.242:INFO::jetty-7.0.2.v20100331
+2014-08-13 20:34:13.262:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-13 20:34:13.465:INFO::jetty-7.0.2.v20100331
+2014-08-13 20:34:13.485:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-13 20:34:13.658:INFO::jetty-7.0.2.v20100331
+2014-08-13 20:34:13.678:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-13 20:34:14.620:INFO::jetty-7.0.2.v20100331
+2014-08-13 20:34:14.640:INFO::Started SelectChannelConnector@0.0.0.0:5555
 ]]></system-err>
 </testsuite>

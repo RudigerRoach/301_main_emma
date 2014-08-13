@@ -47,7 +47,6 @@ public class StartServlet extends HttpServlet
                 jsonResponse.put("description", MinimalServer.session.getImageDetails(0));
                 jsonResponse.put("comments", "true");
                 jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[0].getName());
-                System.out.println("in try");
             } 
             catch (JSONException ex) 
             {

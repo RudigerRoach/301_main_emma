@@ -17,6 +17,8 @@ public class Judge
     
     public Judge(String _name)
     {
+        score = new int [MinimalServer.totaalImages];
+        comment = new String [MinimalServer.totaalImages];
         judgeName = _name;
         currentImage = 0;
     }
