@@ -4,6 +4,12 @@ var slider;
 
 function fixPage()
 {
+	var screenWidth = Ti.Platform.displayCaps.platformWidth;
+	var screenHeight = Ti.Platform.displayCaps.platformHeight;
+	alert(screenWidth);
+	alert(screenHeight);
+	//Ti.App.SCREEN_WIDTH = (pWidth > pHeight) ? pHeight : pWidth;
+	//Ti.App.SCREEN_HEIGHT = (pWidth > pHeight) ? pWidth : pHeight;
 	//If normal event create a slider for scoring
 	service=require('VoteSession');	
 	var rangeBottom = 0;
@@ -23,10 +29,14 @@ function fixPage()
 		
 	//Change image to path received from server	
 	$.currentImage.image = imagePath;
+	$.prev.left = (screenWidth/2) - 160;
+	$.next.right = (screenWidth/2) - 160;
 	
 	//Display interface according to type of session
 	if(sessionType == "normal" || sessionType == "default") //Default for offline testing purposes, to be taken out
 	{
+		//$.prev.opacity=0.0;
+		//$.next.opacity=0.0;
 		slider = Titanium.UI.createSlider(
 		{
 			top:"260",
