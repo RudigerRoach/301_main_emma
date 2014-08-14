@@ -11,6 +11,7 @@
 // Alloy.Globals.someGlobalFunction = function(){};
 
 Alloy.Globals.sessionObj = { id: '0' };
+Alloy.Globals.callCount = 0;
 
 if (Ti.App.deployType !== 'production') {
      Alloy.CFG.environment = 'test';

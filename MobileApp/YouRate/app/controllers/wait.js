@@ -26,8 +26,12 @@ function testStatus(service){
 		    status = service.status();
 		    if (status == "1") {
 		    	goForward(service);
-		        clearInterval(timer);
+		    }else if(status == "2"){
+		    	alert("Voting session completed");
+		    	var win=Alloy.createController('login').getView();
+ 				win.open();
 		    }
+		    clearInterval(timer);
 		}, 1000);
 }
 
