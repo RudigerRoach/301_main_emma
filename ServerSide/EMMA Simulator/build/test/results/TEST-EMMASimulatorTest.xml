@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="1" failures="2" hostname="Dieter-PC" name="EMMASimulatorTest" skipped="0" tests="14" time="0.078" timestamp="2014-07-17T12:16:10">
+<testsuite errors="0" failures="0" hostname="Dieter-PC" name="EMMASimulatorTest" skipped="0" tests="1" time="1.89" timestamp="2014-08-13T18:33:43">
   <properties>
     <property name="netbeans.autoupdate.country" value="US" />
     <property name="nb.wait.for.caches" value="true" />
@@ -39,7 +39,7 @@
     <property name="user.name" value="Dieter" />
     <property name="copylibs.rebase" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner EMMASimulatorTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\test\results\TEST-EMMASimulatorTest.xml crashfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junitvmwatcher3370149195395152022.properties propsfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junit3967931203080724856.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner EMMASimulatorTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\test\results\TEST-EMMASimulatorTest.xml crashfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junitvmwatcher1153556791016835235.properties propsfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junit2211014784097923053.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -305,7 +305,7 @@
     <property name="libs.hibernate4-persistencemodelgen.classpath" value="C:\Program Files\NetBeans 8.0\java\modules\ext\hibernate4\hibernate-jpamodelgen-1.3.0.Final.jar" />
     <property name="libs.junit.src" value="" />
     <property name="annotation.processing.source.output" value="build/generated-sources/ap-source-output" />
-    <property name="main.class" value="EMMASimulator" />
+    <property name="main.class" value="MinimalServer" />
     <property name="libs.CopyLibs.src" value="" />
     <property name="build.dir" value="build" />
     <property name="ant.version" value="Apache Ant(TM) version 1.9.2 compiled on July 8 2013" />
@@ -316,77 +316,7 @@
     <property name="platform.active" value="default_platform" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
   </properties>
-  <testcase classname="EMMASimulatorTest" name="testGetSessionType" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testGetJudges" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testSetJudges" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testSetControll" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testGetBotRange" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testGetTopRange" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testSetRanges" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testGetControll" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testSetAllImageDetails" time="0.0">
-    <failure message="expected:&lt;Photo of a rock&gt; but was:&lt;null&gt;" type="junit.framework.ComparisonFailure">junit.framework.ComparisonFailure: expected:&lt;Photo of a rock&gt; but was:&lt;null&gt;
-	at EMMASimulatorTest.testSetAllImageDetails(EMMASimulatorTest.java:169)
-</failure>
-  </testcase>
-  <testcase classname="EMMASimulatorTest" name="testGetAllImageDetails" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testSetImageDetails" time="0.0" />
-  <testcase classname="EMMASimulatorTest" name="testGetImageDetails" time="0.0">
-    <failure message="expected:&lt;Photo of a rock&gt; but was:&lt;null&gt;" type="junit.framework.ComparisonFailure">junit.framework.ComparisonFailure: expected:&lt;Photo of a rock&gt; but was:&lt;null&gt;
-	at EMMASimulatorTest.testGetImageDetails(EMMASimulatorTest.java:236)
-</failure>
-  </testcase>
-  <testcase classname="EMMASimulatorTest" name="testLoadImages" time="0.0">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at java.io.File.&lt;init&gt;(File.java:251)
-	at EMMASimulator.loadImages(EMMASimulator.java:116)
-	at EMMASimulatorTest.testLoadImages(EMMASimulatorTest.java:248)
-</error>
-  </testcase>
-  <testcase classname="EMMASimulatorTest" name="testGetImages" time="0.0" />
-  <system-out><![CDATA[sessionType
-Test yields:stellies.jpg
-Problem loading images
-getJudges
-Test yields:stellies.jpg
-Problem loading images
-setJudges
-Test yields:stellies.jpg
-Problem loading images
-SetControll
-Test yields:stellies.jpg
-Problem loading images
-getBotRange
-Test yields:stellies.jpg
-Problem loading images
-getTopRange
-Test yields:stellies.jpg
-Problem loading images
-setRanges
-Test yields:stellies.jpg
-Problem loading images
-GetControll
-Test yields:stellies.jpg
-Problem loading images
-setAllImageDetails
-Test yields:stellies.jpg
-Problem loading images
-getAllImageDetails
-Test yields:stellies.jpg
-Problem loading images
-setImageDetails
-Test yields:stellies.jpg
-Problem loading images
-getImageDetails
-Test yields:stellies.jpg
-Problem loading images
-loadImages
-Test yields:stellies.jpg
-Problem loading images
-Test yields:stellies.jpg
-getImages
-Test yields:stellies.jpg
-Problem loading images
-]]></system-out>
+  <testcase classname="EMMASimulatorTest" name="testMain" time="0.0" />
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

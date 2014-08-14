@@ -126,6 +126,11 @@ XHR.prototype.post = function(url, data, onSuccess, onError, extraParams) {
 	xhr.open("POST", url, extraParams.async);
 	xhr.setRequestHeader('Content-Type', extraParams.contentType);
 	
+	//check and set cookie in header if it exists
+	var sessionObj = require('alloy').Globals.sessionObj;
+	if(sessionObj.id != 0){
+		xhr.setRequestHeader('Cookie','session_id='+sessionObj.id);
+	}
 
 	// If we need to authenticate
 	if (extraParams.shouldAuthenticate) {

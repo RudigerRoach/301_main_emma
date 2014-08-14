@@ -1,6 +1,19 @@
 <Alloy>
-    <Window id="votePage">
-		<Label id="underConstruction">Page under construction</Label>	
-		<Button id="logout" onClick="doLogout">Logout</Button>
+    <Window id="votePage"  onFocus="fixPage">
+		<!-- iOS toolbar -->
+		<Toolbar id="toolbar" platform="ios">
+			<Button id="wintitle">YouRate - Voting</Button>
+		</Toolbar>
+		
+		<!-- Android menu -->
+		<Menu id="menu" platform="android">
+			<MenuItem id="menu1" title="YouRate - Voting" onClick="doClickMenu"/>
+		</Menu>
+		
+		<!-- iOS and Android -->
+		<ImageView id="prev" />
+		<ImageView id="currentImage" />
+		<ImageView id="next" />
+		<Button id="submit" onClick="doSubmit">Submit score</Button>            
     </Window>
 </Alloy>

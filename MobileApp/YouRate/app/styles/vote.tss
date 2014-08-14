@@ -1,16 +1,27 @@
-"Window": {
+"#votePage": {
 	backgroundColor: "#DFE4E7",
 	exitOnClose: true
 },
-"Label": {
-	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE,
-	color: "black",
-	font: {
-		fontSize: 20,
-		fontFamily: 'Helvetica Neue'
-	},
-	textAlign: 'center'
+"#currentImage": 
+{
+	top: 50,
+    width: "200", 
+    height: "200",
+    image: "brownLabrador.jpg"
+},
+"#prev": 
+{
+	top: 100,
+    width: "50", 
+    height: "100",
+    image: "prev.jpg"
+},
+"#next": 
+{
+	top: 100,
+    width: "50", 
+    height: "100",
+    image: "next.jpg"
 },
 "Button": 
 {
@@ -22,10 +33,29 @@
     color: "black", 
     textAlign: "center",
 	font: {
-		fontSize: 20,
+		fontSize: 24,
 		fontFamily: 'Helvetica Neue'
 	}, 
-    top: "160", 
-    width: "140", 
+    top: "430", 
+    width: "170", 
     height: "35"
+},
+"#toolbar[platform=ios]": {
+	backgroundColor: "black",
+	top: "0",
+	padding: "10",
+	borderTop: false,
+	borderBottom: true,
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: "100"
+}
+"#wintitle[platform=ios]": {
+	color: 'black'
+},
+'#menu[platform=android]': {
+	backgroundColor: "#bbb",
+	showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS
 }
