@@ -303,7 +303,7 @@ public class MinimalServerTest extends TestCase {
         mockRequest2.setHeader("Content-type", "application/x-www-form-urlencoded");
         //Add parameters
         List<NameValuePair> urlParameters1 = new ArrayList<>();
-        urlParameters1.add(new BasicNameValuePair("email", "test"));
+        urlParameters1.add(new BasicNameValuePair("deviceUID", "BD655C43-3A73-4DFB-AA1F-074A4F0B0DCE"));
         urlParameters1.add(new BasicNameValuePair("comment","asdf"));
         urlParameters1.add(new BasicNameValuePair("result","3"));
         mockRequest1.setEntity(new UrlEncodedFormEntity(urlParameters1,"UTF-8"));

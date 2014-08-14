@@ -20,13 +20,13 @@ public class Judge
         score = new int [MinimalServer.totaalImages];
         comment = new String [MinimalServer.totaalImages];
         judgeName = _name;
-        currentImage = 0;
+        currentImage = 1;
     }
     
     public void setScoreAndComent(int _score, String _comment)
     {
-        score[currentImage] = _score;
-        comment[currentImage] = _comment;
+        score[currentImage-1] = _score;
+        comment[currentImage-1] = _comment;
         currentImage++;
     }
     

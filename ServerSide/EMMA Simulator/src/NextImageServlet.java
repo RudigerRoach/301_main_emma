@@ -26,20 +26,22 @@ public class NextImageServlet extends HttpServlet
             System.out.println("Next image is called");
             String previousImageScore = request.getParameter("result");
             String previousImageComment = request.getParameter("comment");
-            String judge = request.getParameter("email");
+            String judge = request.getParameter("deviceUID");
             for (Judge judgesList : MinimalServer.judgesList) 
             {
                 if (judgesList.getJudgeName().equals(judge) == true)
                 {
                     judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
-                    if (judgesList.getCurrentImage() < MinimalServer.totaalImages)
+                    if (judgesList.getCurrentImage()-1 < MinimalServer.totaalImages)
                     {
                         JSONObject jsonResponse = new JSONObject();
                         try 
                         {
                             jsonResponse.put("status", "1");
-                            jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[MinimalServer.currentPhoto.get()-1].getName());
-
+                            jsonResponse.put("sessionType", "normal");
+                            jsonResponse.put("description", MinimalServer.session.getImageDetails(judgesList.getCurrentImage()-1));
+                            jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
+                            System.out.println();
                         } 
                         catch (JSONException e) 
                         {
@@ -75,7 +77,7 @@ public class NextImageServlet extends HttpServlet
         {
             String previousImageScore = request.getParameter("result");
             String previousImageComment = request.getParameter("comment");
-            String judge = request.getParameter("email");
+            String judge = request.getParameter("deviceUID");
             
             for (Judge judgesList : MinimalServer.judgesList) 
             {
@@ -91,6 +93,8 @@ public class NextImageServlet extends HttpServlet
                         try 
                         {
                             jsonResponse.put("status", "1");
+                            jsonResponse.put("sessionType", MinimalServer.session.getSessionType());
+                            jsonResponse.put("description", MinimalServer.session.getImageDetails(MinimalServer.currentPhoto.get() -1));
                             jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[MinimalServer.currentPhoto.get()-1].getName());
 
                         } 

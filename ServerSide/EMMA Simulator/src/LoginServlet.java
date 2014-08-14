@@ -138,7 +138,7 @@ public class LoginServlet extends HttpServlet
                 {
                     jsonResponse.put("status", "success");
                     jsonResponse.put("session_id", request.getSession().getId());
-                    MinimalServer.judgesList.add(new Judge(user));
+                    MinimalServer.judgesList.add(new Judge(id));
                 } 
                 catch (JSONException e) 
                 {
@@ -231,7 +231,7 @@ public class LoginServlet extends HttpServlet
                 {
                     jsonResponse.put("status", "success");
                     jsonResponse.put("session_id", request.getSession().getId());
-                    MinimalServer.judgesList.add(new Judge(userAuto));
+                    MinimalServer.judgesList.add(new Judge(id));
                 } 
                 catch (JSONException e) 
                 {
