@@ -13,7 +13,9 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.imageio.IIOImage;
@@ -34,7 +36,8 @@ public class MinimalServer
     public static BufferedImage [] images = null;
     public static File [] tmpCompressedImage = null;
     public static int totaalImages = 0;
-    public AtomicInteger currentPhoto = new AtomicInteger(0);
+    public static AtomicInteger currentPhoto = new AtomicInteger(1);
+    public static List<Judge> judgesList = new ArrayList<Judge>();
 
     /**
      * Constructor for the server
@@ -52,44 +55,75 @@ public class MinimalServer
         {
             tmpCompressedImage[i] = saveCompressedImage(images[i],"temp/" + (i+1) + ".jpg");
         }
+        if(session.getControll() == false)
+        {
+            start = true;
+        }
         server = new Server(5555);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         server.setHandler(context);
         LoginServlet loginServlet = new LoginServlet();
         StartServlet startServlet = new StartServlet();
+        NextImageServlet nextImageServlet = new NextImageServlet();
         context.addServlet(new ServletHolder(loginServlet), "/login");
         context.addServlet(new ServletHolder(startServlet), "/start");
+        context.addServlet(new ServletHolder(nextImageServlet), "/nextImage");
+        for(int i = 1; i < totaalImages+1;i++)
+        {
+            getImage imageServlet = new getImage();
+            context.addServlet(new ServletHolder(imageServlet),"/temp/" + i + ".jpg");
+        }
         server.start();
     }    
-//    public static void main(String[] args) throws Exception
-//    {
-//        //Create server
-//        start = true;
-//        String[] _judges = new String[5];
-//        _judges[0]= "Johan";
-//        _judges[1]= "test";
-//        _judges[2]= "test123@test.com";
-//        _judges[3]= "Test3";
-//        _judges[4]= "Test4";
-//        String [] tmp = new String[1];
-//        tmp[0] = "helo";
-//        linkedList tmp2 = new linkedList();
-//        tmp2.info = "stellies.jpg";
-//        BufferedImage[] tmp3 = new BufferedImage[1];
-//        tmp3[0] = ImageIO.read(new File("stellies.jpg"));
-//        session = new Session(tmp2, tmp3, _judges,10,0,false,true,tmp);     
-//        images = session.getImages();
-//        server = new Server(5555);
-//        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-//        context.setContextPath("/");
-//        server.setHandler(context);
-//        LoginServlet loginServlet = new LoginServlet();
-//        StartServlet startServlet = new StartServlet();
-//        context.addServlet(new ServletHolder(loginServlet), "/login");
-//        context.addServlet(new ServletHolder(startServlet), "/start");
-//        server.start();
-//    }
+    public static void main(String[] args) throws Exception
+    {
+        //Create server
+        String[] _judges = new String[5];
+        _judges[0]= "Johan";
+        _judges[1]= "test";
+        _judges[2]= "test123@test.com";
+        _judges[3]= "Test3";
+        _judges[4]= "Test4";
+        String [] tmp = new String[2];
+        tmp[0] = "helo";
+        tmp[1] = "asdf";
+        linkedList tmp2 = new linkedList();
+        tmp2.info = "stellies.jpg";
+        tmp2.next = new linkedList();
+        tmp2.next.info = "guitar.jpg";
+        BufferedImage[] tmp3 = new BufferedImage[2];
+        tmp3[0] = ImageIO.read(new File("stellies.jpg"));
+        tmp3[1] = ImageIO.read(new File("guitar.jpg"));
+        session = new Session(tmp2, tmp3, _judges,10,0,false,false,tmp);     
+        images = session.getImages();
+        totaalImages = images.length;
+        tmpCompressedImage = new File[totaalImages];
+        for(int i = 0; i < totaalImages;i++)
+        {
+            tmpCompressedImage[i] = saveCompressedImage(images[i],"temp/" + (i+1) + ".jpg");
+        }
+        if(session.getControll() == false)
+        {
+            start = true;
+        }
+        server = new Server(5555);
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+        LoginServlet loginServlet = new LoginServlet();
+        StartServlet startServlet = new StartServlet();
+        NextImageServlet nextImageServlet = new NextImageServlet();
+        for(int i = 1; i < totaalImages+1;i++)
+        {
+            getImage imageServlet = new getImage();
+            context.addServlet(new ServletHolder(imageServlet),"/temp/" + i + ".jpg");
+        }
+        context.addServlet(new ServletHolder(loginServlet), "/login");
+        context.addServlet(new ServletHolder(startServlet), "/start");
+        context.addServlet(new ServletHolder(nextImageServlet), "/nextImage");
+        server.start();
+    }
     
     private static File saveCompressedImage(BufferedImage image, String toFileName)
     {
@@ -138,9 +172,15 @@ public class MinimalServer
         start = true;
     }
     
-//    public void nextImage()
-//    {
-//        System.out.println("Next image is geroep");
-//        currentPhoto.getAndIncrement();
-//    }
+    public int [] nextImage()
+    {
+        System.out.println("Next image is geroep");
+        int [] temp = new int[judgesList.size()];
+        for (int i=0; i < temp.length;i++)
+        {
+            temp[i] = judgesList.get(i).getCurrentScore();
+        }
+        currentPhoto.getAndIncrement();
+        return temp;
+    }
 }

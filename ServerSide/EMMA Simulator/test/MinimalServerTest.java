@@ -63,7 +63,7 @@ public class MinimalServerTest extends TestCase {
         tmp2.info = "stellies.jpg";
         BufferedImage[] tmp3 = new BufferedImage[1];
         tmp3[0] = ImageIO.read(new File("stellies.jpg"));
-        Session tmp = new Session(tmp2, tmp3, _judges,10,0,false,true,tmp1);
+        Session tmp = new Session(tmp2, tmp3, _judges,10,0,false,false,tmp1);
         server = new MinimalServer(tmp);
     }
     
@@ -211,7 +211,7 @@ public class MinimalServerTest extends TestCase {
         assertEquals("Testing if there are different session ids",false,stringResponse.equals(stringResponse1));
     }
     
-    public void testNotification() throws Exception
+    public void testStartOfSession() throws Exception
     {
         //Create client
 	HttpClient client = new DefaultHttpClient();
@@ -270,5 +270,54 @@ public class MinimalServerTest extends TestCase {
         jsonTest.put("comments", "true");
         jsonTest.put("imgPath","temp/1.jpg");
         assertEquals("Testing if login was correctly failed due to incorrect username",jsonTest.toString(),asyncResponse);
+    }
+    
+    public void testEndOfSession() throws Exception
+    {
+        //Create client
+	HttpClient client = new DefaultHttpClient();
+        HttpPost mockRequest = new HttpPost("http://localhost:5555/login");
+        CookieStore cookieStore = new BasicCookieStore();
+        HttpContext httpContext = new BasicHttpContext();
+        httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+        mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
+        
+        //Add parameters
+        List<NameValuePair> urlParameters = new ArrayList<>();
+        urlParameters.add(new BasicNameValuePair("email", "test"));
+        urlParameters.add(new BasicNameValuePair("deviceUID","BD655C43-3A73-4DFB-AA1F-074A4F0B0DCE"));
+        mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
+        //Execute the request
+        HttpResponse mockResponse = client.execute(mockRequest,httpContext);
+		
+        //Test if normal login is successful
+        BufferedReader rd = new BufferedReader(new InputStreamReader(mockResponse.getEntity().getContent()));
+        rd.close();
+        HttpPost mockRequest2 = new HttpPost("http://localhost:5555/start");
+        mockRequest2.setHeader("Content-type", "application/x-www-form-urlencoded");
+        //Add parameters
+        HttpResponse mockResponse2 = client.execute(mockRequest2,httpContext);
+        rd = new BufferedReader(new InputStreamReader(mockResponse2.getEntity().getContent()));
+        rd.close();
+        HttpPost mockRequest1 = new HttpPost("http://localhost:5555/nextImage");
+        mockRequest2.setHeader("Content-type", "application/x-www-form-urlencoded");
+        //Add parameters
+        List<NameValuePair> urlParameters1 = new ArrayList<>();
+        urlParameters1.add(new BasicNameValuePair("deviceUID", "BD655C43-3A73-4DFB-AA1F-074A4F0B0DCE"));
+        urlParameters1.add(new BasicNameValuePair("comment","asdf"));
+        urlParameters1.add(new BasicNameValuePair("result","3"));
+        mockRequest1.setEntity(new UrlEncodedFormEntity(urlParameters1,"UTF-8"));
+        HttpResponse mockResponse1 = client.execute(mockRequest1,httpContext);
+        rd = new BufferedReader(new InputStreamReader(mockResponse1.getEntity().getContent()));
+        System.out.println("++++ " + rd.readLine());
+        //                "status": "1", //0 if the app should keep waiting, 1 for success, 2 if the votong session has fininshed
+//		        "sessionType": "normal", //alternatively Yes/No or winner
+//		        "rangeBottom": "0",
+//		        "rangeTop": "15",
+//		        "description": "image discription here",
+//		        "comments": "True",  //True if comments are allowed, False if not
+//		        "imgPath": "path/to/image.jpg" //the path where the image resides on the server
+        
+        assertEquals("Testing if login was correctly failed due to incorrect username",true,true);
     }
 }

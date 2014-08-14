@@ -24,9 +24,8 @@ public class StartServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        System.out.println("A");
-//        if (request.getSession(false) != null)
-//        {
+        if (request.getSession(false) != null)
+        {
             System.out.println("before start");
             while(MinimalServer.start == false){}
             System.out.println("before end");
@@ -35,7 +34,7 @@ public class StartServlet extends HttpServlet
             try 
             {
 //                "status": "1", //0 if the app should keep waiting, 1 for success, 2 if the votong session has fininshed
-//		        "sessionType": "normal", //alternatively Yes/No or winner
+//		        "sessionType": "normal", //alternatively yesNo or winner
 //		        "rangeBottom": "0",
 //		        "rangeTop": "15",
 //		        "description": "image discription here",
@@ -55,7 +54,7 @@ public class StartServlet extends HttpServlet
             }
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print(jsonResponse);
-//        }
+        }
 //        else
 //        {
 //            JSONObject jsonResponse = new JSONObject();

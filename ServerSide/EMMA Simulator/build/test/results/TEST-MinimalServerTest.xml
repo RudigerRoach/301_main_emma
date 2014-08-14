@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Dieter-PC" name="MinimalServerTest" skipped="0" tests="7" time="1.84" timestamp="2014-07-30T07:05:39">
+<testsuite errors="0" failures="0" hostname="Dieter-PC" name="MinimalServerTest" skipped="0" tests="8" time="2.556" timestamp="2014-08-14T13:46:46">
   <properties>
     <property name="netbeans.autoupdate.country" value="US" />
     <property name="nb.wait.for.caches" value="true" />
@@ -39,7 +39,7 @@
     <property name="user.name" value="Dieter" />
     <property name="copylibs.rebase" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner MinimalServerTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\test\results\TEST-MinimalServerTest.xml crashfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junitvmwatcher2266814133491838934.properties propsfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junit475120520006659620.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner MinimalServerTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\test\results\TEST-MinimalServerTest.xml crashfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junitvmwatcher2609456004387594169.properties propsfile=C:\Users\Dieter\Documents\Universiteit\COS\Cos 301\301_main_emma\ServerSide\EMMA Simulator\build\junit4778540831797125085.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -316,13 +316,14 @@
     <property name="platform.active" value="default_platform" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
   </properties>
-  <testcase classname="MinimalServerTest" name="testLoginSuccessful" time="0.769" />
-  <testcase classname="MinimalServerTest" name="testAutoLoginFailure" time="0.143" />
-  <testcase classname="MinimalServerTest" name="testAutoLoginSuccessful" time="0.142" />
-  <testcase classname="MinimalServerTest" name="testLoginFailure" time="0.117" />
-  <testcase classname="MinimalServerTest" name="testSingleSignOnSuccess" time="0.198" />
-  <testcase classname="MinimalServerTest" name="testSingleSignOnFailure" time="0.199" />
-  <testcase classname="MinimalServerTest" name="testNotification" time="0.204" />
+  <testcase classname="MinimalServerTest" name="testLoginSuccessful" time="1.262" />
+  <testcase classname="MinimalServerTest" name="testAutoLoginFailure" time="0.182" />
+  <testcase classname="MinimalServerTest" name="testAutoLoginSuccessful" time="0.132" />
+  <testcase classname="MinimalServerTest" name="testLoginFailure" time="0.098" />
+  <testcase classname="MinimalServerTest" name="testSingleSignOnSuccess" time="0.231" />
+  <testcase classname="MinimalServerTest" name="testSingleSignOnFailure" time="0.183" />
+  <testcase classname="MinimalServerTest" name="testStartOfSession" time="0.213" />
+  <testcase classname="MinimalServerTest" name="testEndOfSession" time="0.182" />
   <system-out><![CDATA[login
 Remember Device...
 login
@@ -339,25 +340,32 @@ Remember Device...
 login
 Remember Device...
 Start session is geroep
-A
 before start
 before end
 Done
+login
+Remember Device...
+before start
+before end
+Next image is called
+++++ {"status":"2"}
 ]]></system-out>
-  <system-err><![CDATA[2014-07-30 09:05:39.406:INFO::Logging to StdErrLog::DEBUG=false via org.eclipse.jetty.util.log.StdErrLog
-2014-07-30 09:05:39.440:INFO::jetty-7.0.2.v20100331
-2014-07-30 09:05:39.539:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-07-30 09:05:40.082:INFO::jetty-7.0.2.v20100331
-2014-07-30 09:05:40.102:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-07-30 09:05:40.225:INFO::jetty-7.0.2.v20100331
-2014-07-30 09:05:40.245:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-07-30 09:05:40.388:INFO::jetty-7.0.2.v20100331
-2014-07-30 09:05:40.409:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-07-30 09:05:40.486:INFO::jetty-7.0.2.v20100331
-2014-07-30 09:05:40.507:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-07-30 09:05:40.684:INFO::jetty-7.0.2.v20100331
-2014-07-30 09:05:40.706:INFO::Started SelectChannelConnector@0.0.0.0:5555
-2014-07-30 09:05:40.884:INFO::jetty-7.0.2.v20100331
-2014-07-30 09:05:40.905:INFO::Started SelectChannelConnector@0.0.0.0:5555
+  <system-err><![CDATA[2014-08-14 15:46:46.567:INFO::Logging to StdErrLog::DEBUG=false via org.eclipse.jetty.util.log.StdErrLog
+2014-08-14 15:46:46.607:INFO::jetty-7.0.2.v20100331
+2014-08-14 15:46:46.817:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-14 15:46:47.690:INFO::jetty-7.0.2.v20100331
+2014-08-14 15:46:47.720:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-14 15:46:47.833:INFO::jetty-7.0.2.v20100331
+2014-08-14 15:46:47.853:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-14 15:46:47.976:INFO::jetty-7.0.2.v20100331
+2014-08-14 15:46:47.996:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-14 15:46:48.083:INFO::jetty-7.0.2.v20100331
+2014-08-14 15:46:48.103:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-14 15:46:48.296:INFO::jetty-7.0.2.v20100331
+2014-08-14 15:46:48.316:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-14 15:46:48.509:INFO::jetty-7.0.2.v20100331
+2014-08-14 15:46:48.529:INFO::Started SelectChannelConnector@0.0.0.0:5555
+2014-08-14 15:46:48.722:INFO::jetty-7.0.2.v20100331
+2014-08-14 15:46:48.742:INFO::Started SelectChannelConnector@0.0.0.0:5555
 ]]></system-err>
 </testsuite>
