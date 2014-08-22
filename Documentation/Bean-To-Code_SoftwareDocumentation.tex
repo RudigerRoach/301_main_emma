@@ -26,8 +26,8 @@ GitHub link: https://github.com/RudigerRoach/301\textunderscore main\textundersc
 \section{Vision and Scope}
 
 \subsection{Vision}
-Our client creates software for camera club event management. A big part of an event comprises of an image judging process. Currently the process is completed by using Infra-red remotes and receivers but this configuration is limited in terms of usability and the amount of judges that can judge concurrently.\\\\
-The proposed solution will replace the hardware remote with a software application to run on a mobile device. The mobile application should alleviate all of the issues caused by the current setup and should be developed with a server component that plugs into the existing EMMA system.  
+Our client creates software for camera club event management. A big part of an event comprises of an image judging process. Currently the process is completed by using Infra-red remotes and receivers, but this configuration is limited in terms of usability and the amount of judges that can judge concurrently.\\\\
+The proposed solution will replace the hardware remote with a software application to run on a mobile device. The mobile application should alleviate all of the issues caused by the current setup, and should be developed with a server component that plugs into the existing EMMA system.  
 
 \subsection{Scope}
 Create a software solution that:
@@ -38,14 +38,14 @@ Create a software solution that:
 \item Remembers the scoring device for future meetings such that registration is not required again.
 \item Caters for realtime scoring.
 \item Can display a thumbnail image of that currently being judged.
-\item Caters for simple score entry bound within a variable range.
+\item Caters for simple score entry bound within a variable range, as well as pluggable scoring methods that could include boolean scoring.
 \item Reports meaningful error messages, in a clear way.
 \item Allows for quick correction and re-capture.
 \item Can notify a judge of outstanding scores.
 \end{itemize}
 
 \begin{figure}  
-\includegraphics[scale=0.4]{Pictures/High-level-use-case.png}
+\includegraphics[scale=0.6]{Pictures/HighLevelUseCase.jpg}
 \caption[Long caption]{High Level Use Case Diagram}
 \label{pic-a}
 \end{figure}
@@ -92,7 +92,7 @@ The mobile application will have to go through a web-service which will be the p
 \item JIRA Framework for the SCRUM agile method.
 \item Appcelerator Titanium framework which is an open-source software development kit for cross-platform mobile development.
 \item Jetty for hosting server and servlet handling.
-\item Jasmine framework to run javascript unit  testing in the Titanium framework.
+\item TiJasmine framework to run javascript unit  testing in the Titanium framework.
 \item JUnit for java unit testing framework.
 \end{itemize}
 \subsection{Technologies and languages}
