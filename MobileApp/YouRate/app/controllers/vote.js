@@ -13,19 +13,19 @@ function fixPage()
 	//If normal event create a slider for scoring
 	service=require('VoteSession');	
 	var rangeBottom = 0;
-	//rangeBottom = service.rangeBottom();
+	rangeBottom = service.rangeBottom();
 	var rangeTop = 50;
-	//rangeTop = service.rangeTop();
+	rangeTop = service.rangeTop();
 	var description = "My description";
-	//description = service.description();  
+	description = service.description();  
 	var comments = "true"; 
-	//comments = service.commentsEnabled();
+	comments = service.commentsEnabled();
 	var imagePath = "brownLabrador.jpg";
-	//imagePath = service.imagePath();
+	imagePath = service.imagePath();
 	photoPath = imagePath; //For yesNo winner events
-	//alert(imagePath);
+	//alert("IMG path: "+imagePath);
 	var sessionType = "default";
-	//sessionType = service.sessionType();
+	sessionType = service.sessionType();
 		
 	//Change image to path received from server	
 	$.currentImage.image = imagePath;
@@ -44,7 +44,7 @@ function fixPage()
 			min:rangeBottom,
 			max:rangeTop,
 			width:"300",
-			value:"30"
+			value:(rangeBottom+rangeTop)/2
 	    });
 	    
 		var sliderLabel = Ti.UI.createLabel(
@@ -207,13 +207,13 @@ function fixPage()
 function doSubmit(e){
 	//Submit result	
 	service=require('VoteSession');	
-	alert(photoPath + "," + slider.value + "," + commentArea.value);
-	//service.submitResult(photoPath,slider.value,commentArea.value);	
-    alert("Result successfully submitted");
+	//alert(photoPath + "," + slider.value + "," + commentArea.value);
+	service.submitResult(slider.value,commentArea.value);	
+    //alert("Result successfully submitted");
     
     //Go to wait page
-	//var win=Alloy.createController('wait').getView();
- 	//win.open();
+	var win=Alloy.createController('wait').getView();
+ 	win.open();
 };
 
 $.votePage.open();

@@ -130,6 +130,10 @@ exports.autologinDone = function(){
 	return autologinIsDone;
 };
 
+exports.deviceID = function(){
+	return UDID;
+};
+
 function out(msg){
 	Ti.API.info(msg);
 };
