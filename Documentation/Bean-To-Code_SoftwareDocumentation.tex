@@ -18,7 +18,7 @@
 Version 1.0 \\
 GitHub link: https://github.com/RudigerRoach/301\textunderscore main\textunderscore emma.git \\
 \vspace*{5\baselineskip}
-\includegraphics[scale=0.35]{Pictures/Logo.png}
+\includegraphics[scale=0.5]{Pictures/Logo.png}
 \end{center}
 \pagebreak
 \tableofcontents
@@ -44,11 +44,12 @@ Create a software solution that:
 \item Can notify a judge of outstanding scores.
 \end{itemize}
 
-\begin{figure}  
-\includegraphics[scale=0.6]{Pictures/HighLevelUseCase.jpg}
-\caption[Long caption]{High Level Use Case Diagram}
-\label{pic-a}
-\end{figure}
+\begin{center}
+\advance\leftskip-2cm
+\includegraphics[width=160mm]{Pictures/HighLevelUseCase.jpg} 
+High Level Use Case Diagram
+\end{center}
+
 \pagebreak
 \section{Architecture requirements}
 \subsection{Architecture requirements}
@@ -103,6 +104,8 @@ The mobile application will have to go through a web-service which will be the p
 \item db40 Object database
 \item JavaFX
 \end{itemize}
+
+\pagebreak
 \section{Functional requirements and application design}
 \subsection{Introduction}
 This section discusses the functional requirements for the mobile judging system.
@@ -129,8 +132,8 @@ Create Judging Session Use Case Diagram
 If a user logs in before the event starts, a loading screen will be displayed until the event starts. The server will inform the user's application when the event starts. The server will then pass through the first image and the details about the image. The details will contain the image name, the bottom and top score ranges as well as if comments must be enabled. The users will vote for the image and will be able to leave a comment if the comments are enabled. The server will either have a time limit per image or the server will check if all users have submitted their vote. If not all users have submitted their vote, the server will notify those users. If all users have submitted their vote, the next image and its details will be displayed. This will continue until all images have been scored. The user will be notified that voting is done.
 
 \begin{center}
-\advance\leftskip-1.3cm
-\includegraphics[width=130mm]{Pictures/Vote.jpg} 
+\advance\leftskip-1.cm
+\includegraphics[width=80mm]{Pictures/Vote.jpg} \\
 Voting Use Case Diagram 
 \end{center}
 
