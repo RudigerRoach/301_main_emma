@@ -1,5 +1,5 @@
 function run() {
-	/*
+	
     var tijasmine = require("tijasmine/tijasmine"),
         reporter = new (require("tijasmine/tijasmine-console").ConsoleReporter);
  
@@ -10,7 +10,7 @@ function run() {
    
     tijasmine.addReporter(reporter);
     tijasmine.execute();
-    */
+    
 }
  
 exports.run = run;

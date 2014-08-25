@@ -9,13 +9,13 @@ var returnStatus = false;
 var loginIsDone = false;
 var autologinIsDone = false;
 var sessionObj = require('alloy').Globals.sessionObj;
-
+var debug = false;
 exports.loginStatus = function(){
 	return returnStatus;
 };
 
 exports.login = function(email){
-	out("login called");
+	if(debug) out("login called");
 	//TODO unit test fail, die test wag nie vir die xhr callback nie - make it wait!
 	
 	/*

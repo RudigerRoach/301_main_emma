@@ -129,7 +129,6 @@ exports.getImage = function() {
 	}
 };
 
-
 exports.submitResult = function(_result, _comment) {
 	Ti.API.info("subM called");
 	/*
