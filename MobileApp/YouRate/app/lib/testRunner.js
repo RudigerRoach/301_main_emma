@@ -4,8 +4,8 @@ function run() {
         reporter = new (require("tijasmine/tijasmine-console").ConsoleReporter);
  
     tijasmine.addSpecModules(
- 		"specs/lib/authentication",
- 		"specs/lib/voteSession"
+    	"specs/lib/voteSession",
+ 		"specs/lib/authentication"
     );
    
     tijasmine.addReporter(reporter);

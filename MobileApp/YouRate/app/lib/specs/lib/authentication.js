@@ -1,5 +1,6 @@
 require("/tijasmine/tijasmine").infect(this);
 
+
 describe("Authentication tests", function() {
 
 	var auth = require('Authentication');
@@ -64,11 +65,7 @@ describe("Authentication tests", function() {
 		auth.autoLogin();
 		testStatus(auth);
 	});
-	
-	/*
-	it("autoLogin", function() {
-		expect(auth.autoLogin()).toBe(true);
-		
-	});*/
   
 });
+
+
