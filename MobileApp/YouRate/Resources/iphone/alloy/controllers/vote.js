@@ -2,18 +2,16 @@ function Controller() {
     function fixPage() {
         var screenWidth = Ti.Platform.displayCaps.platformWidth;
         var screenHeight = Ti.Platform.displayCaps.platformHeight;
-        alert(screenWidth);
-        alert(screenHeight);
         service = require("VoteSession");
         var rangeBottom = 0;
         var rangeTop = 50;
         var comments = "true";
         var imagePath = "brownLabrador.jpg";
         photoPath = imagePath;
-        var sessionType = "default";
+        var sessionType = "yesNo";
+        $.currentImage.height = screenHeight / 2 - 50;
+        $.currentImage.width = "auto";
         $.currentImage.image = imagePath;
-        $.prev.left = screenWidth / 2 - 160;
-        $.next.right = screenWidth / 2 - 160;
         if ("normal" == sessionType || "default" == sessionType) {
             slider = Titanium.UI.createSlider({
                 top: "260",
@@ -21,7 +19,7 @@ function Controller() {
                 min: rangeBottom,
                 max: rangeTop,
                 width: "300",
-                value: "30"
+                value: (rangeBottom + rangeTop) / 2
             });
             var sliderLabel = Ti.UI.createLabel({
                 text: "Score: " + slider.value,
@@ -54,14 +52,12 @@ function Controller() {
                     fontSize: 24,
                     fontFamily: "Helvetica Neue"
                 },
-                top: "255",
-                width: "170",
-                height: "30"
+                top: screenHeight / 2 + 15,
+                width: screenWidth / 2 + 10,
+                height: "30",
+                left: screenWidth / 2 + 5,
+                padding: 0
             });
-            yesButton.addEventListener("click", function() {
-                doSubmit();
-            });
-            $.votePage.add(yesButton);
             var noButton = Titanium.UI.createButton({
                 title: "No",
                 borderWidth: "1",
@@ -74,11 +70,21 @@ function Controller() {
                     fontSize: 24,
                     fontFamily: "Helvetica Neue"
                 },
-                top: "290",
-                width: "170",
-                height: "30"
+                top: screenHeight / 2 + 15,
+                width: screenWidth / 2 + 10,
+                height: "30",
+                right: screenWidth / 2 + 5,
+                padding: 0
             });
-            noButton.addEventListener("click", function() {});
+            yesButton.addEventListener("click", function() {
+                yesButton.opacity = 1;
+                noButton.opacity = .5;
+            });
+            $.votePage.add(yesButton);
+            noButton.addEventListener("click", function() {
+                yesButton.opacity = .5;
+                noButton.opacity = 1;
+            });
             $.votePage.add(noButton);
         } else if ("winner" == sessionType) {
             var winnerButton = Titanium.UI.createButton({
@@ -110,9 +116,9 @@ function Controller() {
                 color: "#888",
                 textAlign: "left",
                 value: "",
-                top: "350",
-                width: "300",
-                height: "70",
+                top: screenHeight / 2 + 80,
+                width: screenWidth + 10,
+                height: screenHeight / 2 - 140,
                 font: {
                     fontSize: 20,
                     fontFamily: "Helvetica Neue"
@@ -123,7 +129,7 @@ function Controller() {
                 width: "200",
                 height: "50",
                 color: "black",
-                top: "310",
+                top: screenHeight / 2 + 40,
                 font: {
                     fontSize: 24,
                     fontFamily: "Helvetica Neue"
@@ -133,11 +139,13 @@ function Controller() {
             $.votePage.add(commentArea);
             $.votePage.add(commentLabel);
         }
+        $.submit.top = screenHeight - 50;
     }
     function doSubmit() {
         service = require("VoteSession");
-        alert(photoPath + "," + slider.value + "," + commentArea.value);
-        alert("Result successfully submitted");
+        service.submitResult(String.format("%3.0f", slider.value), commentArea.value);
+        var win = Alloy.createController("wait").getView();
+        win.open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "vote";
@@ -169,31 +177,19 @@ function Controller() {
     });
     $.__views.votePage.add($.__views.toolbar);
     $.__views.wintitle = Ti.UI.createButton({
-        borderWidth: "1",
-        borderColor: "#bbb",
-        borderRadius: "5",
-        backgroundColor: "#bbb",
         color: "black",
         textAlign: "center",
         font: {
             fontSize: 24,
             fontFamily: "Helvetica Neue"
         },
-        top: "430",
-        width: "170",
+        top: "5",
+        width: "270",
         height: "35",
         title: "YouRate - Voting",
         id: "wintitle"
     });
     $.__views.toolbar.add($.__views.wintitle);
-    $.__views.prev = Ti.UI.createImageView({
-        top: 100,
-        width: "50",
-        height: "100",
-        image: "prev.jpg",
-        id: "prev"
-    });
-    $.__views.votePage.add($.__views.prev);
     $.__views.currentImage = Ti.UI.createImageView({
         top: 50,
         width: "200",
@@ -202,28 +198,20 @@ function Controller() {
         id: "currentImage"
     });
     $.__views.votePage.add($.__views.currentImage);
-    $.__views.next = Ti.UI.createImageView({
-        top: 100,
-        width: "50",
-        height: "100",
-        image: "next.jpg",
-        id: "next"
-    });
-    $.__views.votePage.add($.__views.next);
     $.__views.submit = Ti.UI.createButton({
-        borderWidth: "1",
-        borderColor: "#bbb",
-        borderRadius: "5",
-        backgroundColor: "#bbb",
         color: "black",
         textAlign: "center",
         font: {
             fontSize: 24,
             fontFamily: "Helvetica Neue"
         },
-        top: "430",
-        width: "170",
+        top: "300",
+        width: "200",
         height: "35",
+        borderWidth: "1",
+        borderColor: "#bbb",
+        borderRadius: "5",
+        backgroundColor: "#bbb",
         title: "Submit score",
         id: "submit"
     });
