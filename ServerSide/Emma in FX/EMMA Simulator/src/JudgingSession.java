@@ -2,7 +2,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import javax.imageio.ImageIO;
 
-public class Session 
+public class JudgingSession 
 {
     linkedList imageNames = null;
     BufferedImage[] images = null;
@@ -13,7 +13,7 @@ public class Session
     Boolean controlledSession = true;
     String[] imageDetails;
     
-    public Session(linkedList _imageNames, BufferedImage[] _images, String[] _judges,int _topRange,int _botRange, Boolean _openSession,Boolean _controlledSession,String[] _imageDetails)
+    public JudgingSession(linkedList _imageNames, BufferedImage[] _images, String[] _judges,int _topRange,int _botRange, Boolean _openSession,Boolean _controlledSession,String[] _imageDetails)
     {
         imageNames = _imageNames;
         images = _images;
@@ -25,7 +25,7 @@ public class Session
         imageDetails = _imageDetails;
     }
 
-    Session() 
+    JudgingSession() 
     {
         
     }

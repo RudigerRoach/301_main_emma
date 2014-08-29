@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 
@@ -28,7 +29,38 @@ public class FXMLDocumentController implements Initializable{
     
     @FXML
     private Button start;
+    
+    @FXML
+    private CheckBox controlledSession;
    
+    @FXML
+    private CheckBox openSession;
+    
+    @FXML
+    private CheckBox commentsEnabled;
+    
+    @FXML
+    private RadioButton Normal;
+    
+    @FXML
+    private RadioButton Elimination;
+    
+    @FXML
+    private RadioButton Winner;
+    
+    @FXML
+    private TextField minimumScore;
+    
+    @FXML
+    private TextField maximumScore;
+    
+    @FXML
+    private TableView judges;
+    
+    @FXML
+    private TableView images;
+    
+    
     public FXMLDocumentController()
     {
         
