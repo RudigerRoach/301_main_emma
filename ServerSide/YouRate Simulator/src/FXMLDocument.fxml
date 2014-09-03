@@ -32,9 +32,12 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <RadioButton id="Normal" layoutX="11.0" layoutY="32.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="138.0" text="Normal" />
-                  <RadioButton id="Elimination" layoutX="11.0" layoutY="57.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="161.0" text="Elimination(Yes/No)" />
-                  <RadioButton id="Winner" layoutX="11.0" layoutY="85.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="154.0" text="Winner(Choose 1)" />
+                    <fx:define>
+                    <ToggleGroup fx:id="myToggleGroup"/>
+                    </fx:define>
+                  <RadioButton toggleGroup="$myToggleGroup" id="Normal" layoutX="11.0" layoutY="32.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="138.0" text="Normal" />
+                  <RadioButton toggleGroup="$myToggleGroup" id="Elimination" layoutX="11.0" layoutY="57.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="161.0" text="Elimination(Yes/No)" />
+                  <RadioButton toggleGroup="$myToggleGroup" id="Winner" layoutX="11.0" layoutY="85.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="154.0" text="Winner(Choose 1)" />
                </children>
             </Pane>
             <Pane layoutX="10.0" layoutY="284.0" prefHeight="103.0" prefWidth="197.0" style="-fx-background-color: white; -fx-border-color: black;">
