@@ -6,11 +6,18 @@ function Controller() {
         var rangeBottom = 0;
         var rangeTop = 50;
         var comments = "true";
-        var imagePath = "brownLabrador.jpg";
+        var imagePath = "animalLandscape.jpg";
         photoPath = imagePath;
         var sessionType = "yesNo";
         $.currentImage.height = screenHeight / 2 - 50;
         $.currentImage.width = "auto";
+        if ($.currentImage.height < $.currentImage.width) {
+            $.currentImage.width = screenWidth - 200;
+            $.currentImage.height = "auto";
+            $.currentImage.left = "auto";
+            $.currentImage.right = "auto";
+            $.currentImage.top = (screenHeight / 2 - 50 - $.currentImage.height) / 2;
+        }
         $.currentImage.image = imagePath;
         if ("normal" == sessionType || "default" == sessionType) {
             slider = Titanium.UI.createSlider({
@@ -206,7 +213,7 @@ function Controller() {
             fontFamily: "Helvetica Neue"
         },
         top: "300",
-        width: "200",
+        width: "250",
         height: "35",
         borderWidth: "1",
         borderColor: "#bbb",

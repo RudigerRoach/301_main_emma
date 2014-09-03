@@ -16,7 +16,7 @@ function fixPage()
 	var rangeTop = 50;
 	var description = "My description"; 
 	var comments = "true"; 
-	var imagePath = "brownLabrador.jpg";
+	var imagePath = "animalLandscape.jpg";
 	photoPath = imagePath; //For yesNo winner events
 	//alert("IMG path: "+imagePath);
 	var sessionType = "yesNo";
@@ -29,8 +29,20 @@ function fixPage()
 	sessionType = service.sessionType();*/
 		
 	//Change image to path received from server	
+	//Try portrait image
 	$.currentImage.height = screenHeight/2 - 50;
 	$.currentImage.width = "auto";
+	
+	//Landscape image
+	if($.currentImage.height < $.currentImage.width)
+	{		
+		$.currentImage.width = screenWidth;
+		$.currentImage.height = "auto";
+		$.currentImage.left = "auto";
+		$.currentImage.right = "auto";
+		$.currentImage.top = ((screenHeight/2 - 50) - $.currentImage.height)/2;
+	}
+	
 	$.currentImage.image = imagePath;
 	
 	//Display interface according to type of session
