@@ -11,9 +11,7 @@
 		</Menu>
 		
 		<!-- iOS and Android -->
-		<ImageView id="prev" />
 		<ImageView id="currentImage" />
-		<ImageView id="next" />
 		<Button id="submit" onClick="doSubmit">Submit score</Button>            
     </Window>
 </Alloy>

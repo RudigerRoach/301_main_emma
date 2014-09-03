@@ -103,7 +103,7 @@ XHR.prototype.get = function(url, onSuccess, onError, extraParams) {
 XHR.prototype.post = function(url, data, onSuccess, onError, extraParams) {
 	
 	// Debug
-	Titanium.API.info("XHR out: "+url + " " + JSON.stringify(data));
+	//Titanium.API.info("XHR out: "+url + " " + JSON.stringify(data));
 	
 	// Create some default params
 	var onSuccess = onSuccess || function(){};

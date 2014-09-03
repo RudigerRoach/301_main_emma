@@ -6,37 +6,37 @@ function fixPage()
 {
 	var screenWidth = Ti.Platform.displayCaps.platformWidth;
 	var screenHeight = Ti.Platform.displayCaps.platformHeight;
-	alert(screenWidth);
-	alert(screenHeight);
+	//alert(screenWidth);
+	//alert(screenHeight);
 	//Ti.App.SCREEN_WIDTH = (pWidth > pHeight) ? pHeight : pWidth;
 	//Ti.App.SCREEN_HEIGHT = (pWidth > pHeight) ? pWidth : pHeight;
-	//If normal event create a slider for scoring
+	//For offline testing
 	service=require('VoteSession');	
 	var rangeBottom = 0;
-	rangeBottom = service.rangeBottom();
 	var rangeTop = 50;
-	rangeTop = service.rangeTop();
-	var description = "My description";
-	description = service.description();  
+	var description = "My description"; 
 	var comments = "true"; 
-	comments = service.commentsEnabled();
 	var imagePath = "brownLabrador.jpg";
-	imagePath = service.imagePath();
 	photoPath = imagePath; //For yesNo winner events
 	//alert("IMG path: "+imagePath);
-	var sessionType = "default";
-	sessionType = service.sessionType();
+	var sessionType = "yesNo";
+	
+	/*rangeBottom = service.rangeBottom();
+	rangeTop = service.rangeTop();
+	description = service.description(); 
+	comments = service.commentsEnabled();
+	imagePath = service.imagePath();
+	sessionType = service.sessionType();*/
 		
 	//Change image to path received from server	
+	$.currentImage.height = screenHeight/2 - 50;
+	$.currentImage.width = "auto";
 	$.currentImage.image = imagePath;
-	$.prev.left = (screenWidth/2) - 160;
-	$.next.right = (screenWidth/2) - 160;
 	
 	//Display interface according to type of session
+	//If normal event create a slider for scoring
 	if(sessionType == "normal" || sessionType == "default") //Default for offline testing purposes, to be taken out
 	{
-		//$.prev.opacity=0.0;
-		//$.next.opacity=0.0;
 		slider = Titanium.UI.createSlider(
 		{
 			top:"260",
@@ -106,15 +106,12 @@ function fixPage()
 				fontSize: 24,
 				fontFamily: 'Helvetica Neue'
 			}, 
-		    top: "255", 
-		    width: "170", 
-		    height: "30"
+		    top: screenHeight/2 + 15, 
+		    width: screenWidth/2 + 10, 
+		    height: "30",
+		    left: screenWidth/2 + 5,
+		    padding:0,
 		});
-		yesButton.addEventListener('click',function(e)
-		{
-		   doSubmit();
-		});
-		$.votePage.add(yesButton);
 		
 		var noButton = Titanium.UI.createButton(
 		{		  
@@ -129,13 +126,24 @@ function fixPage()
 				fontSize: 24,
 				fontFamily: 'Helvetica Neue'
 			}, 
-		    top: "290", 
-		    width: "170", 
-		    height: "30"
+		    top: screenHeight/2 + 15, 
+		    width: screenWidth/2 + 10, 
+		    height: "30",
+		    right: screenWidth/2 + 5,
+		    padding:0,
 		});
+		
+		yesButton.addEventListener('click',function(e)
+		{
+		   	yesButton.opacity = 1;
+			noButton.opacity = 0.5;
+		   //doSubmit();
+		});
+		$.votePage.add(yesButton);
 		noButton.addEventListener('click',function(e)
 		{
-		   
+		   	yesButton.opacity = 0.5;
+			noButton.opacity = 1;		   
 		});
 		$.votePage.add(noButton);
 	}
@@ -176,9 +184,9 @@ function fixPage()
 		    color:"#888",
 		    textAlign:"left",
 		    value:"",
-		    top:"350",
-		    width:"300",
-		    height:"70",
+		    top: screenHeight/2 + 80,
+		    width:screenWidth + 10,
+		    height:screenHeight/2 - 140,
 			font: {
 				fontSize: 20,
 				fontFamily: 'Helvetica Neue'
@@ -191,7 +199,7 @@ function fixPage()
 			width: "200",
 			height: "50",
 			color: "black",
-			top: "310",
+			top: screenHeight/2 + 40,
 			font: {
 				fontSize: 24,
 				fontFamily: 'Helvetica Neue'
@@ -202,13 +210,14 @@ function fixPage()
 		$.votePage.add(commentArea);
 		$.votePage.add(commentLabel);
 	}
+	$.submit.top = screenHeight - 50;
 }
 
 function doSubmit(e){
 	//Submit result	
 	service=require('VoteSession');	
 	//alert(photoPath + "," + slider.value + "," + commentArea.value);
-	service.submitResult(slider.value,commentArea.value);	
+	service.submitResult(String.format("%3.0f", slider.value),commentArea.value);	
     //alert("Result successfully submitted");
     
     //Go to wait page

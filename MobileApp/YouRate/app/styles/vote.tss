@@ -9,21 +9,19 @@
     height: "200",
     image: "brownLabrador.jpg"
 },
-"#prev": 
-{
-	top: 100,
-    width: "50", 
-    height: "100",
-    image: "prev.jpg"
-},
-"#next": 
-{
-	top: 100,
-    width: "50", 
-    height: "100",
-    image: "next.jpg"
-},
 "Button": 
+{
+    color: "black", 
+    textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	}, 
+	top: "5",
+    width: "270", 
+    height: "35"
+},
+"#submit": 
 {
 	borderWidth: "1",
 	borderColor: "#bbb", 
@@ -36,8 +34,8 @@
 		fontSize: 24,
 		fontFamily: 'Helvetica Neue'
 	}, 
-    top: "430", 
-    width: "170", 
+	top: "300",
+    width: "200", 
     height: "35"
 },
 "#toolbar[platform=ios]": {
@@ -51,7 +49,7 @@
 		fontFamily: 'Helvetica Neue'
 	},
 	height: "100"
-}
+},
 "#wintitle[platform=ios]": {
 	color: 'black'
 },

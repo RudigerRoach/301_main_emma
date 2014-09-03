@@ -22,7 +22,7 @@ function populateThis(e) {
 	/*
 	 This funtion is to be called in very onSuccess callback
 	 */
-	Ti.API.info("pop this called");
+	//Ti.API.info("pop this called");
 	e = JSON.parse(e.data);
 	//Ti.API.info("e: "+e.toString());
 	status = e.status;
@@ -33,7 +33,7 @@ function populateThis(e) {
 		if (sessionType == "normal") {
 			description = e.description;
 			imgPath = e.imgPath;
-			Ti.API.info("new path: "+imgPath);
+			//Ti.API.info("new path: "+imgPath);
 			if (e.rangeBottom !== undefined) { //this exicutes only on the first call of a session
 				rangeBottom = e.rangeBottom;
 				rangeTop = e.rangeTop;
@@ -45,7 +45,7 @@ function populateThis(e) {
 
 		}
 	} else if (status == 2) {//no session currently running
-		Ti.API.info("Status 2 recieved");
+		//Ti.API.info("Status 2 recieved");
 	}
 };
 
@@ -82,7 +82,7 @@ exports.asyncDone = function(){
 //Network calls
 exports.getImage = function() {
 	
-	Ti.API.info("getImage Called");
+	//Ti.API.info("getImage Called");
 	serverpath = "";
 	/*
 	 expected response example:
@@ -121,14 +121,12 @@ exports.getImage = function() {
 	callcount = require('alloy').Globals.callCount;
 	callcount = callcount+1;
 	require('alloy').Globals.callCount = callcount;
-	Ti.API.info("callcount: "+require('alloy').Globals.callCount);
 	if(callcount == 1){
 		net.getImgPost(payload, onSuccessCallback1, onErrorCallback1);
 	}else{
 		//net.getNextImgPost(payload, onSuccessCallback1, onErrorCallback1);	
 	}
 };
-
 
 exports.submitResult = function(_result, _comment) {
 	Ti.API.info("subM called");
