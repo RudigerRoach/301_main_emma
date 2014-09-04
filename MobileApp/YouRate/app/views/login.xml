@@ -12,7 +12,7 @@
 		
 		<!-- iOS and Android -->
 		<Label id="emailLabel">Email Address:</Label>	
-        <TextArea id="textArea"/>
+        <TextArea id="textArea" keyboardType="Titanium.UI.KEYBOARD_EMAIL">
 		<Button id="loginButton" onClick="doLogin">Login</Button>
 		<ImageView id="loadingImage"/>
     </Window>

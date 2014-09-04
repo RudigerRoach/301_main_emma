@@ -7,7 +7,7 @@
 		
 		<!-- Android menu -->
 		<Menu id="menu" platform="android">
-			<MenuItem id="menu1" title="YouRate - Waiting..." onClick="doClickMenu"/>
+			<MenuItem id="menu1" title="YouRate - Waiting..."/>
 		</Menu>
 		
 		<!-- iOS and Android -->

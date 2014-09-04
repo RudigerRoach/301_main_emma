@@ -26,7 +26,8 @@ exports.login = function(email){
 		}
 	*/
 	
-	if(email.toString().length < 5) //shortest possible email address "a@b.c" is of length 5
+	var filter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	if(!filter.test(email.toString())) //shortest possible email address "a@b.c" is of length 5
 	{
 		error = "Invalid email address entered, please revise your email address.";
 		returnStatus = false;
