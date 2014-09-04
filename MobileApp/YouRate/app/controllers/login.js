@@ -7,7 +7,7 @@ function doLogin()
 	$.loadingImage.opacity=1.0;
 	$.textArea.blur();
 	var number = 1;
-	setInterval(function(){$.loadingImage.image=number+".png"; number++; if (number > 8){number=1;}},500);
+	//setInterval(function(){$.loadingImage.image=number+".png"; number++; if (number > 8){number=1;}},500);
 	
 	//Gets email address from user input
 	var email = $.textArea.value;
@@ -44,7 +44,7 @@ function goForward(service){
 function testStatus(service){
 		var done = false;
 		var timer = setInterval(function(){ //poll every 1s and stop when autologinDone() returns true
-		    done = service.autologinDone();
+		    done = service.loginDone();
 		    if (done) {
 		    	goForward(service);
 		        clearInterval(timer);

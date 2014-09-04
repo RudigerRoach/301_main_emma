@@ -8,10 +8,7 @@ function displayLoginPage(){
 	}else if(OS_IOS){
 		ospath = "";
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> a9a3cd8321f7fbe1125ab734082ead13f71b10a3
+
 	waiter = setInterval(function(){
 			switch(number){
 				case 1:
@@ -39,7 +36,7 @@ function displayLoginPage(){
 					$.loadingImage.image = ospath+"h.png";
 				break;
 			}
-			Ti.API.info($.loadingImage.image+" :image");
+			//Ti.API.info($.loadingImage.image+" :image");
 			number++;
 			if (number > 8){number=1;}
 		},500);

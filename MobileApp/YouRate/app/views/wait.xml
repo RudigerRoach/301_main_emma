@@ -12,6 +12,6 @@
 		
 		<!-- iOS and Android -->
         <ImageView id="loadingImage" image="1.png"/>
-		<Label id="label1">Waiting for session to start...</Label>	
+		<Label id="label1">Waiting for server...</Label>	
     </Window>
 </Alloy>
