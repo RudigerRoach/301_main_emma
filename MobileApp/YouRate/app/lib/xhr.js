@@ -103,7 +103,7 @@ XHR.prototype.get = function(url, onSuccess, onError, extraParams) {
 XHR.prototype.post = function(url, data, onSuccess, onError, extraParams) {
 	
 	// Debug
-	//Titanium.API.info("XHR out: "+url + " " + JSON.stringify(data));
+	Titanium.API.info("XHR out: "+url + " " + JSON.stringify(data));
 	
 	// Create some default params
 	var onSuccess = onSuccess || function(){};
@@ -111,8 +111,8 @@ XHR.prototype.post = function(url, data, onSuccess, onError, extraParams) {
 	var extraParams = extraParams || {};
 	extraParams.async = (extraParams.hasOwnProperty('async')) ? extraParams.async : true; //ek verander
 	extraParams.shouldAuthenticate = extraParams.shouldAuthenticate || false; // if you set this to true, pass "username" and "password" as well
-	extraParams.contentType = extraParams.contentType || "application/json";
-
+	extraParams.contentType = /*extraParams.contentType ||*/ "application/json";
+	extraParams.contentType = "application/x-www-form-urlencoded; charset=utf-8";
 	
 	// Create the HTTP connection
 	var xhr = Titanium.Network.createHTTPClient({
@@ -144,7 +144,7 @@ XHR.prototype.post = function(url, data, onSuccess, onError, extraParams) {
 		
 		result.status = xhr.status == 200 ? "ok" : xhr.status;
 		result.data = xhr.responseText;
-		
+		Ti.API.info("XHR: connection successful: "+result.data);
 		onSuccess(result);
 	};
 	
@@ -154,6 +154,7 @@ XHR.prototype.post = function(url, data, onSuccess, onError, extraParams) {
 		result.status = "error";
 		result.data = e.error;
 		result.code = xhr.status;
+		Ti.API.info("XHR: connection not successful: "+result.data+" code:"+result.code);
 		onError(result);
 	};
 	

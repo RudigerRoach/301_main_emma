@@ -1,18 +1,25 @@
 var commentArea = "";
 var photoPath = "";
 var slider;
-
+var ospath = "";
+	if(OS_ANDROID){
+		ospath = "/images/";
+	}else if(OS_IOS){
+		ospath = "";
+	}
 function fixPage()
 {
 	//For offline testing
 	service=require('VoteSession');	
+	
 	var rangeBottom = 0;
 	var rangeTop = 50;
 	var description = "Image title"; 
 	var displayTitle = "true";
 	var comments = "true"; 
-	//var imagePath = "animalLandscape.jpg";
-	var imagePath = "portrait.jpg";
+	var imagePath = ospath+"placeholder.png";
+	//imagePath = ospath+"animalLandscape.jpg";
+	imagePath = ospath+"portrait.jpg";
 	photoPath = imagePath; //For yesNo winner events
 	//alert("IMG path: "+imagePath);
 	//var sessionType = "normal";
