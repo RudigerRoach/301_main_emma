@@ -16,7 +16,7 @@ function fixPage()
 	var rangeTop = 50;
 	var description = "My description"; 
 	var comments = "true"; 
-	var imagePath = "animalLandscape.jpg";
+	var imagePath = "portrait.jpg";
 	photoPath = imagePath; //For yesNo winner events
 	//alert("IMG path: "+imagePath);
 	var sessionType = "yesNo";
@@ -51,35 +51,62 @@ function fixPage()
 	{
 		slider = Titanium.UI.createSlider(
 		{
-			top:"260",
+			top:screenHeight/2 + 5,
 			color: "black",
 			min:rangeBottom,
 			max:rangeTop,
-			width:"300",
+			width:screenWidth - 100,
+			left:50,
 			value:(rangeBottom+rangeTop)/2
 	    });
 	    
 		var sliderLabel = Ti.UI.createLabel(
 		{
-		    text: "Score: " + slider.value,
-			width: "200",
+		    text: "Score: ",
+			width: "150",
 			height: "50",
 			color: "black",
-			top: "280",
+			top: screenHeight/2 + 20,
+			left: screenWidth/2 - 100,
 			font: { 
 				fontSize: 24,
 				fontFamily: 'Helvetica Neue'
 			},
 			textAlign: 'center',
 			shadowColor: "#aaa"
-	    });
+	    });	
+	    
+		sliderArea = Ti.UI.createTextArea(
+		{
+	  		borderWidth:"2",
+		    borderColor:"#bbb",
+		    borderRadius:"5",
+		    color:"#888",
+		    textAlign:"left",
+		    value:slider.value,
+		    top: screenHeight/2 + 30,
+			left: screenWidth/2 + 50,
+		    width:50,
+		    height:30,
+			font: {
+				fontSize: 20,
+				fontFamily: 'Helvetica Neue'
+			}
+		});
 	
 		slider.addEventListener('change', function(e) 
 		{
-		    sliderLabel.text = "Score: " + String.format("%3.0f", e.value);
+		    sliderArea.value = String.format("%3.0f", e.value);
 		});
+	
+		sliderArea.addEventListener('change', function(e) 
+		{
+		    slider.value = sliderArea.value;
+		});
+		
 		$.votePage.add(slider);
 		$.votePage.add(sliderLabel);
+		$.votePage.add(sliderArea);
 		
 		/*var submitButton = Titanium.UI.createButton(
 		{		   
@@ -120,7 +147,7 @@ function fixPage()
 			}, 
 		    top: screenHeight/2 + 15, 
 		    width: screenWidth/2 + 10, 
-		    height: "30",
+		    height: "40",
 		    left: screenWidth/2 + 5,
 		    padding:0,
 		});
@@ -140,7 +167,7 @@ function fixPage()
 			}, 
 		    top: screenHeight/2 + 15, 
 		    width: screenWidth/2 + 10, 
-		    height: "30",
+		    height: "40",
 		    right: screenWidth/2 + 5,
 		    padding:0,
 		});
@@ -174,9 +201,9 @@ function fixPage()
 				fontSize: 24,
 				fontFamily: 'Helvetica Neue'
 			}, 
-		    top: "275", 
-		    width: "170", 
-		    height: "30"
+		    top: screenHeight/2 + 15, 
+		    width: "auto", 
+		    height: "40"
 		});
 		winnerButton.addEventListener('click',function(e)
 		{
@@ -196,9 +223,9 @@ function fixPage()
 		    color:"#888",
 		    textAlign:"left",
 		    value:"",
-		    top: screenHeight/2 + 80,
+		    top: screenHeight/2 + 95,
 		    width:screenWidth + 10,
-		    height:screenHeight/2 - 140,
+		    height:screenHeight/2 - 160,
 			font: {
 				fontSize: 20,
 				fontFamily: 'Helvetica Neue'
@@ -211,7 +238,7 @@ function fixPage()
 			width: "200",
 			height: "50",
 			color: "black",
-			top: screenHeight/2 + 40,
+			top: screenHeight/2 + 55,
 			font: {
 				fontSize: 24,
 				fontFamily: 'Helvetica Neue'
@@ -223,6 +250,7 @@ function fixPage()
 		$.votePage.add(commentLabel);
 	}
 	$.submit.top = screenHeight - 50;
+	$.submit.width = screenWidth + 10;
 }
 
 function doSubmit(e){

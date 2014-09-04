@@ -7,7 +7,7 @@
 		
 		<!-- Android menu -->
 		<Menu id="menu" platform="android">
-			<MenuItem id="menu1" title="YouRate - Voting" onClick="doClickMenu"/>
+			<MenuItem id="menu1" title="YouRate - Voting" />
 		</Menu>
 		
 		<!-- iOS and Android -->
