@@ -2,29 +2,20 @@
 	backgroundColor: "#DFE4E7",
 	exitOnClose: true
 },
-"#toolbar[platform=ios]": {
-	backgroundColor: "black",
-	top: "0",
-	padding: "10",
-	borderTop: false,
-	borderBottom: true,
+"#appName": 
+{
+    color: "black", 
+    textAlign: "center",
 	font: {
 		fontSize: 24,
 		fontFamily: 'Helvetica Neue'
 	},
-	height: "100"
-}
-"#wintitle[platform=ios]": {
-	title: 'YouRate - Login',
-	color: 'black'
-},
-'#menu[platform=android]': {
-	backgroundColor: "#bbb",
-	title: 'YouRate - Login',
-	showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS
+	top: "10",
+    width: "150", 
+    height: "35"
 },
 "#emailLabel": {
-	width: "200",
+	width: "170",
 	height: "50",
 	color: "black",
 	top: "50",
@@ -50,11 +41,11 @@
 		fontFamily: 'Helvetica Neue'
 	}
 },
-"Button": 
+"#loginButton": 
 {
 	borderWidth: "1",
 	borderColor: "#bbb", 
-	borderRadius: "5",
+	borderRadius: "8",
 	backgroundColor: "#bbb",
 	//backgroundColor: "#E5E5E9",
     color: "black", 
@@ -64,8 +55,8 @@
 		fontFamily: 'Helvetica Neue'
 	}, 
     top: "160", 
-    width: "140", 
-    height: "35"
+    width: "170", 
+    height: "40"
 }
 "#loadingImage": 
 {
@@ -73,4 +64,16 @@
     width: "100", 
     height: "100",
     opacity: 0.0
+},
+"#toolbar[platform=ios]": {
+	backgroundColor: "black",
+	top: "0",
+	padding: "10",
+	borderTop: false,
+	borderBottom: true,
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: "100"
 }

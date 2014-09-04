@@ -2,16 +2,21 @@
     <Window id="waitPage" onOpen="loadImage">
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
-			<Button id="wintitle">YouRate - Waiting...</Button>
+			<Button id="appName">uRate</Button>
 		</Toolbar>
 		
 		<!-- Android menu -->
 		<Menu id="menu" platform="android">
-			<MenuItem id="menu1" title="YouRate - Waiting..."/>
+
+			<!--MenuItem id="menu1" title="YouRate - Waiting..."/-->
+
+			<MenuItem id="appName" title="uRate" />
+
 		</Menu>
 		
 		<!-- iOS and Android -->
         <ImageView id="loadingImage" image="1.png"/>
-		<Label id="label1">Waiting for server...</Label>	
+
+		<Label id="label1">Waiting...</Label>	
     </Window>
 </Alloy>

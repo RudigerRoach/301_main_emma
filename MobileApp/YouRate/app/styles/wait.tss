@@ -2,6 +2,18 @@
 	backgroundColor: "#DFE4E7",
 	exitOnClose: true
 },
+"#appName": 
+{
+    color: "black", 
+    textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	top: "10",
+    width: "150", 
+    height: "35"
+},
 "#loadingImage": {
   	image:'1.png',
     top: "150", 
@@ -30,28 +42,4 @@
 		fontFamily: 'Helvetica Neue'
 	},
 	height: "100"
-}
-"#wintitle[platform=ios]": {
-	color: 'black'
-},
-'#menu[platform=android]': {
-	backgroundColor: "#bbb",
-	showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS
-},
-"Button": 
-{
-	borderWidth: "1",
-	borderColor: "#bbb", 
-	borderRadius: "5",
-	backgroundColor: "#bbb",
-	//backgroundColor: "#E5E5E9",
-    color: "black", 
-    textAlign: "center",
-	font: {
-		fontSize: 24,
-		fontFamily: 'Helvetica Neue'
-	}, 
-    top: "310", 
-    width: "140", 
-    height: "35"
 }
