@@ -1,7 +1,12 @@
 var commentArea = "";
 var photoPath = "";
 var slider;
-
+var ospath = "";
+	if(OS_ANDROID){
+		ospath = "/images/";
+	}else if(OS_IOS){
+		ospath = "";
+	}
 function fixPage()
 {
 	var screenWidth = Ti.Platform.displayCaps.platformWidth;
@@ -12,21 +17,22 @@ function fixPage()
 	//Ti.App.SCREEN_HEIGHT = (pWidth > pHeight) ? pWidth : pHeight;
 	//For offline testing
 	service=require('VoteSession');	
+	
 	var rangeBottom = 0;
 	var rangeTop = 50;
 	var description = "My description"; 
 	var comments = "true"; 
-	var imagePath = "brownLabrador.jpg";
+	var imagePath = ospath+"placeholder.png";
 	photoPath = imagePath; //For yesNo winner events
 	//alert("IMG path: "+imagePath);
 	var sessionType = "yesNo";
 	
-	/*rangeBottom = service.rangeBottom();
+	rangeBottom = service.rangeBottom();
 	rangeTop = service.rangeTop();
 	description = service.description(); 
 	comments = service.commentsEnabled();
 	imagePath = service.imagePath();
-	sessionType = service.sessionType();*/
+	sessionType = service.sessionType();
 		
 	//Change image to path received from server	
 	$.currentImage.height = screenHeight/2 - 50;

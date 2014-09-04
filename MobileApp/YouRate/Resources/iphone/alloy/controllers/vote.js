@@ -5,10 +5,17 @@ function Controller() {
         service = require("VoteSession");
         var rangeBottom = 0;
         var rangeTop = 50;
+        var description = "My description";
         var comments = "true";
-        var imagePath = "brownLabrador.jpg";
+        var imagePath = ospath + "placeholder.png";
         photoPath = imagePath;
         var sessionType = "yesNo";
+        rangeBottom = service.rangeBottom();
+        rangeTop = service.rangeTop();
+        description = service.description();
+        comments = service.commentsEnabled();
+        imagePath = service.imagePath();
+        sessionType = service.sessionType();
         $.currentImage.height = screenHeight / 2 - 50;
         $.currentImage.width = "auto";
         $.currentImage.image = imagePath;
@@ -222,6 +229,8 @@ function Controller() {
     var commentArea = "";
     var photoPath = "";
     var slider;
+    var ospath = "";
+    ospath = "";
     $.votePage.open();
     __defers["$.__views.votePage!focus!fixPage"] && $.__views.votePage.addEventListener("focus", fixPage);
     __defers["$.__views.submit!click!doSubmit"] && $.__views.submit.addEventListener("click", doSubmit);

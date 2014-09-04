@@ -36,8 +36,8 @@ function goForward(service){
 		$.textArea.opacity=1.0;
 		$.loginButton.opacity=1.0;
 		alert("Error: "+service.error());
-		var win=Alloy.createController('vote').getView();
-	 	win.open();
+		//var win=Alloy.createController('vote').getView();
+	 	//win.open();
  	}
 }
 
@@ -69,6 +69,9 @@ function setActionBar(evt)
     		actionBar.onHomeIconItemSelected = function()		//what to do when the "home" icon is pressed
     		{
     			alert("Home icon clicked!");
+    			//This is not the back door you where looking for
+    			var win=Alloy.createController('vote').getView();
+	 			win.open();
     		};  
     		$.mainWindow.activity.invalidateOptionsMenu();		//makes sure the menu is visible  		
     	}

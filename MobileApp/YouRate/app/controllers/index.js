@@ -60,7 +60,7 @@ function goForward(service){
 	{	
 		//If autoLogin not successful
 		//alert("err: "+service.error());
-	    var win=Alloy.createController('vote').getView();
+	    var win=Alloy.createController('login').getView();
 	 	win.open();
  	}
 }
