@@ -8,7 +8,10 @@ function displayLoginPage(){
 	}else if(OS_IOS){
 		ospath = "";
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> a9a3cd8321f7fbe1125ab734082ead13f71b10a3
 	waiter = setInterval(function(){
 			switch(number){
 				case 1:
