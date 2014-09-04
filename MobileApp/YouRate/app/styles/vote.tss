@@ -35,8 +35,8 @@
 		fontFamily: 'Helvetica Neue'
 	}, 
 	top: "300",
-    width: "200", 
-    height: "35"
+    width: "250", 
+    height: "40"
 },
 "#toolbar[platform=ios]": {
 	backgroundColor: "black",
