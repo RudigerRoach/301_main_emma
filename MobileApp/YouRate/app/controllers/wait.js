@@ -36,7 +36,7 @@ function loadImage(){
 					$.loadingImage.image = ospath+"h.png";
 				break;
 			}
-			Ti.API.info($.loadingImage.image+" :image");
+			//Ti.API.info($.loadingImage.image+" :image");
 			number++;
 			if (number > 8){number=1;}
 		},600);

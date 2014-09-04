@@ -2,12 +2,12 @@
 	<Window id="loginPage" onOpen="setActionBar">
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
-			<Button id="wintitle">YouRate - Login</Button>
+			<Button id="appName">uRate</Button>
 		</Toolbar>
 		
 		<!-- Android menu -->
 		<Menu id="menu" platform="android">
-			<MenuItem id="menu1" title="YouRate - Login" onClick="doClickMenu"/>
+			<MenuItem id="appName" title="uRate" />
 		</Menu>
 		
 		<!-- iOS and Android -->

@@ -52,11 +52,6 @@ function testStatus(service){
 		}, 1000);
 }
 
-function doClickMenu(evt) 
-{
-    alert(evt.source.title);
-}
-
 function setActionBar(evt) 
 {
     if (OS_ANDROID) 
@@ -64,7 +59,7 @@ function setActionBar(evt)
     	try
     	{
     		var actionBar = $.mainWindow.activity.actionBar; 	//get a handle to the action bar
-    		actionBar.title = 'YouRate';						//change the App Title
+    		actionBar.title = 'uRate';						//change the App Title
     		actionBar.displayHomeAsUp=false;					//show the "angle" pointing back
     		actionBar.onHomeIconItemSelected = function()		//what to do when the "home" icon is pressed
     		{

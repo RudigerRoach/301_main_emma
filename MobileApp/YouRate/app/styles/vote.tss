@@ -2,30 +2,31 @@
 	backgroundColor: "#DFE4E7",
 	exitOnClose: true
 },
-"#currentImage": 
-{
-	top: 50,
-    width: "200", 
-    height: "200",
-    image: "brownLabrador.jpg"
-},
-"Button": 
+"#appName": 
 {
     color: "black", 
     textAlign: "center",
 	font: {
 		fontSize: 24,
 		fontFamily: 'Helvetica Neue'
-	}, 
-	top: "5",
-    width: "270", 
+	},
+	top: "10",
+    width: "150", 
     height: "35"
+},
+"#currentImage": 
+{
+	top: 60,
+	borderRadius: "5",
+    width: "200", 
+    height: "200",
+    image: "brownLabrador.jpg"
 },
 "#submit": 
 {
 	borderWidth: "1",
 	borderColor: "#bbb", 
-	borderRadius: "5",
+	borderRadius: "8",
 	backgroundColor: "#bbb",
 	//backgroundColor: "#E5E5E9",
     color: "black", 
@@ -33,10 +34,7 @@
 	font: {
 		fontSize: 24,
 		fontFamily: 'Helvetica Neue'
-	}, 
-	top: "300",
-    width: "250", 
-    height: "40"
+	}
 },
 "#toolbar[platform=ios]": {
 	backgroundColor: "black",
@@ -49,9 +47,6 @@
 		fontFamily: 'Helvetica Neue'
 	},
 	height: "100"
-},
-"#wintitle[platform=ios]": {
-	color: 'black'
 },
 '#menu[platform=android]': {
 	backgroundColor: "#bbb",

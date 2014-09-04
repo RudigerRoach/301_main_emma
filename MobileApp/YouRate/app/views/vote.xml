@@ -2,16 +2,16 @@
     <Window id="votePage"  onFocus="fixPage">
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
-			<Button id="wintitle">YouRate - Voting</Button>
+			<Button id="appName">uRate</Button>
 		</Toolbar>
 		
 		<!-- Android menu -->
 		<Menu id="menu" platform="android">
-			<MenuItem id="menu1" title="YouRate - Voting" />
+			<MenuItem id="appName" title="uRate" />
 		</Menu>
 		
 		<!-- iOS and Android -->
 		<ImageView id="currentImage" />
-		<Button id="submit" onClick="doSubmit">Submit score</Button>            
+		<Button id="submit" onClick="doSubmit">Submit</Button>            
     </Window>
 </Alloy>

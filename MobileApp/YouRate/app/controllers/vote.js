@@ -4,59 +4,93 @@ var slider;
 
 function fixPage()
 {
-	var screenWidth = Ti.Platform.displayCaps.platformWidth;
-	var screenHeight = Ti.Platform.displayCaps.platformHeight;
-	//alert(screenWidth);
-	//alert(screenHeight);
-	//Ti.App.SCREEN_WIDTH = (pWidth > pHeight) ? pHeight : pWidth;
-	//Ti.App.SCREEN_HEIGHT = (pWidth > pHeight) ? pWidth : pHeight;
 	//For offline testing
 	service=require('VoteSession');	
 	var rangeBottom = 0;
 	var rangeTop = 50;
-	var description = "My description"; 
+	var description = "Image title"; 
+	var displayTitle = "true";
 	var comments = "true"; 
+	//var imagePath = "animalLandscape.jpg";
 	var imagePath = "portrait.jpg";
 	photoPath = imagePath; //For yesNo winner events
 	//alert("IMG path: "+imagePath);
+	//var sessionType = "normal";
 	var sessionType = "yesNo";
+	//var sessionType = "winner";
 	
+	//Server calls
 	/*rangeBottom = service.rangeBottom();
 	rangeTop = service.rangeTop();
 	description = service.description(); 
 	comments = service.commentsEnabled();
 	imagePath = service.imagePath();
 	sessionType = service.sessionType();*/
-		
-	//Change image to path received from server	
-	//Try portrait image
-	$.currentImage.height = screenHeight/2 - 50;
-	$.currentImage.width = "auto";
 	
-	//Landscape image
-	if($.currentImage.height < $.currentImage.width)
-	{		
-		$.currentImage.width = screenWidth;
-		$.currentImage.height = "auto";
-		$.currentImage.left = "auto";
-		$.currentImage.right = "auto";
-		$.currentImage.top = ((screenHeight/2 - 50) - $.currentImage.height)/2;
-	}
+	var screenWidth = Ti.Platform.displayCaps.platformWidth;
+	var screenHeight = Ti.Platform.displayCaps.platformHeight;
 	
-	$.currentImage.image = imagePath;
+	//Submit button position
+	$.submit.top = screenHeight - 70;
+	$.submit.height = 50;
+	$.submit.width = screenWidth - 40;
+	$.submit.left = 20;
+	var sizeLeft = $.submit.top;
+	
+	//If comments are enabled create comment box
+	if(comments == "true")
+	{			    
+	    /*var commentLabel = Ti.UI.createLabel(
+		{
+			text: "Comments:",
+			width: "200",
+			height: "50",
+			color: "black",
+			top: screenHeight/2 + 55,
+			font: {
+				fontSize: 24,
+				fontFamily: 'Helvetica Neue'
+			},
+			textAlign: 'center'
+	    });*/
+	   
+	   var commentButton = Titanium.UI.createButton({
+	   		title: 'Add comment',
+			borderWidth: "1",
+			borderColor: "#bbb", 
+			borderRadius: "8",
+			backgroundColor: "#bbb",
+			//backgroundColor: "#E5E5E9",
+			color: "black", 
+			textAlign: "center",
+			font: {
+				fontSize: 24,
+				fontFamily: 'Helvetica Neue'
+			},
+		    top: sizeLeft - 60,
+		    width: screenWidth - 40,
+		    left: 20,
+		    height: 40
+		});
+	
+		//$.votePage.add(commentArea);
+		//$.votePage.add(commentLabel);
+		$.votePage.add(commentButton);
+		sizeLeft = commentButton.top;
+	}	
 	
 	//Display interface according to type of session
 	//If normal event create a slider for scoring
-	if(sessionType == "normal" || sessionType == "default") //Default for offline testing purposes, to be taken out
-	{
+	if(sessionType == "normal")
+	{	    				
 		slider = Titanium.UI.createSlider(
 		{
-			top:screenHeight/2 + 5,
+			top:sizeLeft - 90,
 			color: "black",
 			min:rangeBottom,
 			max:rangeTop,
-			width:screenWidth - 100,
-			left:50,
+			width:screenWidth - 40,
+			left:20,
 			value:(rangeBottom+rangeTop)/2
 	    });
 	    
@@ -64,9 +98,9 @@ function fixPage()
 		{
 		    text: "Score: ",
 			width: "150",
-			height: "50",
+			height: "30",
 			color: "black",
-			top: screenHeight/2 + 20,
+			top: sizeLeft - 50,
 			left: screenWidth/2 - 100,
 			font: { 
 				fontSize: 24,
@@ -84,8 +118,8 @@ function fixPage()
 		    color:"#888",
 		    textAlign:"left",
 		    value:slider.value,
-		    top: screenHeight/2 + 30,
-			left: screenWidth/2 + 50,
+			top: sizeLeft - 50,
+			left: screenWidth/2 + 10,
 		    width:50,
 		    height:30,
 			font: {
@@ -93,6 +127,7 @@ function fixPage()
 				fontFamily: 'Helvetica Neue'
 			}
 		});
+		sizeLeft = slider.top;
 	
 		slider.addEventListener('change', function(e) 
 		{
@@ -107,28 +142,6 @@ function fixPage()
 		$.votePage.add(slider);
 		$.votePage.add(sliderLabel);
 		$.votePage.add(sliderArea);
-		
-		/*var submitButton = Titanium.UI.createButton(
-		{		   
-			borderWidth: "1",
-			borderColor: "#bbb", 
-			borderRadius: "5",
-			backgroundColor: "#bbb",
-		    color: "black", 
-		    textAlign: "center",
-			font: {
-				fontSize: 24,
-				fontFamily: 'Helvetica Neue'
-			}, 
-		    top: "430", 
-		    width: "170", 
-		    height: "35"
-		});
-		submitButton.addEventListener('click',function(e)
-		{
-		   doSubmit();
-		});
-		$.votePage.add(submitButton);*/
 	}
 	else if(sessionType == "yesNo")
 	{
@@ -137,18 +150,19 @@ function fixPage()
 			title: "Yes", 
 			borderWidth: "1",
 			borderColor: "#bbb", 
-			borderRadius: "5",
-			backgroundColor: "#bbb",
+			borderRadius: "8",
+			backgroundColor: "green",
 		    color: "black", 
 		    textAlign: "center",
 			font: {
 				fontSize: 24,
 				fontFamily: 'Helvetica Neue'
 			}, 
-		    top: screenHeight/2 + 15, 
-		    width: screenWidth/2 + 10, 
-		    height: "40",
-		    left: screenWidth/2 + 5,
+			top: sizeLeft - 70,
+		    width: screenWidth/2 - 30, 
+		    height: "50",
+		    right: 20,
+		    //left: screenWidth/2 + 5,
 		    padding:0,
 		});
 		
@@ -157,18 +171,19 @@ function fixPage()
 			title: "No", 
 			borderWidth: "1",
 			borderColor: "#bbb", 
-			borderRadius: "5",
-			backgroundColor: "#bbb",
+			borderRadius: "8",
+			backgroundColor: "red",
 		    color: "black", 
 		    textAlign: "center",
 			font: {
 				fontSize: 24,
 				fontFamily: 'Helvetica Neue'
 			}, 
-		    top: screenHeight/2 + 15, 
-		    width: screenWidth/2 + 10, 
-		    height: "40",
-		    right: screenWidth/2 + 5,
+			top: sizeLeft - 70,
+		    width: screenWidth/2 - 30, 
+		    height: "50",
+		    left: 20,
+		    //right: screenWidth/2 + 5,
 		    padding:0,
 		});
 		
@@ -185,6 +200,7 @@ function fixPage()
 			noButton.opacity = 1;		   
 		});
 		$.votePage.add(noButton);
+		sizeLeft = yesButton.top;
 	}
 	else if(sessionType == "winner")
 	{
@@ -193,7 +209,7 @@ function fixPage()
 			title: "Winner", 
 			borderWidth: "1",
 			borderColor: "#bbb", 
-			borderRadius: "5", 
+			borderRadius: "8", 
 			backgroundColor: "#bbb",
 		    color: "black",  
 		    textAlign: "center",
@@ -212,45 +228,11 @@ function fixPage()
 		$.votePage.add(winnerButton);
 	}
 		
-	//If comments are enabled create comment box
-	if(comments == "true")
-	{		
-		commentArea = Ti.UI.createTextArea(
-		{
-	  		borderWidth:"2",
-		    borderColor:"#bbb",
-		    borderRadius:"5",
-		    color:"#888",
-		    textAlign:"left",
-		    value:"",
-		    top: screenHeight/2 + 95,
-		    width:screenWidth + 10,
-		    height:screenHeight/2 - 160,
-			font: {
-				fontSize: 20,
-				fontFamily: 'Helvetica Neue'
-			}
-		});
-	    
-		var commentLabel = Ti.UI.createLabel(
-		{
-			text: "Comments:",
-			width: "200",
-			height: "50",
-			color: "black",
-			top: screenHeight/2 + 55,
-			font: {
-				fontSize: 24,
-				fontFamily: 'Helvetica Neue'
-			},
-			textAlign: 'center'
-	    });
-	
-		$.votePage.add(commentArea);
-		$.votePage.add(commentLabel);
-	}
-	$.submit.top = screenHeight - 50;
-	$.submit.width = screenWidth + 10;
+	//Change image to path received from server	
+	//Try portrait image	
+	$.currentImage.image = imagePath;
+	$.currentImage.height = sizeLeft - 80;
+	$.currentImage.width = "auto";
 }
 
 function doSubmit(e){
