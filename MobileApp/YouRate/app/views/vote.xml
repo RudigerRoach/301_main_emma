@@ -11,7 +11,6 @@
 		</Menu>
 		
 		<!-- iOS and Android -->
-		<ImageView id="currentImage" />
-		<Button id="submit" onClick="doSubmit">Submit</Button>            
+		<ImageView id="currentImage" />           
     </Window>
 </Alloy>

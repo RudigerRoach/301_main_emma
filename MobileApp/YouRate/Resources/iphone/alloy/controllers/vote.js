@@ -4,17 +4,14 @@ function Controller() {
         var rangeBottom = 0;
         var rangeTop = 50;
         var comments = "true";
-        var imagePath = "portrait.jpg";
+        var imagePath = ospath + "placeholder.png";
+        imagePath = ospath + "kitty.jpg";
         photoPath = imagePath;
-        var sessionType = "yesNo";
+        var sessionType = "normal";
         var screenWidth = Ti.Platform.displayCaps.platformWidth;
         var screenHeight = Ti.Platform.displayCaps.platformHeight;
-        $.submit.top = screenHeight - 70;
-        $.submit.height = 50;
-        $.submit.width = screenWidth - 40;
-        $.submit.left = 20;
-        var sizeLeft = $.submit.top;
-        if ("true" == comments) {
+        var screenLeft = screenHeight;
+        if ("t" == comments) {
             var commentButton = Titanium.UI.createButton({
                 title: "Add comment",
                 borderWidth: "1",
@@ -27,17 +24,99 @@ function Controller() {
                     fontSize: 24,
                     fontFamily: "Helvetica Neue"
                 },
-                top: sizeLeft - 60,
-                width: screenWidth - 40,
-                left: 20,
+                top: screenHeight - 90,
+                width: screenWidth - 20,
+                left: 10,
                 height: 40
             });
+            commentButton.addEventListener("click", function() {
+                commentArea = Ti.UI.createTextArea({
+                    borderWidth: "2",
+                    borderColor: "#bbb",
+                    borderRadius: "5",
+                    color: "black",
+                    opacity: 70,
+                    textAlign: "left",
+                    value: "",
+                    top: 60,
+                    width: screenWidth - 40,
+                    left: 20,
+                    height: 200,
+                    font: {
+                        fontSize: 20,
+                        fontFamily: "Helvetica Neue"
+                    }
+                });
+                $.votePage.add(commentArea);
+            });
             $.votePage.add(commentButton);
-            sizeLeft = commentButton.top;
+            screenLeft = commentButton.top;
         }
         if ("normal" == sessionType) {
+            var submitButton = Titanium.UI.createButton({
+                title: "Submit",
+                borderWidth: "1",
+                borderColor: "#bbb",
+                borderRadius: "8",
+                backgroundColor: "#bbb",
+                color: "black",
+                textAlign: "center",
+                font: {
+                    fontSize: 24,
+                    fontFamily: "Helvetica Neue"
+                },
+                top: screenHeight - 70,
+                height: 50,
+                width: screenWidth - 20,
+                left: 10
+            });
+            screenLeft = submitButton.top;
+            if ("true" == comments) {
+                var commentButton = Titanium.UI.createButton({
+                    title: "Add comment",
+                    borderWidth: "1",
+                    borderColor: "#bbb",
+                    borderRadius: "8",
+                    backgroundColor: "#bbb",
+                    color: "black",
+                    textAlign: "center",
+                    font: {
+                        fontSize: 24,
+                        fontFamily: "Helvetica Neue"
+                    },
+                    top: screenLeft - 60,
+                    width: screenWidth - 20,
+                    left: 10,
+                    height: 40
+                });
+                commentButton.addEventListener("click", function() {
+                    commentArea = Ti.UI.createTextArea({
+                        borderWidth: "2",
+                        borderColor: "#bbb",
+                        borderRadius: "5",
+                        color: "black",
+                        opacity: 70,
+                        textAlign: "left",
+                        value: "",
+                        top: 60,
+                        width: screenWidth - 40,
+                        left: 20,
+                        height: 200,
+                        font: {
+                            fontSize: 20,
+                            fontFamily: "Helvetica Neue"
+                        }
+                    });
+                    $.votePage.add(commentArea);
+                });
+                $.votePage.add(commentButton);
+                screenLeft = commentButton.top;
+            }
+            commentButton.addEventListener("click", function() {
+                doSubmit();
+            });
             slider = Titanium.UI.createSlider({
-                top: sizeLeft - 90,
+                top: screenLeft - 90,
                 color: "black",
                 min: rangeBottom,
                 max: rangeTop,
@@ -50,7 +129,7 @@ function Controller() {
                 width: "150",
                 height: "30",
                 color: "black",
-                top: sizeLeft - 50,
+                top: screenLeft - 50,
                 left: screenWidth / 2 - 100,
                 font: {
                     fontSize: 24,
@@ -66,7 +145,7 @@ function Controller() {
                 color: "#888",
                 textAlign: "left",
                 value: slider.value,
-                top: sizeLeft - 50,
+                top: screenLeft - 50,
                 left: screenWidth / 2 + 10,
                 width: 50,
                 height: 30,
@@ -75,33 +154,75 @@ function Controller() {
                     fontFamily: "Helvetica Neue"
                 }
             });
-            sizeLeft = slider.top;
+            screenLeft = slider.top;
             slider.addEventListener("change", function(e) {
                 sliderArea.value = String.format("%3.0f", e.value);
             });
             sliderArea.addEventListener("change", function() {
                 slider.value = sliderArea.value;
             });
+            $.votePage.add(submitButton);
             $.votePage.add(slider);
             $.votePage.add(sliderLabel);
             $.votePage.add(sliderArea);
         } else if ("yesNo" == sessionType) {
+            if ("true" == comments) {
+                var commentButton = Titanium.UI.createButton({
+                    title: "Add comment",
+                    borderWidth: "1",
+                    borderColor: "#bbb",
+                    borderRadius: "8",
+                    backgroundColor: "#bbb",
+                    color: "black",
+                    textAlign: "center",
+                    font: {
+                        fontSize: 24,
+                        fontFamily: "Helvetica Neue"
+                    },
+                    top: screenLeft - 60,
+                    width: screenWidth - 20,
+                    left: 10,
+                    height: 40
+                });
+                commentButton.addEventListener("click", function() {
+                    commentArea = Ti.UI.createTextArea({
+                        borderWidth: "2",
+                        borderColor: "#bbb",
+                        borderRadius: "5",
+                        color: "black",
+                        opacity: 70,
+                        textAlign: "left",
+                        value: "",
+                        top: 60,
+                        width: screenWidth - 40,
+                        left: 20,
+                        height: 200,
+                        font: {
+                            fontSize: 20,
+                            fontFamily: "Helvetica Neue"
+                        }
+                    });
+                    $.votePage.add(commentArea);
+                });
+                $.votePage.add(commentButton);
+                screenLeft = commentButton.top;
+            }
             var yesButton = Titanium.UI.createButton({
                 title: "Yes",
                 borderWidth: "1",
                 borderColor: "#bbb",
                 borderRadius: "8",
-                backgroundColor: "green",
+                backgroundColor: "#197519",
                 color: "black",
                 textAlign: "center",
                 font: {
                     fontSize: 24,
                     fontFamily: "Helvetica Neue"
                 },
-                top: sizeLeft - 70,
-                width: screenWidth / 2 - 30,
-                height: "50",
-                right: 20,
+                top: screenLeft - 100,
+                width: screenWidth / 2 - 20,
+                height: "80",
+                right: 10,
                 padding: 0
             });
             var noButton = Titanium.UI.createButton({
@@ -109,17 +230,17 @@ function Controller() {
                 borderWidth: "1",
                 borderColor: "#bbb",
                 borderRadius: "8",
-                backgroundColor: "red",
+                backgroundColor: "#B80000",
                 color: "black",
                 textAlign: "center",
                 font: {
                     fontSize: 24,
                     fontFamily: "Helvetica Neue"
                 },
-                top: sizeLeft - 70,
-                width: screenWidth / 2 - 30,
-                height: "50",
-                left: 20,
+                top: screenLeft - 100,
+                width: screenWidth / 2 - 20,
+                height: "80",
+                left: 10,
                 padding: 0
             });
             yesButton.addEventListener("click", function() {
@@ -132,7 +253,7 @@ function Controller() {
                 noButton.opacity = 1;
             });
             $.votePage.add(noButton);
-            sizeLeft = yesButton.top;
+            screenLeft = yesButton.top;
         } else if ("winner" == sessionType) {
             var winnerButton = Titanium.UI.createButton({
                 title: "Winner",
@@ -156,12 +277,11 @@ function Controller() {
             $.votePage.add(winnerButton);
         }
         $.currentImage.image = imagePath;
-        $.currentImage.height = sizeLeft - 80;
+        $.currentImage.height = screenLeft - 80;
         $.currentImage.width = "auto";
     }
     function doSubmit() {
         service = require("VoteSession");
-        service.submitResult(String.format("%3.0f", slider.value), commentArea.value);
         var win = Alloy.createController("wait").getView();
         win.open();
     }
@@ -217,30 +337,15 @@ function Controller() {
         id: "currentImage"
     });
     $.__views.votePage.add($.__views.currentImage);
-    $.__views.submit = Ti.UI.createButton({
-        borderWidth: "1",
-        borderColor: "black",
-        borderRadius: "8",
-        backgroundColor: "#bbb",
-        color: "black",
-        textAlign: "center",
-        font: {
-            fontSize: 24,
-            fontFamily: "Helvetica Neue"
-        },
-        title: "Submit",
-        id: "submit"
-    });
-    $.__views.votePage.add($.__views.submit);
-    doSubmit ? $.__views.submit.addEventListener("click", doSubmit) : __defers["$.__views.submit!click!doSubmit"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var commentArea = "";
     var photoPath = "";
     var slider;
+    var ospath = "";
+    ospath = "";
     $.votePage.open();
     __defers["$.__views.votePage!focus!fixPage"] && $.__views.votePage.addEventListener("focus", fixPage);
-    __defers["$.__views.submit!click!doSubmit"] && $.__views.submit.addEventListener("click", doSubmit);
     _.extend($, exports);
 }
 

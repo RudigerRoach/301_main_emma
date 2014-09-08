@@ -1,6 +1,7 @@
 var waiter;
 function displayLoginPage(){
 	//Make loading image move
+	$.loadingImage.top = Ti.Platform.displayCaps.platformHeight/2 - 50;
 	var number = 1;
 	var ospath = "";
 	if(OS_ANDROID){
@@ -72,12 +73,12 @@ function testStatus(service){
 		    	goForward(service);
 		        clearInterval(timer);
 		    }
-		}, 1000);
+		}, 1000); 
 }
 
 function goVote(){
 	//For offline testing of vote page - to be taken out!
-	var win=Alloy.createController('wait').getView();
+	var win=Alloy.createController('vote').getView();
 	win.open();
 }
 
