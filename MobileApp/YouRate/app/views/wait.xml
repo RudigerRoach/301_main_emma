@@ -7,11 +7,16 @@
 		
 		<!-- Android menu -->
 		<Menu id="menu" platform="android">
+
+			<!--MenuItem id="menu1" title="YouRate - Waiting..."/-->
+
 			<MenuItem id="appName" title="uRate" />
+
 		</Menu>
 		
 		<!-- iOS and Android -->
         <ImageView id="loadingImage" image="1.png"/>
+
 		<Label id="label1">Waiting...</Label>	
     </Window>
 </Alloy>

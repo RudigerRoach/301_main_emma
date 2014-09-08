@@ -9,7 +9,6 @@ function doLogin()
 	$.textArea.blur();
 	
 	var number = 1;
-	var number = 1;
 	var ospath = "";
 	if(OS_ANDROID){
 		ospath = "/images/";
@@ -83,7 +82,7 @@ function goForward(service){
 function testStatus(service){
 		var done = false;
 		var timer = setInterval(function(){ //poll every 1s and stop when autologinDone() returns true
-		    done = service.autologinDone();
+		    done = service.loginDone();
 		    if (done) {
 		    	goForward(service);
 		        clearInterval(timer);

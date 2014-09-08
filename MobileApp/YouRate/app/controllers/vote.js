@@ -226,7 +226,7 @@ function fixPage()
 	
 		slider.addEventListener('change', function(e) 
 		{
-		    sliderArea.value = String.format("%3.0f", e.value);
+		    sliderArea.value = Math.floor(Number(slider.value));
 		});
 	
 		sliderArea.addEventListener('change', function(e) 
@@ -391,7 +391,7 @@ function doSubmit(e){
 	//Submit result	
 	service=require('VoteSession');	
 	//alert(photoPath + "," + slider.value + "," + commentArea.value);
-	//service.submitResult(String.format("%3.0f", slider.value),commentArea.value);	
+	service.submitResult(Math.floor(Number(slider.value)),commentArea.value);	
     //alert("Result successfully submitted");
     
     //Go to wait page
