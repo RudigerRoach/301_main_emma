@@ -27,9 +27,12 @@ public class NextImageServlet extends HttpServlet
             String previousImageScore = request.getParameter("result");
             String previousImageComment = request.getParameter("comment");
             String judge = request.getParameter("deviceUID");
+            DBAccess database = new DBAccess();
+            database.open();
+            String email = database.getMail(judge);
             for (Judge judgesList : MinimalServer.judgesList) 
             {
-                if (judgesList.getJudgeName().equals(judge) == true)
+                if (judgesList.getJudgeName().equals(email) == true)
                 {
                     judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
                     if (judgesList.getCurrentImage()-1 < MinimalServer.totaalImages)
@@ -78,10 +81,12 @@ public class NextImageServlet extends HttpServlet
             String previousImageScore = request.getParameter("result");
             String previousImageComment = request.getParameter("comment");
             String judge = request.getParameter("deviceUID");
-            
+            DBAccess database = new DBAccess();
+            database.open();
+            String email = database.getMail(judge);
             for (Judge judgesList : MinimalServer.judgesList) 
             {
-                if (judgesList.getJudgeName().equals(judge) == true)
+                if (judgesList.getJudgeName().equals(email) == true)
                 {
                     judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
                     if (MinimalServer.currentPhoto.get() < MinimalServer.totaalImages)
