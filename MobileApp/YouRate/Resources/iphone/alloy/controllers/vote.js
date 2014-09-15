@@ -155,8 +155,8 @@ function Controller() {
                 }
             });
             screenLeft = slider.top;
-            slider.addEventListener("change", function(e) {
-                sliderArea.value = String.format("%3.0f", e.value);
+            slider.addEventListener("change", function() {
+                sliderArea.value = Math.floor(Number(slider.value));
             });
             sliderArea.addEventListener("change", function() {
                 slider.value = sliderArea.value;
@@ -282,6 +282,7 @@ function Controller() {
     }
     function doSubmit() {
         service = require("VoteSession");
+        service.submitResult(Math.floor(Number(slider.value)), commentArea.value);
         var win = Alloy.createController("wait").getView();
         win.open();
     }

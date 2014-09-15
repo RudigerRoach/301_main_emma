@@ -9,7 +9,7 @@ function displayLoginPage(){
 	}else if(OS_IOS){
 		ospath = "";
 	}
-
+	$.startPage.backgroundImage = ospath+"bg.jpg";
 	waiter = setInterval(function(){
 			switch(number){
 				case 1:
