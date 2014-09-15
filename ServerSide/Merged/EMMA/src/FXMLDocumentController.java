@@ -70,7 +70,7 @@ public class FXMLDocumentController implements Initializable{
     private void handleStartButtonAction(ActionEvent event) throws IOException {
         System.out.println("You clicked me!");
         Parent root = FXMLLoader.load(getClass().getResource("FXMLrunningSession.fxml"));
-        Scene newScene = new Scene(FXMLLoader.load(getClass().getResource("FXMLrunningSession.fxml")));
+        Scene newScene = new Scene((Parent) FXMLLoader.load(getClass().getResource("FXMLrunningSession.fxml")));
         Stage newStage = new Stage();
         newStage.setScene(newScene);
         newStage.setTitle("Emma Simulator");

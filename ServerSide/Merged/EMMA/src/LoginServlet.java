@@ -99,7 +99,21 @@ public class LoginServlet extends HttpServlet
                 {
                     jsonResponse.put("status", "success");
                     jsonResponse.put("session_id", request.getSession().getId());
-                    MinimalServer.judgesList.add(new Judge(id));
+                    boolean tempAllowed = true;
+                    if(MinimalServer.judgesList != null)
+                    {
+                        for (Judge judgesList : MinimalServer.judgesList)
+                        {
+                            if(judgesList.getJudgeName().equals(user) == true)
+                            {
+                                tempAllowed = false;
+                            }
+                        }
+                    }
+                    if(tempAllowed)
+                    {
+                        MinimalServer.judgesList.add(new Judge(user));
+                    }
                 } 
                 catch (JSONException e) 
                 {
@@ -167,7 +181,22 @@ public class LoginServlet extends HttpServlet
                 {
                     jsonResponse.put("status", "success");
                     jsonResponse.put("session_id", request.getSession().getId());
-                    MinimalServer.judgesList.add(new Judge(id));
+                    String email = database.getMail(id);
+                    boolean tempAllowed = true;
+                    if (MinimalServer.judgesList != null)
+                    {
+                        for (Judge judgesList : MinimalServer.judgesList)
+                        {
+                            if(judgesList.getJudgeName().equals(email) == true)
+                            {
+                                tempAllowed = false;
+                            }
+                        }
+                    }
+                    if(tempAllowed)
+                    {
+                        MinimalServer.judgesList.add(new Judge(email));
+                    }
                 } 
                 catch (JSONException e) 
                 {

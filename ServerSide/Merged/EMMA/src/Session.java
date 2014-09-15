@@ -11,10 +11,12 @@ public class Session
     int botRange = 0;
     Boolean openSession = false;
     Boolean controlledSession = true;
+    Boolean commentsEnable = false;
+    Boolean titleEnabled = false;
     String[] imageDetails;
     String type;
     
-    public Session(linkedList _imageNames, BufferedImage[] _images, String[] _judges,int _topRange,int _botRange, Boolean _openSession,Boolean _controlledSession,String[] _imageDetails,String _type )
+    public Session(linkedList _imageNames, BufferedImage[] _images, String[] _judges,int _topRange,int _botRange, Boolean _openSession,Boolean _controlledSession,String[] _imageDetails,String _type, Boolean _commentsEnabled, Boolean _titleEnabled )
     {
         imageNames = _imageNames;
         images = _images;
@@ -25,11 +27,23 @@ public class Session
         controlledSession = _controlledSession;
         imageDetails = _imageDetails;
         type = _type;
+        titleEnabled = _titleEnabled;
+        commentsEnable = _commentsEnabled;
     }
 
     Session() 
     {
         
+    }
+    
+    public boolean getCommentsEnabled()
+    {
+        return commentsEnable;
+    }
+    
+    public boolean getTitleEnabled()
+    {
+        return titleEnabled;
     }
     
     public void setJudges(String[] _judges)

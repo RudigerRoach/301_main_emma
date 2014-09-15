@@ -62,7 +62,7 @@ Create a software solution that:
 \item Usability \\
 99 \% of users should be able to use the system with little to no prior training.
 \item Scalability \\
-The deployed system must be able to operate effectively under the load of 50 concurrent users. The 50 users will be handled by Jetty which creates a thread for each person that connects to certain servlet at a point in time thus it will be able to handle the concurrency. It will be tested by creating a thread pool of 50 threads and doing 50 unit tests concurrently.
+The deployed system must be able to operate effectively under the load of 50 concurrent users. The 50 users will be handled by Jetty which creates a thread for each person that connects to certain servlet at a point in time thus it will be able to handle the concurrency. It will be tested by creating a thread pool of 50 threads and doing 50 unit tests concurrently. If further scalability is needed it could be achieved since jetty supports clustering.
 \item Installability \\
 It should be easy to install the server side component and the effort to get it running each club night should be minimal. There will be a computer at the event running the EMMA server component and our server should be installed on it. The application should also be easy to download and install on the judges phone.
 \item Performance requirements \\
@@ -100,7 +100,8 @@ The mobile application will have to go through a web-service which will be the p
 \item Java
 \item JavaScript
 \item XML
-\item Microsoft Access Database
+\item db40 Object database
+\item JavaFX
 \end{itemize}
 \section{Functional requirements and application design}
 \subsection{Introduction}
