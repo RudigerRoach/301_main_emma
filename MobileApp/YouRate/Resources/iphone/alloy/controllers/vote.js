@@ -345,6 +345,10 @@ function Controller() {
     var slider;
     var ospath = "";
     ospath = "";
+    Ti.Gesture.addEventListener("orientationchange", function() {
+        var win = Alloy.createController("vote").getView();
+        win.open();
+    });
     $.votePage.open();
     __defers["$.__views.votePage!focus!fixPage"] && $.__views.votePage.addEventListener("focus", fixPage);
     _.extend($, exports);

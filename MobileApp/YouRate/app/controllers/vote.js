@@ -7,6 +7,7 @@ var ospath = "";
 	}else if(OS_IOS){
 		ospath = "";
 	}
+	
 function fixPage()
 {
 	//For offline testing
@@ -398,5 +399,36 @@ function doSubmit(e){
 	var win=Alloy.createController('wait').getView();
  	win.open();
 };
+
+Ti.Gesture.addEventListener('orientationchange', function(e){
+ 	var win=Alloy.createController('vote').getView();
+	 	win.open();
+ 
+    /*if (Titanium.UI.orientation === Ti.UI.LANDSCAPE_RIGHT || Titanium.UI.orientation === Ti.UI.LANDSCAPE_LEFT) 
+    {
+        // change UI for landscape layout
+        alert("landscape " + e.orientation);
+        fixPage();
+    } else {
+        // change UI for portrait layout
+        alert("portrait " + e.orientation);
+        fixPage();
+    }   
+    
+//Ti.Gesture.addEventListener('orientationchange',function(e) {
+    // get current device orientation from
+    // Titanium.Gesture.orientation
+ 
+    // get orientation from event object
+    // from e.orientation
+ 
+    // Ti.Gesture.orientation should match e.orientation
+    // but iOS and Android will report different values
+ 
+    // two helper methods return a Boolean
+    // e.source.isPortrait()
+    // e.source.isLandscape()
+//});*/
+});
 
 $.votePage.open();
