@@ -1,6 +1,7 @@
 var waiter;
 function loadImage(){
 	//Make loading image move
+	$.loadingImage.top = Ti.Platform.displayCaps.platformHeight/2 - 50;
 
 	var number = 1;
 	var ospath = "";

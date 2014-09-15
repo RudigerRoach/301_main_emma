@@ -2,6 +2,7 @@ var waiter;
 function doLogin()
 {		
 	//Make loading image move
+	$.loadingImage.top = Ti.Platform.displayCaps.platformHeight/2 - 50;
 	$.emailLabel.opacity=0.0;
 	$.textArea.opacity=0.0;
 	$.loginButton.opacity=0.0;
@@ -52,11 +53,16 @@ function doLogin()
 	//Call login
 	service=require('Authentication');
 	service.login(email);
-	testStatus(service);
+	
+	//INFINITE LOOP???
+	//testStatus(service);
+	
+	goForward(service);
 };
 
 function goForward(service){
 	var success = service.loginStatus();
+		clearInterval(waiter);
 	
 	//If login successful
 	if (success == true)
@@ -81,7 +87,7 @@ function goForward(service){
 
 function testStatus(service){
 		var done = false;
-		var timer = setInterval(function(){ //poll every 1s and stop when autologinDone() returns true
+		var timer = setInterval(function(){ //poll every 1s and stop when loginDone() returns true
 		    done = service.loginDone();
 		    if (done) {
 		    	goForward(service);
