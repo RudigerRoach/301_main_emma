@@ -19,22 +19,7 @@
 	top: 60,
 	borderRadius: "5",
     width: "200", 
-    height: "200",
-    image: "brownLabrador.jpg"
-},
-"#submit": 
-{
-	borderWidth: "1",
-	borderColor: "#bbb", 
-	borderRadius: "8",
-	backgroundColor: "#bbb",
-	//backgroundColor: "#E5E5E9",
-    color: "black", 
-    textAlign: "center",
-	font: {
-		fontSize: 24,
-		fontFamily: 'Helvetica Neue'
-	}
+    height: "200"
 },
 "#toolbar[platform=ios]": {
 	backgroundColor: "black",
