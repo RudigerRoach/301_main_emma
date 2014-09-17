@@ -1,4 +1,12 @@
 var waiter;
+var ospath = "";
+	if(OS_ANDROID){
+		ospath = "/images/";
+	}else if(OS_IOS){
+		ospath = "";
+	}
+	
+	$.loginPage.backgroundImage = ospath+"bg.jpg";
 function doLogin()
 {		
 	//Make loading image move
@@ -10,14 +18,7 @@ function doLogin()
 	$.textArea.blur();
 	$.loginButton.titleid = 'loginB';
 	
-	var number = 1;
-	var ospath = "";
-	if(OS_ANDROID){
-		ospath = "/images/";
-	}else if(OS_IOS){
-		ospath = "/";
-	}
-	$.loginPage.backgroundImage = ospath+"bg.jpg";
+	var number = 1;	
 		ospath += "spinner/";
 	waiter = setInterval(function(){
 			switch(number){

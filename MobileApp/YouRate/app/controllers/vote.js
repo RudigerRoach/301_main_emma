@@ -7,9 +7,14 @@ var ospath = "";
 	}else if(OS_IOS){
 		ospath = "";
 	}	
+	
+$.votePage.backgroundImage = ospath+"bg.jpg";
 
 var screenWidth = Ti.Platform.displayCaps.platformWidth;
 var screenHeight = Ti.Platform.displayCaps.platformHeight;
+if(OS_ANDROID){
+		screenHeight -= 90;
+}
 var screenLeft = screenHeight;
 	
 var rangeBottom = 0;
@@ -74,6 +79,9 @@ function fixPage()
 		
 	//Change image to path received from server	
 	//Try portrait image	
+	if(OS_ANDROID){
+		$.currentImage.top -= 30;
+	}
 	$.currentImage.image = imagePath;
 	$.currentImage.height = screenLeft - 80;
 	$.currentImage.width = "auto";

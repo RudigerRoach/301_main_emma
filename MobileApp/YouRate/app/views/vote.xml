@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="votePage"  onFocus="fixPage" backgroundImage="bg.png">
+    <Window id="votePage"  onFocus="fixPage" >
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
 			<Button id="appName">uRate</Button>

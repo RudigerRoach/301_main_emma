@@ -261,8 +261,7 @@ function Controller() {
     $.__views.votePage = Ti.UI.createWindow({
         backgroundColor: "#DFE4E7",
         exitOnClose: true,
-        id: "votePage",
-        backgroundImage: "bg.png"
+        id: "votePage"
     });
     $.__views.votePage && $.addTopLevelView($.__views.votePage);
     fixPage ? $.__views.votePage.addEventListener("focus", fixPage) : __defers["$.__views.votePage!focus!fixPage"] = true;
@@ -310,6 +309,7 @@ function Controller() {
     var slider;
     var ospath = "";
     ospath = "";
+    $.votePage.backgroundImage = ospath + "bg.jpg";
     var screenWidth = Ti.Platform.displayCaps.platformWidth;
     var screenHeight = Ti.Platform.displayCaps.platformHeight;
     var screenLeft = screenHeight;
