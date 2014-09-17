@@ -8,6 +8,7 @@ function doLogin()
 	$.loginButton.opacity=0.0;
 	$.loadingImage.opacity=1.0;
 	$.textArea.blur();
+	$.loginButton.titleid = 'loginB';
 	
 	var number = 1;
 	var ospath = "";
