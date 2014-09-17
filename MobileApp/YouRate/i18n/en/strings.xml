@@ -1,0 +1,9 @@
+<resources>
+    <string name="loginB">Login</string>
+    <string name="submitB">Submit</string>
+    <string name="commentB">Add comment</string>
+    <string name="sliderT">Score:</string>
+    <string name="yesB">Yes</string>
+    <string name="noB">No</string>
+    <string name="winnerB">Winner</string>
+</resources>

@@ -1,18 +1,15 @@
 function Controller() {
     function fixPage() {
         service = require("VoteSession");
-        var comments = "true";
-        var imagePath = ospath + "placeholder.png";
-        imagePath = ospath + "kitty.jpg";
-        photoPath = imagePath;
-        var sessionType = "winner";
-        var controlled = "false";
         if ("normal" == sessionType) {
             createSubmitButton();
             "true" == comments && commentsEnabled();
             createSlider();
         } else if ("yesNo" == sessionType) {
-            "false" == controlled && createSubmitButton();
+            if ("false" == controlled) {
+                createSubmitButton();
+                alert("done");
+            }
             "true" == comments && commentsEnabled();
             createYesNoButtons();
         } else if ("winner" == sessionType) {
@@ -23,9 +20,15 @@ function Controller() {
         $.currentImage.height = screenLeft - 80;
         $.currentImage.width = "auto";
     }
+    function doSubmit() {
+        service = require("VoteSession");
+        "normal" == sessionType && service.submitResult(Math.floor(Number(slider.value)), commentArea.value);
+        var win = Alloy.createController("wait").getView();
+        win.open();
+    }
     function createSubmitButton() {
         var submitButton = Titanium.UI.createButton({
-            title: "Submit",
+            titleid: "submitB",
             borderWidth: "1",
             borderColor: "#bbb",
             borderRadius: "8",
@@ -38,14 +41,18 @@ function Controller() {
             },
             top: screenHeight - 70,
             height: 50,
-            width: screenWidth - 20,
-            left: 10
+            width: screenWidth - 40,
+            left: 20
         });
         screenLeft = submitButton.top;
+        submitButton.addEventListener("click", function(e) {
+            doSubmit(e);
+        });
+        $.votePage.add(submitButton);
     }
     function commentsEnabled() {
         var commentButton = Titanium.UI.createButton({
-            title: "Add comment",
+            titleid: "commentB",
             borderWidth: "1",
             borderColor: "#bbb",
             borderRadius: "8",
@@ -57,8 +64,8 @@ function Controller() {
                 fontFamily: "Helvetica Neue"
             },
             top: screenLeft - 60,
-            width: screenWidth - 20,
-            left: 10,
+            width: screenWidth - 40,
+            left: 20,
             height: 40
         });
         commentButton.addEventListener("click", function() {
@@ -79,10 +86,10 @@ function Controller() {
                     fontFamily: "Helvetica Neue"
                 }
             });
+            commentArea.addEventListener("blur", function() {
+                $.votePage.remove(commentArea);
+            });
             $.votePage.add(commentArea);
-        });
-        commentArea.addEventListener("blur", function() {
-            $.votePage.remove(commentArea);
         });
         $.votePage.add(commentButton);
         screenLeft = commentButton.top;
@@ -98,7 +105,7 @@ function Controller() {
             value: (rangeBottom + rangeTop) / 2
         });
         var sliderLabel = Ti.UI.createLabel({
-            text: "Score: ",
+            titleid: "SliderT",
             width: "150",
             height: "30",
             color: "black",
@@ -134,14 +141,13 @@ function Controller() {
         sliderArea.addEventListener("change", function() {
             slider.value = sliderArea.value;
         });
-        $.votePage.add(submitButton);
         $.votePage.add(slider);
         $.votePage.add(sliderLabel);
         $.votePage.add(sliderArea);
     }
     function createYesNoButtons() {
         var yesButton = Titanium.UI.createButton({
-            title: "Yes",
+            titleid: "yesB",
             borderWidth: "1",
             borderColor: "#bbb",
             borderRadius: "8",
@@ -153,13 +159,13 @@ function Controller() {
                 fontFamily: "Helvetica Neue"
             },
             top: screenLeft - 100,
-            width: screenWidth / 2 - 20,
+            width: screenWidth / 2 - 30,
             height: "80",
-            right: 10,
+            right: 20,
             padding: 0
         });
         var noButton = Titanium.UI.createButton({
-            title: "No",
+            titleid: "noB",
             borderWidth: "1",
             borderColor: "#bbb",
             borderRadius: "8",
@@ -171,9 +177,9 @@ function Controller() {
                 fontFamily: "Helvetica Neue"
             },
             top: screenLeft - 100,
-            width: screenWidth / 2 - 20,
+            width: screenWidth / 2 - 30,
             height: "80",
-            left: 10,
+            left: 20,
             padding: 0
         });
         yesButton.addEventListener("click", function() {
@@ -190,7 +196,7 @@ function Controller() {
     }
     function createWinnerButton() {
         var winnerButton = Titanium.UI.createButton({
-            title: "Winner",
+            titleid: "winnerB",
             borderWidth: "1",
             borderColor: "#bbb",
             borderRadius: "8",
@@ -207,7 +213,9 @@ function Controller() {
             height: "80",
             padding: 0
         });
-        winnerButton.addEventListener("click", function() {});
+        winnerButton.addEventListener("click", function() {
+            alert("Submit as winner?");
+        });
         $.votePage.add(winnerButton);
         screenLeft = winnerButton.top;
     }
@@ -300,6 +308,14 @@ function Controller() {
     var screenWidth = Ti.Platform.displayCaps.platformWidth;
     var screenHeight = Ti.Platform.displayCaps.platformHeight;
     var screenLeft = screenHeight;
+    var rangeBottom = 0;
+    var rangeTop = 50;
+    var comments = "true";
+    var imagePath = ospath + "placeholder.png";
+    imagePath = ospath + "kitty.jpg";
+    photoPath = imagePath;
+    var sessionType = "normal";
+    var controlled = "false";
     Ti.Gesture.addEventListener("orientationchange", function() {
         var win = Alloy.createController("vote").getView();
         win.open();

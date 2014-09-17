@@ -17,6 +17,6 @@
 		<!-- iOS and Android -->
         <ImageView id="loadingImage" image="1.png"/>
 
-		<Label id="label1">Waiting...</Label>	
+		<Label id="waitLabel">Waiting...</Label>	
     </Window>
 </Alloy>
