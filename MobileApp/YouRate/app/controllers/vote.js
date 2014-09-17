@@ -20,7 +20,7 @@ var displayTitle = "true";
 var comments = "true"; 
 var imagePath = ospath+"placeholder.png";
 //imagePath = ospath+"animalLandscape.jpg";
-imagePath = ospath+"kitty.jpg";
+//imagePath = ospath+"kitty.jpg";
 photoPath = imagePath; //For yesNo winner events
 //alert("IMG path: "+imagePath);
 //var sessionType = "normal";

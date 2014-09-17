@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="votePage"  onFocus="fixPage">
+    <Window id="votePage"  onFocus="fixPage" backgroundImage="bg.png">
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
 			<Button id="appName">uRate</Button>
@@ -11,6 +11,6 @@
 		</Menu>
 		
 		<!-- iOS and Android -->
-		<ImageView id="currentImage" />           
+		<ImageView id="currentImage" defaultImage="placeholder.png"/>           
     </Window>
 </Alloy>

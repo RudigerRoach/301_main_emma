@@ -1,5 +1,5 @@
 <resources>
-    <string name="loginB">Inloggen/string>
+    <string name="loginB">Inloggen</string>
     <string name="submitB">Dien in</string>
     <string name="commentB">Lewer kommentaar</string>
     <string name="sliderT">Punte:</string>

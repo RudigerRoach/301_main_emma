@@ -261,7 +261,8 @@ function Controller() {
     $.__views.votePage = Ti.UI.createWindow({
         backgroundColor: "#DFE4E7",
         exitOnClose: true,
-        id: "votePage"
+        id: "votePage",
+        backgroundImage: "bg.png"
     });
     $.__views.votePage && $.addTopLevelView($.__views.votePage);
     fixPage ? $.__views.votePage.addEventListener("focus", fixPage) : __defers["$.__views.votePage!focus!fixPage"] = true;
@@ -298,7 +299,8 @@ function Controller() {
         borderRadius: "5",
         width: "200",
         height: "200",
-        id: "currentImage"
+        id: "currentImage",
+        defaultImage: "placeholder.png"
     });
     $.__views.votePage.add($.__views.currentImage);
     exports.destroy = function() {};
@@ -316,7 +318,6 @@ function Controller() {
     var rangeTop = 50;
     var comments = "true";
     var imagePath = ospath + "placeholder.png";
-    imagePath = ospath + "kitty.jpg";
     photoPath = imagePath;
     var sessionType = "yesNo";
     var controlled = "false";
