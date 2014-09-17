@@ -1,3 +1,4 @@
+var language = require('alloy').Globals.language;
 var waiter;
 function loadImage(){
 	//Make loading image move
