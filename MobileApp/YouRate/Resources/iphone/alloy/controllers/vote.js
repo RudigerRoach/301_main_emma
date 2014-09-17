@@ -6,10 +6,7 @@ function Controller() {
             "true" == comments && commentsEnabled();
             createSlider();
         } else if ("yesNo" == sessionType) {
-            if ("false" == controlled) {
-                createSubmitButton();
-                alert("done");
-            }
+            "false" == controlled && createSubmitButton();
             "true" == comments && commentsEnabled();
             createYesNoButtons();
         } else if ("winner" == sessionType) {
@@ -185,6 +182,11 @@ function Controller() {
         yesButton.addEventListener("click", function() {
             yesButton.opacity = 1;
             noButton.opacity = .5;
+            language = "de";
+            alert(Titanium.App.language);
+            Titanium.App.Properties.setString("locale", language);
+            Titanium.App.language = language;
+            alert(Titanium.App.language);
         });
         $.votePage.add(yesButton);
         noButton.addEventListener("click", function() {
@@ -215,6 +217,7 @@ function Controller() {
         });
         winnerButton.addEventListener("click", function() {
             alert("Submit as winner?");
+            doSubmit();
         });
         $.votePage.add(winnerButton);
         screenLeft = winnerButton.top;
@@ -300,6 +303,7 @@ function Controller() {
     $.__views.votePage.add($.__views.currentImage);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    var language = require("alloy").Globals.language;
     var commentArea = "";
     var photoPath = "";
     var slider;
@@ -314,7 +318,7 @@ function Controller() {
     var imagePath = ospath + "placeholder.png";
     imagePath = ospath + "kitty.jpg";
     photoPath = imagePath;
-    var sessionType = "normal";
+    var sessionType = "yesNo";
     var controlled = "false";
     Ti.Gesture.addEventListener("orientationchange", function() {
         var win = Alloy.createController("vote").getView();

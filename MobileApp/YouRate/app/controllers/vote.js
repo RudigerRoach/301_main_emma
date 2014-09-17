@@ -1,3 +1,4 @@
+var language = require('alloy').Globals.language;
 var commentArea = "";
 var photoPath = "";
 var slider;
@@ -7,7 +8,7 @@ var ospath = "";
 	}else if(OS_IOS){
 		ospath = "";
 	}	
-	
+
 var screenWidth = Ti.Platform.displayCaps.platformWidth;
 var screenHeight = Ti.Platform.displayCaps.platformHeight;
 var screenLeft = screenHeight;
@@ -22,8 +23,8 @@ var imagePath = ospath+"placeholder.png";
 imagePath = ospath+"kitty.jpg";
 photoPath = imagePath; //For yesNo winner events
 //alert("IMG path: "+imagePath);
-var sessionType = "normal";
-//var sessionType = "yesNo";
+//var sessionType = "normal";
+var sessionType = "yesNo";
 //var sessionType = "winner";
 var controlled = "false"; //Must add this!!
 	
@@ -57,7 +58,6 @@ function fixPage()
 		if(controlled == "false")
 		{
 			createSubmitButton();
-			alert("done");
 		}
 		
 		if(comments == "true")
@@ -324,6 +324,11 @@ function createYesNoButtons()
 	{
 	   	yesButton.opacity = 1;
 		noButton.opacity = 0.5;
+		language = "de";
+		alert(Titanium.App.language);
+		Titanium.App.Properties.setString('locale',language);
+		Titanium.App.language = language;
+		alert(Titanium.App.language);
 	   //doSubmit();
 	});
 	$.votePage.add(yesButton);

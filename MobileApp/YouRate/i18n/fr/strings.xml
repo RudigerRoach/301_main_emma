@@ -1,0 +1,9 @@
+<resources>
+    <string name="loginB">Connexion</string>
+    <string name="submitB">Soumettre</string>
+    <string name="commentB">Ajouter un commentaire</string>
+    <string name="sliderT">Score:</string>
+    <string name="yesB">Oui</string>
+    <string name="noB">Aucun</string>
+    <string name="winnerB">Vainqueur</string>
+</resources>
