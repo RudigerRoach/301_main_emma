@@ -305,7 +305,6 @@ function Controller() {
     $.__views.votePage.add($.__views.currentImage);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var language = require("alloy").Globals.language;
     var commentArea = "";
     var photoPath = "";
     var slider;

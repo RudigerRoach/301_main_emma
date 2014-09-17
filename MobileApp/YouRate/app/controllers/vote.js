@@ -1,4 +1,3 @@
-var language = require('alloy').Globals.language;
 var commentArea = "";
 var photoPath = "";
 var slider;

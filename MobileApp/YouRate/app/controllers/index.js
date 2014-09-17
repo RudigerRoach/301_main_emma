@@ -7,9 +7,10 @@ function displayLoginPage(){
 	if(OS_ANDROID){
 		ospath = "/images/";
 	}else if(OS_IOS){
-		ospath = "";
+		ospath = "/";
 	}
 	$.startPage.backgroundImage = ospath+"bg.jpg";
+	ospath += "spinner/";
 	waiter = setInterval(function(){
 			switch(number){
 				case 1:
@@ -36,13 +37,35 @@ function displayLoginPage(){
 				case 8:
 					$.loadingImage.image = ospath+"h.png";
 				break;
+				case 9:
+					$.loadingImage.image = ospath+"i.png";
+				break;
+				case 10:
+					$.loadingImage.image = ospath+"j.png";
+				break;
+				case 11:
+					$.loadingImage.image = ospath+"k.png";
+				break;
+				case 12:
+					$.loadingImage.image = ospath+"l.png";
+				break;
+				case 13:
+					$.loadingImage.image = ospath+"m.png";
+				break;
+				case 14:
+					$.loadingImage.image = ospath+"n.png";
+				break;
+				case 15:
+					$.loadingImage.image = ospath+"o.png";
+				break;
+				case 16:
+					$.loadingImage.image = ospath+"p.png";
+				break;
 			}
 
-			//Ti.API.info($.loadingImage.image+" :image");
-
 			number++;
-			if (number > 8){number=1;}
-		},500);
+			if (number > 16){number=1;}
+		},150);
 		
 	//Call autoLogin
 	service=require('Authentication');
