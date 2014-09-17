@@ -18,6 +18,9 @@ function doLogin()
 	}else if(OS_IOS){
 		ospath = "";
 	}
+	
+	$.loginPage.backgroundImage = ospath+"bg.jpg";
+	
 	waiter = setInterval(function(){
 			switch(number){
 				case 1:
