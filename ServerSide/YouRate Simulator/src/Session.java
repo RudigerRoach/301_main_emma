@@ -4,7 +4,14 @@ import javax.imageio.ImageIO;
 
 public class Session 
 {
-    linkedList imageNames = null;
+    private final static Session instance = new Session();
+    public static Session getInstance() {
+        return instance;
+    }
+    
+    
+    
+    linkedList imageID = null;
     BufferedImage[] images = null;
     String[] judges = null;
     int topRange = 0;
@@ -14,9 +21,9 @@ public class Session
     String[] imageDetails;
     String type;
     
-    public Session(linkedList _imageNames, BufferedImage[] _images, String[] _judges,int _topRange,int _botRange, Boolean _openSession,Boolean _controlledSession,String[] _imageDetails,String _type )
+    public Session(linkedList _imageID, BufferedImage[] _images, String[] _judges,int _topRange,int _botRange, Boolean _openSession,Boolean _controlledSession,String[] _imageDetails,String _type )
     {
-        imageNames = _imageNames;
+        imageID = _imageID;
         images = _images;
         judges = _judges;
         topRange = _topRange;
@@ -125,19 +132,19 @@ public class Session
     {
         BufferedReader br = new BufferedReader(new FileReader("Photos.txt"));
         String line;
-        imageNames = new linkedList();
+        imageID = new linkedList();
         int count = 0;
         while ((line = br.readLine()) != null) 
         {
                 count++;
                 linkedList a = new linkedList();
-                a.info = line;
+                a.id = Long.parseLong(line);
                 a.next = null;
-            if(imageNames == null)
-                imageNames = a;
+            if(imageID == null)
+                imageID = a;
             else    
             {
-                linkedList current = imageNames;
+                linkedList current = imageID;
                 while(current.next != null)
                     current = current.next;
 
@@ -147,7 +154,7 @@ public class Session
         br.close();
         images = new BufferedImage[count];
         
-        linkedList temp = imageNames;
+        linkedList temp = imageID;
         count = 0;
         
         while(temp != null)
@@ -155,7 +162,7 @@ public class Session
             temp = temp.next;
             try 
             {
-                images[count] = ImageIO.read(new File(temp.info));
+                images[count] = ImageIO.read(new File(temp.id.toString() + ".jpg"));
                 count++;
                 
             } 

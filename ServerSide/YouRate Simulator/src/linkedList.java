@@ -9,7 +9,7 @@
  */
 public class linkedList 
 {
-    public String info;
+    public Long id;
     public linkedList next;
     
 }
