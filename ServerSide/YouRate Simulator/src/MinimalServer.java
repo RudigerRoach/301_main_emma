@@ -172,15 +172,13 @@ public class MinimalServer
         start = true;
     }
     
-    public int [] nextImage()
+    public void nextImage()
     {
-        System.out.println("Next image is geroep");
-        int [] temp = new int[judgesList.size()];
-        for (int i=0; i < temp.length;i++)
-        {
-            temp[i] = judgesList.get(i).getCurrentScore();
-        }
         currentPhoto.getAndIncrement();
-        return temp;
+    }
+    
+    public int statusOnHowManyVoted()
+    {
+        return 0;
     }
 }

@@ -33,79 +33,70 @@ public class DBAccess {
     }
 
     public void insert(String email, String uid) {
-        user usr = new user();
-        usr.email = email;
-        usr.uid = uid;
-        database.store(usr);
+        nu.email = email;
+        nu.uid = uid;
+        database.store(nu);
     }
 
     public boolean update(String email, String uid) {
-        ObjectSet<user> set = database.queryByExample(user.class);
-        for(user j : set){
-            if(j.email.compareTo(email)==0){
-                j.uid = uid;
-                database.store(j);
-                return true;
-            }
+        nu.clear();
+        nu.email = email;
+
+        oSet = database.queryByExample(nu);
+        if (oSet.size() > 0) {
+            nu = oSet.next();
+            nu.uid = uid;
+            database.store(nu);
+            return true;
         }
         return false;
     }
 
     public boolean delete(String email, String uid) {
-        ObjectSet<user> set = database.queryByExample(user.class);
-        for(user j : set){
-            if(j.email.compareTo(email)== 0 && j.uid.compareTo(uid) == 0){
-                database.delete(j);
-                return true;
-            }
+        nu.email = email;
+        nu.uid = uid;
+        oSet = database.queryByExample(nu);
+        if (oSet.size() > 0) {
+            nu = oSet.next();
+            database.delete(nu);
+            return true;
         }
         return false;
     }
 
     public boolean userExists(String email) {
-        ObjectSet<user> set = database.queryByExample(user.class);
-        for(user j : set){
-            if(j.email != null && j.email.compareTo(email)== 0){
-                return true;
-            }
-        }
-        return false;
+        nu.clear();
+        nu.email = email;
+        oSet = database.queryByExample(nu);
+        return oSet.size() > 0;
     }
 
     public boolean deviceExists(String uid) {
-        ObjectSet<user> set = database.queryByExample(user.class);
-        for(user j : set){
-            if(j.uid != null && j.uid.compareTo(uid)== 0){
-                return true;
-            }
-        }
-        return false;
+        nu.clear();
+        nu.uid = uid;
+        oSet = database.queryByExample(nu);
+        return oSet.size() > 0;
     }
 
     public boolean shouldAutoLogin(String email, String uid) {
-        ObjectSet<user> set = database.queryByExample(user.class);
-        for(user j : set){
-            if(j.uid != null && j.uid.compareTo(uid)== 0 && j.email.compareTo(email)== 0){
-                return true;
-            }
-        }
-        return false;
+        nu.uid = uid;
+        nu.email = email;
+        oSet = database.queryByExample(nu);
+        return oSet.size() > 0;
     }
 
     public void selectAll() {
         oSet = database.queryByExample(user.class);
-        for(Object j : oSet){
-            if(((user)j).email != null)
-            System.out.println(((user)j).email+" "+((user)j).uid);
-        }
+        System.out.println(oSet.toString());
     }
     
     public String getMail(String uid) {
-        ObjectSet<user> set = database.queryByExample(user.class);
-        for(user j : set){
-            if(j.uid.compareTo(uid) == 0){
-                return j.email;
-            }
+        nu.clear();
+        nu.uid = uid;
+        oSet = database.queryByExample(nu);
+        if(oSet.size() > 0){
+            nu = oSet.next();
+            return nu.email;
         }
         return "";
     }
