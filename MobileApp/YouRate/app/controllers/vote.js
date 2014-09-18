@@ -30,8 +30,8 @@ var imagePath = ospath+"placeholder.png";
 photoPath = imagePath; //For yesNo winner events
 //alert("IMG path: "+imagePath);
 //var sessionType = "normal";
-//var sessionType = "yesNo";
-var sessionType = "winner";
+var sessionType = "yesNo";
+//var sessionType = "winner";
 	
 function fixPage()
 {
@@ -254,7 +254,7 @@ function createSlider()
     
 	var sliderLabel = Ti.UI.createLabel(
 	{
-	titleid: 'SliderT',
+		titleid: 'SliderT',
 	    //text: "Score: ",
 		width: "150",
 		height: "30",
@@ -436,7 +436,7 @@ function addScrollableImage()
 		  width: "auto",
 		  top: 50
 	});
-	alert(photosView.currentPage);
+	//alert(photosView.currentPage);
 	$.votePage.add(photosView);
 }
 

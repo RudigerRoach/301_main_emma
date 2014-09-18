@@ -22,7 +22,7 @@ function Controller() {
         service = require("VoteSession");
         "normal" == sessionType && ("true" == comments ? service.submitResult(Math.floor(Number(slider.value)), commentArea.value) : service.submitResult(Math.floor(Number(slider.value)), ""));
         "yesNo" == sessionType && ("true" == comments ? service.submitResult(chosen, commentArea.value) : service.submitResult(chosen, ""));
-        "winner" == sessionType && service.submitResult(chosenIndex, "");
+        "winner" == sessionType && service.submitResult(photosView.currentPage, "");
         var win = Alloy.createController("wait").getView();
         win.open();
     }
@@ -216,7 +216,6 @@ function Controller() {
             padding: 0
         });
         winnerButton.addEventListener("click", function() {
-            alert(photosView.currentPage);
             var dialog = Ti.UI.createAlertDialog({
                 cancel: 1,
                 buttonNames: [ "Confirm", "Cancel" ],
@@ -257,7 +256,6 @@ function Controller() {
             width: "auto",
             top: 50
         });
-        alert(photosView.currentPage);
         $.votePage.add(photosView);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -330,7 +328,7 @@ function Controller() {
     var comments = "true";
     var imagePath = ospath + "placeholder.png";
     photoPath = imagePath;
-    var sessionType = "winner";
+    var sessionType = "yesNo";
     Ti.Gesture.addEventListener("orientationchange", function() {
         var win = Alloy.createController("vote").getView();
         win.open();
