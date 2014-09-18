@@ -6,11 +6,12 @@ function Controller() {
             "true" == comments && commentsEnabled();
             createSlider();
         } else if ("yesNo" == sessionType) {
-            "false" == controlled && createSubmitButton();
+            createSubmitButton();
             "true" == comments && commentsEnabled();
             createYesNoButtons();
         } else if ("winner" == sessionType) {
             createWinnerButton();
+            $.votePage.remove($.currentImage);
             addScrollableImage();
         }
         $.currentImage.image = imagePath;
@@ -19,7 +20,9 @@ function Controller() {
     }
     function doSubmit() {
         service = require("VoteSession");
-        "normal" == sessionType && service.submitResult(Math.floor(Number(slider.value)), commentArea.value);
+        "normal" == sessionType && ("true" == comments ? service.submitResult(Math.floor(Number(slider.value)), commentArea.value) : service.submitResult(Math.floor(Number(slider.value)), ""));
+        "yesNo" == sessionType && ("true" == comments ? service.submitResult(chosen, commentArea.value) : service.submitResult(chosen, ""));
+        "winner" == sessionType && service.submitResult(chosenIndex, "");
         var win = Alloy.createController("wait").getView();
         win.open();
     }
@@ -182,16 +185,13 @@ function Controller() {
         yesButton.addEventListener("click", function() {
             yesButton.opacity = 1;
             noButton.opacity = .5;
-            language = "de";
-            alert(Titanium.App.language);
-            Titanium.App.Properties.setString("locale", language);
-            Titanium.App.language = language;
-            alert(Titanium.App.language);
+            chosen = 1;
         });
         $.votePage.add(yesButton);
         noButton.addEventListener("click", function() {
             yesButton.opacity = .5;
             noButton.opacity = 1;
+            chosen = 0;
         });
         $.votePage.add(noButton);
         screenLeft = yesButton.top;
@@ -216,8 +216,17 @@ function Controller() {
             padding: 0
         });
         winnerButton.addEventListener("click", function() {
-            alert("Submit as winner?");
-            doSubmit();
+            alert(photosView.currentPage);
+            var dialog = Ti.UI.createAlertDialog({
+                cancel: 1,
+                buttonNames: [ "Confirm", "Cancel" ],
+                message: "Are you sure that this should be the winner?",
+                title: "Submit as winner"
+            });
+            dialog.addEventListener("click", function(e) {
+                0 == e.index && doSubmit();
+            });
+            dialog.show();
         });
         $.votePage.add(winnerButton);
         screenLeft = winnerButton.top;
@@ -241,13 +250,14 @@ function Controller() {
             maxZoomScale: 4
         });
         img2Wrapper.add(img2);
-        var photosView = Ti.UI.createScrollableView({
+        photosView = Ti.UI.createScrollableView({
             showPagingControl: true,
             views: [ img1Wrapper, img2Wrapper ],
             height: screenLeft - 80,
             width: "auto",
             top: 50
         });
+        alert(photosView.currentPage);
         $.votePage.add(photosView);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -311,14 +321,15 @@ function Controller() {
     var screenWidth = Ti.Platform.displayCaps.platformWidth;
     var screenHeight = Ti.Platform.displayCaps.platformHeight;
     var screenLeft = screenHeight;
+    var chosen = 0;
+    var photosView;
     var rangeBottom = 0;
     var rangeTop = 50;
     var comments = "true";
     var imagePath = ospath + "placeholder.png";
     imagePath = ospath + "kitty.jpg";
     photoPath = imagePath;
-    var sessionType = "yesNo";
-    var controlled = "false";
+    var sessionType = "winner";
     Ti.Gesture.addEventListener("orientationchange", function() {
         var win = Alloy.createController("vote").getView();
         win.open();
