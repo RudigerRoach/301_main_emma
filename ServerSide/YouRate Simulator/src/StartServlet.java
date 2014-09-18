@@ -43,6 +43,7 @@ public class StartServlet extends HttpServlet
                 if((MinimalServer.session.getType().equals("normal") == true) || (MinimalServer.session.getType().equals("yesNo") == true))
                 {
                     jsonResponse.put("status", "1");
+                    jsonResponse.put("controlled","true");
                     jsonResponse.put("sessionType",MinimalServer.session.getType());
                     jsonResponse.put("rangeBottom", MinimalServer.session.getBotRange());
                     jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
@@ -54,6 +55,7 @@ public class StartServlet extends HttpServlet
                 else if (MinimalServer.session.getSessionType().equals("winner") == true)
                 {
                     jsonResponse.put("status", "1");
+                    jsonResponse.put("controlled","false");
                     jsonResponse.put("sessionType",MinimalServer.session.getType());
                     jsonResponse.put("rangeBottom", MinimalServer.session.getBotRange());
                     jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
