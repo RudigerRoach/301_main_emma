@@ -132,7 +132,7 @@ public class FXMLDocumentController implements Initializable{
         if(Normal.isSelected())
             type = "normal";
         else if (Elimination.isSelected())
-            type = "elimination";
+            type = "yesNo";
         else if (Winner.isSelected())
             type = "winner";
         
@@ -153,7 +153,7 @@ public class FXMLDocumentController implements Initializable{
             System.out.println(ex);
         } 
         
-        Scene newScene = new Scene(FXMLLoader.load(getClass().getResource("FXMLrunningSession.fxml")));
+        Scene newScene = new Scene((Parent) FXMLLoader.load(getClass().getResource("FXMLrunningSession.fxml")));
         fxStage newStage = new fxStage(mySession);
         newStage.setScene(newScene);
         newStage.setTitle("Emma Simulator");

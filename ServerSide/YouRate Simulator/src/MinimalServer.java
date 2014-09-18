@@ -179,6 +179,34 @@ public class MinimalServer
     
     public int statusOnHowManyVoted()
     {
-        return 0;
+        int count = 0;
+        int current = currentPhoto.get();
+        for (Judge judgesList1 : judgesList) 
+        {
+            if(current == judgesList1.getCurrentImage())
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    public int howManyLoggedIn()
+    {
+        return judgesList.size();
+    }
+    
+    public int [][] getScores()
+    {
+        if (currentPhoto.get() == totaalImages)
+        {
+            int [][] temp = new int[session.judges.length][totaalImages];
+            for(int i = 0; i < session.judges.length;i++)
+            {
+                temp[i] = judgesList.get(i).getCurrentScores();
+            }
+            return temp;
+        }
+        return null;
     }
 }

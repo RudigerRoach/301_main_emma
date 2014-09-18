@@ -21,6 +21,36 @@ public class NextImageServlet extends HttpServlet
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
+        if(MinimalServer.session.type.equals("winner"))
+        {
+            String previousImageScore = request.getParameter("result");
+            String previousImageComment = request.getParameter("comment");
+            String judge = request.getParameter("deviceUID");
+            String choosen = request.getParameter("choosen");
+            DBAccess database = new DBAccess();
+            database.open();
+            String email = database.getMail(judge);
+            for (Judge judgesList : MinimalServer.judgesList) 
+            {
+                if (judgesList.getJudgeName().equals(email) == true)
+                {
+                    judgesList.setImageSpecificScoreAndComment(Integer.parseInt(choosen), Integer.parseInt(previousImageScore), previousImageComment);
+                }
+            }
+            JSONObject jsonResponse = new JSONObject();
+            try 
+            {
+                jsonResponse.put("status", "2");
+            }
+            catch (JSONException e) 
+            {
+                e.printStackTrace();
+            }
+            
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().print(jsonResponse);
+            database.close();
+        }
         if(MinimalServer.session.getControll() == false)
         {
             System.out.println("Next image is called");
@@ -41,7 +71,7 @@ public class NextImageServlet extends HttpServlet
                         try 
                         {
                             jsonResponse.put("status", "1");
-                            jsonResponse.put("sessionType", "normal");
+                            jsonResponse.put("sessionType", MinimalServer.session.getType());
                             jsonResponse.put("description", MinimalServer.session.getImageDetails(judgesList.getCurrentImage()-1));
                             jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
                             System.out.println();
@@ -75,6 +105,7 @@ public class NextImageServlet extends HttpServlet
                     break;
                 }
             }
+            database.close();
         }
         else
         {
@@ -98,7 +129,7 @@ public class NextImageServlet extends HttpServlet
                         try 
                         {
                             jsonResponse.put("status", "1");
-                            jsonResponse.put("sessionType", MinimalServer.session.getSessionType());
+                            jsonResponse.put("sessionType", MinimalServer.session.getType());
                             jsonResponse.put("description", MinimalServer.session.getImageDetails(MinimalServer.currentPhoto.get() -1));
                             jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[MinimalServer.currentPhoto.get()-1].getName());
 
@@ -132,6 +163,7 @@ public class NextImageServlet extends HttpServlet
                     break;
                 }
             }
+            database.close();
         }
     }
 }

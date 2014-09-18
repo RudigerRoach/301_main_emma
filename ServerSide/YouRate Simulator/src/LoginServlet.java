@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet
                     if(deviceIDExist == false)
                     {
                         System.out.println("Don't Remember Device...");
-                        database.insert(user, id);
+                        //database.insert(user, id);
                     }
                     else
                     {
@@ -225,5 +225,6 @@ public class LoginServlet extends HttpServlet
                 response.getWriter().print(jsonResponse);
             }
         }
+        database.close();
     }
 }
