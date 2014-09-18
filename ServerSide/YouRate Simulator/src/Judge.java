@@ -18,7 +18,15 @@ public class Judge
     public Judge(String _name)
     {
         score = new int [MinimalServer.totaalImages];
+        for (int i= 0; i < MinimalServer.totaalImages;i++)
+        {
+            score[i] = 0;
+        }
         comment = new String [MinimalServer.totaalImages];
+        for (int i = 0; i < MinimalServer.totaalImages;i++)
+        {
+            comment[i] = "";
+        }
         judgeName = _name;
         currentImage = 1;
     }
@@ -40,13 +48,19 @@ public class Judge
         return comment[currentImage-1];
     }
     
-    public int getCurrentScore()
+    public int [] getCurrentScores()
     {
-        return score[currentImage-1];
+        return score;
     }
     
     public String getJudgeName()
     {
         return judgeName;
+    }
+    
+    public void setImageSpecificScoreAndComment(int _index, int _score, String _comment)
+    {
+        score[_index] = _score;
+        comment[_index] = _comment;
     }
 }
