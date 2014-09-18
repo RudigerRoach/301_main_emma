@@ -6,7 +6,9 @@
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -63,6 +65,9 @@ public class FXMLDocumentController implements Initializable{
     @FXML
     private TableView images;
     
+    final ToggleGroup group = new ToggleGroup();
+    
+    Session mySession;
     
     public FXMLDocumentController()
     {
@@ -72,12 +77,7 @@ public class FXMLDocumentController implements Initializable{
     @FXML
     private void handleStartButtonAction(ActionEvent event) throws IOException {
         System.out.println("You called me!");
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLrunningSession.fxml"));
-        Scene newScene = new Scene(FXMLLoader.load(getClass().getResource("FXMLrunningSession.fxml")));
-        Stage newStage = new Stage();
-        newStage.setScene(newScene);
-        newStage.setTitle("Emma Simulator");
-        newStage.show();
+        
 
         
         linkedList names = new linkedList();
@@ -87,11 +87,11 @@ public class FXMLDocumentController implements Initializable{
         linkedList name4 = new linkedList();
         linkedList name5 = new linkedList();
         
-        name1.info = "image1";
-        name2.info = "image2";
-        name3.info = "image3";
-        name4.info = "image4";
-        name5.info = "image5";
+        name1.id = 1L;
+        name2.id = 2L;
+        name3.id = 3L;
+        name4.id = 4L;
+        name5.id = 5L;
         
         names.next = name1;
         name1.next = name2;
@@ -105,7 +105,7 @@ public class FXMLDocumentController implements Initializable{
         images[2] = ImageIO.read(new File("image3.jpg"));
         images[3] = ImageIO.read(new File("image4.jpg"));   
         images[4] = ImageIO.read(new File("image5.jpg"));
-        System.out.println(images[0]);
+        System.out.println("image in 0 : " +images[0]);
         
         String[] judges = new String[5];
         judges[0]= "Johan";
@@ -122,7 +122,26 @@ public class FXMLDocumentController implements Initializable{
         imgDetails[3] = "Huisie by die see";
         imgDetails[4] = "Not a cat you want to play with";
         
-        Session mySession = new Session(names,images,judges,10,0,true,false,imgDetails,"normal");
+        int min =  Integer.parseInt((minimumScore.getText()));
+        int max =  Integer.parseInt((maximumScore.getText()));
+        boolean cont = controlledSession.isSelected();
+        boolean open = openSession.isSelected();
+        boolean comments = commentsEnabled.isSelected();
+        String type = "normal";
+        
+        if(Normal.isSelected())
+            type = "normal";
+        else if (Elimination.isSelected())
+            type = "elimination";
+        else if (Winner.isSelected())
+            type = "winner";
+        
+        
+        mySession = new Session(names,images,judges,max,min,open,cont,imgDetails,type);
+//        FileOutputStream saveFile=new FileOutputStream("SaveObj.sav");
+//        ObjectOutputStream save = new ObjectOutputStream(saveFile);
+//        save.writeObject(mySession);
+//        save.close();
         
         try
         {
@@ -132,19 +151,25 @@ public class FXMLDocumentController implements Initializable{
         catch(Exception ex)
         {
             System.out.println(ex);
-        }
-//        Scene display = new Scene(FXMLLoader.load(getClass().getResource("Display.fxml")));
-//        Stage displayStage = new Stage();
-//        displayStage.setScene(display);
-//        displayStage.setTitle("Emma Simulator");
-//        displayStage.show();
+        } 
         
-        
-        
+        Scene newScene = new Scene(FXMLLoader.load(getClass().getResource("FXMLrunningSession.fxml")));
+        fxStage newStage = new fxStage(mySession);
+        newStage.setScene(newScene);
+        newStage.setTitle("Emma Simulator");
+        newStage.setFullScreen(true);
+        newStage.show();
     }
     
+    
+    
+    
+
+
+    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+        //minimumScore.setText("0");
     }
 }

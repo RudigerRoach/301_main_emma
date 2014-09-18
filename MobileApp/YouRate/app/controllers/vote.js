@@ -7,9 +7,14 @@ var ospath = "";
 	}else if(OS_IOS){
 		ospath = "";
 	}	
+	
+$.votePage.backgroundImage = ospath+"bg.jpg";
 
 var screenWidth = Ti.Platform.displayCaps.platformWidth;
 var screenHeight = Ti.Platform.displayCaps.platformHeight;
+if(OS_ANDROID){
+		screenHeight -= 90;
+}
 var screenLeft = screenHeight;
 	
 var chosen = 0;	
@@ -21,7 +26,7 @@ var displayTitle = "true";
 var comments = "true"; 
 var imagePath = ospath+"placeholder.png";
 //imagePath = ospath+"animalLandscape.jpg";
-imagePath = ospath+"kitty.jpg";
+//imagePath = ospath+"kitty.jpg";
 photoPath = imagePath; //For yesNo winner events
 //alert("IMG path: "+imagePath);
 //var sessionType = "normal";
@@ -73,6 +78,9 @@ function fixPage()
 		
 	//Change image to path received from server	
 	//Try portrait image	
+	if(OS_ANDROID){
+		$.currentImage.top -= 30;
+	}
 	$.currentImage.image = imagePath;
 	$.currentImage.height = screenLeft - 80;
 	$.currentImage.width = "auto";

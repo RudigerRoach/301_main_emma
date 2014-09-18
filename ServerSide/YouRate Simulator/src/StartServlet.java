@@ -40,13 +40,34 @@ public class StartServlet extends HttpServlet
 //		        "description": "image discription here",
 //		        "comments": "True",  //True if comments are allowed, False if not
 //		        "imgPath": "path/to/image.jpg" //the path where the image resides on the server
-                jsonResponse.put("status", "1");
-                jsonResponse.put("sessionType","normal");
-                jsonResponse.put("rangeBottom", MinimalServer.session.getBotRange());
-                jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
-                jsonResponse.put("description", MinimalServer.session.getImageDetails(0));
-                jsonResponse.put("comments", "true");
-                jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[0].getName());
+                if((MinimalServer.session.getType().equals("normal") == true) || (MinimalServer.session.getType().equals("yesNo") == true))
+                {
+                    jsonResponse.put("status", "1");
+                    jsonResponse.put("controlled","true");
+                    jsonResponse.put("sessionType",MinimalServer.session.getType());
+                    jsonResponse.put("rangeBottom", MinimalServer.session.getBotRange());
+                    jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
+                    jsonResponse.put("description", MinimalServer.session.getImageDetails(0));
+                    //check hierna
+                    jsonResponse.put("comments", "true");
+                    jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[0].getName()); 
+                }
+                else if (MinimalServer.session.getSessionType().equals("winner") == true)
+                {
+                    jsonResponse.put("status", "1");
+                    jsonResponse.put("controlled","false");
+                    jsonResponse.put("sessionType",MinimalServer.session.getType());
+                    jsonResponse.put("rangeBottom", MinimalServer.session.getBotRange());
+                    jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
+                    jsonResponse.put("description", MinimalServer.session.getImageDetails(0));
+                    //check hierna
+                    jsonResponse.put("comments", "true");
+                    jsonResponse.put("imgTotaal" , MinimalServer.totaalImages);
+                    for(int i = 0; i < MinimalServer.totaalImages; i++)
+                    {
+                       jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[i].getName());  
+                    }
+                }
             } 
             catch (JSONException ex) 
             {

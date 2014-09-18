@@ -17,9 +17,9 @@
       </Label>
       <Pane layoutX="30.0" layoutY="88.0" prefHeight="401.0" prefWidth="284.0" style="-fx-background-color: white; -fx-border-color: black;">
          <children>
-            <CheckBox id="controlledSession" layoutX="11.0" layoutY="176.0" mnemonicParsing="false" text="Navigation Controlled" />
-            <CheckBox id="openSession" layoutX="10.0" layoutY="211.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="263.0" text="Open Judging(Anyone can Judge)" />
-            <CheckBox id="commentsEnabled" layoutX="11.0" layoutY="245.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="244.0" text="Comments Enabled" />
+            <CheckBox fx:id="controlledSession" layoutX="11.0" layoutY="176.0" mnemonicParsing="false" text="Navigation Controlled" />
+            <CheckBox fx:id="openSession" layoutX="10.0" layoutY="211.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="263.0" text="Open Judging(Anyone can Judge)" />
+            <CheckBox fx:id="commentsEnabled" layoutX="11.0" layoutY="245.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="244.0" text="Comments Enabled" />
             <Label layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="197.0" text="Session Configurations">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -35,14 +35,14 @@
                     <fx:define>
                     <ToggleGroup fx:id="myToggleGroup"/>
                     </fx:define>
-                  <RadioButton toggleGroup="$myToggleGroup" id="Normal" layoutX="11.0" layoutY="32.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="138.0" text="Normal" />
-                  <RadioButton toggleGroup="$myToggleGroup" id="Elimination" layoutX="11.0" layoutY="57.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="161.0" text="Elimination(Yes/No)" />
-                  <RadioButton toggleGroup="$myToggleGroup" id="Winner" layoutX="11.0" layoutY="85.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="154.0" text="Winner(Choose 1)" />
+                  <RadioButton toggleGroup="$myToggleGroup" fx:id="Normal" layoutX="11.0" layoutY="32.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="138.0" text="Normal" />
+                  <RadioButton toggleGroup="$myToggleGroup" fx:id="Elimination" layoutX="11.0" layoutY="57.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="161.0" text="Elimination(Yes/No)" />
+                  <RadioButton toggleGroup="$myToggleGroup" fx:id="Winner" layoutX="11.0" layoutY="85.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="154.0" text="Winner(Choose 1)" />
                </children>
             </Pane>
             <Pane layoutX="10.0" layoutY="284.0" prefHeight="103.0" prefWidth="197.0" style="-fx-background-color: white; -fx-border-color: black;">
                <children>
-                  <TextField id="minimumScore" layoutX="131.0" layoutY="36.0" prefHeight="21.0" prefWidth="39.0" text="0" />
+                  <TextField fx:id="minimumScore" layoutX="131.0" layoutY="36.0" prefHeight="21.0" prefWidth="39.0" text="0" />
                   <Label layoutX="58.0" layoutY="6.0" prefHeight="17.0" prefWidth="108.0" text="Scoring Range">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -50,23 +50,23 @@
                   </Label>
                   <Label layoutX="8.0" layoutY="38.0" prefHeight="20.0" prefWidth="120.0" text="Minimum Score" />
                   <Label layoutX="8.0" layoutY="75.0" prefHeight="17.0" prefWidth="108.0" text="Maximum Score" />
-                  <TextField id="maximumScore" layoutX="131.0" layoutY="71.0" prefHeight="23.0" prefWidth="39.0" text="10" />
+                  <TextField fx:id="maximumScore" layoutX="131.0" layoutY="71.0" prefHeight="23.0" prefWidth="39.0" text="10" />
                </children>
             </Pane>
          </children>
       </Pane>
-      <TableView id="judges" layoutX="351.0" layoutY="313.0" prefHeight="151.0" prefWidth="335.0" style="-fx-border-color: Black;">
+      <TableView fx:id="judges" layoutX="351.0" layoutY="313.0" prefHeight="151.0" prefWidth="335.0" style="-fx-border-color: Black;">
         <columns>
           <TableColumn prefWidth="173.0" text="Judges" />
         </columns>
       </TableView>
-      <TableView id="images" layoutX="351.0" layoutY="87.0" prefHeight="207.0" prefWidth="335.0" style="-fx-border-color: black;">
+      <TableView fx:id="images" layoutX="351.0" layoutY="87.0" prefHeight="207.0" prefWidth="335.0" style="-fx-border-color: black;">
         <columns>
           <TableColumn prefWidth="75.0" text="Image" />
           <TableColumn prefWidth="240.0" text="Description" />
         </columns>
       </TableView>
-      <Button id="start" layoutX="29.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleStartButtonAction" prefHeight="54.0" prefWidth="657.0" style="-fx-background-color: #bbb;" text="Start Session">
+      <Button fx:id="start" layoutX="29.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleStartButtonAction" prefHeight="54.0" prefWidth="657.0" style="-fx-background-color: #bbb;" text="Start Session">
          <font>
             <Font size="25.0" />
          </font>
@@ -77,10 +77,10 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="68.0" prefWidth="314.0">
                <children>
-                  <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Add Image" />
-                  <Button layoutX="162.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Delete Selected Image" />
-                  <Button layoutX="19.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Edit Selected Image" />
-                  <Button layoutX="162.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Import Images" />
+                  <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" fx:id = "addImage" prefWidth="138.0" text="Add Image" />
+                  <Button layoutX="162.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" fx:id = "deleteSelected" prefWidth="138.0" text="Delete Selected Image" />
+                  <Button layoutX="19.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" fx:id = "editSelected" prefWidth="138.0" text="Edit Selected Image" />
+                  <Button layoutX="162.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" fx:id = "importImage" prefWidth="138.0" text="Import Images" />
                </children>
             </AnchorPane>
       </content>
@@ -89,10 +89,10 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="60.0" prefWidth="314.0">
                <children>
-                  <Button id="removeJudge" layoutX="162.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Remove Judge" />
-                  <Button id="removeJudge" layoutX="19.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Import Judges" />
-                  <Button id="addJudge" layoutX="19.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Add Judge" />
-                  <Button id="removeJudge" layoutX="162.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Export Judges" />
+                  <Button fx:id="removeJudge" layoutX="162.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Remove Judge" />
+                  <Button fx:id="importJudge" layoutX="19.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Import Judges" />
+                  <Button fx:id="addJudge" layoutX="19.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Add Judge" />
+                  <Button fx:id="exportJudges" layoutX="162.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Export Judges" />
                </children>
             </AnchorPane>
          </content>

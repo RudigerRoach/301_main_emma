@@ -93,8 +93,8 @@ public class MinimalServer
         tmp2.next = new linkedList();
         tmp2.next.info = "guitar.jpg";
         BufferedImage[] tmp3 = new BufferedImage[2];
-        tmp3[0] = ImageIO.read(new File("stellies.jpg"));
-        tmp3[1] = ImageIO.read(new File("guitar.jpg"));
+        tmp3[0] = ImageIO.read(new File("whiteTiger.jpg"));
+        tmp3[1] = ImageIO.read(new File("nature.jpg"));
         session = new Session(tmp2, tmp3, _judges,10,0,false,false,tmp);     
         images = session.getImages();
         totaalImages = images.length;
