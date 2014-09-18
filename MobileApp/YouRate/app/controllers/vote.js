@@ -17,6 +17,8 @@ if(OS_ANDROID){
 }
 var screenLeft = screenHeight;
 	
+var chosen = 0;	
+var photosView;
 var rangeBottom = 0;
 var rangeTop = 50;
 var description = "Image title"; 
@@ -28,9 +30,8 @@ var imagePath = ospath+"placeholder.png";
 photoPath = imagePath; //For yesNo winner events
 //alert("IMG path: "+imagePath);
 //var sessionType = "normal";
-var sessionType = "yesNo";
-//var sessionType = "winner";
-var controlled = "false"; //Must add this!!
+//var sessionType = "yesNo";
+var sessionType = "winner";
 	
 function fixPage()
 {
@@ -59,10 +60,7 @@ function fixPage()
 	}
 	else if(sessionType == "yesNo")
 	{
-		if(controlled == "false")
-		{
-			createSubmitButton();
-		}
+		createSubmitButton();
 		
 		if(comments == "true")
 		{				   
@@ -74,6 +72,7 @@ function fixPage()
 	else if(sessionType == "winner")
 	{
 		createWinnerButton();
+		$.votePage.remove($.currentImage);
 		addScrollableImage();
 	}
 		
@@ -95,8 +94,30 @@ function doSubmit(e)
 	if(sessionType == "normal")
 	{
 		//alert(photoPath + "," + slider.value + "," + commentArea.value);
-		service.submitResult(Math.floor(Number(slider.value)),commentArea.value);		
+		if(comments == "true")
+		{
+			service.submitResult(Math.floor(Number(slider.value)),commentArea.value);	
+		}	
+		else
+		{
+			service.submitResult(Math.floor(Number(slider.value)),"");
+		}
 	}	
+	if(sessionType == "yesNo")
+	{
+		if(comments == "true")
+		{
+			service.submitResult(chosen,commentArea.value);	
+		}	
+		else
+		{
+			service.submitResult(chosen,"");
+		}
+	}
+	if(sessionType == "winner")
+	{
+		service.submitResult(photosView.currentPage,"");
+	}
     //alert("Result successfully submitted");
     
     //Go to wait page
@@ -331,18 +352,14 @@ function createYesNoButtons()
 	{
 	   	yesButton.opacity = 1;
 		noButton.opacity = 0.5;
-		language = "de";
-		alert(Titanium.App.language);
-		Titanium.App.Properties.setString('locale',language);
-		Titanium.App.language = language;
-		alert(Titanium.App.language);
-	   //doSubmit();
+		chosen = 1;
 	});
 	$.votePage.add(yesButton);
 	noButton.addEventListener('click',function(e)
 	{
 	   	yesButton.opacity = 0.5;
-		noButton.opacity = 1;		   
+		noButton.opacity = 1;	
+		chosen = 0;	   
 	});
 	$.votePage.add(noButton);
 	screenLeft = yesButton.top;
@@ -372,8 +389,20 @@ function createWinnerButton()
 	});
 	winnerButton.addEventListener('click',function(e)
 	{
-	   alert("Submit as winner?");
-	   doSubmit();
+		//Add languages!!!!!!!!!!
+	   var dialog = Ti.UI.createAlertDialog({
+		    cancel: 1,
+		    buttonNames: ['Confirm', 'Cancel'],
+		    message: 'Are you sure that this should be the winner?',
+		    title: 'Submit as winner'
+		  });
+		  dialog.addEventListener('click', function(e){
+		    if(e.index == 0)
+		    {
+		    	doSubmit();
+		    }
+		  });
+		  dialog.show();
 	});
 	$.votePage.add(winnerButton);
 	screenLeft = winnerButton.top;
@@ -400,13 +429,14 @@ function addScrollableImage()
 	    maxZoomScale:4.0
 	});
 	img2Wrapper.add(img2);
-	var photosView = Ti.UI.createScrollableView({
+	photosView = Ti.UI.createScrollableView({
 	    showPagingControl:true,
 	    views:[img1Wrapper, img2Wrapper],
 		  height: screenLeft - 80,
 		  width: "auto",
 		  top: 50
 	});
+	alert(photosView.currentPage);
 	$.votePage.add(photosView);
 }
 
