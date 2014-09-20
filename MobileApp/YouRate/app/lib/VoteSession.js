@@ -13,7 +13,7 @@ var comments = false;
 var imgPath = "";
 var sessionType = "normal";
 var status = -1;
-
+var udid = require("Authentication").deviceID();
 var callcount = 0;
 var asyncDone = false;
 
@@ -33,16 +33,34 @@ function populateThis(e) {
 		if (sessionType == "normal") {
 			description = e.description;
 			imgPath = e.imgPath;
-			//Ti.API.info("new path: "+imgPath);
 			if (e.rangeBottom !== undefined) { //this exicutes only on the first call of a session
 				rangeBottom = e.rangeBottom;
 				rangeTop = e.rangeTop;
 				comments = e.comments;
 			}
-		} else if (sessionType == "yn") {
-
+		} else if (sessionType == "yesNo") {
+			description = e.description;
+			imgPath = e.imgPath;
+			if (e.rangeBottom !== undefined) { //this exicutes only on the first call of a session
+				rangeBottom = e.rangeBottom;
+				rangeTop = e.rangeTop;
+				comments = e.comments;
+			}
 		} else if (sessionType == "winner") {
-
+			imgTotaal = e.imgTotaal;
+			//read obj into js array
+			var result = [];
+			for(var i in e)
+			    result.push([i, e[i]]);
+			
+			returnstring = "";    
+			startindex = result.length()-imgTotaal;
+			for (var i=startindex; i < imgTotaal; i++) {
+			  returnstring += result[i]+",";
+			};
+			returnstring = "["+returnstring+"]";
+			Ti.API.info("@@ returnstring: "+returnstring);
+			Ti.API.info("@@ startindex: "+startindex);
 		}
 	} else if (status == 2) {//no session currently running
 		//Ti.API.info("Status 2 recieved");
@@ -99,7 +117,8 @@ exports.getImage = function() {
 
 	var payload = {
 		//TODO test if this should be removed, if the cookie works
-		session_id : sessionObj.id
+		session_id : sessionObj.id,
+		deviceUID : udid
 	};
 
 	var onSuccessCallback1 = function(e) {
@@ -135,7 +154,7 @@ exports.submitResult = function(_result, _comment) {
 	 */
 	
 	var payload = {
-		deviceUID : require("Authentication").deviceID(),
+		deviceUID : udid,
 		result : _result,
 		comment : _comment
 	};

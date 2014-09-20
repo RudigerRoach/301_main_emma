@@ -32,19 +32,21 @@ photoPath = imagePath; //For yesNo winner events
 //var sessionType = "normal";
 //var sessionType = "yesNo";
 var sessionType = "winner";
-	
-function fixPage()
-{
-	//For offline testing
+
+//For offline testing
 	service=require('VoteSession');	
 	
 	//Server calls
-	/*rangeBottom = service.rangeBottom();
+	rangeBottom = service.rangeBottom();
 	rangeTop = service.rangeTop();
 	description = service.description(); 
 	comments = service.commentsEnabled();
 	imagePath = service.imagePath();
-	sessionType = service.sessionType();*/
+	sessionType = service.sessionType();
+		
+function fixPage()
+{
+	
 	
 	//Display interface according to type of session
 	if(sessionType == "normal")
@@ -436,7 +438,7 @@ function addScrollableImage()
 		  width: "auto",
 		  top: 50
 	});
-	alert(photosView.currentPage);
+	//alert(photosView.currentPage);
 	$.votePage.add(photosView);
 }
 
