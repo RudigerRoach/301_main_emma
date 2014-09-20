@@ -1,0 +1,82 @@
+"#votePage": {
+	backgroundColor: "#DFE4E7",
+	exitOnClose: true
+},
+"#appName": 
+{
+    color: "black", 
+    textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	top: "10",
+    width: "150", 
+    height: "35"
+},
+"#currentImage": 
+{
+	top: 60,
+	borderRadius: "5",
+    width: "200", 
+    height: "200"
+},
+"#toolbar[platform=ios]": {
+	backgroundColor: "black",
+	top: "0",
+	padding: "10",
+	borderTop: false,
+	borderBottom: true,
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: "100"
+},
+"#submitButton": {
+	titleid: 'submitB',
+   	//title: 'Submit',
+	borderWidth: "1",
+	borderColor: "#bbb", 
+	borderRadius: "8",
+	backgroundColor: "#bbb",
+	color: "black", 
+	textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: 50,
+	left: 20
+},
+"#slider": {	
+	color: "black",
+	left:20
+},
+"#sliderLabel": {	
+	titleid: 'SliderT',
+    //text: "Score: ",
+	width: "150",
+	height: "30",
+	color: "black",
+	font: { 
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	textAlign: 'center',
+	shadowColor: "#aaa"
+}
+"#sliderArea": {	
+	borderWidth:"2",
+    borderColor:"#bbb",
+    borderRadius:"5",
+    color:"#888",
+    textAlign:"left",
+    width:50,
+    height:30,
+	font: {
+		fontSize: 20,
+		fontFamily: 'Helvetica Neue'
+	}
+}
+

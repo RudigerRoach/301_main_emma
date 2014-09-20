@@ -29,7 +29,18 @@ public class StartServlet extends HttpServlet
             System.out.println("before start");
             while(MinimalServer.start == false){}
             System.out.println("before end");
-
+            String judge = request.getParameter("deviceUID");
+            DBAccess database = new DBAccess();
+            database.open();
+            String email = database.getMail(judge);
+            int current = 0;
+            for (int i = 0; i < MinimalServer.judgesList.size();i++)
+            {
+                if (MinimalServer.judgesList.get(i).getJudgeName().equals(email))
+                {
+                    current = MinimalServer.judgesList.get(i).getCurrentImage() - 1;
+                }
+            }
             JSONObject jsonResponse = new JSONObject();
             try 
             {
@@ -43,19 +54,17 @@ public class StartServlet extends HttpServlet
                 if((MinimalServer.session.getType().equals("normal") == true) || (MinimalServer.session.getType().equals("yesNo") == true))
                 {
                     jsonResponse.put("status", "1");
-                    jsonResponse.put("controlled","true");
                     jsonResponse.put("sessionType",MinimalServer.session.getType());
                     jsonResponse.put("rangeBottom", MinimalServer.session.getBotRange());
                     jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
                     jsonResponse.put("description", MinimalServer.session.getImageDetails(0));
                     //check hierna
                     jsonResponse.put("comments", "true");
-                    jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[0].getName()); 
+                    jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[current].getName()); 
                 }
                 else if (MinimalServer.session.getSessionType().equals("winner") == true)
                 {
                     jsonResponse.put("status", "1");
-                    jsonResponse.put("controlled","false");
                     jsonResponse.put("sessionType",MinimalServer.session.getType());
                     jsonResponse.put("rangeBottom", MinimalServer.session.getBotRange());
                     jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
@@ -65,7 +74,7 @@ public class StartServlet extends HttpServlet
                     jsonResponse.put("imgTotaal" , MinimalServer.totaalImages);
                     for(int i = 0; i < MinimalServer.totaalImages; i++)
                     {
-                       jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[i].getName());  
+                       jsonResponse.put("imgPath" + i,"temp/" + MinimalServer.tmpCompressedImage[i].getName());  
                     }
                 }
             } 
@@ -75,6 +84,7 @@ public class StartServlet extends HttpServlet
             }
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print(jsonResponse);
+            database.close();
         }
 //        else
 //        {

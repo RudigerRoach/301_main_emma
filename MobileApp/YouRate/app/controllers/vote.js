@@ -30,10 +30,10 @@ var imagePath = ospath+"placeholder.png";
 photoPath = imagePath; //For yesNo winner events
 //alert("IMG path: "+imagePath);
 //var sessionType = "normal";
+
 //var sessionType = "yesNo";
 var sessionType = "winner";
 
-//For offline testing
 	service=require('VoteSession');	
 	
 	//Server calls
@@ -256,7 +256,7 @@ function createSlider()
     
 	var sliderLabel = Ti.UI.createLabel(
 	{
-	titleid: 'SliderT',
+		titleid: 'SliderT',
 	    //text: "Score: ",
 		width: "150",
 		height: "30",

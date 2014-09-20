@@ -109,7 +109,7 @@ function goForward(service){
 		$.loginButton.opacity=1.0;
 		alert("Error: "+service.error());
 		//Offline testing
-		var win=Alloy.createController('vote').getView();
+		var win=Alloy.createController('normal').getView();
 	 	win.open();
  	}
 }

@@ -21,7 +21,6 @@
     <jar href="lib/httpmime-4.3.4.jar" size="37276" download="eager" />
     <jar href="lib/java-json.jar" size="84697" download="eager" />
     <jar href="lib/javax.servlet.jar" size="132002" download="eager" />
-    <jar href="lib/jersey-bundle-1.18.jar" size="1527762" download="eager" />
     <jar href="lib/jetty-all-7.0.2.v20100331.jar" size="1283634" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="YouRate Simulator" >

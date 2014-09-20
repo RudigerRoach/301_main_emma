@@ -47,7 +47,7 @@ exports.login = function(email){
 	   //e.code
 	   
 	   //-----------------------------------------
-	   response = JSON.parse(e.data); //remove comment at integration
+	   response = JSON.parse(e.data); 
 		
 	   if(response.status == "success")
 	   {

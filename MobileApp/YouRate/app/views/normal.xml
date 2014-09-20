@@ -1,0 +1,15 @@
+<Alloy>
+    <Window id="normalPage">
+		<!-- iOS toolbar -->
+		<Toolbar id="toolbar" platform="ios">
+			<Button id="appName">uRate</Button>
+		</Toolbar>
+		
+		<!-- iOS and Android -->
+		<ImageView id="currentImage" defaultImage="placeholder.png"/>  
+		<Button id="submitButton" onClick="doSubmit">Submit</Button>   
+        <Slider id="slider" top="50" min="0" max="100" width="100%" value="50"/>   
+		<Label id="sliderLabel">Score:</Label>   
+        <TextArea id="sliderArea" keyboardType="Titanium.UI.NUMBER_PAD">    
+    </Window>
+</Alloy>
