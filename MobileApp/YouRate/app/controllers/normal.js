@@ -5,7 +5,7 @@ var ospath = "";
 		ospath = "";
 	}	
 	
-$.normalPage.backgroundImage = ospath+"bg.jpg";
+//$.normalPage.backgroundImage = ospath+"bg.jpg";
 
 var screenWidth = Ti.Platform.displayCaps.platformWidth;
 var screenHeight = Ti.Platform.displayCaps.platformHeight;

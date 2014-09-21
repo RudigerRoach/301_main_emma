@@ -1,4 +1,8 @@
+var uiGenerator = require('ui');
 var waiter;
+var page = $.loginPage;
+var activityIndicator = uiGenerator.getWaitIndicator('Attempting automatic login...');
+
 var ospath = "";
 	if(OS_ANDROID){
 		ospath = "/images/";
@@ -6,18 +10,19 @@ var ospath = "";
 		ospath = "";
 	}
 	
-	$.loginPage.backgroundImage = ospath+"bg.jpg";
+	//$.loginPage.backgroundImage = ospath+"bg.jpg";
+	
 function doLogin()
 {		
-	//Make loading image move
-	$.loadingImage.top = Ti.Platform.displayCaps.platformHeight/2 - 50;
+
+	//$.loadingImage.top = Ti.Platform.displayCaps.platformHeight/2 - 50;
 	$.emailLabel.opacity=0.0;
 	$.textArea.opacity=0.0;
 	$.loginButton.opacity=0.0;
-	$.loadingImage.opacity=1.0;
+	//$.loadingImage.opacity=1.0;
 	$.textArea.blur();
 	$.loginButton.titleid = 'loginB';
-	
+	/*
 	var number = 1;	
 		ospath += "spinner/";
 	waiter = setInterval(function(){
@@ -75,7 +80,12 @@ function doLogin()
 			number++;
 			if (number > 16){number=1;}
 		},150);
-	
+		*/
+		
+	//Show background activity with an activityindicator
+	page.add(activityIndicator);
+	activityIndicator.showIndicator();	
+		
 	//Gets email address from user input
 	var email = $.textArea.value;
 	
@@ -92,7 +102,8 @@ function doLogin()
 function goForward(service){
 	var success = service.loginStatus();
 		clearInterval(waiter);
-	
+		activityIndicator.hideIndicator();
+		
 	//If login successful
 	if (success == true)
 	{
@@ -103,7 +114,7 @@ function goForward(service){
 	else
 	{	
 		//If login not successful
-		$.loadingImage.opacity=0.0;
+		//$.loadingImage.opacity=0.0;
 		$.emailLabel.opacity=1.0;
 		$.textArea.opacity=1.0;
 		$.loginButton.opacity=1.0;

@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="waitPage" onOpen="loadImage" >
+    <Window id="waitPage" onOpen="loadImage" orientationModes="">
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
 			<Button id="appName">uRate</Button>
@@ -15,8 +15,8 @@
 		</Menu>
 		
 		<!-- iOS and Android -->
-        <ImageView id="loadingImage" image="1.png"/>
+        <!--ImageView id="loadingImage" image="1.png"/-->
 
-		<Label id="waitLabel">Waiting...</Label>	
+		<!--Label id="waitLabel">Waiting...</Label-->	
     </Window>
 </Alloy>

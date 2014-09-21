@@ -11,6 +11,6 @@
 		</Menu>
 		
 		<!-- iOS and Android -->
-		<ImageView id="currentImage" defaultImage="placeholder.png"/>           
+		<ImageView id="currentImage" />           
     </Window>
 </Alloy>

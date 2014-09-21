@@ -1,0 +1,14 @@
+"Window[platform=android]":{
+	backgroundImage:'/images/bg.jpg'
+}
+"Window[platform=ios]":{
+	backgroundImage:'/bg.jpg',
+	titleImage : 'appicon.png',
+}
+"ImageView[platform=ios]":{
+	defaultImage:'/placeholder.png'
+}
+"ImageView[platform=ios]":{
+	defaultImage:'/images/placeholder.png'
+}
+

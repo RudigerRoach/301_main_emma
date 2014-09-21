@@ -1,6 +1,5 @@
 function Controller() {
     function fixPage() {
-        service = require("VoteSession");
         if ("normal" == sessionType) {
             createSubmitButton();
             "true" == comments && commentsEnabled();
@@ -267,6 +266,8 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.votePage = Ti.UI.createWindow({
+        backgroundImage: "/bg.jpg",
+        titleImage: "appicon.png",
         backgroundColor: "#DFE4E7",
         exitOnClose: true,
         id: "votePage"
@@ -302,12 +303,12 @@ function Controller() {
     });
     $.__views.toolbar.add($.__views.appName);
     $.__views.currentImage = Ti.UI.createImageView({
+        defaultImage: "/images/placeholder.png",
         top: 60,
         borderRadius: "5",
         width: "200",
         height: "200",
-        id: "currentImage",
-        defaultImage: "placeholder.png"
+        id: "currentImage"
     });
     $.__views.votePage.add($.__views.currentImage);
     exports.destroy = function() {};
@@ -325,10 +326,18 @@ function Controller() {
     var photosView;
     var rangeBottom = 0;
     var rangeTop = 50;
+    var description = "Image title";
     var comments = "true";
     var imagePath = ospath + "placeholder.png";
     photoPath = imagePath;
-    var sessionType = "yesNo";
+    var sessionType = "winner";
+    service = require("VoteSession");
+    rangeBottom = service.rangeBottom();
+    rangeTop = service.rangeTop();
+    description = service.description();
+    comments = service.commentsEnabled();
+    imagePath = service.imagePath();
+    sessionType = service.sessionType();
     Ti.Gesture.addEventListener("orientationchange", function() {
         var win = Alloy.createController("vote").getView();
         win.open();

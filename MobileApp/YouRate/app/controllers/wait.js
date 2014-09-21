@@ -1,5 +1,10 @@
+var uiGenerator = require('ui');
 var waiter;
+var page = $.waitPage;
+var activityIndicator = uiGenerator.getWaitIndicator('Waiting for server...');
+
 function loadImage(){
+		/*
 	//Make loading image move
 	$.loadingImage.top = Ti.Platform.displayCaps.platformHeight/2 - 50;
 	$.waitLabel.top = Ti.Platform.displayCaps.platformHeight/2 + 100;
@@ -68,6 +73,10 @@ function loadImage(){
 			number++;
 			if (number > 16){number=1;}
 		},150);
+	*/
+	//Show background activity with an activityindicator
+	page.add(activityIndicator);
+	activityIndicator.showIndicator();
 	
 	//Check if next image is ready	
 	service=require('VoteSession');
@@ -97,6 +106,7 @@ function testStatus(service){
 		    	var win=Alloy.createController('login').getView();
  				win.open();
 		    }
+		    activityIndicator.hideIndicator();
 		    clearInterval(timer);
 		}, 1000);
 }

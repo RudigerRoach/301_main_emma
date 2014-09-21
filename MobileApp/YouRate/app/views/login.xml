@@ -14,6 +14,6 @@
 		<Label id="emailLabel">Email Address:</Label>	
         <TextArea id="textArea" keyboardType="Titanium.UI.KEYBOARD_EMAIL">
 		<Button id="loginButton" onClick="doLogin">Login</Button>
-		<ImageView id="loadingImage"/>
+		<!--ImageView id="loadingImage"/-->
     </Window>
 </Alloy>

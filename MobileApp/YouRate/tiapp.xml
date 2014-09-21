@@ -13,12 +13,15 @@
     <analytics>true</analytics>
     <guid>5332519b-e61b-4aa5-9ca4-8e019cae44eb</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
+    
     <ios>
         <plist>
             <dict>
                 <key>UISupportedInterfaceOrientations~iphone</key>
                 <array>
                     <string>UIInterfaceOrientationPortrait</string>
+                    <string>UIInterfaceOrientationLandscapeLeft</string>
+                    <string>UIInterfaceOrientationLandscapeRight</string>
                 </array>
                 <key>UISupportedInterfaceOrientations~ipad</key>
                 <array>
@@ -38,6 +41,7 @@
             </dict>
         </plist>
     </ios>
+
     <android xmlns:android="http://schemas.android.com/apk/res/android"/>
     <mobileweb>
         <precache/>

@@ -1,5 +1,10 @@
+var uiGenerator = require('ui');
 var waiter;
+var page = $.startPage;
+var activityIndicator = uiGenerator.getWaitIndicator('Attempting automatic login...');
+
 function displayLoginPage(){
+	/*
 	//Make loading image move
 	$.loadingImage.top = Ti.Platform.displayCaps.platformHeight/2 - 50;
 	var number = 1;
@@ -66,7 +71,12 @@ function displayLoginPage(){
 			number++;
 			if (number > 16){number=1;}
 		},150);
+		*/
 		
+	//Show background activity with an activityindicator
+	page.add(activityIndicator);
+	activityIndicator.showIndicator();
+	
 	//Call autoLogin
 	service=require('Authentication');
 	service.autoLogin();
@@ -87,7 +97,7 @@ function goForward(service){
 	{	
 		//If autoLogin not successful
 		//alert("err: "+service.error());
-	    var win=Alloy.createController('login').getView();
+	    var win=Alloy.createController('login').getView(); //must be login
 	 	win.open();
  	}
 }
@@ -97,6 +107,7 @@ function testStatus(service){
 		var timer = setInterval(function(){ //poll every 1s and stop when autologinDone() returns true
 		    done = service.autologinDone();
 		    if (done) {
+		    	activityIndicator.hideIndicator();
 		    	goForward(service);
 		        clearInterval(timer);
 		    }
