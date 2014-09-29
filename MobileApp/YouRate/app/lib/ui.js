@@ -12,12 +12,12 @@ exports.getWaitIndicator = function(message){
 	var indicator = Ti.UI.createActivityIndicator({
 	  style:style,
 	  height:Ti.UI.SIZE,
-	  width:Ti.UI.SIZE,
+	  width:Ti.UI.SIZE
 	});
 	
 	var label = Ti.UI.createLabel({
 		text: message,
-		font: {fontFamily:'Helvetica Neue', fontSize:26},
+		font: {fontFamily:'Helvetica Neue', fontSize:18},
 		color: 'white',
 		textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
 	});

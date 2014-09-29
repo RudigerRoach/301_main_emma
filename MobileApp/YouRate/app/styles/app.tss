@@ -10,5 +10,17 @@
 }
 "ImageView[platform=ios]":{
 	defaultImage:'/images/placeholder.png'
+},
+"#appName": 
+{
+    color: "black", 
+    textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	top: "10",
+    width: "150", 
+    height: "35"
 }
 

@@ -2,18 +2,6 @@
 	backgroundColor: "#DFE4E7",
 	exitOnClose: true
 },
-"#appName": 
-{
-    color: "black", 
-    textAlign: "center",
-	font: {
-		fontSize: 24,
-		fontFamily: 'Helvetica Neue'
-	},
-	top: "10",
-    width: "150", 
-    height: "35"
-},
 "#currentImage": 
 {
 	top: 60,

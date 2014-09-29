@@ -3,20 +3,6 @@
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
 			<Button id="appName">uRate</Button>
-		</Toolbar>
-		
-		<!-- Android menu -->
-		<Menu id="menu" platform="android">
-
-			<!--MenuItem id="menu1" title="YouRate - Waiting..."/-->
-
-			<MenuItem id="appName" title="uRate" />
-
-		</Menu>
-		
-		<!-- iOS and Android -->
-        <!--ImageView id="loadingImage" image="1.png"/-->
-
-		<!--Label id="waitLabel">Waiting...</Label-->	
+		</Toolbar>	
     </Window>
 </Alloy>

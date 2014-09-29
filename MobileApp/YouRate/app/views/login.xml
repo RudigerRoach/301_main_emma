@@ -5,11 +5,6 @@
 			<Button id="appName">uRate</Button>
 		</Toolbar>
 		
-		<!-- Android menu -->
-		<Menu id="menu" platform="android">
-			<MenuItem id="appName" title="uRate" />
-		</Menu>
-		
 		<!-- iOS and Android -->
 		<Label id="emailLabel">Email Address:</Label>	
         <TextArea id="textArea" keyboardType="Titanium.UI.KEYBOARD_EMAIL">

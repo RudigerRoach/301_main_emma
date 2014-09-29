@@ -4,12 +4,5 @@
 		<Toolbar id="toolbar" platform="ios">
 			<Button id="appName">uRate</Button>
 		</Toolbar>
-		
-		<!-- Android menu -->
-		<Menu id="menu" platform="android">
-			<MenuItem id="appNameA" title="uRate" />
-		</Menu>
-		
-        <!--ImageView id="loadingImage" image="1.png" onClick="goVote"/-->
     </Window>
 </Alloy>

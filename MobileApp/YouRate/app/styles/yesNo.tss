@@ -1,0 +1,58 @@
+"#votePage": {
+	backgroundColor: "#DFE4E7",
+	exitOnClose: true
+},
+"#currentImage": 
+{
+	top: 60,
+	borderRadius: "5",
+    width: "200", 
+    height: "200"
+},
+"#toolbar[platform=ios]": {
+	backgroundColor: "black",
+	top: "0",
+	padding: "10",
+	borderTop: false,
+	borderBottom: true,
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: "100"
+},
+"#yesButton": {	
+		titleid: 'yesB',
+		//title: "Yes", 
+		borderWidth: "1",
+		borderColor: "#bbb", 
+		borderRadius: "8",
+		backgroundColor: "#197519",
+	    color: "black", 
+	    textAlign: "center",
+		font: {
+			fontSize: 24,
+			fontFamily: 'Helvetica Neue'
+		}, 
+	    height: "80",
+	    right: 20,
+	    padding:0
+},
+"#noButton": {	  
+		titleid: 'noB',
+		//title: "No", 
+		borderWidth: "1",
+		borderColor: "#bbb", 
+		borderRadius: "8",
+		backgroundColor: "#B80000",
+	    color: "black", 
+	    textAlign: "center",
+		font: {
+			fontSize: 24,
+			fontFamily: 'Helvetica Neue'
+		}, 
+	    height: "80",
+	    left: 20,
+	    padding:0
+}
+

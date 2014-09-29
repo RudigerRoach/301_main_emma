@@ -13,11 +13,12 @@ if(OS_ANDROID){
 
 var screenLeft = screenHeight;
 var commentText = "";	
+var chosen = 0;	
 var rangeBottom = 0;
 var rangeTop = 50;
 var description = "Image title"; 
 var displayTitle = "true";
-var comments = "true"; 
+var comments = "false"; 
 var imagePath = ospath+"placeholder.png";
 //imagePath = ospath+"animalLandscape.jpg";
 imagePath = ospath+"kitty.jpg";
@@ -36,29 +37,22 @@ var sessionType = "yesNo";
 	imagePath = service.imagePath();
 	sessionType = service.sessionType();*/	
 
-	$.submitButton.top = screenHeight - 70;
-	$.submitButton.width = screenWidth - 40;	
-	screenLeft = $.submitButton.top;
+	//$.submitButton.top = screenHeight - 70;
+	//$.submitButton.width = screenWidth - 40;	
+	//screenLeft = $.submitButton.top;
 	
 	if(comments == "true")
 	{
 		commentsEnabled();
 	}
 	
-	$.sliderLabel.top = screenLeft - 50;
-	$.sliderLabel.left = screenWidth/2 - 100;
+	$.yesButton.top = screenLeft - 100;
+	$.yesButton.width = screenWidth/2 - 30;
 	
-	$.sliderArea.top = screenLeft - 50;
-	$.sliderArea.left = screenWidth/2 + 10;
-	screenLeft = $.sliderLabel.top;
+	$.noButton.top = screenLeft - 100;
+	$.noButton.width = screenWidth/2 - 30;
 	
-	$.slider.top = screenLeft - 40;
-	$.slider.min = rangeBottom;
-	$.slider.max = rangeTop;
-	$.slider.width = screenWidth - 40;
-	$.slider.value = (rangeBottom+rangeTop)/2;	
-    $.sliderArea.value = $.slider.value;
-	screenLeft = $.slider.top;
+	screenLeft = $.yesButton.top;
 	
 	if(OS_ANDROID){
 		$.currentImage.top -= 30;
@@ -81,13 +75,54 @@ function doSubmit(e)
 {	
 	//Submit result	
 	service=require('VoteSession');	
-	service.submitResult(Math.floor(Number($.slider.value)),commentText);
-	//service.submitResult(photosView.currentPage,"");
-    //alert("Result successfully submitted");
+	service.submitResult(chosen,commentText);
     
     //Go to wait page
 	var win=Alloy.createController('wait').getView();
  	win.open();
+}
+
+function doYes()
+{	
+   	yesButton.opacity = 1;
+	noButton.opacity = 0.5;
+	chosen = 1;
+}
+
+function doNo()
+{	
+   	yesButton.opacity = 0.5;
+	noButton.opacity = 1;
+	chosen = 0;
+}
+
+function createSubmitButton()
+{				
+	var submitButton = Titanium.UI.createButton({
+		titleid: 'submitB',
+	   	//title: 'Submit',
+		borderWidth: "1",
+		borderColor: "#bbb", 
+		borderRadius: "8",
+		backgroundColor: "#bbb",
+		color: "black", 
+		textAlign: "center",
+		font: {
+			fontSize: 24,
+			fontFamily: 'Helvetica Neue'
+		},
+		top: screenHeight - 70,
+		height: 50,
+		width: screenWidth - 40,
+		left: 20
+	});	
+	screenLeft = submitButton.top;
+	
+	submitButton.addEventListener('click',function(e)
+	{
+		doSubmit(e);
+	});	
+	$.votePage.add(submitButton);
 }
 
 function commentsEnabled()
