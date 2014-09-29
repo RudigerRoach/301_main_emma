@@ -3,12 +3,11 @@
 }
 "Window[platform=ios]":{
 	backgroundImage:'/bg.jpg',
-	titleImage : 'appicon.png',
 }
 "ImageView[platform=ios]":{
-	defaultImage:'/placeholder.png'
+	defaultImage:'/Placeholder.png'
 }
-"ImageView[platform=ios]":{
-	defaultImage:'/images/placeholder.png'
+"ImageView[platform=android]":{
+	defaultImage:'/images/Placeholder.png'
 }
 

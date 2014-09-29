@@ -8,7 +8,7 @@ var ospath = "";
 		ospath = "";
 	}	
 	
-$.votePage.backgroundImage = ospath+"bg.jpg";
+//$.votePage.backgroundImage = ospath+"bg.jpg";
 
 var screenWidth = Ti.Platform.displayCaps.platformWidth;
 var screenHeight = Ti.Platform.displayCaps.platformHeight;

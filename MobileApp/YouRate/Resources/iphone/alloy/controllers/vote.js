@@ -267,7 +267,6 @@ function Controller() {
     var __defers = {};
     $.__views.votePage = Ti.UI.createWindow({
         backgroundImage: "/bg.jpg",
-        titleImage: "appicon.png",
         backgroundColor: "#DFE4E7",
         exitOnClose: true,
         id: "votePage"
@@ -303,7 +302,7 @@ function Controller() {
     });
     $.__views.toolbar.add($.__views.appName);
     $.__views.currentImage = Ti.UI.createImageView({
-        defaultImage: "/images/placeholder.png",
+        defaultImage: "/Placeholder.png",
         top: 60,
         borderRadius: "5",
         width: "200",
@@ -318,7 +317,6 @@ function Controller() {
     var slider;
     var ospath = "";
     ospath = "";
-    $.votePage.backgroundImage = ospath + "bg.jpg";
     var screenWidth = Ti.Platform.displayCaps.platformWidth;
     var screenHeight = Ti.Platform.displayCaps.platformHeight;
     var screenLeft = screenHeight;

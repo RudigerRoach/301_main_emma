@@ -4,76 +4,6 @@ var page = $.waitPage;
 var activityIndicator = uiGenerator.getWaitIndicator('Waiting for server...');
 
 function loadImage(){
-		/*
-	//Make loading image move
-	$.loadingImage.top = Ti.Platform.displayCaps.platformHeight/2 - 50;
-	$.waitLabel.top = Ti.Platform.displayCaps.platformHeight/2 + 100;
-
-	var number = 1;
-	var ospath = "";
-	if(OS_ANDROID){
-		ospath = "/images/";
-	}else if(OS_IOS){
-		ospath = "/";
-	}
-	$.waitPage.backgroundImage = ospath+"bg.jpg";
-		ospath += "spinner/";
-	waiter = setInterval(function(){
-			switch(number){
-				case 1:
-					$.loadingImage.image = ospath+"a.png";
-				break;
-				case 2:
-					$.loadingImage.image = ospath+"b.png";
-				break;
-				case 3:
-					$.loadingImage.image = ospath+"c.png";
-				break;
-				case 4:
-					$.loadingImage.image = ospath+"d.png";
-				break;
-				case 5:
-					$.loadingImage.image = ospath+"e.png";
-				break;
-				case 6:
-					$.loadingImage.image = ospath+"f.png";
-				break;
-				case 7:
-					$.loadingImage.image = ospath+"g.png";
-				break;
-				case 8:
-					$.loadingImage.image = ospath+"h.png";
-				break;
-				case 9:
-					$.loadingImage.image = ospath+"i.png";
-				break;
-				case 10:
-					$.loadingImage.image = ospath+"j.png";
-				break;
-				case 11:
-					$.loadingImage.image = ospath+"k.png";
-				break;
-				case 12:
-					$.loadingImage.image = ospath+"l.png";
-				break;
-				case 13:
-					$.loadingImage.image = ospath+"m.png";
-				break;
-				case 14:
-					$.loadingImage.image = ospath+"n.png";
-				break;
-				case 15:
-					$.loadingImage.image = ospath+"o.png";
-				break;
-				case 16:
-					$.loadingImage.image = ospath+"p.png";
-				break;
-			}
-
-			number++;
-			if (number > 16){number=1;}
-		},150);
-	*/
 	//Show background activity with an activityindicator
 	page.add(activityIndicator);
 	activityIndicator.showIndicator();
@@ -107,6 +37,7 @@ function testStatus(service){
  				win.open();
 		    }
 		    activityIndicator.hideIndicator();
+		    activityIndicator = null; //force garbage collection
 		    clearInterval(timer);
 		}, 1000);
 }
@@ -118,4 +49,4 @@ function goForward(service)
  	win.open();
 }
 
-$.waitPage.open();
+page.open();
