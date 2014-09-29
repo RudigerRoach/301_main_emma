@@ -24,8 +24,6 @@
 "#yesButton": {	
 		titleid: 'yesB',
 		//title: "Yes", 
-		borderWidth: "1",
-		borderColor: "#bbb", 
 		borderRadius: "8",
 		backgroundColor: "#197519",
 	    color: "black", 
@@ -41,8 +39,6 @@
 "#noButton": {	  
 		titleid: 'noB',
 		//title: "No", 
-		borderWidth: "1",
-		borderColor: "#bbb", 
 		borderRadius: "8",
 		backgroundColor: "#B80000",
 	    color: "black", 
@@ -54,5 +50,20 @@
 	    height: "80",
 	    left: 20,
 	    padding:0
+},
+"#submitButton": {
+	titleid: 'submitB',
+	borderWidth: "1",
+	borderColor: "#bbb", 
+	borderRadius: "8",
+	backgroundColor: "#bbb",
+	color: "black", 
+	textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: 50,
+	left: 20
 }
 

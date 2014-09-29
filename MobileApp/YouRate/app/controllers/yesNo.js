@@ -13,7 +13,7 @@ if(OS_ANDROID){
 
 var screenLeft = screenHeight;
 var commentText = "";	
-var chosen = 0;	
+var chosen = -1;	
 var rangeBottom = 0;
 var rangeTop = 50;
 var description = "Image title"; 
@@ -24,7 +24,7 @@ var imagePath = ospath+"placeholder.png";
 imagePath = ospath+"kitty.jpg";
 photoPath = imagePath; //For yesNo winner events
 //alert("IMG path: "+imagePath);
-//var sessionType = "normal";
+//var sessionType = "yesNo";
 var sessionType = "yesNo";
 //var sessionType = "winner";
 	service=require('VoteSession');	
@@ -37,9 +37,9 @@ var sessionType = "yesNo";
 	imagePath = service.imagePath();
 	sessionType = service.sessionType();*/	
 
-	//$.submitButton.top = screenHeight - 70;
-	//$.submitButton.width = screenWidth - 40;	
-	//screenLeft = $.submitButton.top;
+	$.submitButton.top = screenHeight - 70;
+	$.submitButton.width = screenWidth - 40;	
+	screenLeft = $.submitButton.top;
 	
 	if(comments == "true")
 	{
@@ -60,69 +60,38 @@ var sessionType = "yesNo";
 	$.currentImage.image = imagePath;
 	$.currentImage.height = screenLeft - 80;
 	$.currentImage.width = "auto";
-	
-	$.slider.addEventListener('change', function(e) 
-	{
-	    $.sliderArea.value = Math.floor(Number($.slider.value));
-	});
-
-	$.sliderArea.addEventListener('change', function(e) 
-	{
-	    $.slider.value = $.sliderArea.value;
-	});
 
 function doSubmit(e)
 {	
-	//Submit result	
-	service=require('VoteSession');	
-	service.submitResult(chosen,commentText);
-    
-    //Go to wait page
-	var win=Alloy.createController('wait').getView();
- 	win.open();
+	if(chosen == "-1")
+	{
+		//LANGUAGE
+		alert("Please choose yes or no");
+	}
+	else
+	{
+		//Submit result	
+		service=require('VoteSession');	
+		service.submitResult(chosen,commentText);
+	    
+	    //Go to wait page
+		var win=Alloy.createController('wait').getView();
+	 	win.open();
+ 	}
 }
 
 function doYes()
 {	
-   	yesButton.opacity = 1;
-	noButton.opacity = 0.5;
+   	$.yesButton.opacity = 1;
+	$.noButton.opacity = 0.5;
 	chosen = 1;
 }
 
 function doNo()
 {	
-   	yesButton.opacity = 0.5;
-	noButton.opacity = 1;
+   	$.yesButton.opacity = 0.5;
+	$.noButton.opacity = 1;
 	chosen = 0;
-}
-
-function createSubmitButton()
-{				
-	var submitButton = Titanium.UI.createButton({
-		titleid: 'submitB',
-	   	//title: 'Submit',
-		borderWidth: "1",
-		borderColor: "#bbb", 
-		borderRadius: "8",
-		backgroundColor: "#bbb",
-		color: "black", 
-		textAlign: "center",
-		font: {
-			fontSize: 24,
-			fontFamily: 'Helvetica Neue'
-		},
-		top: screenHeight - 70,
-		height: 50,
-		width: screenWidth - 40,
-		left: 20
-	});	
-	screenLeft = submitButton.top;
-	
-	submitButton.addEventListener('click',function(e)
-	{
-		doSubmit(e);
-	});	
-	$.votePage.add(submitButton);
 }
 
 function commentsEnabled()
@@ -173,13 +142,13 @@ function commentsEnabled()
 		commentArea.addEventListener('blur',function(e)
 		{
 			commentText = commentArea.value;
-			$.normalPage.remove(commentArea);
+			$.yesNoPage.remove(commentArea);
 		});
-		$.normalPage.add(commentArea);
+		$.yesNoPage.add(commentArea);
 	});
 		
-	$.normalPage.add(commentButton);
+	$.yesNoPage.add(commentButton);
 	screenLeft = commentButton.top;
 }
 	
-$.normalPage.open();
+$.yesNoPage.open();
