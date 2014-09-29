@@ -2,8 +2,7 @@ var uiGenerator = require('ui');
 var page = $.waitPage;
 var activityIndicator = uiGenerator.getWaitIndicator('Waiting for server...');
 
-function loadImage()
-{
+function loadImage(){
 	//Show background activity with an activityindicator
 	page.add(activityIndicator);
 	activityIndicator.showIndicator();
@@ -43,6 +42,7 @@ function testStatus(service)
  				win.open();
 		    }
 		    activityIndicator.hideIndicator();
+		    activityIndicator = null; //force garbage collection
 		    clearInterval(timer);
 		}, 1000);
 }
@@ -52,4 +52,4 @@ function goForward(service){
  	win.open();
 }
 
-$.waitPage.open();
+page.open();

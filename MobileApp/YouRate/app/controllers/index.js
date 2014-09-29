@@ -1,8 +1,9 @@
+//Do all of the heavy lifting(like OS calls) only once. This improves performance a lot.
 var uiGenerator = require('ui');
 var page = $.startPage;
 var activityIndicator = uiGenerator.getWaitIndicator('Attempting automatic login...');
 
-function displayLoginPage(){		
+function displayLoginPage(){
 	//Show background activity with an activityindicator
 	page.add(activityIndicator);
 	activityIndicator.showIndicator();
@@ -15,6 +16,9 @@ function displayLoginPage(){
 
 function goForward(service){
 	var success = service.loginStatus();
+	activityIndicator.hideIndicator();
+	activityIndicator = null; //force garbage collector to clean up
+	
 	//If autoLogin successful
 	if (success == true) 
 	{
@@ -25,7 +29,6 @@ function goForward(service){
 	else
 	{	
 		//If autoLogin not successful
-		//alert("err: "+service.error());
 	    var win=Alloy.createController('login').getView(); //must be login
 	 	win.open();
  	}
@@ -36,7 +39,6 @@ function testStatus(service){
 		var timer = setInterval(function(){ //poll every 1s and stop when autologinDone() returns true
 		    done = service.autologinDone();
 		    if (done) {
-		    	activityIndicator.hideIndicator();
 		    	goForward(service);
 		        clearInterval(timer);
 		    }
@@ -48,5 +50,4 @@ function goVote(){
 	var win=Alloy.createController('vote').getView();
 	win.open();
 }
-
-$.startPage.open();
+page.open();
