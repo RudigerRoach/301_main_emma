@@ -21,7 +21,7 @@ public class NextImageServlet extends HttpServlet
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
-        if(MinimalServer.session.type.equals("winner"))
+        if(MinimalServer.session.getType().equals("winner") == true)
         {
             String previousImageScore = request.getParameter("result");
             String previousImageComment = request.getParameter("comment");
@@ -47,9 +47,9 @@ public class NextImageServlet extends HttpServlet
                 e.printStackTrace();
             }
             
+            database.close();
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print(jsonResponse);
-            database.close();
         }
         if(MinimalServer.session.getControll() == false)
         {
