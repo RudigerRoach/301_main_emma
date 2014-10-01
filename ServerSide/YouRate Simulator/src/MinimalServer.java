@@ -48,6 +48,7 @@ public class MinimalServer
     {
         //Create server
         session = _session;
+        System.out.println(session.type);
         images = session.getImages();
         totaalImages = images.length;
         tmpCompressedImage = new File[totaalImages];
