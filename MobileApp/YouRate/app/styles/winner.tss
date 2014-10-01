@@ -22,20 +22,20 @@
 	height: "100"
 },
 "#winnerButton": {	
-		titleid: 'yesB',
-		//title: "Yes", 
-		borderRadius: 8,
-		borderColor: "black",
-		borderWidth: 0,
-		backgroundColor: "#197519",
-	    color: "black", 
+		titleid: 'winnerB',
+		//title: "Winner", 
+		borderWidth: "1",
+		borderColor: "#bbb", 
+		borderRadius: "8", 
+		backgroundColor: "#bbb",
+	    color: "black",  
 	    textAlign: "center",
 		font: {
 			fontSize: 24,
 			fontFamily: 'Helvetica Neue'
 		}, 
+	    left:20,
 	    height: "80",
-	    right: 20,
-	    padding:0
+	    padding: 0
 }
 

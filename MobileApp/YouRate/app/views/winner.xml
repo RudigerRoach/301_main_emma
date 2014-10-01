@@ -6,8 +6,7 @@
 		</Toolbar>
 		
 		<!-- iOS and Android -->
-		<ImageView id="currentImage"/>  
 		<Button id="submitButton" onClick="doSubmit">Submit</Button> 
-		<Button id="winner" onClick="doWin">winner</Button>
+		<Button id="winnerButton">Choose as winner</Button>
     </Window>
 </Alloy>
