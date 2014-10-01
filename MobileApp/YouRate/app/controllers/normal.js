@@ -35,14 +35,22 @@ var sessionType = "yesNo";
 	comments = service.commentsEnabled();
 	imagePath = service.imagePath();
 	sessionType = service.sessionType();*/	
+	
+	if(comments == "true")
+	{
+		commentsEnabled();
+	}
 
+function resizePage()
+{
 	$.submitButton.top = screenHeight - 70;
 	$.submitButton.width = screenWidth - 40;	
 	screenLeft = $.submitButton.top;
 	
 	if(comments == "true")
 	{
-		commentsEnabled();
+		commentButton.top = screenLeft - 60;
+	    commentButton.width = screenWidth - 40;
 	}
 	
 	$.sliderLabel.top = screenLeft - 50;
@@ -66,7 +74,7 @@ var sessionType = "yesNo";
 	$.currentImage.image = imagePath;
 	$.currentImage.height = screenLeft - 80;
 	$.currentImage.width = "auto";
-	
+
 	$.slider.addEventListener('change', function(e) 
 	{
 	    $.sliderArea.value = Math.floor(Number($.slider.value));
@@ -76,6 +84,7 @@ var sessionType = "yesNo";
 	{
 	    $.slider.value = $.sliderArea.value;
 	});
+}
 
 function doSubmit(e)
 {	
@@ -93,7 +102,6 @@ function doSubmit(e)
 function commentsEnabled()
 {
 	var commentButton = Titanium.UI.createButton({
-		title:"Add comment",
 		titleid: 'commentB',
 		borderWidth: "1",
 		borderColor: "#bbb", 
@@ -146,5 +154,11 @@ function commentsEnabled()
 	$.normalPage.add(commentButton);
 	screenLeft = commentButton.top;
 }
+
+Ti.Gesture.addEventListener('orientationchange', function(e) {
+ 	screenHeight = ui.platformHeight();
+	screenWidth = ui.platformWidth();
+	resizePage();
+});
 	
 $.normalPage.open();

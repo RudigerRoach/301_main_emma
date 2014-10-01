@@ -48,7 +48,7 @@ function testStatus(service)
 }
 
 function goForward(service){
-	var win=Alloy.createController('vote').getView();
+	var win=Alloy.createController(service.sessionType()).getView();
  	win.open();
 }
 

@@ -21,7 +21,7 @@
 	},
 	height: "100"
 },
-"#yesButton": {	
+"#winnerButton": {	
 		titleid: 'yesB',
 		//title: "Yes", 
 		borderRadius: 8,
@@ -36,23 +36,6 @@
 		}, 
 	    height: "80",
 	    right: 20,
-	    padding:0
-},
-"#noButton": {	  
-		titleid: 'noB',
-		//title: "No", 
-		borderRadius: 8,
-		borderColor: "black",
-		borderWidth: 0,
-		backgroundColor: "#B80000",
-	    color: "black", 
-	    textAlign: "center",
-		font: {
-			fontSize: 24,
-			fontFamily: 'Helvetica Neue'
-		}, 
-	    height: "80",
-	    left: 20,
 	    padding:0
 }
 
