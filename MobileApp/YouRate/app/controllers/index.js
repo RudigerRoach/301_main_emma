@@ -1,6 +1,5 @@
 //Do all of the heavy lifting(like OS calls) only once. This improves performance a lot.
 var uiGenerator = require('ui');
-var waiter;
 var page = $.startPage;
 var activityIndicator = uiGenerator.getWaitIndicator('Attempting automatic login...');
 
@@ -19,6 +18,7 @@ function goForward(service){
 	var success = service.loginStatus();
 	activityIndicator.hideIndicator();
 	activityIndicator = null; //force garbage collector to clean up
+	
 	//If autoLogin successful
 	if (success == true) 
 	{

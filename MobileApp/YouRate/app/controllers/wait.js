@@ -1,5 +1,4 @@
 var uiGenerator = require('ui');
-var waiter;
 var page = $.waitPage;
 var activityIndicator = uiGenerator.getWaitIndicator('Waiting for server...');
 
@@ -14,22 +13,28 @@ function loadImage(){
 	testDone(service);	
 }
 
-function testDone(service){
+function testDone(service)
+{
 		var done = false;
-		var timer = setInterval(function(){ //poll every 1s and stop when getImgDone() returns true
+		var timer = setInterval(function() //poll every 1s and stop when getImgDone() returns true
+		{
 		    done = service.getImgDone();
-		    if (done) {
+		    if (done) 
+		    {
 		    	testStatus(service);
 		        clearInterval(timer);
 		    }
 		}, 1000);
 }
 
-function testStatus(service){
+function testStatus(service)
+{
 		var done = false;
-		var timer = setInterval(function(){ //poll every 1s and stop when loginStatus() returns 1
+		var timer = setInterval(function() //poll every 1s and stop when loginStatus() returns 1
+		{
 		    status = service.status();
-		    if (status == "1") {
+		    if (status == "1") 
+		    {
 		    	goForward(service);
 		    }else if(status == "2"){
 		    	alert("Voting session completed");
@@ -42,10 +47,8 @@ function testStatus(service){
 		}, 1000);
 }
 
-function goForward(service)
-{
-	clearInterval(waiter);
-	var win=Alloy.createController('vote').getView();
+function goForward(service){
+	var win=Alloy.createController('normal').getView(); //service.sessionType()
  	win.open();
 }
 

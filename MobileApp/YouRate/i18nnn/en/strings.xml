@@ -1,4 +1,5 @@
 <resources>
+    <string name="emailL">Email address:</string>	
     <string name="loginB">Login</string>
     <string name="submitB">Submit</string>
     <string name="commentB">Add comment</string>

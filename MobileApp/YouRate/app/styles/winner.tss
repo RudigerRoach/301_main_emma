@@ -21,7 +21,21 @@
 	},
 	height: "100"
 },
-'#menu[platform=android]': {
-	backgroundColor: "#bbb",
-	showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS
+"#winnerButton": {	
+		titleid: 'yesB',
+		//title: "Yes", 
+		borderRadius: 8,
+		borderColor: "black",
+		borderWidth: 0,
+		backgroundColor: "#197519",
+	    color: "black", 
+	    textAlign: "center",
+		font: {
+			fontSize: 24,
+			fontFamily: 'Helvetica Neue'
+		}, 
+	    height: "80",
+	    right: 20,
+	    padding:0
 }
+

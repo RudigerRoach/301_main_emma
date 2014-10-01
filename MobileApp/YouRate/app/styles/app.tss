@@ -8,6 +8,33 @@
 	defaultImage:'/Placeholder.png'
 }
 "ImageView[platform=android]":{
-	defaultImage:'/images/Placeholder.png'
+	defaultImage:'/images/placeholder.png'
+},
+"#appName": 
+{
+    color: "black", 
+    textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	top: "10",
+    width: "150", 
+    height: "35"
+},
+"#submitButton": {
+	titleid: 'submitB',
+	borderWidth: "1",
+	borderColor: "#bbb", 
+	borderRadius: "8",
+	backgroundColor: "#bbb",
+	color: "black", 
+	textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: 50,
+	left: 20
 }
 
