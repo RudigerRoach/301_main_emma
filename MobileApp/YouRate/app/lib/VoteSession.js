@@ -22,37 +22,30 @@ function populateThis(e) {
 	/*
 	 This funtion is to be called in very onSuccess callback
 	 */
-	Ti.API.info("pop this called");
 	e = JSON.parse(e.data);
-	Ti.API.info("e: "+JSON.stringify(e));
+	//Ti.API.info("e: " + JSON.stringify(e));
 	status = e.status;
-	if (status == 0) {//device should wait
-
-	} else if (status == 1) {//new judge-able object recieved
-		sessionType = e.sessionType;
-		if (sessionType == "normal") {
-			description = e.description;
-			imgPath = e.imgPath;
-			if (e.rangeBottom !== undefined) { //this exicutes only on the first call of a session
-				rangeBottom = e.rangeBottom;
-				rangeTop = e.rangeTop;
-				comments = e.comments;
-			}
-		} else if (sessionType == "yesNo") {
-			description = e.description;
-			imgPath = e.imgPath;
-			if (e.rangeBottom !== undefined) { //this exicutes only on the first call of a session
-				rangeBottom = e.rangeBottom;
-				rangeTop = e.rangeTop;
-				comments = e.comments;
-			}
-		} else if (sessionType == "winner") {
-			
+	if (sessionType == "winner") {
+		/*
+		 {"rangeBottom":0,"status":"1","imgPaths":["temp/1.jpg","temp/2.jpg","temp/3.jpg","temp/4.jpg","temp/5.jpg"],"description":"Beauty comes in all shapes and sizes","imgTotaal":5,"sessionType":"winner","rangeTop":10,"comments":"true"}
+		 */
+		imgPath = imgPaths;
+		description = e.description;
+		rangeBottom = e.rangeBottom;
+		rangeTop = e.rangeTop;
+		comments = e.comments;
+		imgTotaal = 5;
+	} else {
+		description = e.description;
+		imgPath = e.imgPath;
+		if (e.rangeBottom !== undefined) {//this exicutes only on the first call of a session
+			rangeBottom = e.rangeBottom;
+			rangeTop = e.rangeTop;
+			comments = e.comments;
 		}
-	} else if (status == 2) {//no session currently running
-		//Ti.API.info("Status 2 recieved");
 	}
-};
+
+	};
 
 //Getters
 exports.imagePath = function() {
@@ -80,13 +73,13 @@ exports.status = function() {
 exports.getImgDone = function() {
 	return getImgDone;
 };
-exports.asyncDone = function(){
+exports.asyncDone = function() {
 	return asyncDone;
 };
 
 //Network calls
 exports.getImage = function() {
-	
+
 	//Ti.API.info("getImage Called");
 	serverpath = "";
 	/*
@@ -112,7 +105,7 @@ exports.getImage = function() {
 		populateThis(e);
 		getImgDone = true;
 		status = 1;
-		
+
 	};
 
 	var onErrorCallback1 = function(e) {
@@ -125,12 +118,12 @@ exports.getImage = function() {
 		status = -1;
 	};
 	callcount = require('alloy').Globals.callCount;
-	callcount = callcount+1;
+	callcount = callcount + 1;
 	require('alloy').Globals.callCount = callcount;
-	if(callcount == 1){
+	if (callcount == 1) {
 		net.getImgPost(payload, onSuccessCallback1, onErrorCallback1);
-	}else{
-		//net.getNextImgPost(payload, onSuccessCallback1, onErrorCallback1);	
+	} else {
+		//net.getNextImgPost(payload, onSuccessCallback1, onErrorCallback1);
 	}
 };
 
@@ -139,14 +132,14 @@ exports.submitResult = function(_result, _comment) {
 	/*
 	 This function will be called to send the result of any type of event({ y/n | winner | normal }) back to the server
 	 */
-	
+
 	var payload = {
 		deviceUID : udid,
 		result : _result,
 		comment : _comment
 	};
 	var onSuccessCallback = function(e) {
-		Ti.API.info("OSC subm:"+e.toString());
+		Ti.API.info("OSC subm:" + e.toString());
 		populateThis(e);
 		asyncDone = true;
 	};
@@ -161,5 +154,4 @@ exports.submitResult = function(_result, _comment) {
 	};
 	net.resultPost(payload, onSuccessCallback, onErrorCallback);
 };
-
 

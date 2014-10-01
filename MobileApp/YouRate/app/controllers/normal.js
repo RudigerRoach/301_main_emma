@@ -61,6 +61,7 @@ function resizePage()
 		if(commentButton == null)
 		{
 			commentsEnabled();
+			$.sliderArea.blur();
 		}
 		commentButton.top = screenLeft - 60;
 	    commentButton.width = screenWidth - 40;
@@ -99,6 +100,7 @@ function doSubmit(e)
 	//service.submitResult(photosView.currentPage,"");
     //alert("Result successfully submitted");
     
+   
     //Go to wait page
 	var win=Alloy.createController('wait').getView();
  	win.open();
@@ -130,4 +132,3 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 });
 	
 $.normalPage.open();
-$.sliderArea.blur();

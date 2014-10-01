@@ -1,6 +1,6 @@
 var uiGenerator = require('ui');
 var page = $.loginPage;
-var activityIndicator = uiGenerator.getWaitIndicator('Attempting automatic login...');
+var activityIndicator = uiGenerator.getWaitIndicator('Loging in...');
 
 var ospath = "";
 	if(OS_ANDROID){
