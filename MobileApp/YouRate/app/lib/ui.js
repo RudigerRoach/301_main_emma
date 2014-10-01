@@ -4,25 +4,20 @@ var platformWidth = Ti.Platform.displayCaps.platformWidth;
 var isIOS = OS_IOS;
 var isPortrait = platformHeight > platformWidth ? true : false;
 
-//helper variables
-var indicatorRunning = false;
 /*
+Helper variables
+*/
+var indicatorRunning = false;
+
 Ti.Gesture.addEventListener('orientationchange', function(e) {
  	platformHeight = Ti.Platform.displayCaps.platformHeight;
 	platformWidth = Ti.Platform.displayCaps.platformWidth;
 	isPortrait = e.source.isPortrait();
 });
-*/
-exports.getImageView = function(){
-	//setting attributes in javascript is faster than parsing JSON
-	var imageView = Ti.UI.createImageView();
-	imageView.height = platformHeight/2;
-	imageView.width = 'auto';
-	imageView.image = isIOS ? 'Placeholder.png' : '/images/Placeholder.png';
-	
-	return imageView;
-};
 
+/*
+ UI artifacts
+ */
 exports.getWaitIndicator = function(message){
 	var style = platformName === 'iPhone OS' ? Ti.UI.iPhone.ActivityIndicatorStyle.BIG : Ti.UI.ActivityIndicatorStyle.BIG;
 	
@@ -60,10 +55,21 @@ exports.getWaitIndicator = function(message){
 	return view;
 }; 
 
+/*
+ Device information
+ */
+exports.platformHeight = function(){
+	return platformHeight;
+};
+
+exports.platformWidth = function(){
+	return platformWidth;
+};
+
 exports.isIOS = function(){
 	return isIOS;
 };
-/*
+
 exports.isPortrait = function(){
 	return isPortrait;
-};*/
+};
