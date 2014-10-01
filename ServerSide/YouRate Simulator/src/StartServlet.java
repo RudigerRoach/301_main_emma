@@ -65,7 +65,7 @@ public class StartServlet extends HttpServlet
                     jsonResponse.put("comments", "true");
                     jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[current].getName()); 
                 }
-                else if (MinimalServer.session.getSessionType().equals("winner") == true)
+                else if (MinimalServer.session.getType().equals("winner") == true)
                 {
                     jsonResponse.put("status", "1");
                     jsonResponse.put("sessionType",MinimalServer.session.getType());
@@ -84,7 +84,7 @@ public class StartServlet extends HttpServlet
                     JSONArray array = new JSONArray();
                     for(int i = 0; i < list.size();i++)
                     {
-                        array.put(list.get(i));
+                        array.put(i, list.get(i));
                     }
                     
                     jsonResponse.put("imgPaths", array);

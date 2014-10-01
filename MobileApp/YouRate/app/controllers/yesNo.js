@@ -1,57 +1,52 @@
-var ospath = "";
-	if(OS_ANDROID){
-		ospath = "/images/";
-	}else if(OS_IOS){
-		ospath = "";
-	}	
+var ui = require('ui');
+var service = require('VoteSession');
+var isIOS = ui.isIOS();
+var updateSlider = false;
 
-var screenWidth = Ti.Platform.displayCaps.platformWidth;
-var screenHeight = Ti.Platform.displayCaps.platformHeight;
-if(OS_ANDROID){
-		screenHeight -= 90;
+var ospath = "";
+if (!isIOS) {
+	ospath = "/images/";
+} else {
+	ospath = "";
 }
 
-var screenLeft = screenHeight;
+//declare variables and use defaults for testing
+var commentButton = null;
 var commentText = "";	
-var chosen = -1;	
-var rangeBottom = 0;
-var rangeTop = 50;
-var description = "Image title"; 
-var displayTitle = "true";
-var comments = "false"; 
-var imagePath = ospath+"placeholder.png";
+var chosen = -1;
+var description = "Image title";
+var comments = "true";
+var imagePath = ospath + "placeholder.png";
 //imagePath = ospath+"animalLandscape.jpg";
-imagePath = ospath+"kitty.jpg";
-photoPath = imagePath; //For yesNo winner events
-//alert("IMG path: "+imagePath);
-//var sessionType = "yesNo";
-var sessionType = "yesNo";
-//var sessionType = "winner";
-	service=require('VoteSession');	
-	
-	//Server calls
-	rangeBottom = service.rangeBottom();
-	rangeTop = service.rangeTop();
-	description = service.description(); 
-	comments = service.commentsEnabled();
-	imagePath = service.imagePath();
-	sessionType = service.sessionType();		
-	
-	if(comments == "true")
-	{
-		commentsEnabled();
-	}
 
+//Server calls
+ /*description = service.description();
+ comments = service.commentsEnabled();
+ imagePath = service.imagePath();*/
+
+//Resize all artifacts on the screen to match the screen size and orientation
 function resizePage()
 {
+	var screenWidth = ui.platformWidth();
+	var screenHeight = ui.platformHeight();
+	if (!isIOS) {
+		screenHeight -= 90;
+	}
+	var screenLeft = screenHeight;
+	
 	$.submitButton.top = screenHeight - 70;
 	$.submitButton.width = screenWidth - 40;	
 	screenLeft = $.submitButton.top;
 	
 	if(comments == "true")
 	{
-	    commentButton.top = screenLeft - 60;
+		if(commentButton == null)
+		{
+			commentsEnabled();
+		}
+		commentButton.top = screenLeft - 60;
 	    commentButton.width = screenWidth - 40;
+	    screenLeft = commentButton.top;
 	}
 	
 	$.yesButton.top = screenLeft - 100;
@@ -62,8 +57,8 @@ function resizePage()
 	
 	screenLeft = $.yesButton.top;
 	
-	if(OS_ANDROID){
-		$.currentImage.top -= 30;
+	if(!isIOS){
+		$.currentImage.top = 30;
 	}
 	$.currentImage.image = imagePath;
 	$.currentImage.height = screenLeft - 80;
@@ -107,60 +102,29 @@ function doNo()
 	chosen = 0;
 }
 
-function commentsEnabled()
-{
-	var commentButton = Titanium.UI.createButton({
-		titleid: 'commentB',
-		borderWidth: "1",
-		borderColor: "#bbb", 
-		borderRadius: "8",
-		backgroundColor: "#bbb",
-		//backgroundColor: "#E5E5E9",
-		color: "black", 
-		textAlign: "center",
-		font: {
-			fontSize: 24,
-			fontFamily: 'Helvetica Neue'
-		},
-	    top: screenLeft - 60,
-	    width: screenWidth - 40,
-	    left: 20,
-	    height: 40
-	});	
-	
-	screenLeft = commentButton.top;
+function commentsEnabled() {
+		commentButton = ui.getCommentButton();
+		commentArea = ui.getCommentArea();
 
-	commentButton.addEventListener('click',function(e)
-	{		   
-		commentArea = Ti.UI.createTextArea(
+		commentButton.addEventListener('click',function(e)
 		{
-	  		borderWidth:"2",
-		    borderColor:"#bbb",
-		    borderRadius:"5",
-		    color:"black",			    
-		    opacity: 70,
-		    textAlign:"left",
-		    value:"",
-		    top:60,
-		    width:screenWidth - 40,
-		    left:20,
-		    height:200,
-			font: {
-				fontSize: 20,
-				fontFamily: 'Helvetica Neue'
-			}
+				$.normalPage.add(commentArea);
+				commentArea.focus();
 		});
-	
 		commentArea.addEventListener('blur',function(e)
 		{
 			commentText = commentArea.value;
 			$.yesNoPage.remove(commentArea);
 		});
-		$.yesNoPage.add(commentArea);
-	});
-		
+		commentArea.addEventListener('return',function(e)
+		{
+			commentArea.blur();
+		});
 	$.yesNoPage.add(commentButton);
-	screenLeft = commentButton.top;
 }
+
+Ti.Gesture.addEventListener('orientationchange', function(e) {
+	resizePage();
+});
 	
 $.yesNoPage.open();
