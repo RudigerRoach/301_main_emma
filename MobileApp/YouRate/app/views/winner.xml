@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="yesNoPage" onFocus="resizePage">
+    <Window id="winnerPage" onFocus="resizePage">
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
 			<Button id="appName">uRate</Button>
@@ -8,7 +8,6 @@
 		<!-- iOS and Android -->
 		<ImageView id="currentImage"/>  
 		<Button id="submitButton" onClick="doSubmit">Submit</Button> 
-		<Button id="yesButton" onClick="doYes">Yes</Button>
-		<Button id="noButton" onClick="doNo">No</Button>
+		<Button id="winner" onClick="doWin">winner</Button>
     </Window>
 </Alloy>

@@ -56,7 +56,7 @@ function goForward(service){
 		$.loginButton.opacity=1.0;
 		alert("Error: "+service.error());
 		//Offline testing
-		var win=Alloy.createController('yesNo').getView();
+		var win=Alloy.createController('normal').getView();
 	 	win.open();
  	}
 }
@@ -70,31 +70,6 @@ function testStatus(service){
 		        clearInterval(timer);
 		    }
 		}, 1000);
-}
-
-function setActionBar(evt) 
-{
-    if (OS_ANDROID) 
-    {
-    	try
-    	{
-    		var actionBar = $.mainWindow.activity.actionBar; 	//get a handle to the action bar
-    		actionBar.title = 'uRate';						//change the App Title
-    		actionBar.displayHomeAsUp=false;					//show the "angle" pointing back
-    		actionBar.onHomeIconItemSelected = function()		//what to do when the "home" icon is pressed
-    		{
-    			alert("Home icon clicked!");
-    			//This is not the back door you where looking for
-    			var win=Alloy.createController('vote').getView();
-	 			win.open();
-    		};  
-    		$.mainWindow.activity.invalidateOptionsMenu();		//makes sure the menu is visible  		
-    	}
-    	catch(e)
-    	{
-    		//
-    	}
-    }
 }
 
 $.loginPage.open();

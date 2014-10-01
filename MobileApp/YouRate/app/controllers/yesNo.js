@@ -35,15 +35,23 @@ var sessionType = "yesNo";
 	description = service.description(); 
 	comments = service.commentsEnabled();
 	imagePath = service.imagePath();
-	sessionType = service.sessionType();*/	
+	sessionType = service.sessionType();*/		
+	
+	if(comments == "true")
+	{
+		commentsEnabled();
+	}
 
+function resizePage()
+{
 	$.submitButton.top = screenHeight - 70;
 	$.submitButton.width = screenWidth - 40;	
 	screenLeft = $.submitButton.top;
 	
 	if(comments == "true")
 	{
-		commentsEnabled();
+	    commentButton.top = screenLeft - 60;
+	    commentButton.width = screenWidth - 40;
 	}
 	
 	$.yesButton.top = screenLeft - 100;
@@ -60,6 +68,7 @@ var sessionType = "yesNo";
 	$.currentImage.image = imagePath;
 	$.currentImage.height = screenLeft - 80;
 	$.currentImage.width = "auto";
+}
 
 function doSubmit(e)
 {	
@@ -83,21 +92,24 @@ function doSubmit(e)
 function doYes()
 {	
    	$.yesButton.opacity = 1;
+   	$.yesButton.borderWidth = 2;
 	$.noButton.opacity = 0.5;
+   	$.noButton.borderWidth = 0;
 	chosen = 1;
 }
 
 function doNo()
 {	
    	$.yesButton.opacity = 0.5;
+   	$.yesButton.borderWidth = 0;
 	$.noButton.opacity = 1;
+   	$.noButton.borderWidth = 2;
 	chosen = 0;
 }
 
 function commentsEnabled()
 {
 	var commentButton = Titanium.UI.createButton({
-		title:"Add comment",
 		titleid: 'commentB',
 		borderWidth: "1",
 		borderColor: "#bbb", 
