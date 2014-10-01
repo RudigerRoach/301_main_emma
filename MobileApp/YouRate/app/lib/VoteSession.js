@@ -22,9 +22,9 @@ function populateThis(e) {
 	/*
 	 This funtion is to be called in very onSuccess callback
 	 */
-	//Ti.API.info("pop this called");
+	Ti.API.info("pop this called");
 	e = JSON.parse(e.data);
-	//Ti.API.info("e: "+e.toString());
+	Ti.API.info("e: "+JSON.stringify(e));
 	status = e.status;
 	if (status == 0) {//device should wait
 
@@ -47,20 +47,7 @@ function populateThis(e) {
 				comments = e.comments;
 			}
 		} else if (sessionType == "winner") {
-			imgTotaal = e.imgTotaal;
-			//read obj into js array
-			var result = [];
-			for(var i in e)
-			    result.push([i, e[i]]);
 			
-			returnstring = "";    
-			startindex = result.length()-imgTotaal;
-			for (var i=startindex; i < imgTotaal; i++) {
-			  returnstring += result[i]+",";
-			};
-			returnstring = "["+returnstring+"]";
-			Ti.API.info("@@ returnstring: "+returnstring);
-			Ti.API.info("@@ startindex: "+startindex);
 		}
 	} else if (status == 2) {//no session currently running
 		//Ti.API.info("Status 2 recieved");

@@ -1,56 +1,70 @@
-var ospath = "";
-	if(OS_ANDROID){
-		ospath = "/images/";
-	}else if(OS_IOS){
-		ospath = "";
-	}	
+var ui = require('ui');
+var service = require('VoteSession');
+var isIOS = ui.isIOS();
+var updateSlider = false;
 
-var screenWidth = Ti.Platform.displayCaps.platformWidth;
-var screenHeight = Ti.Platform.displayCaps.platformHeight;
-if(OS_ANDROID){
-		screenHeight -= 90;
+var ospath = "";
+if (!isIOS) {
+	ospath = "/images/";
+} else {
+	ospath = "";
 }
 
-var screenLeft = screenHeight;
+//declare variables and use defaults for testing
+var commentButton = null;
 var commentText = "";	
 var rangeBottom = 0;
 var rangeTop = 50;
-var description = "Image title"; 
-var displayTitle = "true";
-var comments = "true"; 
-var imagePath = ospath+"placeholder.png";
+var description = "Image title";
+var comments = "true";
+var imagePath = ospath + "placeholder.png";
 //imagePath = ospath+"animalLandscape.jpg";
-imagePath = ospath+"kitty.jpg";
-photoPath = imagePath; //For yesNo winner events
-//alert("IMG path: "+imagePath);
-//var sessionType = "normal";
-var sessionType = "yesNo";
-//var sessionType = "winner";
-	service=require('VoteSession');	
-	
-	//Server calls
-	/*rangeBottom = service.rangeBottom();
-	rangeTop = service.rangeTop();
-	description = service.description(); 
-	comments = service.commentsEnabled();
-	imagePath = service.imagePath();
-	sessionType = service.sessionType();*/	
-	
-	if(comments == "true")
-	{
-		commentsEnabled();
-	}
 
+//Server calls
+ rangeBottom = service.rangeBottom();
+ rangeTop = service.rangeTop();
+ description = service.description();
+ comments = service.commentsEnabled();
+ imagePath = service.imagePath();
+
+//Bind event listeners to the slider and score input box to make them play nice
+$.slider.addEventListener('change', function(e) {
+	if(!updateSlider)
+	{
+		$.sliderArea.value = Math.floor(Number($.slider.value));
+	}else{
+		updateSlider = false;
+	}
+});
+$.sliderArea.addEventListener('return', function(e) {
+	updateSlider = true;
+	$.slider.value = $.sliderArea.value;
+	$.sliderArea.blur();
+});
+
+//Resize all artifacts on the screen to match the screen size and orientation
 function resizePage()
 {
+	var screenWidth = ui.platformWidth();
+	var screenHeight = ui.platformHeight();
+	if (!isIOS) {
+		screenHeight -= 90;
+	}
+	var screenLeft = screenHeight;
+	
 	$.submitButton.top = screenHeight - 70;
 	$.submitButton.width = screenWidth - 40;	
 	screenLeft = $.submitButton.top;
 	
 	if(comments == "true")
 	{
+		if(commentButton == null)
+		{
+			commentsEnabled();
+		}
 		commentButton.top = screenLeft - 60;
 	    commentButton.width = screenWidth - 40;
+	    screenLeft = commentButton.top;
 	}
 	
 	$.sliderLabel.top = screenLeft - 50;
@@ -68,22 +82,13 @@ function resizePage()
     $.sliderArea.value = $.slider.value;
 	screenLeft = $.slider.top;
 	
-	if(OS_ANDROID){
-		$.currentImage.top -= 30;
+	if(!isIOS){
+		$.currentImage.top = 30;
 	}
 	$.currentImage.image = imagePath;
 	$.currentImage.height = screenLeft - 80;
 	$.currentImage.width = "auto";
 
-	$.slider.addEventListener('change', function(e) 
-	{
-	    $.sliderArea.value = Math.floor(Number($.slider.value));
-	});
-
-	$.sliderArea.addEventListener('change', function(e) 
-	{
-	    $.slider.value = $.sliderArea.value;
-	});
 }
 
 function doSubmit(e)
@@ -99,66 +104,30 @@ function doSubmit(e)
  	win.open();
 }
 
-function commentsEnabled()
-{
-	var commentButton = Titanium.UI.createButton({
-		titleid: 'commentB',
-		borderWidth: "1",
-		borderColor: "#bbb", 
-		borderRadius: "8",
-		backgroundColor: "#bbb",
-		//backgroundColor: "#E5E5E9",
-		color: "black", 
-		textAlign: "center",
-		font: {
-			fontSize: 24,
-			fontFamily: 'Helvetica Neue'
-		},
-	    top: screenLeft - 60,
-	    width: screenWidth - 40,
-	    left: 20,
-	    height: 40
-	});	
-	
-	screenLeft = commentButton.top;
+function commentsEnabled() {
+		commentButton = ui.getCommentButton();
+		commentArea = ui.getCommentArea();
 
-	commentButton.addEventListener('click',function(e)
-	{		   
-		commentArea = Ti.UI.createTextArea(
+		commentButton.addEventListener('click',function(e)
 		{
-	  		borderWidth:"2",
-		    borderColor:"#bbb",
-		    borderRadius:"5",
-		    color:"black",			    
-		    opacity: 70,
-		    textAlign:"left",
-		    value:"",
-		    top:60,
-		    width:screenWidth - 40,
-		    left:20,
-		    height:200,
-			font: {
-				fontSize: 20,
-				fontFamily: 'Helvetica Neue'
-			}
+				$.normalPage.add(commentArea);
+				commentArea.focus();
 		});
-	
 		commentArea.addEventListener('blur',function(e)
 		{
 			commentText = commentArea.value;
 			$.normalPage.remove(commentArea);
 		});
-		$.normalPage.add(commentArea);
-	});
-		
+		commentArea.addEventListener('return',function(e)
+		{
+			commentArea.blur();
+		});
 	$.normalPage.add(commentButton);
-	screenLeft = commentButton.top;
 }
 
 Ti.Gesture.addEventListener('orientationchange', function(e) {
- 	screenHeight = ui.platformHeight();
-	screenWidth = ui.platformWidth();
 	resizePage();
 });
 	
 $.normalPage.open();
+$.sliderArea.blur();
