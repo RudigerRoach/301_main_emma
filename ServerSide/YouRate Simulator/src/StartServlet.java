@@ -1,11 +1,14 @@
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -72,10 +75,19 @@ public class StartServlet extends HttpServlet
                     //check hierna
                     jsonResponse.put("comments", "true");
                     jsonResponse.put("imgTotaal" , MinimalServer.totaalImages);
+                    List < String > list = new ArrayList < String > ();
                     for(int i = 0; i < MinimalServer.totaalImages; i++)
                     {
-                       jsonResponse.put("imgPath" + i,"temp/" + MinimalServer.tmpCompressedImage[i].getName());  
+                       list.add("temp/" + MinimalServer.tmpCompressedImage[i].getName());  
                     }
+                    
+                    JSONArray array = new JSONArray();
+                    for(int i = 0; i < list.size();i++)
+                    {
+                        array.put(list.get(i));
+                    }
+                    
+                    jsonResponse.put("imgPaths", array);
                 }
             } 
             catch (JSONException ex) 
