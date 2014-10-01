@@ -20,9 +20,9 @@ var imagePath = ospath + "placeholder.png";
 //imagePath = ospath+"animalLandscape.jpg";
 
 //Server calls
- /*description = service.description();
+ description = service.description();
  comments = service.commentsEnabled();
- imagePath = service.imagePath();*/
+ imagePath = service.imagePath();
 
 //Resize all artifacts on the screen to match the screen size and orientation
 function resizePage()
