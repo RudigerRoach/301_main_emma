@@ -30,12 +30,12 @@ var sessionType = "yesNo";
 	service=require('VoteSession');	
 	
 	//Server calls
-	/*rangeBottom = service.rangeBottom();
+	rangeBottom = service.rangeBottom();
 	rangeTop = service.rangeTop();
 	description = service.description(); 
 	comments = service.commentsEnabled();
 	imagePath = service.imagePath();
-	sessionType = service.sessionType();*/		
+	sessionType = service.sessionType();		
 	
 	if(comments == "true")
 	{

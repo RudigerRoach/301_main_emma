@@ -31,9 +31,9 @@ function doLogin()
 	service.login(email);
 	
 	//INFINITE LOOP???
-	//testStatus(service);
+	testStatus(service);
 	
-	goForward(service);
+	//goForward(service);
 };
 
 function goForward(service){
@@ -56,8 +56,8 @@ function goForward(service){
 		$.loginButton.opacity=1.0;
 		alert("Error: "+service.error());
 		//Offline testing
-		var win=Alloy.createController('normal').getView();
-	 	win.open();
+		//var win=Alloy.createController('normal').getView();
+	 	//win.open();
  	}
 }
 
