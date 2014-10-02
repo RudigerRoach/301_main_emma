@@ -11,16 +11,19 @@ if (!isIOS) {
 	ospath = "";
 }
 
-//declare variables and use defaults for testing	
+//declare variables and use defaults for testing
+var photosView = null;
+var screenLeft;	
 var chosen = -1;
 var description = "Image title";
 var imagePath = new Array();
-imagePath[0] = ospath+"animalLandscape.jpg";
+imagePath[0] = ospath+"brownLabrador.jpg";
 imagePath[1] = ospath+"kitty.jpg";
+imagePath[2] = ospath+"whiteLabrador.jpg";
 
 //Server calls
- /*description = service.description();
- imagePath = service.imagePath();*/
+ description = service.description();
+ imagePath = service.imagePath();
 
 //Resize all artifacts on the screen to match the screen size and orientation
 function resizePage()
@@ -30,7 +33,7 @@ function resizePage()
 	if (!isIOS) {
 		screenHeight -= 60;
 	}
-	var screenLeft = screenHeight;
+	screenLeft = screenHeight;
 	
 	$.submitButton.top = screenHeight - 70;
 	$.submitButton.width = screenWidth - 40;	
@@ -74,36 +77,41 @@ $.winnerButton.addEventListener('click',function(e)
 
 function addScrollableImage()
 {
-	alert(screenLeft);
-	var total = 2;	
-	var wrapperList = new Array();
-	for(var k = 0; k < total; k++)
-	{		
-		var img = Ti.UI.createImageView({
-	    image:imagePath[k],
-		  height: screenLeft - 80,
-		  width: "auto"
+	if(photosView == null)
+	{
+		var wrapperList = new Array();
+		for(var k = 0; k < imagePath.length; k++)
+		{		
+			var img = Ti.UI.createImageView({
+		    image:imagePath[k],
+			  height: screenLeft - 80,
+			  width: "auto"
+			});
+			var imgWrapper = Ti.UI.createScrollView({
+			    maxZoomScale:4.0
+			});
+			imgWrapper.add(img);
+			wrapperList[k] = imgWrapper;
+		}
+	
+		photosView = Ti.UI.createScrollableView({
+		    showPagingControl:true,
+		    views:wrapperList,
+		    top:60
 		});
-		var imgWrapper = Ti.UI.createScrollView({
-		    maxZoomScale:4.0
-		});
-		imgWrapper.add(img);
-		wrapperList[k] = imgWrapper;
+	
+		$.winnerPage.add(photosView);
 	}
-
-	photosView = Ti.UI.createScrollableView({
-	    showPagingControl:true,
-	    views:wrapperList,
-	});
-	alert(photosView.currentPage);
 		
 	if(!isIOS){
 		photosView.top = 30;
 	}
 	photosView.height = screenLeft - 80;
 	photosView.width = "auto";
-	
-	$.winnerPage.add(photosView);
 }
 	
+Ti.Gesture.addEventListener('orientationchange', function(e) {
+	resizePage();
+});
+
 $.winnerPage.open();

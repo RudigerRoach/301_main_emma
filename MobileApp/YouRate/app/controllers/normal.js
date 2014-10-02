@@ -89,7 +89,6 @@ function resizePage()
 	$.currentImage.image = imagePath;
 	$.currentImage.height = screenLeft - 80;
 	$.currentImage.width = "auto";
-
 }
 
 function doSubmit(e)
