@@ -37,9 +37,21 @@ function testStatus(service)
 		    {
 		    	goForward(service);
 		    }else if(status == "2"){
-		    	alert("Voting session completed");
-		    	var win=Alloy.createController('login').getView();
- 				win.open();
+		    	//Add languages!!!!!!!!!!
+			   var dialog = Ti.UI.createAlertDialog({
+				    cancel: 1,
+				    buttonNames: ['OK'],
+				    message: 'Voting session completed',
+				    title: 'Submit as winner'
+				  });
+				  dialog.addEventListener('click', function(e){
+				    if(e.index == 0)
+				    {
+				    	var win=Alloy.createController('login').getView();
+		 				win.open();
+				    }
+				  });
+				  dialog.show();
 		    }
 		    activityIndicator.hideIndicator();
 		    activityIndicator = null; //force garbage collection
