@@ -2,7 +2,7 @@
 	backgroundImage:'/images/bg.jpg'
 }
 "Window[platform=ios]":{
-	backgroundImage:'/bg.jpg',
+	backgroundImage:'/bg.png',
 }
 "ImageView[platform=ios]":{
 	defaultImage:'/Placeholder.png'

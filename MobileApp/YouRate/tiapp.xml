@@ -13,7 +13,6 @@
     <analytics>true</analytics>
     <guid>5332519b-e61b-4aa5-9ca4-8e019cae44eb</guid>
     <property name="ti.ui.defaultunit" type="string">dip</property>
-    
     <ios>
         <plist>
             <dict>
@@ -41,7 +40,6 @@
             </dict>
         </plist>
     </ios>
-
     <android xmlns:android="http://schemas.android.com/apk/res/android"/>
     <mobileweb>
         <precache/>

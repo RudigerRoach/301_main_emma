@@ -266,7 +266,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.votePage = Ti.UI.createWindow({
-        backgroundImage: "/bg.jpg",
+        backgroundImage: "/bg.png",
         backgroundColor: "#DFE4E7",
         exitOnClose: true,
         id: "votePage"
