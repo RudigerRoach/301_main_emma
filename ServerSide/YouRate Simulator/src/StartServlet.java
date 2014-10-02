@@ -30,18 +30,18 @@ public class StartServlet extends HttpServlet
         if (request.getSession(false) != null)
         {
             System.out.println("before start");
-            while(MinimalServer.start == false){}
+            while(YourateServer.start == false){}
             System.out.println("before end");
             String judge = request.getParameter("deviceUID");
             DBAccess database = new DBAccess();
             database.open();
             String email = database.getMail(judge);
             int current = 0;
-            for (int i = 0; i < MinimalServer.judgesList.size();i++)
+            for (int i = 0; i < YourateServer.judgesList.size();i++)
             {
-                if (MinimalServer.judgesList.get(i).getJudgeName().equals(email))
+                if (YourateServer.judgesList.get(i).getJudgeName().equals(email))
                 {
-                    current = MinimalServer.judgesList.get(i).getCurrentImage() - 1;
+                    current = YourateServer.judgesList.get(i).getCurrentImage() - 1;
                 }
             }
             JSONObject jsonResponse = new JSONObject();
@@ -54,31 +54,31 @@ public class StartServlet extends HttpServlet
 //		        "description": "image discription here",
 //		        "comments": "True",  //True if comments are allowed, False if not
 //		        "imgPath": "path/to/image.jpg" //the path where the image resides on the server
-                if((MinimalServer.session.getType().equals("normal") == true) || (MinimalServer.session.getType().equals("yesNo") == true))
+                if((YourateServer.session.getType().equals("normal") == true) || (YourateServer.session.getType().equals("yesNo") == true))
                 {
                     jsonResponse.put("status", "1");
-                    jsonResponse.put("sessionType",MinimalServer.session.getType());
-                    jsonResponse.put("rangeBottom", MinimalServer.session.getBotRange());
-                    jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
-                    jsonResponse.put("description", MinimalServer.session.getImageDetails(0));
+                    jsonResponse.put("sessionType",YourateServer.session.getType());
+                    jsonResponse.put("rangeBottom", YourateServer.session.getBotRange());
+                    jsonResponse.put("rangeTop", YourateServer.session.getTopRange());
+                    jsonResponse.put("description", YourateServer.session.getImageDetails(0));
                     //check hierna
                     jsonResponse.put("comments", "true");
-                    jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[current].getName()); 
+                    jsonResponse.put("imgPath","temp/" + YourateServer.tmpCompressedImage[current].getName()); 
                 }
-                else if (MinimalServer.session.getType().equals("winner") == true)
+                else if (YourateServer.session.getType().equals("winner") == true)
                 {
                     jsonResponse.put("status", "1");
-                    jsonResponse.put("sessionType",MinimalServer.session.getType());
-                    jsonResponse.put("rangeBottom", MinimalServer.session.getBotRange());
-                    jsonResponse.put("rangeTop", MinimalServer.session.getTopRange());
-                    jsonResponse.put("description", MinimalServer.session.getImageDetails(0));
+                    jsonResponse.put("sessionType",YourateServer.session.getType());
+                    jsonResponse.put("rangeBottom", YourateServer.session.getBotRange());
+                    jsonResponse.put("rangeTop", YourateServer.session.getTopRange());
+                    jsonResponse.put("description", YourateServer.session.getImageDetails(0));
                     //check hierna
                     jsonResponse.put("comments", "true");
-                    jsonResponse.put("imgTotaal" , MinimalServer.totaalImages);
+                    jsonResponse.put("imgTotaal" , YourateServer.totaalImages);
                     List < String > list = new ArrayList < String > ();
-                    for(int i = 0; i < MinimalServer.totaalImages; i++)
+                    for(int i = 0; i < YourateServer.totaalImages; i++)
                     {
-                       list.add("temp/" + MinimalServer.tmpCompressedImage[i].getName());  
+                       list.add("temp/" + YourateServer.tmpCompressedImage[i].getName());  
                     }
                     
                     JSONArray array = new JSONArray();
@@ -92,7 +92,7 @@ public class StartServlet extends HttpServlet
             } 
             catch (JSONException ex) 
             {
-                Logger.getLogger(MinimalServer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(YourateServer.class.getName()).log(Level.SEVERE, null, ex);
             }
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print(jsonResponse);

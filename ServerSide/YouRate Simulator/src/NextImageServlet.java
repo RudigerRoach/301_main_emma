@@ -21,7 +21,7 @@ public class NextImageServlet extends HttpServlet
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
-        if(MinimalServer.session.getType().equals("winner") == true)
+        if(YourateServer.session.getType().equals("winner") == true)
         {
             String previousImageScore = request.getParameter("result");
             String previousImageComment = request.getParameter("comment");
@@ -30,7 +30,7 @@ public class NextImageServlet extends HttpServlet
             DBAccess database = new DBAccess();
             database.open();
             String email = database.getMail(judge);
-            for (Judge judgesList : MinimalServer.judgesList) 
+            for (Judge judgesList : YourateServer.judgesList) 
             {
                 if (judgesList.getJudgeName().equals(email) == true)
                 {
@@ -51,7 +51,7 @@ public class NextImageServlet extends HttpServlet
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print(jsonResponse);
         }
-        if(MinimalServer.session.getControll() == false)
+        if(YourateServer.session.getControll() == false)
         {
             System.out.println("Next image is called");
             String previousImageScore = request.getParameter("result");
@@ -60,20 +60,20 @@ public class NextImageServlet extends HttpServlet
             DBAccess database = new DBAccess();
             database.open();
             String email = database.getMail(judge);
-            for (Judge judgesList : MinimalServer.judgesList) 
+            for (Judge judgesList : YourateServer.judgesList) 
             {
                 if (judgesList.getJudgeName().equals(email) == true)
                 {
                     judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
-                    if (judgesList.getCurrentImage()-1 < MinimalServer.totaalImages)
+                    if (judgesList.getCurrentImage()-1 < YourateServer.totaalImages)
                     {
                         JSONObject jsonResponse = new JSONObject();
                         try 
                         {
                             jsonResponse.put("status", "1");
-                            jsonResponse.put("sessionType", MinimalServer.session.getType());
-                            jsonResponse.put("description", MinimalServer.session.getImageDetails(judgesList.getCurrentImage()-1));
-                            jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
+                            jsonResponse.put("sessionType", YourateServer.session.getType());
+                            jsonResponse.put("description", YourateServer.session.getImageDetails(judgesList.getCurrentImage()-1));
+                            jsonResponse.put("imgPath","temp/" + YourateServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
                             System.out.println();
                         } 
                         catch (JSONException e) 
@@ -115,23 +115,23 @@ public class NextImageServlet extends HttpServlet
             DBAccess database = new DBAccess();
             database.open();
             String email = database.getMail(judge);
-            for (Judge judgesList : MinimalServer.judgesList) 
+            for (Judge judgesList : YourateServer.judgesList) 
             {
                 if (judgesList.getJudgeName().equals(email) == true)
                 {
                     judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
-                    if (MinimalServer.currentPhoto.get() < MinimalServer.totaalImages)
+                    if (YourateServer.currentPhoto.get() < YourateServer.totaalImages)
                     {
-                        while(judgesList.getCurrentImage() == MinimalServer.currentPhoto.get())
+                        while(judgesList.getCurrentImage() == YourateServer.currentPhoto.get())
                         {
                         }
                         JSONObject jsonResponse = new JSONObject();
                         try 
                         {
                             jsonResponse.put("status", "1");
-                            jsonResponse.put("sessionType", MinimalServer.session.getType());
-                            jsonResponse.put("description", MinimalServer.session.getImageDetails(MinimalServer.currentPhoto.get() -1));
-                            jsonResponse.put("imgPath","temp/" + MinimalServer.tmpCompressedImage[MinimalServer.currentPhoto.get()-1].getName());
+                            jsonResponse.put("sessionType", YourateServer.session.getType());
+                            jsonResponse.put("description", YourateServer.session.getImageDetails(YourateServer.currentPhoto.get() -1));
+                            jsonResponse.put("imgPath","temp/" + YourateServer.tmpCompressedImage[YourateServer.currentPhoto.get()-1].getName());
 
                         } 
                         catch (JSONException e) 

@@ -28,10 +28,10 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
  
-public class MinimalServer 
+public class YourateServer 
 {
     private static Server server = null;
-    public static Session session = null;
+    public static Configuration session = null;
     public static boolean start = false;
     public static BufferedImage [] images = null;
     public static File [] tmpCompressedImage = null;
@@ -44,7 +44,7 @@ public class MinimalServer
      * @param _session
      * @throws Exception
      */
-    public MinimalServer(Session _session) throws Exception
+    public YourateServer(Configuration _session) throws Exception
     {
         //Create server
         session = _session;
@@ -96,7 +96,7 @@ public class MinimalServer
 //        BufferedImage[] tmp3 = new BufferedImage[2];
 //        tmp3[0] = ImageIO.read(new File("stellies.jpg"));
 //        tmp3[1] = ImageIO.read(new File("guitar.jpg"));
-//        session = new Session(tmp2, tmp3, _judges,10,0,false,false,tmp);     
+//        session = new Configuration(tmp2, tmp3, _judges,10,0,false,false,tmp);     
 //        images = session.getImages();
 //        totaalImages = images.length;
 //        tmpCompressedImage = new File[totaalImages];

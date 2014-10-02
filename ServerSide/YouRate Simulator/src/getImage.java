@@ -25,7 +25,7 @@ public class getImage extends HttpServlet
         String imagePath = request.getRequestURI();
         imagePath = imagePath.substring(6, imagePath.indexOf("."));
         int number = Integer.parseInt(imagePath)-1;
-        File f = new File(MinimalServer.tmpCompressedImage[number].getAbsolutePath());
+        File f = new File(YourateServer.tmpCompressedImage[number].getAbsolutePath());
 	BufferedImage bi = ImageIO.read(f);
 
         response.setContentType("image/jpg");
