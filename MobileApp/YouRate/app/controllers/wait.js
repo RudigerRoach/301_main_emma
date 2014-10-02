@@ -1,6 +1,6 @@
 var uiGenerator = require('ui');
 var page = $.waitPage;
-var activityIndicator = uiGenerator.getWaitIndicator('Waiting for server...');
+var activityIndicator = uiGenerator.getWaitIndicator('waitL');
 
 function loadImage(){
 	//Show background activity with an activityindicator

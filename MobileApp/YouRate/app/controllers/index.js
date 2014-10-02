@@ -1,7 +1,7 @@
 //Do all of the heavy lifting(like OS calls) only once. This improves performance a lot.
 var uiGenerator = require('ui');
 var page = $.startPage;
-var activityIndicator = uiGenerator.getWaitIndicator('Attempting automatic login...');
+var activityIndicator = uiGenerator.getWaitIndicator('autoLoginL');
 
 function displayLoginPage(){
 	//Show background activity with an activityindicator
@@ -29,7 +29,7 @@ function goForward(service){
 	else
 	{	
 		//If autoLogin not successful
-	    var win=Alloy.createController('login').getView(); //must be login
+	    var win=Alloy.createController('normal').getView(); //must be login
 	 	win.open();
  	}
 }

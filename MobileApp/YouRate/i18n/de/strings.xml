@@ -1,6 +1,7 @@
 <resources>
 	<string name="autoLoginL">FIX...</string>	
 	<string name="loginL">FIX...</string>	
+	<string name="waitL">Waiting for server...</string>
     <string name="emailL">Email address FIX:</string>	
     <string name="loginB">Inloggen</string>
     <string name="submitB">Dien in</string>

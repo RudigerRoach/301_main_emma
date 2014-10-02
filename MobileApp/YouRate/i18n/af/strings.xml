@@ -1,6 +1,7 @@
 <resources>
 	<string name="autoLoginL">Probeer om automaties in te teken...</string>	
-	<string name="loginL">Probeer om in te teken...</string>	
+	<string name="loginL">Probeer om in te teken...</string>
+	<string name="waitL">Wag vir die bediener...</string>	
     <string name="emailL">Epos adres:</string>	
     <string name="loginB">Teken in</string>
     <string name="submitB">Dien in</string>
