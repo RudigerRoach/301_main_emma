@@ -11,15 +11,19 @@ if (!isIOS) {
 	ospath = "";
 }
 
-//declare variables and use defaults for testing	
+//declare variables and use defaults for testing
+var photosView = null;
+var screenLeft;	
 var chosen = -1;
 var description = "Image title";
-var imagePath = ospath + "placeholder.png";
-//imagePath = ospath+"animalLandscape.jpg";
+var imagePath = new Array();
+imagePath[0] = ospath+"brownLabrador.jpg";
+imagePath[1] = ospath+"kitty.jpg";
+imagePath[2] = ospath+"whiteLabrador.jpg";
 
 //Server calls
- /*description = service.description();
- imagePath = service.imagePath();*/
+ description = service.description();
+ imagePath = service.imagePath();
 
 //Resize all artifacts on the screen to match the screen size and orientation
 function resizePage()
@@ -27,9 +31,9 @@ function resizePage()
 	var screenWidth = ui.platformWidth();
 	var screenHeight = ui.platformHeight();
 	if (!isIOS) {
-		screenHeight -= 90;
+		screenHeight -= 60;
 	}
-	var screenLeft = screenHeight;
+	screenLeft = screenHeight;
 	
 	$.submitButton.top = screenHeight - 70;
 	$.submitButton.width = screenWidth - 40;	
@@ -38,9 +42,7 @@ function resizePage()
 	$.winnerButton.top = screenLeft - 100;
 	$.winnerButton.width = screenWidth - 40;	
 	screenLeft = $.winnerButton.top;
-	alert(screenLeft);
 	addScrollableImage();	
-	alert(screenLeft);
 }
 
 function doSubmit(e)
@@ -75,33 +77,41 @@ $.winnerButton.addEventListener('click',function(e)
 
 function addScrollableImage()
 {
-	var total = 2;	
-	var wrapperList = new Array();
-	for(var k = 0; k < total; k++)
-	{		
-		var img = Ti.UI.createImageView({
-	    image:"whiteLabrador.jpg",
-		  height: screenLeft - 80,
-		  width: "auto"
+	if(photosView == null)
+	{
+		var wrapperList = new Array();
+		for(var k = 0; k < imagePath.length; k++)
+		{		
+			var img = Ti.UI.createImageView({
+		    image:imagePath[k],
+			  height: screenLeft - 80,
+			  width: "auto"
+			});
+			var imgWrapper = Ti.UI.createScrollView({
+			    maxZoomScale:4.0
+			});
+			imgWrapper.add(img);
+			wrapperList[k] = imgWrapper;
+		}
+	
+		photosView = Ti.UI.createScrollableView({
+		    showPagingControl:true,
+		    views:wrapperList,
+		    top:60
 		});
-		var imgWrapper = Ti.UI.createScrollView({
-		    maxZoomScale:4.0
-		});
-		imgWrapper.add(img);
-	alert("2 " + imgWrapper);
-		wrapperList[k] = imgWrapper;
+	
+		$.winnerPage.add(photosView);
 	}
-
-alert("|"+wrapperList+"|");
-	photosView = Ti.UI.createScrollableView({
-	    showPagingControl:true,
-	    views:[wrapperList],
-		  height: 300,
-		  width: 300,
-		  top: 60
-	});
-	//alert(photosView.currentPage);
-	$.winnerPage.add(photosView);
+		
+	if(!isIOS){
+		photosView.top = 30;
+	}
+	photosView.height = screenLeft - 80;
+	photosView.width = "auto";
 }
 	
+Ti.Gesture.addEventListener('orientationchange', function(e) {
+	resizePage();
+});
+
 $.winnerPage.open();

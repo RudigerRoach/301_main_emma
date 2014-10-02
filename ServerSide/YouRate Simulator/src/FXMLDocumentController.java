@@ -21,6 +21,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import org.thehecklers.dialogfx.DialogFX;
+import org.thehecklers.dialogfx.DialogFX.Type;
+
 
 
 /**
@@ -67,7 +70,7 @@ public class FXMLDocumentController implements Initializable{
     
     final ToggleGroup group = new ToggleGroup();
     
-    Session mySession;
+    Configuration mySession;
     
     public FXMLDocumentController()
     {
@@ -78,7 +81,8 @@ public class FXMLDocumentController implements Initializable{
     private void handleStartButtonAction(ActionEvent event) throws IOException {
         System.out.println("You called me!");
         
-
+        String problems = "";
+        boolean ok = true;
         
         linkedList names = new linkedList();
         linkedList name1 = new linkedList();
@@ -122,8 +126,51 @@ public class FXMLDocumentController implements Initializable{
         imgDetails[3] = "Huisie by die see";
         imgDetails[4] = "Not a cat you want to play with";
         
-        int min =  Integer.parseInt((minimumScore.getText()));
-        int max =  Integer.parseInt((maximumScore.getText()));
+        String minStr = minimumScore.getText();
+        int min =  0;
+        boolean minwrong = false;
+        for(int i =0;i<minStr.length();i++)
+        {
+            if (!Character.isDigit(minStr.charAt(i)))
+            {
+                ok = false;
+                minwrong = true;
+            }  
+        }
+        
+        if(minwrong)
+            problems += " the minimum range has an invalid input,";
+        else 
+            min = Integer.parseInt((minimumScore.getText()));
+        
+        
+        
+        String maxStr = maximumScore.getText();
+        int max =  10;
+        boolean maxwrong = false;
+        for(int i =0;i<maxStr.length();i++)
+        {
+            if (!Character.isDigit(maxStr.charAt(i)))
+            {
+                ok = false;
+                maxwrong = true;
+            }  
+        }
+        
+        if(maxwrong)
+            problems += " the minimum range has an invalid input,";
+        else 
+            max =  Integer.parseInt((maximumScore.getText()));
+        
+        
+        if(min > max)
+        {
+            ok = false;
+            problems += " min needs to be smaller than max,";
+        }
+        
+        
+        
         boolean cont = controlledSession.isSelected();
         boolean open = openSession.isSelected();
         boolean comments = commentsEnabled.isSelected();
@@ -132,33 +179,48 @@ public class FXMLDocumentController implements Initializable{
         if(Normal.isSelected())
             type = "normal";
         else if (Elimination.isSelected())
-            type = "yesNo";
+            type = "elimination";
         else if (Winner.isSelected())
             type = "winner";
-        
-        
-        mySession = new Session(names,images,judges,max,min,open,cont,imgDetails,type);
-//        FileOutputStream saveFile=new FileOutputStream("SaveObj.sav");
-//        ObjectOutputStream save = new ObjectOutputStream(saveFile);
-//        save.writeObject(mySession);
-//        save.close();
-        
-        try
+        else 
         {
-            MinimalServer myServer = new MinimalServer(mySession);
-            myServer.startSession();
+            ok = false;
+            problems += " no session type selected,";
         }
-        catch(Exception ex)
-        {
-            System.out.println(ex);
-        } 
         
-        Scene newScene = new Scene((Parent) FXMLLoader.load(getClass().getResource("FXMLrunningSession.fxml")));
-        fxStage newStage = new fxStage(mySession);
-        newStage.setScene(newScene);
-        newStage.setTitle("Emma Simulator");
-        newStage.setFullScreen(true);
-        newStage.show();
+        if(ok == true)
+        {
+            mySession = new Configuration(names,images,judges,max,min,open,cont,imgDetails,type);
+    //        FileOutputStream saveFile=new FileOutputStream("SaveObj.sav");
+    //        ObjectOutputStream save = new ObjectOutputStream(saveFile);
+    //        save.writeObject(mySession);
+    //        save.close();
+
+            try
+            {
+                uRateServer myServer = new uRateServer(mySession);
+                myServer.startSession();
+            }
+            catch(Exception ex)
+            {
+                System.out.println(ex);
+            } 
+
+            Scene newScene = new Scene(FXMLLoader.load(getClass().getResource("FXMLrunningSession.fxml")));
+            fxStage newStage = new fxStage(mySession);
+            newStage.setScene(newScene);
+            newStage.setTitle("Emma Simulator");
+            newStage.setFullScreen(true);
+            newStage.show();
+            
+        }
+        else
+        {
+        DialogFX dialog = new DialogFX(Type.ERROR);
+        dialog.setTitleText("The input is incorrect");
+        dialog.setMessage("Problems:"+problems.substring(0, problems.length()-1)+".");
+        dialog.showDialog();
+        }
     }
     
     

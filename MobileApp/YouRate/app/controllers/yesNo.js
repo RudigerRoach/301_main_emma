@@ -30,7 +30,7 @@ function resizePage()
 	var screenWidth = ui.platformWidth();
 	var screenHeight = ui.platformHeight();
 	if (!isIOS) {
-		screenHeight -= 90;
+		screenHeight -= 60;
 	}
 	var screenLeft = screenHeight;
 	
@@ -44,7 +44,7 @@ function resizePage()
 		{
 			commentsEnabled();
 		}
-		commentButton.top = screenLeft - 60;
+		commentButton.top = screenLeft - 70;
 	    commentButton.width = screenWidth - 40;
 	    screenLeft = commentButton.top;
 	}
@@ -108,7 +108,7 @@ function commentsEnabled() {
 
 		commentButton.addEventListener('click',function(e)
 		{
-				$.normalPage.add(commentArea);
+				$.yesNoPage.add(commentArea);
 				commentArea.focus();
 		});
 		commentArea.addEventListener('blur',function(e)

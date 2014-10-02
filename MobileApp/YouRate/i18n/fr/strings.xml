@@ -1,0 +1,12 @@
+<resources>
+	<string name="autoLoginL">Essayez se connecter automatiquement...</string>	
+	<string name="loginL">Essayez se connecter...</string>	
+    <string name="emailL">Addresse e-mail:</string>	
+    <string name="loginB">Connexion</string>
+    <string name="submitB">Soumettre</string>
+    <string name="commentB">Ajouter un commentaire</string>
+    <string name="sliderT">Le score:</string>
+    <string name="yesB">Oui</string>
+    <string name="noB">Non</string>
+    <string name="winnerB">Le vainqueur</string>
+</resources>

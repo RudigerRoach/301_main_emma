@@ -154,4 +154,3 @@ exports.submitResult = function(_result, _comment) {
 	};
 	net.resultPost(payload, onSuccessCallback, onErrorCallback);
 };
-

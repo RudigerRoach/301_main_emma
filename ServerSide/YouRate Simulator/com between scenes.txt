@@ -1,0 +1,104 @@
+package javafx_windowcomm;
+ 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+ 
+/**
+ * @web http://java-buddy.blogspot.com/
+ */
+public class JavaFX_WindowComm extends Application {
+     
+    SubWindow subWindow;
+    Label mainMsg;
+     
+    @Override
+    public void start(Stage primaryStage) {
+         
+        StackPane root = new StackPane();
+         
+        mainMsg = new Label();
+         
+        final TextField mainTextField = new TextField();
+        Button mainSendButton = new Button("Send to sub-Window");
+        mainSendButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                subWindow.setMsg(mainTextField.getText());
+            }
+        });
+         
+        VBox mainVBox = new VBox();
+        mainVBox.getChildren().addAll(mainMsg, mainTextField, mainSendButton);
+        root.getChildren().add(mainVBox);
+         
+        Scene scene = new Scene(root, 300, 250);
+         
+        primaryStage.setTitle("java-buddy");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+         
+        subWindow = new SubWindow(this);
+    }
+ 
+    public static void main(String[] args) {
+        launch(args);
+    }
+     
+    public void setMainMsg(String msg){
+        mainMsg.setText(msg);
+    }
+     
+    class SubWindow extends Stage{
+        JavaFX_WindowComm parent;
+        Label labelID;
+        Label messageIn;
+        TextField subTextField;
+        Button subSendButton;
+        Stage subStage;
+ 
+        private SubWindow(JavaFX_WindowComm aThis) {
+            parent = aThis;
+             
+            subStage = new Stage();
+            Group subRoot = new Group();
+            Scene scene = new Scene(subRoot, 300, 200);
+            subStage.setScene(scene);
+            subStage.show();
+         
+            VBox vBox = new VBox();
+         
+            labelID = new Label();
+            labelID.setText(subStage.toString());
+             
+            messageIn = new Label();
+            subTextField = new TextField();
+             
+            subSendButton = new Button("Send to main Window");
+            subSendButton.setOnAction(new EventHandler<ActionEvent>() {
+ 
+                @Override
+                public void handle(ActionEvent t) {
+                    setMainMsg(subTextField.getText());
+                }
+ 
+            });
+                  
+            vBox.getChildren().addAll(labelID, messageIn, subTextField, subSendButton);
+            subRoot.getChildren().add(vBox);
+        }
+         
+        public void setMsg(String msg){
+            messageIn.setText(msg);
+        }
+         
+    }
+}

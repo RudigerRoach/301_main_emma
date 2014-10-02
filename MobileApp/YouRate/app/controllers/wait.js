@@ -48,7 +48,6 @@ function testStatus(service)
 }
 
 function goForward(service){
-	alert(service.sessionType());
 	var win=Alloy.createController(service.sessionType()).getView(); //service.sessionType()
  	win.open();
 }

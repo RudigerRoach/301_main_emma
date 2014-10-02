@@ -4,13 +4,20 @@
  * and open the template in the editor.
  */
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class FXMLrunningSessionController implements Initializable {
 
@@ -31,11 +38,15 @@ public class FXMLrunningSessionController implements Initializable {
     @FXML
     private TableView imagesRemaining;
     
-    
+    Configuration mySession;
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+    mySession = Configuration.getInstance();
+    System.out.println(mySession.botRange);
+    
+    }
+     
     
 }
