@@ -34,7 +34,6 @@ exports.getWaitIndicator = function(labelId) {
 
 	var label = Ti.UI.createLabel({
 		textid : labelId,
-		//text : message,
 		font : {
 			fontFamily : 'Helvetica Neue',
 			fontSize : 18
