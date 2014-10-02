@@ -1,14 +1,26 @@
 "Window[platform=android]":{
 	backgroundImage:'/images/bg.jpg'
-}
+},
 "Window[platform=ios]":{
 	backgroundImage:'/bg.jpg',
-}
+},
 "ImageView[platform=ios]":{
 	defaultImage:'/Placeholder.png'
-}
+},
 "ImageView[platform=android]":{
 	defaultImage:'/images/placeholder.png'
+},
+"TextArea":{
+	color: "black",
+	backgroundColor:"white",
+	borderWidth:"2",
+    borderColor:"#bbb",
+    borderRadius:"5",
+    textAlign:"left",
+	font: {
+		fontSize: 20,
+		fontFamily: 'Helvetica Neue'
+	}
 },
 "#appName": 
 {

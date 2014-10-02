@@ -73,28 +73,19 @@ exports.getCommentButton = function() {
 		},
 		width : platformWidth - 40,
 		left : 20,
-		height : 40
+		height : 50
 	});
 	return commentButton;
 };
 
 exports.getCommentArea = function(){
 	commentArea = Ti.UI.createTextArea({
-			borderWidth : "2",
-			borderColor : "#bbb",
-			borderRadius : "5",
-			color : "black",
 			opacity : 70,
-			textAlign : "left",
 			value : "",
 			top : 60,
 			width : platformWidth - 40,
 			left : 20,
 			height : 200,
-			font : {
-				fontSize : 20,
-				fontFamily : 'Helvetica Neue'
-			}
 		});
 		return commentArea;
 };

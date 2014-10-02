@@ -21,29 +21,13 @@
 	},
 	height: "100"
 },
-"#submitButton": {
-	titleid: 'submitB',
-	borderWidth: "1",
-	borderColor: "#bbb", 
-	borderRadius: "8",
-	backgroundColor: "#bbb",
-	color: "black", 
-	textAlign: "center",
-	font: {
-		fontSize: 24,
-		fontFamily: 'Helvetica Neue'
-	},
-	height: 50,
-	left: 20
-},
 "#slider": {	
 	color: "black",
 	left:20
 },
 "#sliderLabel": {	
-	titleid: 'sliderT',
-    //text: "Score: ",
-	width: "150",
+	textid: 'sliderT',
+	width: "110",
 	height: "30",
 	color: "black",
 	font: { 
@@ -54,16 +38,7 @@
 	shadowColor: "#aaa"
 }
 "#sliderArea": {	
-	borderWidth:"2",
-    borderColor:"#bbb",
-    borderRadius:"5",
-    color:"#888",
-    textAlign:"left",
     width:50,
-    height:30,
-	font: {
-		fontSize: 20,
-		fontFamily: 'Helvetica Neue'
-	}
+    height:30
 }
 

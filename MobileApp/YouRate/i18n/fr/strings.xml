@@ -1,5 +1,7 @@
 <resources>
-    <string name="emailL">Email address FIX:</string>	
+	<string name="autoLoginL">Essayez se connecter automatiquement...</string>	
+	<string name="loginL">Essayez se connecter...</string>	
+    <string name="emailL">Addresse e-mail:</string>	
     <string name="loginB">Connexion</string>
     <string name="submitB">Soumettre</string>
     <string name="commentB">Ajouter un commentaire</string>

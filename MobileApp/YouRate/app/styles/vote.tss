@@ -20,8 +20,4 @@
 		fontFamily: 'Helvetica Neue'
 	},
 	height: "100"
-},
-'#menu[platform=android]': {
-	backgroundColor: "#bbb",
-	showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS
 }

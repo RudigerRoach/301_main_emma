@@ -23,7 +23,6 @@
 },
 "#yesButton": {	
 		titleid: 'yesB',
-		//title: "Yes", 
 		borderRadius: 8,
 		borderColor: "black",
 		borderWidth: 0,
@@ -40,7 +39,6 @@
 },
 "#noButton": {	  
 		titleid: 'noB',
-		//title: "No", 
 		borderRadius: 8,
 		borderColor: "black",
 		borderWidth: 0,

@@ -6,9 +6,8 @@
 		</Toolbar>
 		
 		<!-- iOS and Android -->
-		<Label id="emailLabel">Email Address:</Label>	
+		<Label id="emailLabel"></Label>	
         <TextArea id="textArea" keyboardType="Titanium.UI.KEYBOARD_EMAIL">
-		<Button id="loginButton" onClick="doLogin">Login</Button>
-		<!--ImageView id="loadingImage"/-->
+		<Button id="loginButton" onClick="doLogin"></Button>
     </Window>
 </Alloy>

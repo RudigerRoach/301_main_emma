@@ -23,7 +23,6 @@
 },
 "#winnerButton": {	
 		titleid: 'winnerB',
-		//title: "Winner", 
 		borderWidth: "1",
 		borderColor: "#bbb", 
 		borderRadius: "8", 

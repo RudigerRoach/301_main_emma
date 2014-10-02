@@ -1,4 +1,6 @@
 <resources>
+	<string name="autoLoginL">Attempting auotomatic login...</string>	
+	<string name="loginL">Attempting login...</string>	
     <string name="emailL">Email address:</string>	
     <string name="loginB">Login</string>
     <string name="submitB">Submit</string>

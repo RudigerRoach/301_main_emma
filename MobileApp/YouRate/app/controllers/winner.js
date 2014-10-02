@@ -14,8 +14,9 @@ if (!isIOS) {
 //declare variables and use defaults for testing	
 var chosen = -1;
 var description = "Image title";
-var imagePath = ospath + "placeholder.png";
-//imagePath = ospath+"animalLandscape.jpg";
+var imagePath = new Array();
+imagePath[0] = ospath+"animalLandscape.jpg";
+imagePath[1] = ospath+"kitty.jpg";
 
 //Server calls
  /*description = service.description();
@@ -27,7 +28,7 @@ function resizePage()
 	var screenWidth = ui.platformWidth();
 	var screenHeight = ui.platformHeight();
 	if (!isIOS) {
-		screenHeight -= 90;
+		screenHeight -= 60;
 	}
 	var screenLeft = screenHeight;
 	
@@ -38,9 +39,7 @@ function resizePage()
 	$.winnerButton.top = screenLeft - 100;
 	$.winnerButton.width = screenWidth - 40;	
 	screenLeft = $.winnerButton.top;
-	alert(screenLeft);
 	addScrollableImage();	
-	alert(screenLeft);
 }
 
 function doSubmit(e)
@@ -75,12 +74,13 @@ $.winnerButton.addEventListener('click',function(e)
 
 function addScrollableImage()
 {
+	alert(screenLeft);
 	var total = 2;	
 	var wrapperList = new Array();
 	for(var k = 0; k < total; k++)
 	{		
 		var img = Ti.UI.createImageView({
-	    image:"whiteLabrador.jpg",
+	    image:imagePath[k],
 		  height: screenLeft - 80,
 		  width: "auto"
 		});
@@ -88,19 +88,21 @@ function addScrollableImage()
 		    maxZoomScale:4.0
 		});
 		imgWrapper.add(img);
-	alert("2 " + imgWrapper);
 		wrapperList[k] = imgWrapper;
 	}
 
-alert("|"+wrapperList+"|");
 	photosView = Ti.UI.createScrollableView({
 	    showPagingControl:true,
-	    views:[wrapperList],
-		  height: 300,
-		  width: 300,
-		  top: 60
+	    views:wrapperList,
 	});
-	//alert(photosView.currentPage);
+	alert(photosView.currentPage);
+		
+	if(!isIOS){
+		photosView.top = 30;
+	}
+	photosView.height = screenLeft - 80;
+	photosView.width = "auto";
+	
 	$.winnerPage.add(photosView);
 }
 	

@@ -3,7 +3,7 @@
 	exitOnClose: true
 },
 "#emailLabel": {
-	titleid: 'emailL',
+	textid: 'emailL',
 	width: "170",
 	height: "50",
 	color: "black",
@@ -37,7 +37,6 @@
 	borderColor: "#bbb", 
 	borderRadius: "8",
 	backgroundColor: "#bbb",
-	//backgroundColor: "#E5E5E9",
     color: "black", 
     textAlign: "center",
 	font: {
@@ -59,8 +58,4 @@
 		fontFamily: 'Helvetica Neue'
 	},
 	height: "100"
-},
-'#menu[platform=android]': {
-	backgroundColor: "#bbb",
-	showAsAction: Ti.Andoid.SHOW_AS_ACTION_ALWAYS
 }
