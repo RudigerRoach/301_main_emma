@@ -14,10 +14,10 @@ import javafx.stage.Stage;
  */
 public class fxStage extends Stage{
 
-    Session mySession;
+    Configuration mySession;
     BufferedImage[] images = null;
     
-    public fxStage(Session ses) 
+    public fxStage(Configuration ses) 
     {
         mySession = ses;
         System.out.println("Inside fxStage with "+ mySession.imageDetails[0]);

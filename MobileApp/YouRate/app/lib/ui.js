@@ -61,11 +61,13 @@ exports.getWaitIndicator = function(message) {
 exports.getCommentButton = function() {
 	var commentButton = Titanium.UI.createButton({
 		titleid : 'commentB',
+		title : 'Add comment',
 		borderWidth : "1",
 		borderColor : "#bbb",
 		borderRadius : "8",
 		backgroundColor : "#bbb",
 		color : "black",
+		
 		textAlign : "center",
 		font : {
 			fontSize : 24,

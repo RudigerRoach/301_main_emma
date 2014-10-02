@@ -2,10 +2,10 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import javax.imageio.ImageIO;
 
-public class Session 
+public class Configuration 
 {
-    private final static Session instance = new Session();
-    public static Session getInstance() {
+    private final static Configuration instance = new Configuration();
+    public static Configuration getInstance() {
         return instance;
     }
     
@@ -21,7 +21,7 @@ public class Session
     String[] imageDetails;
     String type;
     
-    public Session(linkedList _imageID, BufferedImage[] _images, String[] _judges,int _topRange,int _botRange, Boolean _openSession,Boolean _controlledSession,String[] _imageDetails,String _type )
+    public Configuration(linkedList _imageID, BufferedImage[] _images, String[] _judges,int _topRange,int _botRange, Boolean _openSession,Boolean _controlledSession,String[] _imageDetails,String _type )
     {
         imageID = _imageID;
         images = _images;
@@ -34,7 +34,7 @@ public class Session
         type = _type;
     }
 
-    Session() 
+    Configuration() 
     {
         
     }

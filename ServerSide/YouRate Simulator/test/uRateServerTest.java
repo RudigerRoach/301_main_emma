@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,13 +31,13 @@ import org.json.JSONObject;
 
 /**
  *
- * @author Dieter
+ * @author Endzeit
  */
-public class MinimalServerTest extends TestCase {
+public class uRateServerTest extends TestCase {
     
-    private static MinimalServer server = null;
+    private static uRateServer server = null;
     
-    public MinimalServerTest(String testName) throws Exception {
+    public uRateServerTest(String testName) throws Exception {
         super(testName);
     }
     
@@ -63,8 +57,8 @@ public class MinimalServerTest extends TestCase {
         tmp2.id = 1L;
         BufferedImage[] tmp3 = new BufferedImage[1];
         tmp3[0] = ImageIO.read(new File("image1.jpg"));
-        Session tmp = new Session(tmp2, tmp3, _judges,10,0,false,false,tmp1,"normal");
-        server = new MinimalServer(tmp);
+        Configuration tmp = new Configuration(tmp2, tmp3, _judges,10,0,false,false,tmp1,"normal");
+        server = new uRateServer(tmp);
     }
     
     @Override

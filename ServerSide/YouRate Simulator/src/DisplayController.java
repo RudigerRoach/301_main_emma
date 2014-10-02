@@ -14,13 +14,16 @@ import javafx.fxml.Initializable;
  * @author Endzeit
  */
 public class DisplayController implements Initializable {
+    private Configuration mySession;
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+    mySession = Configuration.getInstance();
+    System.out.println("Inside display "+mySession.botRange);
+    }
     
 }
