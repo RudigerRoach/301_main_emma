@@ -42,13 +42,13 @@ public class LoginServlet extends HttpServlet
             boolean loginSuccess = false;
 
             //Getting judges from emma
-            if(YourateServer.session.getSessionType() == true)
+            if(uRateServer.session.getSessionType() == true)
             {
                 loginSuccess = true;
             }
             else
             {
-                String [] judges = YourateServer.session.getJudges();
+                String [] judges = uRateServer.session.getJudges();
                 if (judges != null)
                 {
                     for (String judge : judges) 
@@ -100,9 +100,9 @@ public class LoginServlet extends HttpServlet
                     jsonResponse.put("status", "success");
                     jsonResponse.put("session_id", request.getSession().getId());
                     boolean tempAllowed = true;
-                    if(YourateServer.judgesList != null)
+                    if(uRateServer.judgesList != null)
                     {
-                        for (Judge judgesList : YourateServer.judgesList)
+                        for (Judge judgesList : uRateServer.judgesList)
                         {
                             if(judgesList.getJudgeName().equals(user) == true)
                             {
@@ -112,7 +112,7 @@ public class LoginServlet extends HttpServlet
                     }
                     if(tempAllowed)
                     {
-                        YourateServer.judgesList.add(new Judge(user));
+                        uRateServer.judgesList.add(new Judge(user));
                     }
                 } 
                 catch (JSONException e) 
@@ -154,13 +154,13 @@ public class LoginServlet extends HttpServlet
 
             userAuto = database.getMail(id);
             //get the judges from emma
-            if(YourateServer.session.getSessionType() == true)
+            if(uRateServer.session.getSessionType() == true)
             {
                 loginSuccess = true;
             }
             else
             {
-                String [] judges = YourateServer.session.getJudges();
+                String [] judges = uRateServer.session.getJudges();
                 if (judges != null)
                 {
                     for (String judge : judges) 
@@ -183,9 +183,9 @@ public class LoginServlet extends HttpServlet
                     jsonResponse.put("session_id", request.getSession().getId());
                     String email = database.getMail(id);
                     boolean tempAllowed = true;
-                    if (YourateServer.judgesList != null)
+                    if (uRateServer.judgesList != null)
                     {
-                        for (Judge judgesList : YourateServer.judgesList)
+                        for (Judge judgesList : uRateServer.judgesList)
                         {
                             if(judgesList.getJudgeName().equals(email) == true)
                             {
@@ -195,7 +195,7 @@ public class LoginServlet extends HttpServlet
                     }
                     if(tempAllowed)
                     {
-                        YourateServer.judgesList.add(new Judge(email));
+                        uRateServer.judgesList.add(new Judge(email));
                     }
                 } 
                 catch (JSONException e) 

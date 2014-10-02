@@ -17,13 +17,13 @@ public class Judge
     
     public Judge(String _name)
     {
-        score = new int [YourateServer.totaalImages];
-        for (int i= 0; i < YourateServer.totaalImages;i++)
+        score = new int [uRateServer.totaalImages];
+        for (int i= 0; i < uRateServer.totaalImages;i++)
         {
             score[i] = 0;
         }
-        comment = new String [YourateServer.totaalImages];
-        for (int i = 0; i < YourateServer.totaalImages;i++)
+        comment = new String [uRateServer.totaalImages];
+        for (int i = 0; i < uRateServer.totaalImages;i++)
         {
             comment[i] = "";
         }

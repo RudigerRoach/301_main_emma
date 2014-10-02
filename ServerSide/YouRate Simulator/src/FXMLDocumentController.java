@@ -198,7 +198,7 @@ public class FXMLDocumentController implements Initializable{
 
             try
             {
-                YourateServer myServer = new YourateServer(mySession);
+                uRateServer myServer = new uRateServer(mySession);
                 myServer.startSession();
             }
             catch(Exception ex)
