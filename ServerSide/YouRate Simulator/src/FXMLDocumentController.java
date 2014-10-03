@@ -10,7 +10,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import org.thehecklers.dialogfx.DialogFX;
@@ -37,6 +42,8 @@ public class FXMLDocumentController implements Initializable{
     
     @FXML
     private Button start;
+    @FXML
+    private Button importJudge;
     
     @FXML
     private CheckBox controlledSession;
@@ -64,6 +71,9 @@ public class FXMLDocumentController implements Initializable{
     
     @FXML
     private TableView judges;
+    
+    @FXML
+    private TableColumn<Person, String> colX;
     
     @FXML
     private TableView images;
@@ -206,12 +216,19 @@ public class FXMLDocumentController implements Initializable{
                 System.out.println(ex);
             } 
 
-            Scene newScene = new Scene(FXMLLoader.load(getClass().getResource("FXMLrunningSession.fxml")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLrunningSession.fxml"));
+            Scene newScene = new Scene(loader.load());
             fxStage newStage = new fxStage(mySession);
             newStage.setScene(newScene);
             newStage.setTitle("Emma Simulator");
             newStage.setFullScreen(true);
             newStage.show();
+
+            
+            
+
+            
+            
             
         }
         else
@@ -224,14 +241,106 @@ public class FXMLDocumentController implements Initializable{
     }
     
     
+    @FXML
+    private void handleAddImage(ActionEvent event) throws IOException 
+    {
+    
+    }
+    
+    @FXML
+    private void handledeleteSelected(ActionEvent event) throws IOException 
+    {
+        
+    
+    }
+    
+    @FXML
+    private void handleeditSelected(ActionEvent event) throws IOException 
+    {
+        
+    
+    }
+    
+    @FXML
+    private void handleimportImage(ActionEvent event) throws IOException 
+    {
+        
+    
+    }
+    
+    @FXML
+    private void handleRemoveJudge(ActionEvent event) throws IOException 
+    {
+        int selectedIndex = judges.getSelectionModel().getSelectedIndex();
+        judges.getItems().remove(selectedIndex);
+    
+    }
+    
+    @FXML
+    private void handleImportJudges(ActionEvent event) throws IOException 
+    {
+        
     
     
+    
+    
+    }
+    
+    @FXML
+    private void handleAddJudge(ActionEvent event) throws IOException 
+    {
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJudgeDialog.fxml"));
+        Scene newScene = new Scene(loader.load());
+        AddJudgeDialogController controller = loader.getController();
+        Stage dialogStage = new Stage();
+        dialogStage.setScene(newScene);
+        dialogStage.setTitle("Add Judge");
+        //controller.setDialogStage(dialogStage);
+        dialogStage.show();
+        controller.setPerson(new Person("Piet"));
+        
+        ObservableList<Person> data = judges.getItems();
+        data.add(controller.getPerson());
+        judges.setVisible(true);
+        
+        
+    
+    }
+    
+    @FXML
+    private void handleExportJudges(ActionEvent event) throws IOException 
+    {
+        
+    
+    }
 
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        //minimumScore.setText("0");
+
+        
+        ObservableList<String> data =
+        FXCollections.observableArrayList(
+            new String("Jacob"),
+            new String("Isabella"),
+            new String("Ethan"),
+            new String("Emma"),
+            new String("Michael")
+        );
+        judges.setEditable(true);
+        images.setEditable(true);
+        images.setDisable(false);
+        judges.setItems(data);
+        colX.setCellValueFactory(new PropertyValueFactory("firstName"));
+        colX.setText("Judges");
+        colX.setVisible(true);
     }
+    
+
+     
+     
+     
 }

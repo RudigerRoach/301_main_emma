@@ -18,7 +18,7 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 /*
  UI artifacts
  */
-exports.getWaitIndicator = function(message) {
+exports.getWaitIndicator = function(labelId) {
 	var style = platformName === 'iPhone OS' ? Ti.UI.iPhone.ActivityIndicatorStyle.BIG : Ti.UI.ActivityIndicatorStyle.BIG;
 
 	var view = Ti.UI.createView({
@@ -33,7 +33,7 @@ exports.getWaitIndicator = function(message) {
 	});
 
 	var label = Ti.UI.createLabel({
-		textid: message,
+		textid : labelId,
 		font : {
 			fontFamily : 'Helvetica Neue',
 			fontSize : 18

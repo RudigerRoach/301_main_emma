@@ -2,6 +2,7 @@
 	<string name="autoLoginL">Der Versuch automatisch login</string>	
 	<string name="loginL">Der Versuch login</string>	
     <string name="emailL">Email addresse:</string>	
+	<string name="waitL">Waiting for server...</string>
     <string name="loginB">Inloggen</string>
     <string name="submitB">Einsenden</string>
     <string name="commentB">Lewer kommentaar</string>
