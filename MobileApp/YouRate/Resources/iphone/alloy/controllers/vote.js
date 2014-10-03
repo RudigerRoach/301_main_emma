@@ -266,7 +266,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.votePage = Ti.UI.createWindow({
-        backgroundImage: "/bg.png",
+        backgroundImage: "/universal/bg.png",
         backgroundColor: "#DFE4E7",
         exitOnClose: true,
         id: "votePage"
@@ -302,7 +302,7 @@ function Controller() {
     });
     $.__views.toolbar.add($.__views.appName);
     $.__views.currentImage = Ti.UI.createImageView({
-        defaultImage: "/Placeholder.png",
+        defaultImage: "/universal/placeholder.png",
         top: 60,
         borderRadius: "5",
         width: "200",

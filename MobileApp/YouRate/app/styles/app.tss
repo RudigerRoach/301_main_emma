@@ -1,14 +1,14 @@
 "Window[platform=android]":{
-	backgroundImage:'/images/bg.jpg'
+	backgroundImage:'/universal/bg.png'
 },
 "Window[platform=ios]":{
-	backgroundImage:'/bg.png',
+	backgroundImage:'/universal/bg.png',
 },
 "ImageView[platform=ios]":{
-	defaultImage:'/Placeholder.png'
+	defaultImage:'/universal/placeholder.png'
 },
 "ImageView[platform=android]":{
-	defaultImage:'/images/placeholder.png'
+	defaultImage:'/universal/placeholder.png'
 },
 "TextArea":{
 	color: "black",

@@ -3,13 +3,6 @@ var service = require('VoteSession');
 var isIOS = ui.isIOS();
 var updateSlider = false;
 
-var ospath = "";
-if (!isIOS) {
-	ospath = "/images/";
-} else {
-	ospath = "";
-}
-
 //declare variables and use defaults for testing
 var commentButton = null;
 var commentText = "";	
@@ -17,15 +10,15 @@ var rangeBottom = 0;
 var rangeTop = 50;
 var description = "Image title";
 var comments = "true";
-var imagePath = ospath + "placeholder.png";
+var imagePath = "/universal/placeholder.png";
 //imagePath = ospath+"animalLandscape.jpg";
 
 //Server calls
- rangeBottom = service.rangeBottom();
+/* rangeBottom = service.rangeBottom();
  rangeTop = service.rangeTop();
  description = service.description();
  comments = service.commentsEnabled();
- imagePath = service.imagePath();
+ imagePath = service.imagePath();*/
 
 //Bind event listeners to the slider and score input box to make them play nice
 $.slider.addEventListener('change', function(e) {
@@ -108,15 +101,19 @@ function doSubmit(e)
 function commentsEnabled() {
 		commentButton = ui.getCommentButton();
 		commentArea = ui.getCommentArea();
-
+	
+		commentArea.addEventListener('setFocus',function(e){
+			commentArea.focus();
+		});
 		commentButton.addEventListener('click',function(e)
 		{
 				$.normalPage.add(commentArea);
-				commentArea.focus();
+				commentArea.fireEvent('setFocus');
 		});
 		commentArea.addEventListener('blur',function(e)
 		{
 			commentText = commentArea.value;
+			commentArea.blur();
 			$.normalPage.remove(commentArea);
 		});
 		commentArea.addEventListener('return',function(e)
@@ -129,5 +126,4 @@ function commentsEnabled() {
 Ti.Gesture.addEventListener('orientationchange', function(e) {
 	resizePage();
 });
-	
 $.normalPage.open();

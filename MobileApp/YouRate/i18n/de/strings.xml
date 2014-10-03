@@ -1,9 +1,9 @@
 <resources>
-	<string name="autoLoginL">FIX...</string>	
-	<string name="loginL">FIX...</string>	
-    <string name="emailL">Email address FIX:</string>	
+	<string name="autoLoginL">Der Versuch automatisch login</string>	
+	<string name="loginL">Der Versuch login</string>	
+    <string name="emailL">Email addresse:</string>	
     <string name="loginB">Inloggen</string>
-    <string name="submitB">Dien in</string>
+    <string name="submitB">Einsenden</string>
     <string name="commentB">Lewer kommentaar</string>
     <string name="sliderT">Punte:</string>
     <string name="yesB">Ja</string>

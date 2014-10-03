@@ -1,7 +1,7 @@
 //Do all of the heavy lifting(like OS calls) only once. This improves performance a lot.
 var uiGenerator = require('ui');
 var page = $.startPage;
-var activityIndicator = uiGenerator.getWaitIndicator('Attempting automatic login...');
+var activityIndicator = uiGenerator.getWaitIndicator('autoLoginL');
 
 function displayLoginPage(){
 	//Show background activity with an activityindicator

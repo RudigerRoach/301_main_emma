@@ -22,10 +22,10 @@ exports.getWaitIndicator = function(message) {
 	var style = platformName === 'iPhone OS' ? Ti.UI.iPhone.ActivityIndicatorStyle.BIG : Ti.UI.ActivityIndicatorStyle.BIG;
 
 	var view = Ti.UI.createView({
-		layout : 'vertical',
+		layout : 'vertical'
 	});
-	view.top = isPortrait ? platformHeight / 2 - 60 : platformHeight / 2 - 70;
-
+	view.top = isPortrait ? platformHeight / 2 - 70 : platformHeight / 2 - 60;
+	
 	var indicator = Ti.UI.createActivityIndicator({
 		style : style,
 		height : Ti.UI.SIZE,
@@ -33,7 +33,7 @@ exports.getWaitIndicator = function(message) {
 	});
 
 	var label = Ti.UI.createLabel({
-		text : message,
+		textid: message,
 		font : {
 			fontFamily : 'Helvetica Neue',
 			fontSize : 18
