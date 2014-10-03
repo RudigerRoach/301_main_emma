@@ -49,7 +49,7 @@ function testStatus(service)
 				    {
 				    	var win=Alloy.createController('login').getView();
 		 				win.open();
-				    }
+				    } //else what happens?
 				  });
 				  dialog.show();
 		    }

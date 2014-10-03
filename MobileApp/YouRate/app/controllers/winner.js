@@ -17,9 +17,9 @@ var screenLeft;
 var chosen = -1;
 var description = "Image title";
 var imagePath = new Array();
-imagePath[0] = ospath+"brownLabrador.jpg";
-imagePath[1] = ospath+"kitty.jpg";
-imagePath[2] = ospath+"whiteLabrador.jpg";
+imagePath[0] = "/brownLabrador.jpg";
+imagePath[1] = "/kitty.jpg";
+imagePath[2] = "/whiteLabrador.jpg";
 
 //Server calls
  description = service.description();

@@ -3,6 +3,10 @@ var uiGenerator = require('ui');
 var page = $.startPage;
 var activityIndicator = uiGenerator.getWaitIndicator('autoLoginL');
 
+Ti.App.addEventListener('android:back',function(e){
+	alert("back pressed");
+});
+
 function displayLoginPage(){
 	//Show background activity with an activityindicator
 	page.add(activityIndicator);
