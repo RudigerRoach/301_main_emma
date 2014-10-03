@@ -49,16 +49,6 @@ function doSubmit(e)
 {	
 	//Submit result	
 	service=require('VoteSession');	
-		service.submitResult(photosView.currentPage,"");
-    //alert("Result successfully submitted");
-    
-    //Go to wait page
-	var win=Alloy.createController('wait').getView();
- 	win.open();
-};
-
-$.winnerButton.addEventListener('click',function(e)
-{
 	//Add languages!!!!!!!!!!
    var dialog = Ti.UI.createAlertDialog({
 	    cancel: 1,
@@ -69,10 +59,21 @@ $.winnerButton.addEventListener('click',function(e)
 	  dialog.addEventListener('click', function(e){
 	    if(e.index == 0)
 	    {
-	    	doSubmit();
+			service.submitResult(chosen,"");
+		    //Go to wait page
+			var win=Alloy.createController('wait').getView();
+		 	win.open();
 	    }
 	  });
 	  dialog.show();
+    //alert("Result successfully submitted");
+};
+
+$.winnerButton.addEventListener('click',function(e)
+{
+	chosen = photosView.currentPage;
+	$.winnerButton.borderWidth = 1;
+	$.winnerButton.borderColor = "black";
 });
 
 function addScrollableImage()
@@ -98,6 +99,19 @@ function addScrollableImage()
 		    showPagingControl:true,
 		    views:wrapperList,
 		    top:60
+		});
+		
+		photosView.addEventListener('scroll',function(e)
+		{
+			if(photosView.currentPage == chosen)
+			{
+				$.winnerButton.borderWidth = 1;
+				$.winnerButton.borderColor = "black";
+			}
+			else
+			{
+				$.winnerButton.borderWidth = 0;	
+			}
 		});
 	
 		$.winnerPage.add(photosView);
