@@ -14,24 +14,26 @@ var imagePath = "/universal/placeholder.png";
 //imagePath = ospath+"animalLandscape.jpg";
 
 //Server calls
-/* rangeBottom = service.rangeBottom();
+ rangeBottom = service.rangeBottom();
  rangeTop = service.rangeTop();
  description = service.description();
  comments = service.commentsEnabled();
- imagePath = service.imagePath();*/
+ imagePath = service.imagePath();
 
 //Bind event listeners to the slider and score input box to make them play nice
 $.slider.addEventListener('change', function(e) {
 	if(!updateSlider)
 	{
 		$.sliderArea.value = Math.floor(Number($.slider.value));
-	}else{
+	}
+	else
+	{
 		updateSlider = false;
 	}
 });
 $.sliderArea.addEventListener('return', function(e) {
 	updateSlider = true;
-	$.slider.value = $.sliderArea.value;
+	$.slider.value = Math.floor(Number($.sliderArea.value));;
 	$.sliderArea.blur();
 });
 

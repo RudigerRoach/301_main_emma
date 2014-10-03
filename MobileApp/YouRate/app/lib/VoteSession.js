@@ -25,6 +25,7 @@ function populateThis(e) {
 	e = JSON.parse(e.data);
 	//Ti.API.info("e: " + JSON.stringify(e));
 	status = e.status;
+	sessionType = e.sessionType;
 	if (sessionType == "winner") {
 		/*
 		 {"rangeBottom":0,"status":"1","imgPaths":["temp/1.jpg","temp/2.jpg","temp/3.jpg","temp/4.jpg","temp/5.jpg"],"description":"Beauty comes in all shapes and sizes","imgTotaal":5,"sessionType":"winner","rangeTop":10,"comments":"true"}
