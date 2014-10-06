@@ -21,7 +21,7 @@
 	},
 	height: "100"
 },
-"#slider": {	
+"#scoreSlider": {	
 	color: "black",
 	left:20
 },

@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="normalPage" onFocus="resizePage">
+    <Window id="normalPage" onOpen="resizePage" >
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
 			<Button id="appName">uRate</Button>
@@ -8,7 +8,7 @@
 		<!-- iOS and Android -->
 		<ImageView id="currentImage"/>  
 		<Button id="submitButton" onClick="doSubmit"></Button>   
-        <Slider id="slider" top="50" min="0" max="100" width="100%" value="50"/>   
+        <Slider id="scoreSlider" top="50" min="0" max="100" width="100%" value="50"/>   
 		<Label id="sliderLabel"></Label>   
         <TextArea id="sliderArea" keyboardType="Titanium.UI.NUMBER_PAD">    
     </Window>
