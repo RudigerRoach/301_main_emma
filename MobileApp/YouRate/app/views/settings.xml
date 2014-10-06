@@ -1,0 +1,8 @@
+<Alloy>
+    <Window id="settingsPage" onOpen="loadnames" >
+        <TableView id="table">
+        	<TableViewRow id="row1" title="Set server Address" onClick="setIP" />
+            <!--TableViewRow title="Set comment entry method" onClick="setCommentType"/-->
+        </TableView>
+    </Window>
+</Alloy>

@@ -1,3 +1,5 @@
+//TODO : remove focus from sliderArea when page opens
+
 var ui = require('ui');
 var service = require('VoteSession');
 var isIOS = ui.isIOS();

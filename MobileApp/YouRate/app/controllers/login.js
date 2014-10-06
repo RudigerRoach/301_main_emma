@@ -72,4 +72,18 @@ function testStatus(service){
 		}, 1000);
 }
 
+
+var activity = $.loginPage.activity;
+
+activity.onCreateOptionsMenu = function(e){
+  var menu = e.menu;
+  var menuItem = menu.add({ 
+    title: "Settings"
+  });
+  menuItem.addEventListener("click", function(e) {
+    var win=Alloy.createController('settings').getView();
+	win.open();
+  });
+};
+
 $.loginPage.open();
