@@ -58,6 +58,30 @@ exports.getWaitIndicator = function(labelId) {
 	return view;
 };
 
+exports.getCommentLabel = function(){
+	label = Ti.UI.createLabel({
+		textid : "commentB",
+		color : 'black',
+		font: {
+			fontSize: 20,
+			fontFamily: 'Helvetica Neue'
+		},
+		textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER
+	});
+	return label;
+};
+
+exports.getCommentBox = function() {
+	commentArea = Ti.UI.createTextArea({
+			value : "",
+			width : platformWidth - 40,
+			left : 20,
+			height : 50,
+			borderRadius : "8",
+		});
+		return commentArea;
+};
+
 exports.getCommentButton = function() {
 	var commentButton = Titanium.UI.createButton({
 		titleid : 'commentB',
@@ -81,7 +105,7 @@ exports.getCommentButton = function() {
 
 exports.getCommentArea = function(){
 	commentArea = Ti.UI.createTextArea({
-			opacity : 70,
+			opacity : 50,
 			value : "",
 			top : 60,
 			width : platformWidth - 40,

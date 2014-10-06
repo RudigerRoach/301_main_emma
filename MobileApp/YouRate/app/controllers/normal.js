@@ -9,20 +9,22 @@ var firstload = true;
 
 //declare variables and use defaults for testing
 var commentButton = null;
+var commentBox = null;
 var commentText = "";
 var rangeBottom = 0;
 var rangeTop = 50;
 var description = "Image title";
 var comments = "true";
 var imagePath = "/universal/placeholder.png";
+var displayAsButton = "false";
 //imagePath = ospath+"animalLandscape.jpg";
 
 //Server calls
-rangeBottom = service.rangeBottom();
+/*rangeBottom = service.rangeBottom();
 rangeTop = service.rangeTop();
 description = service.description();
 comments = service.commentsEnabled();
-imagePath = service.imagePath();
+imagePath = service.imagePath();*/
 
 //Bind event listeners to the slider and score input box to make them play nice
 $.scoreSlider.addEventListener('change', function(e) {
@@ -53,13 +55,21 @@ function resizePage() {
 	screenLeft = $.submitButton.top;
 
 	if (comments == "true") {
-		if (commentButton == null) {
-			commentsEnabled();
-			$.sliderArea.blur();
+		if(displayAsButton == "true" && commentButton == null)
+		{
+			commentButtonEnabled();
+			commentButton.top = screenLeft - 70;
+			screenLeft = commentButton.top;
+			$.sliderArea.blur();	
 		}
-		commentButton.top = screenLeft - 70;
-		commentButton.width = screenWidth - 40;
-		screenLeft = commentButton.top;
+		else if(displayAsButton == "false" && commentBox == null)
+		{
+			commentsEnabled();
+			commentBox.top = screenLeft - 70;
+			commentLab.top = screenLeft - 100;
+			screenLeft = commentLab.top;
+			$.sliderArea.blur();	
+		}
 	}
 
 	$.sliderLabel.top = screenLeft - 50;
@@ -103,6 +113,30 @@ function doSubmit(e) {
 }
 
 function commentsEnabled() {
+	commentLab = ui.getCommentLabel();
+	commentBox = ui.getCommentBox();
+	commentArea = ui.getCommentArea();
+	commentArea.addEventListener('setFocus', function(e) {
+		commentArea.focus();
+	});
+	commentBox.addEventListener('focus', function(e) {
+		$.normalPage.add(commentArea);
+		commentArea.fireEvent('setFocus');
+	});
+	commentArea.addEventListener('blur', function(e) {
+		commentText = commentArea.value;
+		commentBox.value = commentText;
+		commentArea.blur();
+		$.normalPage.remove(commentArea);
+	});
+	commentArea.addEventListener('return', function(e) {
+		commentArea.blur();
+	});
+	$.normalPage.add(commentLab);
+	$.normalPage.add(commentBox);
+}
+
+function commentButtonEnabled() {
 	commentButton = ui.getCommentButton();
 	commentArea = ui.getCommentArea();
 
@@ -128,4 +162,3 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 	resizePage();
 });
 $.normalPage.open();
-$.normalPage.focus();
