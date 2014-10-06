@@ -1,5 +1,5 @@
 <resources>
-	<string name="autoLoginL">Attempting auotomatic login...</string>	
+	<string name="autoLoginL">Attempting automatic login...</string>	
 	<string name="loginL">Attempting to log in...</string>	
 	<string name="waitL">Waiting for server...</string>
     <string name="emailL">Email address:</string>	
