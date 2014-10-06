@@ -1,14 +1,8 @@
 var uiGenerator = require('ui');
 var page = $.loginPage;
 var activityIndicator = uiGenerator.getWaitIndicator('loginL');
+var isIOS = require('ui').isIOS();
 
-var ospath = "";
-	if(OS_ANDROID){
-		ospath = "/images/";
-	}else if(OS_IOS){
-		ospath = "";
-	}
-	
 function doLogin()
 {		
 	//$.loadingImage.top = Ti.Platform.displayCaps.platformHeight/2 - 50;
@@ -72,18 +66,32 @@ function testStatus(service){
 		}, 1000);
 }
 
+//show the settings menu
+if (!isIOS) {
+	var activity = $.loginPage.activity;
 
-var activity = $.loginPage.activity;
-
-activity.onCreateOptionsMenu = function(e){
-  var menu = e.menu;
-  var menuItem = menu.add({ 
-    title: "Settings"
-  });
-  menuItem.addEventListener("click", function(e) {
-    var win=Alloy.createController('settings').getView();
-	win.open();
-  });
-};
+	activity.onCreateOptionsMenu = function(e) {
+		var menu = e.menu;
+		var menuItem = menu.add({
+			title : "Settings",
+			icon : '/universal/settingsIcon.png'
+		});
+		menuItem.addEventListener("click", function(e) {
+			var win = Alloy.createController('settings').getView();
+			win.open();
+		});
+	};
+}else{
+	var img = Ti.UI.createImageView({
+		image : '/universal/settingsIcon.png',
+		bottom : 0,
+		right : 0
+	});
+	img.addEventListener('click',function(e){
+		var win = Alloy.createController('settings').getView();
+		win.open();
+	});
+	$.loginPage.add(img);
+}
 
 $.loginPage.open();
