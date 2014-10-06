@@ -111,6 +111,7 @@ exports.getCommentArea = function(){
 			width : platformWidth - 40,
 			left : 20,
 			height : 200,
+			borderRadius : "8",
 		});
 		return commentArea;
 };
