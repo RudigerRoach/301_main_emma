@@ -17,15 +17,14 @@ var description = "Image title";
 var comments = "true";
 var imagePath = "/universal/placeholder.png";
 var displayAsButton = (Ti.App.Properties.getString('commentEntry') == 'button') ? true : false;
-Ti.API.info('com en: '+Ti.App.Properties.getString('commentEntry'));
 //imagePath = ospath+"animalLandscape.jpg";
 
 //Server calls
-/*rangeBottom = service.rangeBottom();
+rangeBottom = service.rangeBottom();
 rangeTop = service.rangeTop();
 description = service.description();
 comments = service.commentsEnabled();
-imagePath = service.imagePath();*/
+imagePath = service.imagePath();
 
 //Bind event listeners to the slider and score input box to make them play nice
 $.scoreSlider.addEventListener('change', function(e) {
