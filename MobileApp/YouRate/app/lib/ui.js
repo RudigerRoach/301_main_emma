@@ -24,7 +24,7 @@ exports.getWaitIndicator = function(labelId) {
 	var view = Ti.UI.createView({
 		layout : 'vertical'
 	});
-	view.top = isPortrait ? platformHeight / 2 - 70 : platformHeight / 2 - 60;
+	view.top = isPortrait ? platformHeight / 2 - 70 : platformHeight / 2 - 80;
 	
 	var indicator = Ti.UI.createActivityIndicator({
 		style : style,

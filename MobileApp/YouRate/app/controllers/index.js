@@ -3,6 +3,11 @@ var uiGenerator = require('ui');
 var page = $.startPage;
 var activityIndicator = uiGenerator.getWaitIndicator('autoLoginL');
 
+//Configure app settings
+if(!Ti.App.Properties.hasProperty('commentEntry')){
+	Ti.App.Properties.setString('commentEntry', 'button'); //If the property doens't exist, default to a button
+}
+
 function displayLoginPage(){
 	//Show background activity with an activityindicator
 	page.add(activityIndicator);
@@ -29,7 +34,7 @@ function goForward(service){
 	else
 	{	
 		//If autoLogin not successful
-	    var win=Alloy.createController('normal').getView(); //must be login
+	    var win=Alloy.createController('login').getView(); //must be login
 	 	win.open();
  	}
 }

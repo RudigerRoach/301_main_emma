@@ -16,7 +16,8 @@ var rangeTop = 50;
 var description = "Image title";
 var comments = "true";
 var imagePath = "/universal/placeholder.png";
-var displayAsButton = "false";
+var displayAsButton = (Ti.App.Properties.getString('commentEntry') == 'button') ? true : false;
+Ti.API.info('com en: '+Ti.App.Properties.getString('commentEntry'));
 //imagePath = ospath+"animalLandscape.jpg";
 
 //Server calls
@@ -55,14 +56,14 @@ function resizePage() {
 	screenLeft = $.submitButton.top;
 
 	if (comments == "true") {
-		if(displayAsButton == "true" && commentButton == null)
+		if(displayAsButton && commentButton == null)
 		{
 			commentButtonEnabled();
 			commentButton.top = screenLeft - 70;
 			screenLeft = commentButton.top;
 			$.sliderArea.blur();	
 		}
-		else if(displayAsButton == "false" && commentBox == null)
+		else if(!displayAsButton && commentBox == null)
 		{
 			commentsEnabled();
 			commentBox.top = screenLeft - 70;

@@ -25,8 +25,9 @@ function doLogin()
 	service.login(email);
 	
 	//INFINITE LOOP???
-	testStatus(service);
-	
+	//testStatus(service);
+	var win=Alloy.createController('normal').getView();
+	 	win.open();
 	//goForward(service);
 };
 
