@@ -20,11 +20,11 @@ var displayAsButton = (Ti.App.Properties.getString('commentEntry') == 'button') 
 //imagePath = ospath+"animalLandscape.jpg";
 
 //Server calls
-rangeBottom = service.rangeBottom();
+/*rangeBottom = service.rangeBottom();
 rangeTop = service.rangeTop();
 description = service.description();
 comments = service.commentsEnabled();
-imagePath = service.imagePath();
+imagePath = service.imagePath();*/
 
 //Bind event listeners to the slider and score input box to make them play nice
 $.scoreSlider.addEventListener('change', function(e) {
@@ -61,12 +61,27 @@ function resizePage() {
 			commentButton.top = screenLeft - 70;
 			screenLeft = commentButton.top;
 			$.sliderArea.blur();	
+		}else if(displayAsButton && commentButton != null)
+		{
+			commentButton.top = screenLeft - 70;
+			commentButton.width = screenWidth - 40;
+			commentArea.width = screenWidth - 40;
+			screenLeft = commentButton.top;
+			$.sliderArea.blur();	
 		}
 		else if(!displayAsButton && commentBox == null)
 		{
 			commentsEnabled();
 			commentBox.top = screenLeft - 70;
 			commentLab.top = screenLeft - 100;
+			screenLeft = commentLab.top;
+			$.sliderArea.blur();	
+		}else if(!displayAsButton && commentBox != null)
+		{
+			commentBox.top = screenLeft - 70;
+			commentLab.top = screenLeft - 100;
+			commentBox.width = screenWidth - 40;
+			commentArea.width = screenWidth - 40;
 			screenLeft = commentLab.top;
 			$.sliderArea.blur();	
 		}
