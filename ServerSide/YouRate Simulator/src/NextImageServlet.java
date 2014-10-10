@@ -21,149 +21,151 @@ public class NextImageServlet extends HttpServlet
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
-        if(uRateServer.session.getType().equals("winner") == true)
+        if (request.getSession(false) != null)
         {
-            String previousImageScore = request.getParameter("result");
-            String previousImageComment = request.getParameter("comment");
-            String judge = request.getParameter("deviceUID");
-            String choosen = request.getParameter("choosen");
-            DBAccess database = new DBAccess();
-            database.open();
-            String email = database.getMail(judge);
-            for (Judge judgesList : uRateServer.judgesList) 
+            if(uRateServer.session.getType().equals("winner") == true)
             {
-                if (judgesList.getJudgeName().equals(email) == true)
+                String previousImageScore = request.getParameter("result");
+                String previousImageComment = request.getParameter("comment");
+                String judge = request.getParameter("deviceUID");
+                String choosen = request.getParameter("choosen");
+                DBAccess database = new DBAccess();
+                database.open();
+                String email = database.getMail(judge);
+                for (Judge judgesList : uRateServer.judgesList) 
                 {
-                    judgesList.setImageSpecificScoreAndComment(Integer.parseInt(choosen), Integer.parseInt(previousImageScore), previousImageComment);
+                    if (judgesList.getJudgeName().equals(email) == true)
+                    {
+                        judgesList.setImageSpecificScoreAndComment(Integer.parseInt(choosen), Integer.parseInt(previousImageScore), previousImageComment);
+                    }
                 }
-            }
-            JSONObject jsonResponse = new JSONObject();
-            try 
-            {
-                jsonResponse.put("status", "2");
-            }
-            catch (JSONException e) 
-            {
-                e.printStackTrace();
-            }
-            
-            database.close();
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().print(jsonResponse);
-        }
-        if(uRateServer.session.getControll() == false)
-        {
-            System.out.println("Next image is called");
-            String previousImageScore = request.getParameter("result");
-            String previousImageComment = request.getParameter("comment");
-            String judge = request.getParameter("deviceUID");
-            DBAccess database = new DBAccess();
-            database.open();
-            String email = database.getMail(judge);
-            for (Judge judgesList : uRateServer.judgesList) 
-            {
-                if (judgesList.getJudgeName().equals(email) == true)
+                JSONObject jsonResponse = new JSONObject();
+                try 
                 {
-                    judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
-                    if (judgesList.getCurrentImage()-1 < uRateServer.totaalImages)
-                    {
-                        JSONObject jsonResponse = new JSONObject();
-                        try 
-                        {
-                            jsonResponse.put("status", "1");
-                            jsonResponse.put("sessionType", uRateServer.session.getType());
-                            jsonResponse.put("description", uRateServer.session.getImageDetails(judgesList.getCurrentImage()-1));
-                            jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
-                            System.out.println();
-                        } 
-                        catch (JSONException e) 
-                        {
-                            e.printStackTrace();
-                        }
-
-                        //response to successful auto login
-                        response.setContentType("application/json;charset=UTF-8");
-                        response.getWriter().print(jsonResponse);
-                    }
-                    else
-                    {
-                        JSONObject jsonResponse = new JSONObject();
-                        try 
-                        {
-                            jsonResponse.put("status", "2");
-
-                        } 
-                        catch (JSONException e) 
-                        {
-                            e.printStackTrace();
-                        }
-
-                        //response to successful auto login
-                        response.setContentType("application/json;charset=UTF-8");
-                        response.getWriter().print(jsonResponse);
-                    }
-                    break;
+                    jsonResponse.put("status", "2");
                 }
-            }
-            database.close();
-        }
-        else
-        {
-            String previousImageScore = request.getParameter("result");
-            String previousImageComment = request.getParameter("comment");
-            String judge = request.getParameter("deviceUID");
-            DBAccess database = new DBAccess();
-            database.open();
-            String email = database.getMail(judge);
-            for (Judge judgesList : uRateServer.judgesList) 
-            {
-                if (judgesList.getJudgeName().equals(email) == true)
+                catch (JSONException e) 
                 {
-                    judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
-                    if (uRateServer.currentPhoto.get() < uRateServer.totaalImages)
-                    {
-                        while(judgesList.getCurrentImage() == uRateServer.currentPhoto.get())
-                        {
-                        }
-                        JSONObject jsonResponse = new JSONObject();
-                        try 
-                        {
-                            jsonResponse.put("status", "1");
-                            jsonResponse.put("sessionType", uRateServer.session.getType());
-                            jsonResponse.put("description", uRateServer.session.getImageDetails(uRateServer.currentPhoto.get() -1));
-                            jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[uRateServer.currentPhoto.get()-1].getName());
-
-                        } 
-                        catch (JSONException e) 
-                        {
-                            e.printStackTrace();
-                        }
-
-                        //response to successful auto login
-                        response.setContentType("application/json;charset=UTF-8");
-                        response.getWriter().print(jsonResponse);
-                    }
-                    else
-                    {
-                        JSONObject jsonResponse = new JSONObject();
-                        try 
-                        {
-                            jsonResponse.put("status", "2");
-
-                        } 
-                        catch (JSONException e) 
-                        {
-                            e.printStackTrace();
-                        }
-
-                        //response to successful auto login
-                        response.setContentType("application/json;charset=UTF-8");
-                        response.getWriter().print(jsonResponse);
-                    }
-                    break;
+                    e.printStackTrace();
                 }
+
+                database.close();
+                response.setContentType("application/json;charset=UTF-8");
+                response.getWriter().print(jsonResponse);
             }
-            database.close();
+            else if(uRateServer.session.getControll() == false)
+            {
+                String previousImageScore = request.getParameter("result");
+                String previousImageComment = request.getParameter("comment");
+                String judge = request.getParameter("deviceUID");
+                DBAccess database = new DBAccess();
+                database.open();
+                String email = database.getMail(judge);
+                for (Judge judgesList : uRateServer.judgesList) 
+                {
+                    if (judgesList.getJudgeName().equals(email) == true)
+                    {
+                        judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
+                        if (judgesList.getCurrentImage()-1 < uRateServer.totaalImages)
+                        {
+                            JSONObject jsonResponse = new JSONObject();
+                            try 
+                            {
+                                jsonResponse.put("status", "1");
+                                jsonResponse.put("sessionType", uRateServer.session.getType());
+                                jsonResponse.put("description", uRateServer.session.getImageDetails(judgesList.getCurrentImage()-1));
+                                jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
+                                System.out.println();
+                            } 
+                            catch (JSONException e) 
+                            {
+                                e.printStackTrace();
+                            }
+
+                            //response to successful auto login
+                            response.setContentType("application/json;charset=UTF-8");
+                            response.getWriter().print(jsonResponse);
+                        }
+                        else
+                        {
+                            JSONObject jsonResponse = new JSONObject();
+                            try 
+                            {
+                                jsonResponse.put("status", "2");
+
+                            } 
+                            catch (JSONException e) 
+                            {
+                                e.printStackTrace();
+                            }
+
+                            //response to successful auto login
+                            response.setContentType("application/json;charset=UTF-8");
+                            response.getWriter().print(jsonResponse);
+                        }
+                        break;
+                    }
+                }
+                database.close();
+            }
+            else
+            {
+                String previousImageScore = request.getParameter("result");
+                String previousImageComment = request.getParameter("comment");
+                String judge = request.getParameter("deviceUID");
+                DBAccess database = new DBAccess();
+                database.open();
+                String email = database.getMail(judge);
+                for (Judge judgesList : uRateServer.judgesList) 
+                {
+                    if (judgesList.getJudgeName().equals(email) == true)
+                    {
+                        judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
+                        if (uRateServer.currentPhoto.get() < uRateServer.totaalImages)
+                        {
+                            while(judgesList.getCurrentImage() == uRateServer.currentPhoto.get())
+                            {
+                            }
+                            JSONObject jsonResponse = new JSONObject();
+                            try 
+                            {
+                                jsonResponse.put("status", "1");
+                                jsonResponse.put("sessionType", uRateServer.session.getType());
+                                jsonResponse.put("description", uRateServer.session.getImageDetails(uRateServer.currentPhoto.get() -1));
+                                jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[uRateServer.currentPhoto.get()-1].getName());
+
+                            } 
+                            catch (JSONException e) 
+                            {
+                                e.printStackTrace();
+                            }
+
+                            //response to successful auto login
+                            response.setContentType("application/json;charset=UTF-8");
+                            response.getWriter().print(jsonResponse);
+                        }
+                        else
+                        {
+                            JSONObject jsonResponse = new JSONObject();
+                            try 
+                            {
+                                jsonResponse.put("status", "2");
+
+                            } 
+                            catch (JSONException e) 
+                            {
+                                e.printStackTrace();
+                            }
+
+                            //response to successful auto login
+                            response.setContentType("application/json;charset=UTF-8");
+                            response.getWriter().print(jsonResponse);
+                        }
+                        break;
+                    }
+                }
+                database.close();
+            }
         }
     }
 }

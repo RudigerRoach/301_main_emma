@@ -32,7 +32,6 @@ public class LoginServlet extends HttpServlet
     {   
         DBAccess database = new DBAccess();
         database.open();
-        System.out.println("login");
         //Get post parameters
         String user = request.getParameter("email");
         String id = request.getParameter("deviceUID");
@@ -71,13 +70,11 @@ public class LoginServlet extends HttpServlet
                     boolean deviceIDExist = database.deviceExists(id);
                     if(deviceIDExist == false)
                     {
-                        System.out.println("Don't Remember Device...");
-                        //database.insert(user, id);
+                       // database.insert(user, id);
                     }
                     else
                     {
-                        database.update(user, id);
-                        System.out.println("Remember DeviceUID...");
+                        database.update(user, id);;
                     }
                 }
                 else
@@ -86,12 +83,7 @@ public class LoginServlet extends HttpServlet
 
                     if(bothInSameRecord == false)
                     {
-                        System.out.println("Remember user...");
                         database.update(user, id);
-                    }
-                    else
-                    {
-                        System.out.println("Remember Device...");
                     }
                 }
                 JSONObject jsonResponse = new JSONObject();

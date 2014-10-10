@@ -27,11 +27,11 @@ public class StartServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
+        System.out.println("A");
         if (request.getSession(false) != null)
         {
-            System.out.println("before start");
+            System.out.println("B");
             while(uRateServer.start == false){}
-            System.out.println("before end");
             String judge = request.getParameter("deviceUID");
             DBAccess database = new DBAccess();
             database.open();
@@ -98,21 +98,5 @@ public class StartServlet extends HttpServlet
             response.getWriter().print(jsonResponse);
             database.close();
         }
-//        else
-//        {
-//            JSONObject jsonResponse = new JSONObject();
-//                try 
-//                {
-//                    jsonResponse.put("status", "failed");
-//                } 
-//                catch (JSONException e) 
-//                {
-//                    e.printStackTrace();
-//                }
-//
-//                //response to failed login
-//                response.setContentType("application/json;charset=UTF-8");
-//                response.getWriter().print(jsonResponse);
-//        }
     }
 }

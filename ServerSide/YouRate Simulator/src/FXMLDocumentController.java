@@ -10,7 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -217,7 +216,7 @@ public class FXMLDocumentController implements Initializable{
             } 
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLrunningSession.fxml"));
-            Scene newScene = new Scene(loader.load());
+            Scene newScene = new Scene((Parent) loader.load());
             fxStage newStage = new fxStage(mySession);
             newStage.setScene(newScene);
             newStage.setTitle("Emma Simulator");
@@ -291,7 +290,7 @@ public class FXMLDocumentController implements Initializable{
     {
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJudgeDialog.fxml"));
-        Scene newScene = new Scene(loader.load());
+        Scene newScene = new Scene((Parent) loader.load());
         AddJudgeDialogController controller = loader.getController();
         Stage dialogStage = new Stage();
         dialogStage.setScene(newScene);
