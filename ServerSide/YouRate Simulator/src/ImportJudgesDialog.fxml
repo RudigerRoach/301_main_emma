@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="180.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AddJudgeDialogController">
+<AnchorPane id="AnchorPane" prefHeight="180.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ImportJudgesDialogController">
    <children>
       <GridPane layoutX="24.0" layoutY="9.0" prefHeight="161.0" prefWidth="425.0">
         <columnConstraints>
@@ -21,17 +21,19 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Email address:">
+            <Label prefHeight="26.0" prefWidth="194.0" text="Browse for judge file(.txt)">
                <font>
-                  <Font size="25.0" />
+                  <Font size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="email" prefHeight="25.0" prefWidth="157.0" GridPane.columnIndex="1" />
-            <Button fx:id="add" onAction="#add" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="96.0" text="Add" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Button id="add" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="96.0" text="Add" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin>
             </Button>
+            <Button mnemonicParsing="false" text="Browse" GridPane.columnIndex="1" />
+            <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="212.0" GridPane.columnIndex="1" />
+            <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="208.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

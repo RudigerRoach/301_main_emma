@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -29,30 +30,21 @@ public class AddJudgeDialogController implements Initializable {
         // TODO
     }    
     @FXML
-    private TextField email;
-    private Person person;
-    private boolean okClicked = false;
-    
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
-            
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-    public Person getPerson() {
-        return this.person;
-    }
-    
-     public boolean isOkClicked() {
-        return okClicked;
-    }
+    public TextField email;
+    public boolean valid = false;
     
     @FXML
-    private void buttonClickedHandler(ActionEvent event) throws IOException 
+    private void add(ActionEvent event) throws IOException 
     {
-    okClicked = true;    
-    dialogStage.close();
+        
+        if(email.getText().length() > 4)
+        {
+            valid = true;
+        }
+        Node  source = (Node)  event.getSource(); 
+        Stage stage  = (Stage) source.getScene().getWindow();
+        stage.close();
     
     }
+    
 }
