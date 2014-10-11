@@ -46,6 +46,7 @@ public class uRateServer
      */
     public uRateServer(Configuration _session) throws Exception
     {
+        System.out.println("Creating Server");
         //Create server
         session = _session;
         images = session.getImages();
@@ -76,54 +77,6 @@ public class uRateServer
         }
         server.start();
     }    
-//    public static void main(String[] args) throws Exception
-//    {
-//        //Create server
-//        String[] _judges = new String[5];
-//        _judges[0]= "Johan";
-//        _judges[1]= "test";
-//        _judges[2]= "test123@test.com";
-//        _judges[3]= "Test3";
-//        _judges[4]= "Test4";
-//        String [] tmp = new String[2];
-//        tmp[0] = "helo";
-//        tmp[1] = "asdf";
-//        linkedList tmp2 = new linkedList();
-//        tmp2.info = "stellies.jpg";
-//        tmp2.next = new linkedList();
-//        tmp2.next.info = "guitar.jpg";
-//        BufferedImage[] tmp3 = new BufferedImage[2];
-//        tmp3[0] = ImageIO.read(new File("stellies.jpg"));
-//        tmp3[1] = ImageIO.read(new File("guitar.jpg"));
-//        session = new Configuration(tmp2, tmp3, _judges,10,0,false,false,tmp);     
-//        images = session.getImages();
-//        totaalImages = images.length;
-//        tmpCompressedImage = new File[totaalImages];
-//        for(int i = 0; i < totaalImages;i++)
-//        {
-//            tmpCompressedImage[i] = saveCompressedImage(images[i],"temp/" + (i+1) + ".jpg");
-//        }
-//        if(session.getControll() == false)
-//        {
-//            start = true;
-//        }
-//        server = new Server(5555);
-//        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-//        context.setContextPath("/");
-//        server.setHandler(context);
-//        LoginServlet loginServlet = new LoginServlet();
-//        StartServlet startServlet = new StartServlet();
-//        NextImageServlet nextImageServlet = new NextImageServlet();
-//        for(int i = 1; i < totaalImages+1;i++)
-//        {
-//            getImage imageServlet = new getImage();
-//            context.addServlet(new ServletHolder(imageServlet),"/temp/" + i + ".jpg");
-//        }
-//        context.addServlet(new ServletHolder(loginServlet), "/login");
-//        context.addServlet(new ServletHolder(startServlet), "/start");
-//        context.addServlet(new ServletHolder(nextImageServlet), "/nextImage");
-//        server.start();
-//    }
     
     private static File saveCompressedImage(BufferedImage image, String toFileName)
     {

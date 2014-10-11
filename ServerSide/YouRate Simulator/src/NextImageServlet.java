@@ -63,6 +63,7 @@ public class NextImageServlet extends HttpServlet
                 String email = database.getMail(judge);
                 for (Judge judgesList : uRateServer.judgesList) 
                 {
+                    System.out.println("+++++ " + judgesList.getJudgeName());
                     if (judgesList.getJudgeName().equals(email) == true)
                     {
                         judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
@@ -75,7 +76,7 @@ public class NextImageServlet extends HttpServlet
                                 jsonResponse.put("sessionType", uRateServer.session.getType());
                                 jsonResponse.put("description", uRateServer.session.getImageDetails(judgesList.getCurrentImage()-1));
                                 jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
-                                System.out.println();
+                                System.out.println(judge + " temp/" + uRateServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
                             } 
                             catch (JSONException e) 
                             {
@@ -133,6 +134,7 @@ public class NextImageServlet extends HttpServlet
                                 jsonResponse.put("sessionType", uRateServer.session.getType());
                                 jsonResponse.put("description", uRateServer.session.getImageDetails(uRateServer.currentPhoto.get() -1));
                                 jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[uRateServer.currentPhoto.get()-1].getName());
+                                System.out.println(judge + " temp/" + uRateServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
 
                             } 
                             catch (JSONException e) 
