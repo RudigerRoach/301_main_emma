@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="100%" prefWidth="100%" style="-fx-background-color: black;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller=".DisplayController">
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="713.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="DisplayController">
    <children>
-      <ImageView fitHeight="475.0" fitWidth="574.0" layoutX="63.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id = "picture" fitHeight="556.0" fitWidth="713.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
