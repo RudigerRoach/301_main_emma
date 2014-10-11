@@ -20,11 +20,11 @@ var displayAsButton = (Ti.App.Properties.getString('commentEntry') == 'button') 
 //imagePath = ospath+"animalLandscape.jpg";
 
 //Server calls
-/*rangeBottom = service.rangeBottom();
+rangeBottom = service.rangeBottom();
 rangeTop = service.rangeTop();
 description = service.description();
 comments = service.commentsEnabled();
-imagePath = service.imagePath();*/
+imagePath = service.imagePath();
 
 //Bind event listeners to the slider and score input box to make them play nice
 $.scoreSlider.addEventListener('change', function(e) {
