@@ -17,13 +17,14 @@ import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 
-public class DBAccess {
+public class DBAccess implements Database{
 
     private ObjectContainer database;
     private final String fileName = "database.db";
     ObjectSet<user> oSet;
-    user nu = new user();
+    //user nu = new user();
 
+    
     public void open() {
         database = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), fileName);
     }
@@ -33,56 +34,61 @@ public class DBAccess {
     }
 
     public void insert(String email, String uid) {
-        nu.email = email;
-        nu.uid = uid;
-        database.store(nu);
+        user newU = new user(email, uid);
+        database.store(newU);
     }
 
     public boolean update(String email, String uid) {
-        nu.clear();
-        nu.email = email;
-
-        oSet = database.queryByExample(nu);
-        if (oSet.size() > 0) {
-            nu = oSet.next();
-            nu.uid = uid;
-            database.store(nu);
-            return true;
+        oSet = database.queryByExample(user.class);
+        for(user k : oSet){
+            if(k.getEmail().compareTo(email)==0){
+                k.setUID(uid);
+                database.store(k);
+                return true;
+            }
         }
         return false;
     }
 
     public boolean delete(String email, String uid) {
-        nu.email = email;
-        nu.uid = uid;
-        oSet = database.queryByExample(nu);
-        if (oSet.size() > 0) {
-            nu = oSet.next();
-            database.delete(nu);
-            return true;
+        oSet = database.queryByExample(user.class);
+        for(user k : oSet){
+            if(k.getEmail().compareTo(email)==0 && k.getUID().compareTo(uid)==0){
+                database.delete(k);
+                return true;
+            }
         }
         return false;
     }
 
     public boolean userExists(String email) {
-        nu.clear();
-        nu.email = email;
-        oSet = database.queryByExample(nu);
-        return oSet.size() > 0;
+        oSet = database.queryByExample(user.class);
+        for(user k : oSet){
+            if(k.getEmail().compareTo(email)==0){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean deviceExists(String uid) {
-        nu.clear();
-        nu.uid = uid;
-        oSet = database.queryByExample(nu);
-        return oSet.size() > 0;
+        oSet = database.queryByExample(user.class);
+        for(user k : oSet){
+            if(k.getUID().compareTo(uid)==0){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean shouldAutoLogin(String email, String uid) {
-        nu.uid = uid;
-        nu.email = email;
-        oSet = database.queryByExample(nu);
-        return oSet.size() > 0;
+        oSet = database.queryByExample(user.class);
+        for(user k : oSet){
+            if(k.getUID().compareTo(uid)==0 && k.getEmail().compareTo(email)==0){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void selectAll() {
@@ -91,23 +97,49 @@ public class DBAccess {
     }
     
     public String getMail(String uid) {
-        nu.clear();
-        nu.uid = uid;
-        oSet = database.queryByExample(nu);
-        if(oSet.size() > 0){
-            nu = oSet.next();
-            return nu.email;
+        oSet = database.queryByExample(user.class);
+        for(user k : oSet){
+            if(k.getUID().compareTo(uid)==0){
+                return k.getEmail();
+            }
         }
         return "";
     }
     
     private class user {
-        public String uid;
-        public String email;
+        private String uid;
+        private String email;
+        
+        @Override
+        public String toString(){
+            return email + " "+ uid;
+        }
+        
+        public user()
+        {
+            
+        }
 
-        public void clear() {
-            uid = "";
-            email = "";
+        public user(String uid, String email)
+        {
+            this.uid = uid;
+            this.email = email;
+        }
+        
+        public void setUID(String uid){
+            this.uid = uid;
+        }
+        
+        public void setEmail(String email){
+            this.email = email;
+        }
+        
+        public String getEmail(){
+            return this.email;
+        }
+        
+        public String getUID(){
+            return this.uid;
         }
     }
 }
