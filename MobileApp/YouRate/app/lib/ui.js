@@ -82,6 +82,15 @@ exports.getCommentBox = function() {
 		return commentArea;
 };
 
+exports.getCancelIcon = function() {
+	var image = Ti.UI.createImageView({
+	  image:'/universal/cancelIcon.png',
+	  width:50,
+	  height:50
+	});
+	return image;
+};
+
 exports.getCommentButton = function() {
 	var commentButton = Titanium.UI.createButton({
 		titleid : 'commentB',

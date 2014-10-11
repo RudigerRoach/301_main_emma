@@ -46,3 +46,10 @@ void submitResult(String photoPath, String result, String comment)
 boolean asyncDone()
 	-> returns true if the network call has finished exicution
 	-> TODO replace all references of getImgDone with asyncDone
+	
+TODO
+Fix email validation
+Waiting image stops spinning
+Test noSession
+Settings languages
+Change submit alert to Dialog
