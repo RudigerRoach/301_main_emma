@@ -64,6 +64,7 @@ public class StartServlet extends HttpServlet
                     //check hierna
                     jsonResponse.put("comments", "true");
                     jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[current].getName()); 
+                    System.out.println(judge + " temp/" + uRateServer.tmpCompressedImage[current].getName());
                 }
                 else if (uRateServer.session.getType().equals("winner") == true)
                 {

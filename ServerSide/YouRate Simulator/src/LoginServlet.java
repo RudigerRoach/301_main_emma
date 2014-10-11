@@ -31,6 +31,8 @@ public class LoginServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {   
         Database database = new DBAccess();
+
+        System.out.println("Login");
         database.open();
         //Get post parameters
         String user = request.getParameter("email");
