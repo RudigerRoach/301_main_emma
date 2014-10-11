@@ -302,7 +302,6 @@ function Controller() {
     });
     $.__views.toolbar.add($.__views.appName);
     $.__views.currentImage = Ti.UI.createImageView({
-        defaultImage: "/universal/placeholder.png",
         top: 60,
         borderRadius: "5",
         width: "200",

@@ -6,7 +6,7 @@
 		</Toolbar>
 		
 		<!-- iOS and Android -->
-		<ImageView id="currentImage"/>  
+		<ImageView id="currentImage" image="/universal/placeholder.png"/>  
 		<Button id="submitButton" onClick="doSubmit"></Button>   
         <Slider id="scoreSlider" top="50" min="0" max="100" width="100%" value="50"/>   
 		<Label id="sliderLabel"></Label>   

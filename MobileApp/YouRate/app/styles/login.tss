@@ -16,19 +16,11 @@
 },
 "#textArea": 
 {
-	borderWidth: "2",
-	borderColor: "#bbb", 
-	borderRadius: "5",
-    color: "#888", 
     textAlign: "center", 
     value: "",
     top: "100", 
     width: "250", 
     height: "40",
-	font: {
-		fontSize: 20,
-		fontFamily: 'Helvetica Neue'
-	}
 },
 "#loginButton": 
 {

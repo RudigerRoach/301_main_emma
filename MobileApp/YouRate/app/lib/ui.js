@@ -111,7 +111,16 @@ exports.getCommentArea = function(){
 			width : platformWidth - 40,
 			left : 20,
 			height : 200,
-			borderRadius : "8",
+			color: "black",
+			backgroundColor:"white",
+			borderWidth:"2",
+		    borderColor:"#bbb",
+		    borderRadius:"5",
+		    textAlign:"left",
+			font: {
+				fontSize: 20,
+				fontFamily: 'Helvetica Neue'
+			}
 		});
 		return commentArea;
 };

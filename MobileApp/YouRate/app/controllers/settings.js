@@ -16,6 +16,7 @@ function setIP() {
 	if (isIOS) {
 		var dialog = Ti.UI.createAlertDialog({
 			title : 'Set new address',
+			value : Ti.App.Properties.getString('serverAddress'),
 			style : Ti.UI.iPhone.AlertDialogStyle.PLAIN_TEXT_INPUT,
 			buttonNames : ['OK', 'cancel']
 		});
@@ -28,6 +29,7 @@ function setIP() {
 		var textfield = Ti.UI.createTextField();
 		var dialog = Ti.UI.createAlertDialog({
 			title : 'Set new address',
+			value : Ti.App.Properties.getString('serverAddress'),
 			androidView : textfield,
 			buttonNames : ['OK', 'cancel']
 		});

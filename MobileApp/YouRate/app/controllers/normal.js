@@ -13,7 +13,8 @@ var commentBox = null;
 var commentText = "";
 var rangeBottom = 0;
 var rangeTop = 50;
-var description = "Image title";
+var topSpace = 50;
+var title = "Image title";
 var comments = "true";
 var imagePath = "/universal/placeholder.png";
 var displayAsButton = (Ti.App.Properties.getString('commentEntry') == 'button') ? true : false;
@@ -39,6 +40,9 @@ $.sliderArea.addEventListener('return', function(e) {
 	newValue = Math.floor(Number($.sliderArea.value));
 	$.scoreSlider.value = newValue;
 	$.sliderArea.blur();
+});
+$.currentImage.addEventListener('click', function(e) {
+	fullScreenImage();
 });
 
 //Resize all artifacts on the screen to match the screen size and orientation
@@ -101,30 +105,30 @@ function resizePage() {
 		$.scoreSlider.value = (rangeBottom + rangeTop) / 2;
 		$.sliderArea.value = $.scoreSlider.value;
 		$.currentImage.image = imagePath;
+		//alert("firstLoad " + $.currentImage.image);
 		firstload = false;
 	}
 
 	$.scoreSlider.width = screenWidth - 40;
 	screenLeft = $.scoreSlider.top;
 
-	if (!isIOS) {
-		$.currentImage.top = 30;
-	}
-
+	$.currentImage.top = topSpace;
 	$.currentImage.height = screenLeft - 80;
 	$.currentImage.width = "auto";
 }
 
 function doSubmit(e) {
-	//Submit result
-	service = require('VoteSession');
-	service.submitResult(Math.floor(Number($.scoreSlider.value)), commentText);
-	//service.submitResult(photosView.currentPage,"");
-	//alert("Result successfully submitted");
-
-	//Go to wait page
-	var win = Alloy.createController('wait').getView();
-	win.open();
+	
+	//$.currentImage.image = imagePath;
+	alert("changed " + $.currentImage.image);
+	
+	/*//Submit result	
+	service=require('VoteSession');	
+	service.submitResult(Math.floor(Number($.scoreSlider.value)),commentText);
+    
+    //Go to wait page
+	var win=Alloy.createController('wait').getView();
+ 	win.open();*/
 }
 
 function commentsEnabled() {
@@ -171,6 +175,49 @@ function commentButtonEnabled() {
 		commentArea.blur();
 	});
 	$.normalPage.add(commentButton);
+}
+
+function fullScreenImage()
+{	
+	var w = ui.platformWidth();
+	var h = ui.platformHeight();
+	if (!isIOS) {
+		h -= 60;
+		topSpace = 20;
+	}
+	else topSpace = 50;
+	
+	if(title != "")
+	{
+		label = Ti.UI.createLabel({
+			text : title,
+			color : 'black',
+			font: {
+				fontSize: 24,
+				fontFamily: 'Helvetica Neue'
+			},
+			textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER
+		});
+		label.top = topSpace;
+		topSpace = topSpace + 20;
+		$.normalPage.add(label);
+	}
+	
+	$.currentImage.height = h - 40 - topSpace;
+	$.currentImage.width = "auto";
+	$.currentImage.top = topSpace + 20;	
+	$.currentImage.zIndex = 5;
+	$.scoreSlider.opacity = 0.3;
+	$.sliderLabel.opacity = 0.3;
+	$.sliderArea.opacity = 0.3;
+	if (comments == "true") {
+		commentButton.opacity = 0.3;
+	}
+	$.submitButton.opacity = 0.3;	
+}
+
+function fullScreenExit()
+{	
 }
 
 Ti.Gesture.addEventListener('orientationchange', function(e) {

@@ -25,6 +25,10 @@ imagePath[2] = "/whiteLabrador.jpg";
  description = service.description();
  imagePath = service.imagePath();
 
+$.currentImage.addEventListener('click', function(e) {
+	fullScreenImage();
+});
+
 //Resize all artifacts on the screen to match the screen size and orientation
 function resizePage()
 {
@@ -122,6 +126,40 @@ function addScrollableImage()
 	}
 	photosView.height = screenLeft - 80;
 	photosView.width = "auto";
+}
+
+function fullScreenImage()
+{	
+	var w = ui.platformWidth();
+	var h = ui.platformHeight();
+	if (!isIOS) {
+		h -= 60;
+		topSpace = 20;
+	}
+	else topSpace = 50;
+	
+	if(title != "")
+	{
+		label = Ti.UI.createLabel({
+			text : title,
+			color : 'black',
+			font: {
+				fontSize: 24,
+				fontFamily: 'Helvetica Neue'
+			},
+			textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER
+		});
+		label.top = topSpace;
+		topSpace = topSpace + 20;
+		$.normalPage.add(label);
+	}
+	
+	$.currentImage.height = h - 40 - topSpace;
+	$.currentImage.width = "auto";
+	$.currentImage.top = topSpace + 20;	
+	$.currentImage.zIndex = 5;
+	$.winnerButton.opacity = 0.3;
+	$.submitButton.opacity = 0.3;	
 }
 	
 Ti.Gesture.addEventListener('orientationchange', function(e) {
