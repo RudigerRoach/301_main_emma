@@ -18,7 +18,6 @@ var title = "Image title";
 var comments = "true";
 var imagePath = "/universal/placeholder.png";
 var displayAsButton = (Ti.App.Properties.getString('commentEntry') == 'button') ? true : false;
-//imagePath = ospath+"animalLandscape.jpg";
 
 //Server calls
 rangeBottom = service.rangeBottom();
@@ -44,13 +43,18 @@ $.sliderArea.addEventListener('return', function(e) {
 $.currentImage.addEventListener('click', function(e) {
 	fullScreenImage();
 });
+//Temporary solution to hide sliderarea at page load
+$.sliderArea.addEventListener('focus', function f(e){
+        $.sliderArea.blur();
+        $.sliderArea.removeEventListener('focus', f);
+});
 
 //Resize all artifacts on the screen to match the screen size and orientation
 function resizePage() {
 	var screenWidth = ui.platformWidth();
 	var screenHeight = ui.platformHeight();
 	if (!isIOS) {
-		screenHeight -= 60;
+		screenHeight -= 70;
 	}
 	var screenLeft = screenHeight;
 
@@ -182,7 +186,7 @@ function fullScreenImage()
 	var w = ui.platformWidth();
 	var h = ui.platformHeight();
 	if (!isIOS) {
-		h -= 60;
+		h -= 70;
 		topSpace = 20;
 	}
 	else topSpace = 50;
@@ -223,4 +227,7 @@ function fullScreenExit()
 Ti.Gesture.addEventListener('orientationchange', function(e) {
 	resizePage();
 });
+
 $.normalPage.open();
+
+

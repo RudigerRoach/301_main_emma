@@ -10,6 +10,6 @@
 		<Button id="submitButton" onClick="doSubmit"></Button>   
         <Slider id="scoreSlider" top="50" min="0" max="100" width="100%" value="50"/>   
 		<Label id="sliderLabel"></Label>   
-        <TextArea id="sliderArea" keyboardType="Titanium.UI.NUMBER_PAD">    
+        <TextArea id="sliderArea" keyboardType="Titanium.UI.NUMBER_PAD" >    
     </Window>
 </Alloy>

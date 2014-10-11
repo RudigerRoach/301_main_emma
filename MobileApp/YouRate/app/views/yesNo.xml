@@ -6,7 +6,7 @@
 		</Toolbar>
 		
 		<!-- iOS and Android -->
-		<ImageView id="currentImage"/>  
+		<ImageView id="currentImage" defaultImage="/universal/placeholder.png"/>  
 		<Button id="submitButton" onClick="doSubmit">Submit</Button> 
 		<Button id="yesButton" onClick="doYes">Yes</Button>
 		<Button id="noButton" onClick="doNo">No</Button>

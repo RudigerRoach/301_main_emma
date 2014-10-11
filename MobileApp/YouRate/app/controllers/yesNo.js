@@ -2,21 +2,13 @@ var ui = require('ui');
 var service = require('VoteSession');
 var isIOS = ui.isIOS();
 
-var ospath = "";
-if (!isIOS) {
-	ospath = "/images/";
-} else {
-	ospath = "";
-}
-
 //declare variables and use defaults for testing
 var commentButton = null;
 var commentText = "";	
 var chosen = -1;
-var description = "Image title";
+var title = "Image title";
 var comments = "true";
-var imagePath = ospath + "placeholder.png";
-//imagePath = ospath+"animalLandscape.jpg";
+var imagePath = "/universal/placeholder.png";
 
 //Server calls
  description = service.description();
@@ -38,7 +30,8 @@ function resizePage()
 	var screenLeft = screenHeight;
 	
 	$.submitButton.top = screenHeight - 70;
-	$.submitButton.width = screenWidth - 40;	
+	$.submitButton.width = screenWidth - 40;
+   	$.submitButton.opacity = 0.3;	
 	screenLeft = $.submitButton.top;
 	
 	if(comments == "true")
@@ -93,6 +86,7 @@ function doYes()
    	$.yesButton.borderWidth = 2;
 	$.noButton.opacity = 0.5;
    	$.noButton.borderWidth = 0;
+   	$.submitButton.opacity = 1;
 	chosen = 1;
 }
 
@@ -102,6 +96,7 @@ function doNo()
    	$.yesButton.borderWidth = 0;
 	$.noButton.opacity = 1;
    	$.noButton.borderWidth = 2;
+   	$.submitButton.opacity = 1;
 	chosen = 0;
 }
 
@@ -149,7 +144,7 @@ function fullScreenImage()
 		});
 		label.top = topSpace;
 		topSpace = topSpace + 20;
-		$.normalPage.add(label);
+		$.yesNoPage.add(label);
 	}
 	
 	$.currentImage.height = h - 40 - topSpace;
