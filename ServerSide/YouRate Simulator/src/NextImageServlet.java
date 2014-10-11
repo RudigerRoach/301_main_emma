@@ -29,7 +29,7 @@ public class NextImageServlet extends HttpServlet
                 String previousImageComment = request.getParameter("comment");
                 String judge = request.getParameter("deviceUID");
                 String choosen = request.getParameter("choosen");
-                DBAccess database = new DBAccess();
+                Database database = new DBAccess();
                 database.open();
                 String email = database.getMail(judge);
                 for (Judge judgesList : uRateServer.judgesList) 
@@ -58,7 +58,7 @@ public class NextImageServlet extends HttpServlet
                 String previousImageScore = request.getParameter("result");
                 String previousImageComment = request.getParameter("comment");
                 String judge = request.getParameter("deviceUID");
-                DBAccess database = new DBAccess();
+                Database database = new DBAccess();
                 database.open();
                 String email = database.getMail(judge);
                 for (Judge judgesList : uRateServer.judgesList) 
@@ -113,7 +113,7 @@ public class NextImageServlet extends HttpServlet
                 String previousImageScore = request.getParameter("result");
                 String previousImageComment = request.getParameter("comment");
                 String judge = request.getParameter("deviceUID");
-                DBAccess database = new DBAccess();
+                Database database = new DBAccess();
                 database.open();
                 String email = database.getMail(judge);
                 for (Judge judgesList : uRateServer.judgesList) 

@@ -33,7 +33,7 @@ public class StartServlet extends HttpServlet
             System.out.println("B");
             while(uRateServer.start == false){}
             String judge = request.getParameter("deviceUID");
-            DBAccess database = new DBAccess();
+            Database database = new DBAccess();
             database.open();
             String email = database.getMail(judge);
             int current = 0;
