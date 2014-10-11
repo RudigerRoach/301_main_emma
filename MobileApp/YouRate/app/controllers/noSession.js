@@ -1,6 +1,6 @@
 var uiGenerator = require('ui');
-var page = $.waitPage;
-var activityIndicator = uiGenerator.getWaitIndicator('waitL');
+var page = $.noSessionPage;
+var activityIndicator = uiGenerator.getWaitIndicator('noSessionL');
 
 function loadImage(){
 	//Show background activity with an activityindicator
@@ -36,22 +36,6 @@ function testStatus(service)
 		    if (status == "1") 
 		    {
 		    	goForward(service);
-		    }else if(status == "2"){
-		    	//Add languages!!!!!!!!!!
-			   var dialog = Ti.UI.createAlertDialog({
-				    cancel: 1,
-				    buttonNames: ['OK'],
-				    message: 'Voting session completed',
-				    title: 'Voting session'
-				  });
-				  dialog.addEventListener('click', function(e){
-				    if(e.index == 0)
-				    {
-				    	var win=Alloy.createController('login').getView();
-		 				win.open();
-				    } //else what happens?
-				  });
-				  dialog.show();
 		    }
 		    activityIndicator.hideIndicator();
 		    activityIndicator = null; //force garbage collection
@@ -60,7 +44,7 @@ function testStatus(service)
 }
 
 function goForward(service){
-	var win=Alloy.createController(service.sessionType()).getView(); //service.sessionType()
+	var win=Alloy.createController("index.js").getView();
  	win.open();
 }
 

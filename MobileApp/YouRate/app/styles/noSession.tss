@@ -1,0 +1,16 @@
+"#noSessionPage": {
+	backgroundColor: "#DFE4E7",
+	exitOnClose: true
+},
+"#toolbar[platform=ios]": {
+	backgroundColor: "black",
+	top: "0",
+	padding: "10",
+	borderTop: false,
+	borderBottom: true,
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: "100"
+}

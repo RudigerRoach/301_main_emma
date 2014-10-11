@@ -2,6 +2,7 @@
 	<string name="autoLoginL">Attempting automatic login...</string>	
 	<string name="loginL">Attempting to log in...</string>	
 	<string name="waitL">Waiting for server...</string>
+	<string name="noSessionL">No session currently running...</string>	
     <string name="emailL">Email address:</string>	
     <string name="loginB">Login</string>
     <string name="submitB">Submit</string>
