@@ -107,7 +107,7 @@ public class FXMLrunningSessionController implements Initializable {
         Stage dialogStage = new Stage();
         dialogStage.setScene(newScene);
         dialogStage.setTitle("Display");
-        dialogStage.setFullScreen(true);
+        //dialogStage.setFullScreen(true);
         //controller.setDialogStage(dialogStage);
         dialogStage.show();
         

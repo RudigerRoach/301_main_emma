@@ -30,7 +30,9 @@ public class LoginServlet extends HttpServlet
     //Handle post requests
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {   
-        DBAccess database = new DBAccess();
+        Database database = new DBAccess();
+
+        System.out.println("Login");
         database.open();
         //Get post parameters
         String user = request.getParameter("email");
@@ -70,7 +72,7 @@ public class LoginServlet extends HttpServlet
                     boolean deviceIDExist = database.deviceExists(id);
                     if(deviceIDExist == false)
                     {
-                       // database.insert(user, id);
+                        database.insert(user, id);
                     }
                     else
                     {

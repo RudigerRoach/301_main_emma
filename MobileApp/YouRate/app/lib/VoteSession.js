@@ -51,6 +51,7 @@ function populateThis(e) {
 //Getters
 exports.imagePath = function() {
 	var net = require("Network");
+	Ti.API.info('get img: '+net.serverPath() + "/" + imgPath);
 	return net.serverPath() + "/" + imgPath;
 };
 exports.rangeBottom = function() {

@@ -10,6 +10,7 @@
  */
 public abstract class reportGenerator
 {
+    //
     int [][] scores = null;
     String [] imgNames = null;
     

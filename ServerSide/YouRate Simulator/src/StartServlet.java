@@ -33,7 +33,7 @@ public class StartServlet extends HttpServlet
             System.out.println("B");
             while(uRateServer.start == false){}
             String judge = request.getParameter("deviceUID");
-            DBAccess database = new DBAccess();
+            Database database = new DBAccess();
             database.open();
             String email = database.getMail(judge);
             int current = 0;
@@ -64,6 +64,7 @@ public class StartServlet extends HttpServlet
                     //check hierna
                     jsonResponse.put("comments", "true");
                     jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[current].getName()); 
+                    System.out.println(judge + " temp/" + uRateServer.tmpCompressedImage[current].getName());
                 }
                 else if (uRateServer.session.getType().equals("winner") == true)
                 {
