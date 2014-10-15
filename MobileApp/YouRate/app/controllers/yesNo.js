@@ -227,15 +227,10 @@ function fullScreenImage()
 			$.yesNoPage.remove(label);
 			fullScreen = false;
 		});
-<<<<<<< HEAD
 		label.top = topSpace;
 		topSpace = topSpace + 20;
-		$.yesNoPage.add(label);
-	}
-=======
->>>>>>> 20b882029f44272cad6adb286ea983903d56f96e
-	
 		$.yesNoPage.add(cancelIcon);
+		$.yesNoPage.add(label);	
 		fullScreen = true;
 	}
 }
