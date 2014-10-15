@@ -4,13 +4,16 @@
  * and open the template in the editor.
  */
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +23,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageViewBuilder;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -37,10 +42,16 @@ public class FXMLrunningSessionController implements Initializable {
     private Button Finalize;
     
     @FXML
-    private ImageView image;
+    private ImageView imageView;
+    
+    @FXML
+    private Image myImage;
     
     @FXML
     private TableView imagesRemaining;
+    
+    @FXML
+    protected AnchorPane AnchorPane;
     
     int current = 0;
     Configuration config;
@@ -52,31 +63,22 @@ public class FXMLrunningSessionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("Display.fxml"));
-//        Scene newScene = null;
-//        try {
-//            newScene = new Scene(loader.load());
-//        } catch (IOException ex) {
-//            Logger.getLogger(FXMLrunningSessionController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        DisplayController controller = loader.getController();
-//        Stage dialogStage = new Stage();
-//        dialogStage.setScene(newScene);
-//        dialogStage.setTitle("Display");
-//        
-//        dialogStage.setFullScreen(true);
-//        
-//        
-//        
-//        
+
     }
     
     public void setConfig(Configuration myConfig,LinkedList imgP) throws Exception
     {
+
         config = myConfig;
         System.out.println("Config called with min of "+ config.getBotRange());
         imagePaths = imgP;
         
+        File file = new File(imagePaths.get(current).toString());
+        Image curimage = SwingFXUtils.toFXImage(config.images[0], null);
+        imageView.setImage(curimage);
+        imageView.fitHeightProperty();
+        imageView.fitWidthProperty();
+
         final uRateServer myServer =new uRateServer(config);
             try
             {
@@ -88,18 +90,12 @@ public class FXMLrunningSessionController implements Initializable {
             }
             
         System.out.println("-------------------------------------" + imagePaths.get(current).toString());
+        BufferedImage originalImage = config.images[0];
+        int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
             
-            
-        //Image newImage = new Image("image1.jpg");
-//        image.setImage(newImage);
-//        image.setFitWidth(100);
-//        image.setPreserveRatio(true);
-//        image.setSmooth(true);
-//        image.setCache(true);
-            
-            
-            
-            
+        Image tagImg = SwingFXUtils.toFXImage(originalImage, null);
+
+      
             
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Display.fxml"));
         Scene newScene = new Scene(loader.load());
@@ -107,7 +103,7 @@ public class FXMLrunningSessionController implements Initializable {
         Stage dialogStage = new Stage();
         dialogStage.setScene(newScene);
         dialogStage.setTitle("Display");
-        //dialogStage.setFullScreen(true);
+        dialogStage.setFullScreen(true);
         //controller.setDialogStage(dialogStage);
         dialogStage.show();
         
@@ -173,21 +169,7 @@ public class FXMLrunningSessionController implements Initializable {
     @FXML
     private void handleNext(ActionEvent event) throws IOException 
     {
-        
-        System.out.println("Next called");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Display.fxml"));
-        Scene newScene = null;
-        try {
-            newScene = new Scene(loader.load());
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLrunningSessionController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-//        DisplayController controller = loader.getController();
-//        Stage dialogStage = new Stage();
-//        dialogStage.setScene(newScene);
-//        dialogStage.setTitle("Display");   
-//        dialogStage.setFullScreen(true);
-        
+
     }
     
     

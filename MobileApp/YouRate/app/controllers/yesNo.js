@@ -15,7 +15,6 @@ var comments = false;
 var imagePath = "/universal/placeholder.png";
 var screenLeft = 0;
 var fullScreen = false;
-//imagePath = ospath+"animalLandscape.jpg";
 
 //Server calls
  description = service.description();
@@ -228,6 +227,13 @@ function fullScreenImage()
 			$.yesNoPage.remove(label);
 			fullScreen = false;
 		});
+<<<<<<< HEAD
+		label.top = topSpace;
+		topSpace = topSpace + 20;
+		$.yesNoPage.add(label);
+	}
+=======
+>>>>>>> 20b882029f44272cad6adb286ea983903d56f96e
 	
 		$.yesNoPage.add(cancelIcon);
 		fullScreen = true;
