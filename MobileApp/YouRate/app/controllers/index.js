@@ -34,7 +34,7 @@ function goForward(service){
 	else
 	{	
 		//If autoLogin not successful
-	    var win=Alloy.createController('yesNo').getView(); //must be login
+	    var win=Alloy.createController('login').getView(); //must be login
 	 	win.open();
  	}
 }
