@@ -124,15 +124,15 @@ function resizePage() {
 function doSubmit(e) {
 	
 	//$.currentImage.image = imagePath;
-	alert("changed " + $.currentImage.image);
+	//alert("changed " + $.currentImage.image);
 	
-	/*//Submit result	
+	//Submit result	
 	service=require('VoteSession');	
 	service.submitResult(Math.floor(Number($.scoreSlider.value)),commentText);
     
     //Go to wait page
 	var win=Alloy.createController('wait').getView();
- 	win.open();*/
+ 	win.open();
 }
 
 function commentsEnabled() {
