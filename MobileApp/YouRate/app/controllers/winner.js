@@ -95,7 +95,7 @@ function addScrollableImage()
 		{		
 			var img = Ti.UI.createImageView({
 		      image:imagePath[k],
-		      //image:net.serverPath() + "/" +imagePath[k],
+		      image:net.serverPath() + "/" +imagePath[k],
 			  height: screenLeft - 80,
 			  width: "auto"
 			});
