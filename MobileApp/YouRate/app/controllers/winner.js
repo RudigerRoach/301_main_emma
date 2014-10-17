@@ -15,19 +15,20 @@ if (!isIOS) {
 var photosView = null;
 var screenLeft;	
 var chosen = -1;
-var description = "Image title";
+var cancelIcon;
+var label;
+var im;
+var topSpace;
+var title = "I work";
+var fullScreen = false;
 var imagePath = new Array();
 imagePath[0] = "/brownLabrador.jpg";
 imagePath[1] = "/kitty.jpg";
 imagePath[2] = "/whiteLabrador.jpg";
 
 //Server calls
- description = service.description();
- imagePath = service.imagePath();
-
-$.currentImage.addEventListener('click', function(e) {
-	fullScreenImage();
-});
+ /*description = service.description();
+ imagePath = service.imagePath();*/
 
 //Resize all artifacts on the screen to match the screen size and orientation
 function resizePage()
@@ -35,7 +36,7 @@ function resizePage()
 	var screenWidth = ui.platformWidth();
 	var screenHeight = ui.platformHeight();
 	if (!isIOS) {
-		screenHeight -= 60;
+		screenHeight -= 70;
 	}
 	screenLeft = screenHeight;
 	
@@ -46,7 +47,18 @@ function resizePage()
 	$.winnerButton.top = screenLeft - 100;
 	$.winnerButton.width = screenWidth - 40;	
 	screenLeft = $.winnerButton.top;
-	addScrollableImage();	
+	
+    if(fullScreen == false)
+	{
+		addScrollableImage();	
+	}
+	else
+	{						
+		im.height = screenHeight - 40 - topSpace;
+		im.width = "auto";
+		im.top = topSpace + 20;	
+		im.zIndex = 5;
+	}  
 }
 
 function doSubmit(e)
@@ -76,7 +88,7 @@ function doSubmit(e)
 $.winnerButton.addEventListener('click',function(e)
 {
 	chosen = photosView.currentPage;
-	$.winnerButton.borderWidth = 1;
+	$.winnerButton.borderWidth = 3;
 	$.winnerButton.borderColor = "black";
 });
 
@@ -84,16 +96,21 @@ function addScrollableImage()
 {
 	if(photosView == null)
 	{
+		var net = require("Network");
 		var wrapperList = new Array();
 		for(var k = 0; k < imagePath.length; k++)
 		{		
 			var img = Ti.UI.createImageView({
-		    image:imagePath[k],
+		      image:imagePath[k],
+		      //image:net.serverPath() + "/" +imagePath[k],
 			  height: screenLeft - 80,
 			  width: "auto"
 			});
 			var imgWrapper = Ti.UI.createScrollView({
 			    maxZoomScale:4.0
+			});
+			img.addEventListener('singletap', function(e) {
+				fullScreenImage();
 			});
 			imgWrapper.add(img);
 			wrapperList[k] = imgWrapper;
@@ -109,7 +126,7 @@ function addScrollableImage()
 		{
 			if(photosView.currentPage == chosen)
 			{
-				$.winnerButton.borderWidth = 1;
+				$.winnerButton.borderWidth = 3;
 				$.winnerButton.borderColor = "black";
 			}
 			else
@@ -117,7 +134,7 @@ function addScrollableImage()
 				$.winnerButton.borderWidth = 0;	
 			}
 		});
-	
+				
 		$.winnerPage.add(photosView);
 	}
 		
@@ -130,36 +147,71 @@ function addScrollableImage()
 
 function fullScreenImage()
 {	
-	var w = ui.platformWidth();
-	var h = ui.platformHeight();
-	if (!isIOS) {
-		h -= 60;
-		topSpace = 20;
-	}
-	else topSpace = 50;
-	
-	if(title != "")
+	if(fullScreen == false)
 	{
-		label = Ti.UI.createLabel({
-			text : title,
-			color : 'black',
-			font: {
-				fontSize: 24,
-				fontFamily: 'Helvetica Neue'
-			},
-			textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER
+		var w = ui.platformWidth();
+		var h = ui.platformHeight();
+		if (!isIOS) {
+			h -= 70;
+			topSpace = 20;
+		}
+		else topSpace = 50;
+		if(title != "")
+		{
+			label = Ti.UI.createLabel({
+				text : title,
+				color : 'black',
+				font: {
+					fontSize: 24,
+					fontFamily: 'Helvetica Neue'
+				},
+				textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER
+			});
+			label.top = topSpace;
+			topSpace = topSpace + 20;
+			$.winnerPage.add(label);	
+		}
+				
+		im = Ti.UI.createImageView({
+			image:imagePath[photosView.currentPage],
+			height:h - 40 - topSpace,
+			width:"auto",
+			top:topSpace + 20,
+			zIndex:5			
 		});
-		label.top = topSpace;
-		topSpace = topSpace + 20;
-		$.normalPage.add(label);
+		$.winnerPage.add(im);
+		photosView.opacity = 0;
+		$.submitButton.opacity = 0.3;	
+		$.winnerButton.opacity = 0.3;
+		
+		cancelIcon = ui.getCancelIcon();
+		if (!isIOS) {
+			cancelIcon.top = 20;
+		}
+		else cancelIcon.top = 50;
+		cancelIcon.right = 20;
+		
+		cancelIcon.addEventListener('click', function(e) {
+			if(!isIOS){
+				photosView.top = 30;
+			}
+			photosView.height = screenLeft - 80;
+			photosView.width = "auto";
+			photosView.opacity = 1;
+			$.submitButton.opacity = 1;
+			$.winnerButton.opacity = 1;
+			
+			$.winnerPage.remove(im);			
+			$.winnerPage.remove(cancelIcon);
+			if(title != "")
+			{
+				$.winnerPage.remove(label);
+			}
+			fullScreen = false;
+		});
+		$.winnerPage.add(cancelIcon);
+		fullScreen = true;
 	}
-	
-	$.currentImage.height = h - 40 - topSpace;
-	$.currentImage.width = "auto";
-	$.currentImage.top = topSpace + 20;	
-	$.currentImage.zIndex = 5;
-	$.winnerButton.opacity = 0.3;
-	$.submitButton.opacity = 0.3;	
 }
 	
 Ti.Gesture.addEventListener('orientationchange', function(e) {

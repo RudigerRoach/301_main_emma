@@ -9,6 +9,9 @@
     <string name="commentB">Add comment</string>
     <string name="sliderT">Score:</string>
     <string name="yesB">Yes</string>
+    <string name="yesNoSubmit">Please choose yes or no</string>    
+    <string name="winnerSubmit1">Submit as winner</string>   
+    <string name="winnerSubmit2">Are you sure that this should be the winner?</string>   
     <string name="noB">No</string>
     <string name="winnerB">Winner</string>
 </resources>

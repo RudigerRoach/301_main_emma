@@ -2,6 +2,11 @@ var uiGenerator = require('ui');
 var page = $.waitPage;
 var activityIndicator = uiGenerator.getWaitIndicator('waitL');
 
+Ti.Gesture.addEventListener('orientationchange', function(e) {
+	alert("Mel");
+	activityIndicator.changeTop();
+});
+
 function loadImage(){
 	//Show background activity with an activityindicator
 	page.add(activityIndicator);

@@ -1,0 +1,17 @@
+<resources>
+	<string name="autoLoginL">Próba automatycznego logowania...</string>	
+	<string name="loginL">Próbuje się zalogować...</string>	
+	<string name="waitL">Oczekiwanie na serwer...</string>
+	<string name="noSessionL">Nie uruchomione sesji*...</string>	
+    <string name="emailL">Adres e-mail:</string>	
+    <string name="loginB">Zaloguj się</string>
+    <string name="submitB">Godzić się</string>
+    <string name="commentB">Dodaj komentarz</string>
+    <string name="sliderT">Wynik:</string>
+    <string name="yesB">Tak</string>
+    <string name="yesNoSubmit">Wybierz tak lub nie</string>    
+    <string name="winnerSubmit1">Przedstawić jako zwycięzca</string>   
+    <string name="winnerSubmit2">Jesteś pewien, że powinien to być zwycięzcą?</string>   
+    <string name="noB">Nie</string>
+    <string name="winnerB">Zwycięzca</string>
+</resources>
