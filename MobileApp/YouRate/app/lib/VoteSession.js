@@ -29,13 +29,14 @@ function populateThis(e) {
 	if (sessionType == "winner") {
 		/*
 		 {"rangeBottom":0,"status":"1","imgPaths":["temp/1.jpg","temp/2.jpg","temp/3.jpg","temp/4.jpg","temp/5.jpg"],"description":"Beauty comes in all shapes and sizes","imgTotaal":5,"sessionType":"winner","rangeTop":10,"comments":"true"}
-		 */
-		imgPath = imgPaths;
+		 {"imgPaths":["temp/1.jpg","temp/2.jpg"],"comments":"true","sessionType":"winner","description":"","rangeTop":10,"imgTotaal":2,"rangeBottom":0,"status":"1"}
+		 * */
+		imgPath = e.imgPaths;
 		description = e.description;
 		rangeBottom = e.rangeBottom;
 		rangeTop = e.rangeTop;
 		comments = e.comments;
-		imgTotaal = 5;
+		imgTotaal = e.imgTotaal;
 	} else {
 		description = e.description;
 		imgPath = e.imgPath;
@@ -51,8 +52,11 @@ function populateThis(e) {
 //Getters
 exports.imagePath = function() {
 	var net = require("Network");
-	Ti.API.info('get img: '+net.serverPath() + "/" + imgPath);
+	//Ti.API.info('get img: '+net.serverPath() + "/" + imgPath);
 	return net.serverPath() + "/" + imgPath;
+};
+exports.imageArray = function(){
+	return imgPath;
 };
 exports.rangeBottom = function() {
 	return rangeBottom;

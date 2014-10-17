@@ -20,6 +20,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.json.JSONObject;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -31,6 +33,15 @@ public class uRateServerTest extends TestCase {
     
     public uRateServerTest(String testName) throws Exception {
         super(testName);
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+        
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
     }
     
     @Override
@@ -181,6 +192,9 @@ public class uRateServerTest extends TestCase {
         BufferedReader rd = new BufferedReader(new InputStreamReader(mockResponse.getEntity().getContent()));
         String stringResponse = rd.readLine();
         HttpPost mockRequest1 = new HttpPost("http://localhost:5555/start");
+        List<NameValuePair> urlParameters1 = new ArrayList<>();
+        urlParameters1.add(new BasicNameValuePair("deviceUID", "123"));
+        mockRequest1.setEntity(new UrlEncodedFormEntity(urlParameters1,"UTF-8"));
         HttpResponse mockResponse1 = client.execute(mockRequest1,httpContext);
         rd.close();
         rd = new BufferedReader(new InputStreamReader(mockResponse1.getEntity().getContent()));
@@ -219,23 +233,24 @@ public class uRateServerTest extends TestCase {
         BufferedReader rd = new BufferedReader(new InputStreamReader(mockResponse.getEntity().getContent()));
         rd.close();
         HttpPost mockRequest2 = new HttpPost("http://localhost:5555/start");
+        List<NameValuePair> urlParameters1 = new ArrayList<>();
+        urlParameters1.add(new BasicNameValuePair("deviceUID", "123"));
+        mockRequest2.setEntity(new UrlEncodedFormEntity(urlParameters1,"UTF-8"));
         mockRequest2.setHeader("Content-type", "application/x-www-form-urlencoded");
         //Add parameters
         HttpResponse mockResponse2 = client.execute(mockRequest2,httpContext);
         rd = new BufferedReader(new InputStreamReader(mockResponse2.getEntity().getContent()));
-        System.out.println(rd.readLine());
         rd.close();
         HttpPost mockRequest1 = new HttpPost("http://localhost:5555/nextImage");
         mockRequest2.setHeader("Content-type", "application/x-www-form-urlencoded");
         //Add parameters
-        List<NameValuePair> urlParameters1 = new ArrayList<>();
-        urlParameters1.add(new BasicNameValuePair("deviceUID", "123"));
-        urlParameters1.add(new BasicNameValuePair("comment","asdf"));
-        urlParameters1.add(new BasicNameValuePair("result","3"));
-        mockRequest1.setEntity(new UrlEncodedFormEntity(urlParameters1,"UTF-8"));
+        List<NameValuePair> urlParameters2 = new ArrayList<>();
+        urlParameters2.add(new BasicNameValuePair("deviceUID", "123"));
+        urlParameters2.add(new BasicNameValuePair("comment","asdf"));
+        urlParameters2.add(new BasicNameValuePair("result","3"));
+        mockRequest1.setEntity(new UrlEncodedFormEntity(urlParameters2,"UTF-8"));
         HttpResponse mockResponse1 = client.execute(mockRequest1,httpContext);
         rd = new BufferedReader(new InputStreamReader(mockResponse1.getEntity().getContent()));
-        System.out.println("++ " + rd.readLine());
         rd.close();
         assertEquals("Testing if nextImage is correct",true,true);
     }

@@ -30,10 +30,6 @@ public class LoginServlet extends HttpServlet
     //Handle post requests
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {   
-        Database database = new DBAccess();
-
-        System.out.println("Login");
-        database.open();
         //Get post parameters
         String user = request.getParameter("email");
         String id = request.getParameter("deviceUID");
@@ -65,27 +61,27 @@ public class LoginServlet extends HttpServlet
             //Successful login
             if (loginSuccess == true)
             {
-                boolean userExist = database.userExists(user);
-
+                boolean userExist = uRateServer.database.userExists(user);
                 if(userExist == false)
                 {
-                    boolean deviceIDExist = database.deviceExists(id);
+                    boolean deviceIDExist = uRateServer.database.deviceExists(id);
+                   
                     if(deviceIDExist == false)
                     {
-                        database.insert(user, id);
+                        uRateServer.database.insert(user, id);
                     }
                     else
                     {
-                        database.update(user, id);;
+                        uRateServer.database.update(user, id);
                     }
                 }
                 else
                 {
-                    boolean bothInSameRecord = database.shouldAutoLogin(user, id);
+                    boolean bothInSameRecord = uRateServer.database.shouldAutoLogin(user, id);
 
                     if(bothInSameRecord == false)
                     {
-                        database.update(user, id);
+                        uRateServer.database.update(user, id);
                     }
                 }
                 JSONObject jsonResponse = new JSONObject();
@@ -145,8 +141,8 @@ public class LoginServlet extends HttpServlet
             }
             String userAuto= "";
             boolean loginSuccess = false;
-
-            userAuto = database.getMail(id);
+            
+            userAuto = uRateServer.database.getMail(id);
             //get the judges from emma
             if(uRateServer.session.getSessionType() == true)
             {
@@ -175,7 +171,8 @@ public class LoginServlet extends HttpServlet
                 {
                     jsonResponse.put("status", "success");
                     jsonResponse.put("session_id", request.getSession().getId());
-                    String email = database.getMail(id);
+                    String email = uRateServer.database.getMail(id);
+                    
                     boolean tempAllowed = true;
                     if (uRateServer.judgesList != null)
                     {
@@ -219,6 +216,5 @@ public class LoginServlet extends HttpServlet
                 response.getWriter().print(jsonResponse);
             }
         }
-        database.close();
     }
 }

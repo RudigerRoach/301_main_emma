@@ -27,8 +27,12 @@ imagePath[1] = "/kitty.jpg";
 imagePath[2] = "/whiteLabrador.jpg";
 
 //Server calls
- /*description = service.description();
- imagePath = service.imagePath();*/
+ title = service.description();
+ imagePath = service.imageArray();
+
+$.currentImage.addEventListener('click', function(e) {
+	fullScreenImage();
+});
 
 //Resize all artifacts on the screen to match the screen size and orientation
 function resizePage()
