@@ -4,13 +4,6 @@ var isIOS = ui.isIOS();
 var updateSlider = false;
 var screenLeft;
 
-var ospath = "";
-if (!isIOS) {
-	ospath = "/images/";
-} else {
-	ospath = "";
-}
-
 //declare variables and use defaults for testing
 var photosView = null;
 var screenLeft;	
@@ -29,10 +22,6 @@ imagePath[2] = "/whiteLabrador.jpg";
 //Server calls
  title = service.description();
  imagePath = service.imageArray();
-
-$.currentImage.addEventListener('click', function(e) {
-	fullScreenImage();
-});
 
 //Resize all artifacts on the screen to match the screen size and orientation
 function resizePage()
