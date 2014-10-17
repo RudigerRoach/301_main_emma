@@ -14,8 +14,12 @@ var commentText = "";
 var rangeBottom = 0;
 var rangeTop = 50;
 var topSpace = 50;
-var title = "Image title";
-var comments = "true";
+var cancelIcon;
+var label;
+var title = "I work";
+var fullScreen = false;
+var screenLeft;
+var comments = true;
 var imagePath = "/universal/placeholder.png";
 var displayAsButton = (Ti.App.Properties.getString('commentEntry') == 'button') ? true : false;
 
@@ -56,13 +60,13 @@ function resizePage() {
 	if (!isIOS) {
 		screenHeight -= 70;
 	}
-	var screenLeft = screenHeight;
+	screenLeft = screenHeight;
 
 	$.submitButton.top = screenHeight - 70;
 	$.submitButton.width = screenWidth - 40;
 	screenLeft = $.submitButton.top;
 
-	if (comments == "true") {
+	if (comments == true) {
 		if(displayAsButton && commentButton == null)
 		{
 			commentButtonEnabled();
@@ -115,10 +119,22 @@ function resizePage() {
 
 	$.scoreSlider.width = screenWidth - 40;
 	screenLeft = $.scoreSlider.top;
-
-	$.currentImage.top = topSpace;
-	$.currentImage.height = screenLeft - 80;
-	$.currentImage.width = "auto";
+	
+	if(fullScreen == false)
+	{
+		if(!isIOS){
+			$.currentImage.top = 30;
+		}
+		$.currentImage.height = screenLeft - 80;
+		$.currentImage.width = "auto";
+	}
+	else
+	{		
+		$.currentImage.height = screenHeight - 40 - topSpace;
+		$.currentImage.width = "auto";
+		$.currentImage.top = topSpace + 20;	
+		$.currentImage.zIndex = 5;
+	}
 }
 
 function doSubmit(e) {
@@ -183,45 +199,77 @@ function commentButtonEnabled() {
 
 function fullScreenImage()
 {	
-	var w = ui.platformWidth();
-	var h = ui.platformHeight();
-	if (!isIOS) {
-		h -= 70;
-		topSpace = 20;
-	}
-	else topSpace = 50;
-	
-	if(title != "")
+	if(fullScreen == false)
 	{
-		label = Ti.UI.createLabel({
-			text : title,
-			color : 'black',
-			font: {
-				fontSize: 24,
-				fontFamily: 'Helvetica Neue'
-			},
-			textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER
+		var w = ui.platformWidth();
+		var h = ui.platformHeight();
+		if (!isIOS) {
+			h -= 70;
+			topSpace = 20;
+		}
+		else topSpace = 50;
+		if(title != "")
+		{
+			label = Ti.UI.createLabel({
+				text : title,
+				color : 'black',
+				font: {
+					fontSize: 24,
+					fontFamily: 'Helvetica Neue'
+				},
+				textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER
+			});
+			label.top = topSpace;
+			topSpace = topSpace + 20;
+			$.normalPage.add(label);	
+		}
+				
+		$.currentImage.height = h - 40 - topSpace;
+		$.currentImage.width = "auto";
+		$.currentImage.top = topSpace + 20;	
+		$.currentImage.zIndex = 5;
+		$.scoreSlider.opacity = 0.3;
+		$.sliderLabel.opacity = 0.3;
+		$.sliderArea.opacity = 0.3;
+		if (comments == true) {
+			commentButton.opacity = 0.3;
+		}
+		$.submitButton.opacity = 0.3;	
+		
+		cancelIcon = ui.getCancelIcon();
+		if (!isIOS) {
+			cancelIcon.top = 20;
+		}
+		else cancelIcon.top = 50;
+		cancelIcon.right = 20;
+		
+		cancelIcon.addEventListener('click', function(e) {
+			if(!isIOS){
+				$.currentImage.top = 30;
+			}
+			else {
+				$.currentImage.top = 60;
+			}
+			$.currentImage.height = screenLeft - 80;
+			$.currentImage.width = "auto";
+			if (comments == true) {
+				commentButton.opacity = 1;
+			}			
+			$.submitButton.opacity = 1;
+			$.scoreSlider.opacity = 1;
+			$.sliderLabel.opacity = 1;
+			$.sliderArea.opacity = 1;
+						
+			$.normalPage.remove(cancelIcon);
+			if(title != "")
+			{
+				$.normalPage.remove(label);
+			}
+			fullScreen = false;
 		});
-		label.top = topSpace;
-		topSpace = topSpace + 20;
-		$.normalPage.add(label);
+		$.normalPage.add(cancelIcon);
+		fullScreen = true;
 	}
-	
-	$.currentImage.height = h - 40 - topSpace;
-	$.currentImage.width = "auto";
-	$.currentImage.top = topSpace + 20;	
-	$.currentImage.zIndex = 5;
-	$.scoreSlider.opacity = 0.3;
-	$.sliderLabel.opacity = 0.3;
-	$.sliderArea.opacity = 0.3;
-	if (comments == "true") {
-		commentButton.opacity = 0.3;
-	}
-	$.submitButton.opacity = 0.3;	
-}
-
-function fullScreenExit()
-{	
 }
 
 Ti.Gesture.addEventListener('orientationchange', function(e) {
