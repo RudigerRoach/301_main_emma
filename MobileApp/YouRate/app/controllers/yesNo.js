@@ -10,11 +10,11 @@ var commentText = "";
 var chosen = -1;
 var cancelIcon;
 var label;
-var title = "";
+var title = "I work";
+var fullScreen = false;
 var comments = false;
 var imagePath = "/universal/placeholder.png";
 var screenLeft = 0;
-var fullScreen = false;
 
 //Server calls
  description = service.description();
@@ -32,11 +32,6 @@ function resizePage()
 	var screenHeight = ui.platformHeight();
 	if (!isIOS) {
 		screenHeight -= 70;
-		topSpace = 20;
-	}
-	else
-	{
-		topSpace = 50;
 	}
 	screenLeft = screenHeight;
 	
@@ -153,23 +148,22 @@ function fullScreenImage()
 			topSpace = 20;
 		}
 		else topSpace = 50;
-		
-		label = Ti.UI.createLabel({
-			text : title,
-			color : 'black',
-			font: {
-				fontSize: 24,
-				fontFamily: 'Helvetica Neue'
-			},
-			textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER
-		});
-		label.top = topSpace;
 		if(title != "")
 		{
+			label = Ti.UI.createLabel({
+				text : title,
+				color : 'black',
+				font: {
+					fontSize: 24,
+					fontFamily: 'Helvetica Neue'
+				},
+				textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER
+			});
+			label.top = topSpace;
 			topSpace = topSpace + 20;
+			$.yesNoPage.add(label);	
 		}
-		$.yesNoPage.add(label);		
-		
+				
 		$.currentImage.height = h - 40 - topSpace;
 		$.currentImage.width = "auto";
 		$.currentImage.top = topSpace + 20;	
@@ -186,7 +180,7 @@ function fullScreenImage()
 			cancelIcon.top = 20;
 		}
 		else cancelIcon.top = 50;
-		cancelIcon.right = 30;
+		cancelIcon.right = 20;
 		
 		cancelIcon.addEventListener('click', function(e) {
 			if(!isIOS){
@@ -224,13 +218,13 @@ function fullScreenImage()
 			}
 			
 			$.yesNoPage.remove(cancelIcon);
-			$.yesNoPage.remove(label);
+			if(title != "")
+			{
+				$.yesNoPage.remove(label);
+			}
 			fullScreen = false;
 		});
-		label.top = topSpace;
-		topSpace = topSpace + 20;
 		$.yesNoPage.add(cancelIcon);
-		$.yesNoPage.add(label);	
 		fullScreen = true;
 	}
 }
