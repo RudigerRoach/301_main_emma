@@ -3,8 +3,7 @@ var page = $.waitPage;
 var activityIndicator = uiGenerator.getWaitIndicator('waitL');
 
 Ti.Gesture.addEventListener('orientationchange', function(e) {
-	alert("Mel");
-	activityIndicator.changeTop();
+	activityIndicator.top = uiGenerator.isPortrait ? uiGenerator.platformHeight / 2 - 70 : uiGenerator.platformHeight / 2 - 80;
 });
 
 function loadImage(){

@@ -22,6 +22,7 @@ imagePath[2] = "/whiteLabrador.jpg";
 //Server calls
  title = service.description();
  imagePath = service.imageArray();
+ var net = require("Network");
 
 //Resize all artifacts on the screen to match the screen size and orientation
 function resizePage()
@@ -89,7 +90,6 @@ function addScrollableImage()
 {
 	if(photosView == null)
 	{
-		var net = require("Network");
 		var wrapperList = new Array();
 		for(var k = 0; k < imagePath.length; k++)
 		{		
@@ -167,6 +167,7 @@ function fullScreenImage()
 				
 		im = Ti.UI.createImageView({
 			image:imagePath[photosView.currentPage],
+			image:net.serverPath() + "/" +imagePath[photosView.currentPage],
 			height:h - 40 - topSpace,
 			width:"auto",
 			top:topSpace + 20,

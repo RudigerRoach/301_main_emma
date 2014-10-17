@@ -49,10 +49,6 @@ exports.getWaitIndicator = function(labelId) {
 		view.show();
 		indicator.show();
 	};
-	
-	view.changeTop = function() {
-		view.top = isPortrait ? platformHeight / 2 - 70 : platformHeight / 2 - 80;
-	};
 
 	view.hideIndicator = function() {
 		indicator.hide();
