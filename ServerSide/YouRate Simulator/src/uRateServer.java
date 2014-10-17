@@ -38,6 +38,7 @@ public class uRateServer
     public static int totaalImages = 0;
     public static AtomicInteger currentPhoto = new AtomicInteger(1);
     public static List<Judge> judgesList = new ArrayList<Judge>();
+    public static Database database = null;
 
     /**
      * Constructor for the server
@@ -46,7 +47,8 @@ public class uRateServer
      */
     public uRateServer(Configuration _session) throws Exception
     {
-        System.out.println("Creating Server");
+        database = new DBAccess();
+        database.open();
         //Create server
         session = _session;
         images = session.getImages();
@@ -93,7 +95,7 @@ public class uRateServer
             ImageWriteParam iwparam = new JPEGImageWriteParam(Locale.getDefault());
 
             iwparam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-            iwparam.setCompressionQuality(0.7F);
+            iwparam.setCompressionQuality(0.5F);
 
             writer.write(null, new IIOImage(image, null, null), iwparam);
 
@@ -115,13 +117,13 @@ public class uRateServer
      */
     public void close() throws Exception
     {
+        database.close();
         if (server != null)
             server.stop();
     }
 
     public void startSession()
     {
-        System.out.println("Start session is geroep");
         start = true;
     }
     

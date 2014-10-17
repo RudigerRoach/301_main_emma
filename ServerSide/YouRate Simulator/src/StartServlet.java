@@ -27,15 +27,11 @@ public class StartServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        System.out.println("A");
         if (request.getSession(false) != null)
         {
-            System.out.println("B");
             while(uRateServer.start == false){}
             String judge = request.getParameter("deviceUID");
-            Database database = new DBAccess();
-            database.open();
-            String email = database.getMail(judge);
+            String email = uRateServer.database.getMail(judge);
             int current = 0;
             for (int i = 0; i < uRateServer.judgesList.size();i++)
             {
@@ -63,8 +59,7 @@ public class StartServlet extends HttpServlet
                     jsonResponse.put("description", uRateServer.session.getImageDetails(0));
                     //check hierna
                     jsonResponse.put("comments", "true");
-                    jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[current].getName()); 
-                    System.out.println(judge + " temp/" + uRateServer.tmpCompressedImage[current].getName());
+                    jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[current].getName());
                 }
                 else if (uRateServer.session.getType().equals("winner") == true)
                 {
@@ -97,7 +92,6 @@ public class StartServlet extends HttpServlet
             }
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print(jsonResponse);
-            database.close();
         }
     }
 }

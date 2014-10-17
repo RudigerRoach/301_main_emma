@@ -29,9 +29,10 @@ public class NextImageServlet extends HttpServlet
                 String previousImageComment = request.getParameter("comment");
                 String judge = request.getParameter("deviceUID");
                 String choosen = request.getParameter("choosen");
-                Database database = new DBAccess();
-                database.open();
-                String email = database.getMail(judge);
+                
+                String email = uRateServer.database.getMail(judge);
+                
+                
                 for (Judge judgesList : uRateServer.judgesList) 
                 {
                     if (judgesList.getJudgeName().equals(email) == true)
@@ -49,7 +50,6 @@ public class NextImageServlet extends HttpServlet
                     e.printStackTrace();
                 }
 
-                database.close();
                 response.setContentType("application/json;charset=UTF-8");
                 response.getWriter().print(jsonResponse);
             }
@@ -58,12 +58,10 @@ public class NextImageServlet extends HttpServlet
                 String previousImageScore = request.getParameter("result");
                 String previousImageComment = request.getParameter("comment");
                 String judge = request.getParameter("deviceUID");
-                Database database = new DBAccess();
-                database.open();
-                String email = database.getMail(judge);
+
+                String email = uRateServer.database.getMail(judge);
                 for (Judge judgesList : uRateServer.judgesList) 
                 {
-                    System.out.println("+++++ " + judgesList.getJudgeName());
                     if (judgesList.getJudgeName().equals(email) == true)
                     {
                         judgesList.setScoreAndComent(Integer.parseInt(previousImageScore), previousImageComment);
@@ -76,7 +74,6 @@ public class NextImageServlet extends HttpServlet
                                 jsonResponse.put("sessionType", uRateServer.session.getType());
                                 jsonResponse.put("description", uRateServer.session.getImageDetails(judgesList.getCurrentImage()-1));
                                 jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
-                                System.out.println(judge + " temp/" + uRateServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
                             } 
                             catch (JSONException e) 
                             {
@@ -107,16 +104,14 @@ public class NextImageServlet extends HttpServlet
                         break;
                     }
                 }
-                database.close();
             }
             else
             {
                 String previousImageScore = request.getParameter("result");
                 String previousImageComment = request.getParameter("comment");
                 String judge = request.getParameter("deviceUID");
-                Database database = new DBAccess();
-                database.open();
-                String email = database.getMail(judge);
+
+                String email = uRateServer.database.getMail(judge);
                 for (Judge judgesList : uRateServer.judgesList) 
                 {
                     if (judgesList.getJudgeName().equals(email) == true)
@@ -134,8 +129,7 @@ public class NextImageServlet extends HttpServlet
                                 jsonResponse.put("sessionType", uRateServer.session.getType());
                                 jsonResponse.put("description", uRateServer.session.getImageDetails(uRateServer.currentPhoto.get() -1));
                                 jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[uRateServer.currentPhoto.get()-1].getName());
-                                System.out.println(judge + " temp/" + uRateServer.tmpCompressedImage[judgesList.getCurrentImage()-1].getName());
-
+                                
                             } 
                             catch (JSONException e) 
                             {
@@ -163,10 +157,8 @@ public class NextImageServlet extends HttpServlet
                             response.setContentType("application/json;charset=UTF-8");
                             response.getWriter().print(jsonResponse);
                         }
-                        break;
                     }
                 }
-                database.close();
             }
         }
     }

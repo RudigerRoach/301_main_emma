@@ -25,19 +25,23 @@ public class DBAccess implements Database{
     //user nu = new user();
 
     
+    @Override
     public void open() {
-        database = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), fileName);
+        database = Db4oEmbedded.openFile(fileName);
     }
 
+    @Override
     public void close() {
         database.close();
     }
 
+    @Override
     public void insert(String email, String uid) {
         user newU = new user(email, uid);
         database.store(newU);
     }
 
+    @Override
     public boolean update(String email, String uid) {
         oSet = database.queryByExample(user.class);
         for(user k : oSet){
@@ -50,6 +54,7 @@ public class DBAccess implements Database{
         return false;
     }
 
+    @Override
     public boolean delete(String email, String uid) {
         oSet = database.queryByExample(user.class);
         for(user k : oSet){
@@ -61,6 +66,7 @@ public class DBAccess implements Database{
         return false;
     }
 
+    @Override
     public boolean userExists(String email) {
         oSet = database.queryByExample(user.class);
         for(user k : oSet){
@@ -71,6 +77,7 @@ public class DBAccess implements Database{
         return false;
     }
 
+    @Override
     public boolean deviceExists(String uid) {
         oSet = database.queryByExample(user.class);
         for(user k : oSet){
@@ -81,6 +88,7 @@ public class DBAccess implements Database{
         return false;
     }
 
+    @Override
     public boolean shouldAutoLogin(String email, String uid) {
         oSet = database.queryByExample(user.class);
         for(user k : oSet){
@@ -91,11 +99,13 @@ public class DBAccess implements Database{
         return false;
     }
 
+    @Override
     public void selectAll() {
         oSet = database.queryByExample(user.class);
         System.out.println(oSet.toString());
     }
     
+    @Override
     public String getMail(String uid) {
         oSet = database.queryByExample(user.class);
         for(user k : oSet){
@@ -104,42 +114,5 @@ public class DBAccess implements Database{
             }
         }
         return "";
-    }
-    
-    private class user {
-        private String uid;
-        private String email;
-        
-        @Override
-        public String toString(){
-            return email + " "+ uid;
-        }
-        
-        public user()
-        {
-            
-        }
-
-        public user(String uid, String email)
-        {
-            this.uid = uid;
-            this.email = email;
-        }
-        
-        public void setUID(String uid){
-            this.uid = uid;
-        }
-        
-        public void setEmail(String email){
-            this.email = email;
-        }
-        
-        public String getEmail(){
-            return this.email;
-        }
-        
-        public String getUID(){
-            return this.uid;
-        }
     }
 }
