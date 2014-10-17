@@ -23,7 +23,7 @@ imagePath[2] = "/whiteLabrador.jpg";
 
 //Server calls
  description = service.description();
- imagePath = service.imagePath();
+ imagePath = service.imageArray();
 
 $.currentImage.addEventListener('click', function(e) {
 	fullScreenImage();
