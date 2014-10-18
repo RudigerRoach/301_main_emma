@@ -1,35 +1,18 @@
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
  
 public class Person {
-   private final SimpleStringProperty firstName = new SimpleStringProperty("");
-   private final SimpleStringProperty lastName = new SimpleStringProperty("");
    private final SimpleStringProperty email = new SimpleStringProperty("");
 
 public Person() {
-        this("", "", "");
+        this("");
     }
  
-    public Person(String firstName, String lastName, String email) {
-        setFirstName(firstName);
-        setLastName(lastName);
-        setEmail(email);
+    public Person(String e) {
+        setEmail(e);
     }
 
-    public String getFirstName() {
-        return firstName.get();
-    }
- 
-    public void setFirstName(String fName) {
-        firstName.set(fName);
-    }
-        
-    public String getLastName() {
-        return lastName.get();
-    }
-    
-    public void setLastName(String fName) {
-        lastName.set(fName);
-    }
+
     
     public String getEmail() {
         return email.get();
@@ -38,4 +21,8 @@ public Person() {
     public void setEmail(String fName) {
         email.set(fName);
     }
+    
+    	public StringProperty emailProperty() {
+		return email;
+	}
 }

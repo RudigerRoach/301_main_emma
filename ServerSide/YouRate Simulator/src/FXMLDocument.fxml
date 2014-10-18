@@ -59,17 +59,16 @@
       
       <TableView fx:id="judges" layoutX="351.0" layoutY="313.0" prefHeight="151.0" prefWidth="335.0" style="-fx-border-color: Black;">
         <columns>
-          <TableColumn prefWidth="173.0" text="Judges" fx:id="email" editable="true"  >
-          </TableColumn>
+          <TableColumn prefWidth="173.0" text="Judges" fx:id="email"/>
         </columns>
       </TableView>
       
       
       
-      <TableView fx:id="images" layoutX="351.0" layoutY="87.0" prefHeight="207.0" prefWidth="335.0" style="-fx-border-color: black;">
+      <TableView fx:id="imageTable" layoutX="351.0" layoutY="87.0" prefHeight="207.0" prefWidth="335.0" style="-fx-border-color: black;">
         <columns>
-          <TableColumn prefWidth="75.0" text="Image" />
-          <TableColumn prefWidth="240.0" text="Description" />
+          <TableColumn prefWidth="200.0" text="Image" fx:id="imagePath" />
+          <TableColumn prefWidth="200.0" text="Description" fx:id="descript" />
         </columns>
       </TableView>
       <Button fx:id="start" layoutX="29.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleStartButtonAction" prefHeight="54.0" prefWidth="657.0" style="-fx-background-color: #bbb;" text="Start Session">
@@ -79,7 +78,7 @@
       </Button>
       <Accordion layoutX="582.0" layoutY="162.0" />
       <Accordion layoutX="449.0" layoutY="46.0" />
-    <TitledPane expanded="false" layoutX="351.0" layoutY="288.0" prefHeight="171.0" prefWidth="335.0" text="Image Options" fx:id = "imagePane">
+    <TitledPane expanded="false" layoutX="351.0" layoutY="288.0" prefHeight="120.0" prefWidth="335.0" text="Image Options" fx:id = "imagePane">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="68.0" prefWidth="314.0">
                <children>

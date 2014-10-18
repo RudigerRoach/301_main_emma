@@ -109,5 +109,5 @@ public class ImportImagesDialogController implements Initializable {
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
     
-    }
+    } 
 }

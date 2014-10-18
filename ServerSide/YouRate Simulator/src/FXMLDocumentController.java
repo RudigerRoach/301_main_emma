@@ -28,6 +28,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -105,17 +107,21 @@ public class FXMLDocumentController implements Initializable{
     private TextField maximumScore;
     
     @FXML
-    TableView<String> judges;
+    TableView<Person> judges;
         
     @FXML
-    TableColumn email;
+    private TableColumn<Person, String> email;
     
     @FXML
     private TitledPane imagePane;
     
     
     @FXML
-    private TableView imageTable;
+    private TableView<Images> imageTable;
+    @FXML
+    private TableColumn<Images, String> imagePath;
+    @FXML
+    private TableColumn<Images, String> descript;
     
     final ToggleGroup group = new ToggleGroup();
     
@@ -123,12 +129,12 @@ public class FXMLDocumentController implements Initializable{
     LinkedList imagePaths = new LinkedList();
     LinkedList imageDescription = new LinkedList();
     LinkedList judgesLL = new LinkedList();
-
-    ObservableList<String> data;
+    private ObservableList<Person> masterData = FXCollections.observableArrayList();
+    private ObservableList<Images> imageData = FXCollections.observableArrayList();
     
     public FXMLDocumentController()
     {
-        
+
     }
     
     @FXML
@@ -175,22 +181,9 @@ public class FXMLDocumentController implements Initializable{
         for(int i = 0; i< judgesLL.size();i++)
             judges[i]= judgesLL.get(i).toString();
         
-        //////////////////////
-        //////////////////////
-        //////////////////////
-        //////////////////////
-        
         String[] imgDetails = new String[imageDescription.size()]; 
         for(int i = 0; i< imageDescription.size();i++)
             imgDetails[i]= imageDescription.get(i).toString();
-        
-//        String[] imgDetails = new String[5]; 
-//        
-//        imgDetails[0] = "Beauty comes in all shapes and sizes";
-//        imgDetails[1] = "Where I want to be";
-//        imgDetails[2] = "Natures perfect architecture";
-//        imgDetails[3] = "Huisie by die see";
-//        imgDetails[4] = "Not a cat you want to play with";
         
         String minStr = minimumScore.getText();
         int min =  0;
@@ -235,10 +228,6 @@ public class FXMLDocumentController implements Initializable{
             problems += " min needs to be smaller than max,";
         }
         
-            
-        
-        
-        
         boolean cont = controlledSession.isSelected();
         boolean open = openSession.isSelected();
         boolean comments = commentsEnabled.isSelected();
@@ -275,7 +264,8 @@ public class FXMLDocumentController implements Initializable{
             
             for(int i = 0; i < judges.length;i++)
                 System.out.println("Judges in list: "+ judges[i]);
-            
+             
+            //Create Configuration
             mySession = new Configuration(names,images,judges,max,min,open,cont,imgDetails,type);
 
              
@@ -288,15 +278,11 @@ public class FXMLDocumentController implements Initializable{
             FXMLrunningSessionController controller = loader.getController();
             controller.setConfig(mySession);
             newStage.initStyle(StageStyle.UNDECORATED);
-            
-            
-            /////
-            
-            
             Node  source = (Node) event.getSource(); 
             Stage stage  = (Stage) source.getScene().getWindow();
             stage.close();
-            
+            controller.addImages(imagePaths,imageDescription);
+            controller.loadImages();
             newStage.showAndWait();
         }
         else
@@ -326,18 +312,46 @@ public class FXMLDocumentController implements Initializable{
             imageDescription.add(controller.description);  
             System.out.println("after add shows descript: "+ controller.description);
         }
+        loadImages();
     }
     
     @FXML
     private void handledeleteSelected(ActionEvent event) throws IOException 
     {
-    
+        int selectedIndex = imageTable.getSelectionModel().getSelectedIndex();
+        System.out.println("item in table is at index " + selectedIndex);
+        imagePaths.remove(selectedIndex);
+        imageDescription.remove(selectedIndex);
+        loadImages();
     }
     
     @FXML
     private void handleeditSelected(ActionEvent event) throws IOException 
     {
-        
+        try
+        {
+            int selectedIndex = imageTable.getSelectionModel().getSelectedIndex();
+            System.out.println("item in table is at index " + selectedIndex);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddImage.fxml"));
+            Scene newScene = new Scene(loader.load());
+            AddImageController controller = loader.getController();
+            Stage dialogStage = new Stage();
+            dialogStage.setScene(newScene);
+            dialogStage.setTitle("Edit Image");
+            controller.insertValues(imagePaths.get(selectedIndex).toString(), imageDescription.get(selectedIndex).toString());
+            dialogStage.showAndWait();
+            if(controller.valid == true)
+            {
+                handleRemoveJudge(event);
+
+                imagePaths.add(controller.imagePath);
+                imageDescription.add(controller.description);  
+                System.out.println("after add shows descript: "+ controller.description);
+            }
+            loadImages();
+            
+        }catch(Exception x){}
+
     
     }
     
@@ -386,6 +400,7 @@ public class FXMLDocumentController implements Initializable{
             
             
         }
+        loadImages();
         
     }
     
@@ -393,8 +408,9 @@ public class FXMLDocumentController implements Initializable{
     private void handleRemoveJudge(ActionEvent event) throws IOException 
     {
         int selectedIndex = judges.getSelectionModel().getSelectedIndex();
-        judges.getItems().remove(selectedIndex);
-    
+        System.out.println("item in table is at index " + selectedIndex);
+        judgesLL.remove(selectedIndex);
+        loadJudges();
     }
     
     @FXML
@@ -415,7 +431,7 @@ public class FXMLDocumentController implements Initializable{
             System.out.println("Imported Judge: " +s);
         } 
         fr.close(); 
- 
+        loadJudges();
         
         
     }
@@ -434,7 +450,7 @@ public class FXMLDocumentController implements Initializable{
         dialogStage.showAndWait();
         if(controller.valid == true)
             judgesLL.add(controller.email.getText());
-        
+        loadJudges();
         
     
     }
@@ -469,44 +485,48 @@ public class FXMLDocumentController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) 
+    {  
+    }  
+    
+    public void loadJudges()
     {
-        System.out.println(judges);
-        List<String> row = new ArrayList<String>();
-        row.add("tester");
-        TableColumn [] tableColumns = new TableColumn[row.size()];     
+        
+        masterData.clear();
+        if(judgesLL.size()>0)
+        {
+            for(int i =0; i< judgesLL.size();i++)
+                masterData.add(new Person(judgesLL.get(i).toString()));
 
+            email.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+                    FilteredList<Person> filteredData = new FilteredList<>(masterData, p -> true);
+                    SortedList<Person> sortedData = new SortedList<>(filteredData);
+                    sortedData.comparatorProperty().bind(judges.comparatorProperty());
+                    judges.setItems(sortedData);
 
-            TableRow<String> row1 = new TableRow<>();
-            judges.getItems().add("Testing");
-            judges.getItems().add("Testing");
-        
-
-        //ObservableList<ObservableList> csvData = FXCollections.observableArrayList();
-        //judges.setItems(row);
-        
-        //row1.addAll("d22");
-        //csvData.add(row);
-        //csvData.add(row1);
-//        try
-//        {
-//            judges.getItems().add("testing");
-//        }
-//        catch(Exception ex){System.out.println(ex);}
-        
-
-        
-        
-   }    
+         }
+    }
     
-//    @FXML
-//    private void imagePaneHandler(ActionEvent event) throws IOException 
-//    {
-////        imagePane.setPrefHeight(0);
-////        imagePane.setPrefWidth(0);
-//        System.out.println("imagePaneHandler called");
-//    
-//    }
-    
+    public void loadImages()
+    {
+        imageData.clear();
+        if(imagePaths.size() > 0)
+        {
+        
+        
+            for(int i =0; i< imagePaths.size();i++)
+            {
+                imageData.add(new Images(imagePaths.get(i).toString(),imageDescription.get(i).toString()));
+            }
+
+            imagePath.setCellValueFactory(cellData -> cellData.getValue().imageProperty());
+            descript.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
+
+                    FilteredList<Images> filteredData = new FilteredList<>(imageData, p -> true);
+                    SortedList<Images> sortedData = new SortedList<>(filteredData);
+                    sortedData.comparatorProperty().bind(imageTable.comparatorProperty());
+                    imageTable.setItems(sortedData);
+           }
+    }
 
      
      

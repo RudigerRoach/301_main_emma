@@ -13,6 +13,10 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,10 +53,18 @@ public class FXMLrunningSessionController implements Initializable {
     @FXML
     public Label descriptLabel;
     
+    public LinkedList imagePaths;
+    public LinkedList imageDescription;
+    
     
     @FXML
-    private TableView imagesRemaining;
+    private TableView<Images> imagesRemaining;
+    @FXML
+    private TableColumn<Images, String> imagePath;
+    @FXML
+    private TableColumn<Images, String> descript;
     
+    private ObservableList<Images> imageData = FXCollections.observableArrayList();
     @FXML
     protected AnchorPane AnchorPane;
     
@@ -74,7 +86,6 @@ public class FXMLrunningSessionController implements Initializable {
     
     public void setConfig(Configuration myConfig) throws Exception
     {
-
         config = myConfig;
         System.out.println("Config called with min of "+ config.getBotRange());
         max = config.images.length-1;
@@ -147,6 +158,13 @@ public class FXMLrunningSessionController implements Initializable {
     
     
     
+    
+    public void addImages(LinkedList p,LinkedList d)
+    {
+        imagePaths = p;
+        imageDescription = d;
+    }
+    
     @FXML
     private void handleNext(ActionEvent event) throws IOException 
     {
@@ -218,5 +236,22 @@ public class FXMLrunningSessionController implements Initializable {
       catch(Exception x){}
         
     }
-    
+        public void loadImages()
+    {
+        System.out.println("Running loadImages in Running session");
+        imageData.clear();
+        imageData.add(new Images("piet", ""));
+        for(int i =0; i< imagePaths.size();i++)
+        {
+            imageData.add(new Images(imagePaths.get(i).toString(),imageDescription.get(i).toString()));
+        }
+        
+        imagePath.setCellValueFactory(cellData -> cellData.getValue().imageProperty());
+        descript.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
+        
+		FilteredList<Images> filteredData = new FilteredList<>(imageData, p -> true);
+		SortedList<Images> sortedData = new SortedList<>(filteredData);
+		sortedData.comparatorProperty().bind(imagesRemaining.comparatorProperty());
+		imagesRemaining.setItems(sortedData);
+    }
 }

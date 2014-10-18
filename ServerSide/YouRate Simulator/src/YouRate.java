@@ -23,7 +23,7 @@ public class YouRate extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
-        stage.setTitle("Emma Simulator");
+        stage.setTitle("uRate");
         stage.show();
     }
 
