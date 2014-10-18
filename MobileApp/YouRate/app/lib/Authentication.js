@@ -10,6 +10,7 @@ var loginIsDone = false;
 var autologinIsDone = false;
 var sessionObj = require('alloy').Globals.sessionObj;
 var debug = false;
+
 exports.loginStatus = function() {
 	return returnStatus;
 };

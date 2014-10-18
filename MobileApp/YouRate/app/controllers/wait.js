@@ -39,14 +39,13 @@ function testStatus(service) {
 		} else if (status == "2") {
 			//Add languages!!!!!!!!!!
 			var dialog = Ti.UI.createAlertDialog({
-				cancel : 1,
 				buttonNames : ['OK'],
 				message : 'Voting session completed',
 				title : 'Voting session'
 			});
 			dialog.addEventListener('click', function(e) {
 				if (e.index == 0) {
-					var win = Alloy.createController('login').getView();
+					var win = Alloy.createController('noSession').getView();
 					win.open();
 				} //else what happens?
 			});

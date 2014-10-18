@@ -1,17 +1,10 @@
 var commentArea = "";
 var photoPath = "";
 var slider;
-var ospath = "";
-if (OS_ANDROID) {
-	ospath = "/images/";
-} else if (OS_IOS) {
-	ospath = "";
-}
-
-//$.votePage.backgroundImage = ospath+"bg.jpg";
 
 var screenWidth = Ti.Platform.displayCaps.platformWidth;
 var screenHeight = Ti.Platform.displayCaps.platformHeight;
+
 if (OS_ANDROID) {
 	screenHeight -= 90;
 }
@@ -24,15 +17,8 @@ var rangeTop = 50;
 var description = "Image title";
 var displayTitle = "true";
 var comments = "true";
-var imagePath = ospath + "placeholder.png";
-//imagePath = ospath+"animalLandscape.jpg";
-//imagePath = ospath+"kitty.jpg";
+var imagePath = "/universal/placeholder.png";
 photoPath = imagePath;
-//For yesNo winner events
-//alert("IMG path: "+imagePath);
-//var sessionType = "normal";
-
-//var sessionType = "yesNo";
 var sessionType = "winner";
 
 service = require('VoteSession');
@@ -85,7 +71,6 @@ function doSubmit(e) {
 	//Submit result
 	service = require('VoteSession');
 	if (sessionType == "normal") {
-		//alert(photoPath + "," + slider.value + "," + commentArea.value);
 		if (comments == "true") {
 			service.submitResult(Math.floor(Number(slider.value)), commentArea.value);
 		} else {
@@ -102,8 +87,7 @@ function doSubmit(e) {
 	if (sessionType == "winner") {
 		service.submitResult(photosView.currentPage, "");
 	}
-	//alert("Result successfully submitted");
-
+	
 	//Go to wait page
 	var win = Alloy.createController('wait').getView();
 	win.open();
@@ -112,38 +96,11 @@ function doSubmit(e) {
 Ti.Gesture.addEventListener('orientationchange', function(e) {
 	var win = Alloy.createController('vote').getView();
 	win.open();
-
-	/*if (Titanium.UI.orientation === Ti.UI.LANDSCAPE_RIGHT || Titanium.UI.orientation === Ti.UI.LANDSCAPE_LEFT)
-	 {
-	 // change UI for landscape layout
-	 alert("landscape " + e.orientation);
-	 fixPage();
-	 } else {
-	 // change UI for portrait layout
-	 alert("portrait " + e.orientation);
-	 fixPage();
-	 }
-
-	 //Ti.Gesture.addEventListener('orientationchange',function(e) {
-	 // get current device orientation from
-	 // Titanium.Gesture.orientation
-
-	 // get orientation from event object
-	 // from e.orientation
-
-	 // Ti.Gesture.orientation should match e.orientation
-	 // but iOS and Android will report different values
-
-	 // two helper methods return a Boolean
-	 // e.source.isPortrait()
-	 // e.source.isLandscape()
-	 //});*/
 });
 
 function createSubmitButton() {
 	var submitButton = Titanium.UI.createButton({
 		titleid : 'submitB',
-		//title: 'Submit',
 		borderWidth : "1",
 		borderColor : "#bbb",
 		borderRadius : "8",
@@ -170,12 +127,10 @@ function createSubmitButton() {
 function commentsEnabled() {
 	var commentButton = Titanium.UI.createButton({
 		titleid : 'commentB',
-		//title: 'Add comment',
 		borderWidth : "1",
 		borderColor : "#bbb",
 		borderRadius : "8",
 		backgroundColor : "#bbb",
-		//backgroundColor: "#E5E5E9",
 		color : "black",
 		textAlign : "center",
 		font : {
@@ -230,7 +185,6 @@ function createSlider() {
 
 	var sliderLabel = Ti.UI.createLabel({
 		titleid : 'SliderT',
-		//text: "Score: ",
 		width : "150",
 		height : "30",
 		color : "black",
@@ -277,7 +231,6 @@ function createSlider() {
 function createYesNoButtons() {
 	var yesButton = Titanium.UI.createButton({
 		titleid : 'yesB',
-		//title: "Yes",
 		borderWidth : "1",
 		borderColor : "#bbb",
 		borderRadius : "8",
@@ -292,13 +245,11 @@ function createYesNoButtons() {
 		width : screenWidth / 2 - 30,
 		height : "80",
 		right : 20,
-		//left: screenWidth/2 + 5,
 		padding : 0,
 	});
 
 	var noButton = Titanium.UI.createButton({
 		titleid : 'noB',
-		//title: "No",
 		borderWidth : "1",
 		borderColor : "#bbb",
 		borderRadius : "8",
@@ -313,7 +264,6 @@ function createYesNoButtons() {
 		width : screenWidth / 2 - 30,
 		height : "80",
 		left : 20,
-		//right: screenWidth/2 + 5,
 		padding : 0,
 	});
 
@@ -335,7 +285,6 @@ function createYesNoButtons() {
 function createWinnerButton() {
 	var winnerButton = Titanium.UI.createButton({
 		titleid : 'winnerB',
-		//title: "Winner",
 		borderWidth : "1",
 		borderColor : "#bbb",
 		borderRadius : "8",
@@ -398,7 +347,6 @@ function addScrollableImage() {
 		width : "auto",
 		top : 50
 	});
-	//alert(photosView.currentPage);
 	$.votePage.add(photosView);
 }
 

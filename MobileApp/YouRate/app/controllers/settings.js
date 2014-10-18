@@ -7,7 +7,6 @@ function closePage() {
 }
 
 function loadnames() {
-	//$.row1.title = 'Set server Address (currently: '+Ti.App.Properties.getString('serverAddress')+')';
 	$.adrHint.text = '(Currently: ' + Ti.App.Properties.getString('serverAddress') + ')';
 	$.comHint.text = '(Currently: ' + Ti.App.Properties.getString('commentEntry') + ')';
 }
@@ -44,7 +43,6 @@ function setIP() {
 	function setAdress(newAddress) {
 		Ti.App.Properties.setString('serverAddress', newAddress);
 		$.adrHint.text = '(Currently: ' + Ti.App.Properties.getString('serverAddress') + ')';
-		//retrieve: var value = Ti.App.Properties.getString('key');
 	}
 
 }

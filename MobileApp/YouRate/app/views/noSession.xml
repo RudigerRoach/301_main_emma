@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="noSessionPage" onOpen="loadImage" orientationModes="">
+    <Window id="noSessionPage" onOpen="loadImage" >
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
 			<Button id="appName">uRate</Button>

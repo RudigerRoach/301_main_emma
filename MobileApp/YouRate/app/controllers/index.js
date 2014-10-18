@@ -20,7 +20,6 @@ function displayLoginPage(){
 };
 
 function goForward(service){
-	alert("service.loginStatus()" + service.loginStatus());
 	var success = service.loginStatus();
 	activityIndicator.hideIndicator();
 	activityIndicator = null; //force garbage collector to clean up
@@ -44,9 +43,7 @@ function testStatus(service){
 		var done = false;
 		var timer = setInterval(function(){ //poll every 1s and stop when autologinDone() returns true
 		    done = service.autologinDone();
-		    alert("done " + done);
 		    if (done) {
-		    	alert("done");
 		    	goForward(service);
 		        clearInterval(timer);
 		    }
