@@ -3,12 +3,24 @@ var page = $.loginPage;
 var activityIndicator = uiGenerator.getWaitIndicator('loginL');
 var isIOS = require('ui').isIOS();
 
-function doLogin() {
-	//$.loadingImage.top = Ti.Platform.displayCaps.platformHeight/2 - 50;
-	$.emailLabel.opacity = 0.0;
-	$.textArea.opacity = 0.0;
-	$.loginButton.opacity = 0.0;
-	//$.loadingImage.opacity=1.0;
+function doLogin()
+{		
+	var filter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	if (!filter.test($.textArea.value))//shortest possible email address "a@b.c" is of length 5
+	{
+		error = "Invalid email address entered, please revise your email address.";
+		var dialog = Ti.UI.createAlertDialog({
+			buttonNames : ['Ok'],
+			message : error,
+			title : 'Invalid input.'
+		});
+		dialog.show();
+		return;
+	}
+	
+	$.emailLabel.opacity=0.0;
+	$.textArea.opacity=0.0;
+	$.loginButton.opacity=0.0;
 	$.textArea.blur();
 	$.loginButton.titleid = 'loginB';
 
@@ -40,15 +52,11 @@ function goForward(service) {
 		win.open();
 	} else {
 		//If login not successful
-		//$.loadingImage.opacity=0.0;
-		$.emailLabel.opacity = 1.0;
-		$.textArea.opacity = 1.0;
-		$.loginButton.opacity = 1.0;
-		alert("Error: " + service.error());
-		//Offline testing
-		//var win=Alloy.createController('normal').getView();
-		//win.open();
-	}
+		emailLabel.opacity=1.0;
+		$.textArea.opacity=1.0;
+		$.loginButton.opacity=1.0;
+		alert("Error: "+service.error());
+ 	}
 }
 
 function testStatus(service) {

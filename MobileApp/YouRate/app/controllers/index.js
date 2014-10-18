@@ -20,8 +20,7 @@ function displayLoginPage() {
 	testStatus(service);
 };
 
-function goForward(service) {
-	alert("service.loginStatus()" + service.loginStatus());
+function goForward(service){
 	var success = service.loginStatus();
 	activityIndicator.hideIndicator();
 	activityIndicator = null;
@@ -40,17 +39,15 @@ function goForward(service) {
 	}
 }
 
-function testStatus(service) {
-	var done = false;
-	var timer = setInterval(function() {//poll every 1s and stop when autologinDone() returns true
-		done = service.autologinDone();
-		alert("done " + done);
-		if (done) {
-			alert("done");
-			goForward(service);
-			clearInterval(timer);
-		}
-	}, 1000);
+function testStatus(service){
+		var done = false;
+		var timer = setInterval(function(){ //poll every 1s and stop when autologinDone() returns true
+		    done = service.autologinDone();
+		    if (done) {
+		    	goForward(service);
+		        clearInterval(timer);
+		    }
+		}, 1000); 
 }
 
 function goVote() {

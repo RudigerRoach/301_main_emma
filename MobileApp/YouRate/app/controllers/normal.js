@@ -108,7 +108,6 @@ function resizePage() {
 		$.scoreSlider.value = (rangeBottom + rangeTop) / 2;
 		$.sliderArea.value = $.scoreSlider.value;
 		$.currentImage.image = imagePath;
-		//alert("firstLoad " + $.currentImage.image);
 		firstload = false;
 	}
 
@@ -130,10 +129,6 @@ function resizePage() {
 }
 
 function doSubmit(e) {
-
-	//$.currentImage.image = imagePath;
-	//alert("changed " + $.currentImage.image);
-
 	//Submit result
 	service = require('VoteSession');
 	service.submitResult(Math.floor(Number($.scoreSlider.value)), commentText);
