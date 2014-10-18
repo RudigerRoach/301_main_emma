@@ -314,8 +314,6 @@ function Controller() {
     var commentArea = "";
     var photoPath = "";
     var slider;
-    var ospath = "";
-    ospath = "";
     var screenWidth = Ti.Platform.displayCaps.platformWidth;
     var screenHeight = Ti.Platform.displayCaps.platformHeight;
     var screenLeft = screenHeight;
@@ -325,7 +323,7 @@ function Controller() {
     var rangeTop = 50;
     var description = "Image title";
     var comments = "true";
-    var imagePath = ospath + "placeholder.png";
+    var imagePath = "/universal/placeholder.png";
     photoPath = imagePath;
     var sessionType = "winner";
     service = require("VoteSession");

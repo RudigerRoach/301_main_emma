@@ -73,8 +73,12 @@ function resizePage() {
 
 function doSubmit(e) {
 	if (chosen == "-1") {
-		//LANGUAGE
-		alert("Please choose yes or no");
+		var dialog = Ti.UI.createAlertDialog({
+				okid : 'ok',
+				messageid : 'yesNoMessage',
+				titleid : 'yesNoCaption'
+			});
+		dialog.show();
 	} else {
 		//Submit result
 		service = require('VoteSession');

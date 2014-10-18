@@ -14,10 +14,10 @@ function loadnames() {
 function setIP() {
 	if (isIOS) {
 		var dialog = Ti.UI.createAlertDialog({
-			title : 'Set new address',
+			titleid : 'newAddress',
 			value : Ti.App.Properties.getString('serverAddress'),
 			style : Ti.UI.iPhone.AlertDialogStyle.PLAIN_TEXT_INPUT,
-			buttonNames : ['OK', 'cancel']
+			buttonNames : [L('ok'), L('cancel')]
 		});
 		dialog.addEventListener('click', function(e) {
 			if (e.index != 1) {//if the button clicked whas not 'cancel'
@@ -27,10 +27,10 @@ function setIP() {
 	} else {
 		var textfield = Ti.UI.createTextField();
 		var dialog = Ti.UI.createAlertDialog({
-			title : 'Set new address',
+			titleid : 'newAddress',
 			value : Ti.App.Properties.getString('serverAddress'),
 			androidView : textfield,
-			buttonNames : ['OK', 'cancel']
+			buttonNames : [L('confirm'), L('cancel')]
 		});
 		dialog.addEventListener('click', function(e) {
 			if (e.index != 1) {//if the button clicked whas not 'cancel'
@@ -50,9 +50,9 @@ function setIP() {
 function setCommentType() {
 	if (isIOS) {
 		var dialog = Ti.UI.createAlertDialog({
-			title : 'Set comment entry method',
+			titleid : 'entryMethod',
 			style : Ti.UI.iPhone.AlertDialogStyle.DEFAULT,
-			buttonNames : ['Show button', 'Show text box', 'Cancel']
+			buttonNames : [L('btn'), L('txt'), L('cancel')]
 		});
 		dialog.addEventListener('click', function(e) {
 			if (e.index == 0) {//if the button clicked whas 'Show button'
@@ -64,8 +64,8 @@ function setCommentType() {
 	} else {
 		var textfield = Ti.UI.createTextField();
 		var dialog = Ti.UI.createAlertDialog({
-			title : 'Set comment entry method',
-			buttonNames : ['Show button', 'Show text box', 'Cancel']
+			title : 'entryMethod',
+			buttonNames : [L('btn'), L('txt'), L('cancel')]
 		});
 		dialog.addEventListener('click', function(e) {
 			if (e.index == 0) {//if the button clicked whas 'Show button'

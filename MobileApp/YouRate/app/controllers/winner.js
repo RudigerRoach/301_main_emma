@@ -41,6 +41,7 @@ function resizePage() {
 	$.submitButton.width = screenWidth - 40;
 	screenLeft = $.submitButton.top;
 
+	$.winnerButton.opacity = 0.3;
 	$.winnerButton.top = screenLeft - 100;
 	$.winnerButton.width = screenWidth - 40;
 	screenLeft = $.winnerButton.top;
@@ -57,26 +58,38 @@ function resizePage() {
 
 function doSubmit(e) {
 	//Submit result
-	service = require('VoteSession');
-	var dialog = Ti.UI.createAlertDialog({
-		cancel : 1,
-		buttonNames : [L('confirm'), L('cancel')],
-		messageid : 'winnerSubmit2',
-		titleid : 'winnerSubmit1'
-	});
-	dialog.addEventListener('click', function(e) {
-		if (e.index == 0) {
-			service.submitResult(""+chosen+"", "");
-			//Go to wait page
-			var win = Alloy.createController('wait').getView();
-			win.open();
-		}
-	});
-	dialog.show();
+	if(chosen == "-1")
+	{
+		var dialog = Ti.UI.createAlertDialog({
+			okid : 'ok',
+			messageid : 'winnerMessage',
+			titleid : 'please'
+		});		
+	}
+	else
+	{
+		service = require('VoteSession');
+		var dialog = Ti.UI.createAlertDialog({
+			cancel : 1,
+			buttonNames : [L('confirm'), L('cancel')],
+			messageid : 'winnerSubmit2',
+			titleid : 'winnerSubmit1'
+		});
+		dialog.addEventListener('click', function(e) {
+			if (e.index == 0) {
+				service.submitResult(""+chosen+"", "");
+				//Go to wait page
+				var win = Alloy.createController('wait').getView();
+				win.open();
+			}
+		});
+		dialog.show();
+	}
 };
 
-$.winnerButton.addEventListener('click', function(e) {
+$.winnerButton.addEventListener('click', function(e) {	
 	chosen = photosView.currentPage;
+	$.winnerButton.opacity = 1;
 	$.winnerButton.borderWidth = 3;
 	$.winnerButton.borderColor = "black";
 });

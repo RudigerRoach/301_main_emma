@@ -8,11 +8,10 @@ function doLogin()
 	var filter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 	if (!filter.test($.textArea.value))//shortest possible email address "a@b.c" is of length 5
 	{
-		error = "Invalid email address entered, please revise your email address.";
 		var dialog = Ti.UI.createAlertDialog({
-			buttonNames : ['Ok'],
-			message : error,
-			title : 'Invalid input.'
+			okid : 'ok',
+			messageid : 'invalidEmail',
+			titleid : 'invalidInput'
 		});
 		dialog.show();
 		return;
@@ -52,10 +51,15 @@ function goForward(service) {
 		win.open();
 	} else {
 		//If login not successful
-		emailLabel.opacity=1.0;
+		$.emailLabel.opacity=1.0;
 		$.textArea.opacity=1.0;
 		$.loginButton.opacity=1.0;
-		alert("Error: "+service.error());
+		var dialog = Ti.UI.createAlertDialog({
+			okid : 'ok',
+			message : service.error(),
+			titleid : 'error2'
+		});
+		dialog.show();
  	}
 }
 

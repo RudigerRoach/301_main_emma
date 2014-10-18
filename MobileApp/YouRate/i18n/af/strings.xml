@@ -11,11 +11,22 @@
 	<string name="yesB">Ja</string>
 	<string name="noB">Nee</string>
 	<string name="winnerB">Wenner</string>
-	<string name="yesNoSubmit">Kies asb ja of nee</string>
+	<string name="yesNoMessage">Kies asb ja of nee</string>
+	<string name="please">Kies asb</string>
+	<string name="winnerMessage">Kies asb 'n wenner'</string>
 	<string name="winnerSubmit1">Dien in as wenner</string>
 	<string name="winnerSubmit2">Is u seker dat die die wenner moet wees?</string>
 	<string name="confirm">Bevestig</string>
 	<string name="cancel">Kanselleer</string>
 	<string name="invalidInput">Ongeldige insette</string>
 	<string name="invalidEmail">Ongeldige e-pos adres ingesleutel</string>
+	<string name="error">Fout</string>
+	<string name="error2">Fout:</string>
+	<string name="ok">Ok</string>
+	<string name="newAddress">Stel nuwe adres</string>	
+	<string name="btn">Wys knoppie</string>	
+	<string name="txt">Wys teks boks</string>	
+	<string name="entryMethod">Stel kommentaar inskrywing metode</string>
+	<string name="votingTitle">Stem sessie</string>
+	<string name="votingMessage">Stem sessie voltooid</string>
 </resources>

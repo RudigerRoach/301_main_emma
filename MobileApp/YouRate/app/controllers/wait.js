@@ -37,17 +37,14 @@ function testStatus(service) {
 		if (status == "1") {
 			goForward(service);
 		} else if (status == "2") {
-			//Add languages!!!!!!!!!!
 			var dialog = Ti.UI.createAlertDialog({
-				buttonNames : ['OK'],
-				message : 'Voting session completed',
-				title : 'Voting session'
+				okid : 'ok',
+				messageid : 'votingMessage',
+				titleid : 'votingTitle'
 			});
 			dialog.addEventListener('click', function(e) {
-				if (e.index == 0) {
-					var win = Alloy.createController('noSession').getView();
-					win.open();
-				} //else what happens?
+				var win = Alloy.createController('noSession').getView();
+				win.open();
 			});
 			dialog.show();
 		}
