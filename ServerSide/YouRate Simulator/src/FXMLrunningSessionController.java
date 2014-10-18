@@ -67,7 +67,7 @@ public class FXMLrunningSessionController implements Initializable {
     private ObservableList<Images> imageData = FXCollections.observableArrayList();
     @FXML
     protected AnchorPane AnchorPane;
-    
+    int sec;
     int current = 0;
     int max;
     Configuration config;
@@ -115,7 +115,7 @@ public class FXMLrunningSessionController implements Initializable {
         //Code for duel screen
             int primaryMon;
             Screen primary = Screen.getPrimary();
-            int sec =0;
+            sec =0;
             for(int i = 0; i < Screen.getScreens().size(); i++)
             {
                 if(!Screen.getScreens().get(i).equals(primary))
@@ -176,13 +176,12 @@ public class FXMLrunningSessionController implements Initializable {
             imageView.setImage(curimage);
             imageView.fitHeightProperty();
             imageView.fitWidthProperty();
-            
+
             if(config.controlledSession)
             {
                 controller.imageView.setImage(curimage);
                 controller.imageView.fitHeightProperty();
-                controller.imageView.fitWidthProperty();
-                server.nextImage();
+                controller.imageView.fitWidthProperty();            
                 imagePaths.remove(0);
                 imageDescription.remove(0);
                 loadImages();
@@ -237,6 +236,45 @@ public class FXMLrunningSessionController implements Initializable {
             stage.close();
             System.out.println("finilize called");
             bigScreen.close();
+            
+            FXMLLoader loader2 = new FXMLLoader(getClass().getResource("Results.fxml"));
+            Scene res = new Scene(loader2.load());
+            ResultsController controller = loader2.getController();
+            Stage dialogStage = new Stage();
+            dialogStage.setScene(res);
+            dialogStage.setTitle("Results");
+            
+            String[] names = new String[imagePaths.size()];
+            for(int i =0; i < imagePaths.size();i++)
+            {
+                int last = imagePaths.get(i).toString().lastIndexOf('\\');
+                names[i] = imagePaths.get(i).toString().substring(last+1);
+            }
+            
+            if(config.type == "normal")
+            {
+                controller.setName("Final Scores");
+                controller.setType("average", server.getScores(), names);
+                controller.populate();
+            }
+            else
+            {
+                controller.setName("Final Scores");
+                controller.setType("sum", server.getScores(), names);
+                controller.populate();
+            }
+            
+            //controller.setDialogStage(dialogStage);
+                Screen screen = Screen.getScreens().get(sec);
+                dialogStage.setX(screen.getVisualBounds().getMinX());
+                dialogStage.setY(screen.getVisualBounds().getMinY());
+                dialogStage.setWidth(screen.getVisualBounds().getWidth());
+                dialogStage.setHeight(screen.getVisualBounds().getHeight());
+                //dialogStage.initStyle(StageStyle.UNDECORATED);
+                dialogStage.show();
+            
+            
+            
       }
       catch(Exception x){}
         

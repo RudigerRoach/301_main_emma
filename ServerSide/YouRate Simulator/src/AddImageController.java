@@ -57,13 +57,14 @@ public class AddImageController implements Initializable {
         System.out.println("#browseForImage handler called");
         Stage fileGetter = new Stage();
         FileChooser myChooser = new FileChooser();
-        selectedFile = myChooser.showOpenDialog(fileGetter);
         myChooser.getExtensionFilters().addAll
         (
             new FileChooser.ExtensionFilter("All Images", "*.*"),
             new FileChooser.ExtensionFilter("JPG", "*.jpg"),
             new FileChooser.ExtensionFilter("PNG", "*.png")
         );
+        selectedFile = myChooser.showOpenDialog(fileGetter);
+        
         
         if(selectedFile != null)
         {

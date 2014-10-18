@@ -50,13 +50,14 @@ public class ImportImagesDialogController implements Initializable {
     {
         Stage fileGetter = new Stage();
         FileChooser myChooser = new FileChooser();
-        List<File> selectedFiles = myChooser.showOpenMultipleDialog(fileGetter);
         myChooser.getExtensionFilters().addAll
         (
             new FileChooser.ExtensionFilter("All Images", "*.*"),
             new FileChooser.ExtensionFilter("JPG", "*.jpg"),
             new FileChooser.ExtensionFilter("PNG", "*.png")
         );
+        List<File> selectedFiles = myChooser.showOpenMultipleDialog(fileGetter);
+        
         
         
         if(selectedFiles != null)
