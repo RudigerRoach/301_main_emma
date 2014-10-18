@@ -25,7 +25,7 @@ imagePath[2] = "/whiteLabrador.jpg";
 
 //Server calls
 title = service.description();
- imagePath = service.imageArray();
+imagePath = service.imageArray();
 var net = require("Network");
 
 //Resize all artifacts on the screen to match the screen size and orientation
@@ -87,7 +87,7 @@ function addScrollableImage() {
 		for (var k = 0; k < imagePath.length; k++) {
 			var img = Ti.UI.createImageView({
 				image : imagePath[k],
-				image:net.serverPath() + "/" +imagePath[k],
+				image : net.serverPath() + "/" + imagePath[k],
 				height : screenLeft - 80,
 				width : "auto"
 			});
@@ -153,7 +153,7 @@ function fullScreenImage() {
 
 		im = Ti.UI.createImageView({
 			image : imagePath[index],
-			image:net.serverPath() + "/" +imagePath[index],
+			image : net.serverPath() + "/" + imagePath[index],
 			height : h - 40 - topSpace,
 			width : "auto",
 			top : topSpace + 20,
@@ -197,4 +197,4 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 	resizePage();
 });
 
-$.winnerPage.open(); 
+$.winnerPage.open();

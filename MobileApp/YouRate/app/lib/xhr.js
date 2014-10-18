@@ -1,64 +1,70 @@
 /*
- Source:
- https://github.com/raulriera/XHR
- 
- Tutorial:
- http://www.appcelerator.com/blog/2013/03/consuming-data-from-web-services/
- 
- */
+Source:
+https://github.com/raulriera/XHR
+
+Tutorial:
+http://www.appcelerator.com/blog/2013/03/consuming-data-from-web-services/
+
+*/
 
 // Create the cache manager (a shared object)
 var cacheManager = Titanium.App.Properties.getObject("cachedXHRDocuments", {});
 
-XHR = function(){};
+XHR = function() {
+};
 
 // Public functions
 // ================
 
-// GET 
+// GET
 // @url (string) URL to fetch
 // @onSuccess (function) success callback
 // @onError (function) error callback
-// @extraParams (object) 
+// @extraParams (object)
 XHR.prototype.get = function(url, onSuccess, onError, extraParams) {
 	// Debug
 	Titanium.API.info(url);
-	
+
 	// Create some default params
-	var onSuccess = onSuccess || function(){};
-	var onError = onError || function(){};
+	var onSuccess = onSuccess ||
+	function() {
+	};
+	var onError = onError ||
+	function() {
+	};
 	var extraParams = extraParams || {};
 	extraParams.async = (extraParams.hasOwnProperty('async')) ? extraParams.async : true;
-	extraParams.ttl = extraParams.ttl || false; 
-	extraParams.shouldAuthenticate = extraParams.shouldAuthenticate || false; // if you set this to true, pass "username" and "password" as well
+	extraParams.ttl = extraParams.ttl || false;
+	extraParams.shouldAuthenticate = extraParams.shouldAuthenticate || false;
+	// if you set this to true, pass "username" and "password" as well
 	extraParams.contentType = extraParams.contentType || "application/json";
-		
+
 	var cache = readCache(url);
 	// If there is nothing cached, send the request
 	if (!extraParams.ttl || cache == 0) {
-		
+
 		// Create the HTTP connection
 		var xhr = Titanium.Network.createHTTPClient({
-			enableKeepAlive: false
+			enableKeepAlive : false
 		});
 		// Create the result object
 		var result = {};
-	
+
 		// Open the HTTP connection
 		xhr.open("GET", url, extraParams.async);
 		xhr.setRequestHeader('Content-Type', extraParams.contentType);
 
 		// If we need to authenticate
 		if (extraParams.shouldAuthenticate) {
-			var authstr = 'Basic ' + Titanium.Utils.base64encode(extraParams.username + ':' + extraParams.password); 
+			var authstr = 'Basic ' + Titanium.Utils.base64encode(extraParams.username + ':' + extraParams.password);
 			xhr.setRequestHeader('Authorization', authstr);
 		}
-	
+
 		// When the connection was successful
 		xhr.onload = function() {
 			// Check the status of this
 			result.status = xhr.status == 200 ? "ok" : xhr.status;
-			
+
 			// Check the type of content we should serve back to the user
 			if (extraParams.contentType.indexOf("application/json") != -1) {
 				result.data = xhr.responseText;
@@ -67,13 +73,13 @@ XHR.prototype.get = function(url, onSuccess, onError, extraParams) {
 			} else {
 				result.data = xhr.responseData;
 			}
-						
+
 			onSuccess(result);
-		
+
 			// Cache this response
 			writeCache(result.data, url, extraParams.ttl);
 		};
-	
+
 		// When there was an error
 		xhr.onerror = function(e) {
 			// Check the status of this
@@ -89,9 +95,9 @@ XHR.prototype.get = function(url, onSuccess, onError, extraParams) {
 
 		result.status = "cache";
 		result.data = cache;
-		
+
 		onSuccess(result);
-	}	
+	}
 };
 
 // POST requests
@@ -101,63 +107,68 @@ XHR.prototype.get = function(url, onSuccess, onError, extraParams) {
 // @onError (function) error callback
 // @extraParams (object)
 XHR.prototype.post = function(url, data, onSuccess, onError, extraParams) {
-	
+
 	// Debug
-	Titanium.API.info("XHR out: "+url + " " + JSON.stringify(data));
-	
+	Titanium.API.info("XHR out: " + url + " " + JSON.stringify(data));
+
 	// Create some default params
-	var onSuccess = onSuccess || function(){};
-	var onError = onError || function(){};
+	var onSuccess = onSuccess ||
+	function() {
+	};
+	var onError = onError ||
+	function() {
+	};
 	var extraParams = extraParams || {};
-	extraParams.async = (extraParams.hasOwnProperty('async')) ? extraParams.async : true; //ek verander
-	extraParams.shouldAuthenticate = extraParams.shouldAuthenticate || false; // if you set this to true, pass "username" and "password" as well
-	extraParams.contentType = /*extraParams.contentType ||*/ "application/json";
+	extraParams.async = (extraParams.hasOwnProperty('async')) ? extraParams.async : true;
+	//ek verander
+	extraParams.shouldAuthenticate = extraParams.shouldAuthenticate || false;
+	// if you set this to true, pass "username" and "password" as well
+	extraParams.contentType = /*extraParams.contentType ||*/"application/json";
 	extraParams.contentType = "application/x-www-form-urlencoded; charset=utf-8";
-	
+
 	// Create the HTTP connection
 	var xhr = Titanium.Network.createHTTPClient({
-		enableKeepAlive: false
+		enableKeepAlive : false
 	});
 	// Create the result object
 	var result = {};
-	
 
 	// Open the HTTP connection
 	xhr.open("POST", url, extraParams.async);
 	xhr.setRequestHeader('Content-Type', extraParams.contentType);
-	
+
 	//check and set cookie in header if it exists
 	var sessionObj = require('alloy').Globals.sessionObj;
-	if(sessionObj.id != 0){
-		xhr.setRequestHeader('Cookie','session_id='+sessionObj.id);
+	if (sessionObj.id != 0) {
+		xhr.setRequestHeader('Cookie', 'session_id=' + sessionObj.id);
 	}
 
 	// If we need to authenticate
 	if (extraParams.shouldAuthenticate) {
-		var authstr = 'Basic ' + Titanium.Utils.base64encode(extraParams.username + ':' + extraParams.password); 
+		var authstr = 'Basic ' + Titanium.Utils.base64encode(extraParams.username + ':' + extraParams.password);
 		xhr.setRequestHeader('Authorization', authstr);
 	}
-	
+
 	// When the connection was successful
 	xhr.onload = function() {
 		// Check the status of this
-		
+
 		result.status = xhr.status == 200 ? "ok" : xhr.status;
 		result.data = xhr.responseText;
-		Ti.API.info("XHR: connection successful: "+result.data);
+		Ti.API.info("XHR: connection successful: " + result.data);
 		onSuccess(result);
 	};
-	
+
 	// When there was an error
 	xhr.onerror = function(e) {
-		// Check the status of this		
+		// Check the status of this
 		result.status = "error";
 		result.data = e.error;
 		result.code = xhr.status;
-		Ti.API.info("XHR: connection not successful: "+result.data+" code:"+result.code);
+		Ti.API.info("XHR: connection not successful: " + result.data + " code:" + result.code);
 		onError(result);
 	};
-	
+
 	xhr.send(data);
 };
 
@@ -169,39 +180,44 @@ XHR.prototype.post = function(url, data, onSuccess, onError, extraParams) {
 // @extraParams (object)
 XHR.prototype.put = function(url, data, onSuccess, onError, extraParams) {
 	// Create some default params
-	var onSuccess = onSuccess || function(){};
-	var onError = onError || function(){};
+	var onSuccess = onSuccess ||
+	function() {
+	};
+	var onError = onError ||
+	function() {
+	};
 	var extraParams = extraParams || {};
 	extraParams.async = (extraParams.hasOwnProperty('async')) ? extraParams.async : true;
-	extraParams.shouldAuthenticate = extraParams.shouldAuthenticate || false; // if you set this to true, pass "username" and "password" as well
+	extraParams.shouldAuthenticate = extraParams.shouldAuthenticate || false;
+	// if you set this to true, pass "username" and "password" as well
 	extraParams.contentType = extraParams.contentType || "application/json";
-	
+
 	// Create the HTTP connection
 	var xhr = Titanium.Network.createHTTPClient({
-		enableKeepAlive: false
+		enableKeepAlive : false
 	});
 	// Create the result object
 	var result = {};
-	
+
 	// Open the HTTP connection
 	xhr.open("PUT", url, extraParams.async);
 	xhr.setRequestHeader('Content-Type', extraParams.contentType);
-	
+
 	// If we need to authenticate
 	if (extraParams.shouldAuthenticate) {
-		var authstr = 'Basic ' + Titanium.Utils.base64encode(extraParams.username + ':' + extraParams.password); 
+		var authstr = 'Basic ' + Titanium.Utils.base64encode(extraParams.username + ':' + extraParams.password);
 		xhr.setRequestHeader('Authorization', authstr);
 	}
-	
+
 	// When the connection was successful
 	xhr.onload = function() {
 		// Check the status of this
 		result.status = xhr.status == 200 ? "ok" : xhr.status;
 		result.data = xhr.responseText;
-		
+
 		onSuccess(result);
 	};
-	
+
 	// When there was an error
 	xhr.onerror = function(e) {
 		// Check the status of this
@@ -210,7 +226,7 @@ XHR.prototype.put = function(url, data, onSuccess, onError, extraParams) {
 		result.code = xhr.status;
 		onError(result);
 	};
-	
+
 	xhr.send(data);
 };
 
@@ -222,41 +238,46 @@ XHR.prototype.put = function(url, data, onSuccess, onError, extraParams) {
 XHR.prototype.destroy = function(url, onSuccess, onError, extraParams) {
 	// Debug
 	Titanium.API.info(url);
-	
+
 	// Create some default params
-	var onSuccess = onSuccess || function(){};
-	var onError = onError || function(){};
+	var onSuccess = onSuccess ||
+	function() {
+	};
+	var onError = onError ||
+	function() {
+	};
 	var extraParams = extraParams || {};
 	extraParams.async = (extraParams.hasOwnProperty('async')) ? extraParams.async : true;
-	extraParams.shouldAuthenticate = extraParams.shouldAuthenticate || false; // if you set this to true, pass "username" and "password" as well
+	extraParams.shouldAuthenticate = extraParams.shouldAuthenticate || false;
+	// if you set this to true, pass "username" and "password" as well
 	extraParams.contentType = extraParams.contentType || "application/json";
-	
+
 	// Create the HTTP connection
 	var xhr = Titanium.Network.createHTTPClient({
-		enableKeepAlive: false
+		enableKeepAlive : false
 	});
 	// Create the result object
 	var result = {};
-	
+
 	// Open the HTTP connection
 	xhr.open("DELETE", url, extraParams.async);
 	xhr.setRequestHeader('Content-Type', extraParams.contentType);
-	
+
 	// If we need to authenticate
 	if (extraParams.shouldAuthenticate) {
-		var authstr = 'Basic ' + Titanium.Utils.base64encode(extraParams.username + ':' + extraParams.password); 
+		var authstr = 'Basic ' + Titanium.Utils.base64encode(extraParams.username + ':' + extraParams.password);
 		xhr.setRequestHeader('Authorization', authstr);
 	}
-	
+
 	// When the connection was successful
 	xhr.onload = function() {
 		// Check the status of this
 		result.status = xhr.status == 200 ? "ok" : xhr.status;
 		result.data = xhr.responseText;
-		
+
 		onSuccess(result);
 	};
-	
+
 	// When there was an error
 	xhr.onerror = function(e) {
 		// Check the status of this
@@ -265,7 +286,7 @@ XHR.prototype.destroy = function(url, onSuccess, onError, extraParams) {
 		result.code = xhr.status;
 		onError(result);
 	};
-	
+
 	xhr.send();
 };
 
@@ -274,73 +295,73 @@ XHR.prototype.destroy = function(url, onSuccess, onError, extraParams) {
 
 // Removes the cached content of a given URL (this is useful if you are not satisfied with the data returned that time)
 XHR.prototype.clear = function(url) {
-		
+
 	if (url) {
 		// Hash the URL
 		var hashedURL = Titanium.Utils.md5HexDigest(url);
 		// Check if the file exists in the manager
 		var cache = cacheManager[hashedURL];
-		
+
 		// If the file was found
 		if (cache) {
 			// Delete references and file
 			var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, hashedURL);
 			// Delete the record and file
 			delete cacheManager[hashedURL];
-			file.deleteFile();	
-			
+			file.deleteFile();
+
 			// Update the cache manager
 			updateCacheManager();
-			
+
 			//Titanium.API.info("REMOVED CACHE FILE " + hashedURL);
 		}
-	} 
-	
+	}
+
 };
 
 // Removes all the expired documents from the manager and the file system
 XHR.prototype.clean = function() {
-	
+
 	var nowInMilliseconds = new Date().getTime();
 	var expiredDocuments = 0;
-	
+
 	for (var key in cacheManager) {
 		var cache = cacheManager[key];
-	   
-		if(cache.timestamp <= nowInMilliseconds){
+
+		if (cache.timestamp <= nowInMilliseconds) {
 			// Delete references and file
 			var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, key);
 			// Delete the record and file
 			delete cacheManager[key];
-			file.deleteFile();	
-			
+			file.deleteFile();
+
 			// Update the cache manager
 			updateCacheManager();
-			
+
 			// Update the deleted documents count
 			expiredDocuments = expiredDocuments + 1;
-			
+
 			//Titanium.API.info("REMOVED CACHE FILE " + cachedDocuments[i].file);
 		}
 
 	}
-	
+
 	// Return the number of files deleted
-	return expiredDocuments;	
+	return expiredDocuments;
 };
 
 // Removes all documents from the manager and the file system
 XHR.prototype.purge = function() {
-	
+
 	var purgedDocuments = 0;
-	
+
 	for (var key in cacheManager) {
 		var cache = cacheManager[key];
 		// Delete references and file
 		var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, key);
 		// Delete the record and file
 		delete cacheManager[key];
-		file.deleteFile();	
+		file.deleteFile();
 
 		// Update the cache manager
 		updateCacheManager();
@@ -351,9 +372,9 @@ XHR.prototype.purge = function() {
 		//Titanium.API.info("REMOVED CACHE FILE " + cachedDocuments[i].file);
 
 	}
-	
+
 	// Return the number of files deleted
-	return purgedDocuments;	
+	return purgedDocuments;
 };
 
 // Private functions
@@ -362,19 +383,19 @@ XHR.prototype.purge = function() {
 readCache = function(url) {
 	// Hash the URL
 	var hashedURL = Titanium.Utils.md5HexDigest(url);
-	
+
 	// Check if the file exists in the manager
 	var cache = cacheManager[hashedURL];
 	// Default the return value to false
 	var result = false;
-	
+
 	//Titanium.API.info("CHECKING CACHE");
-	
+
 	// If the file was found
 	if (cache) {
 		// Fetch a reference to the cache file
 		var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, hashedURL);
-				
+
 		// Check that the TTL is further than the current date
 		if (cache.timestamp >= new Date().getTime()) {
 			//Titanium.API.info("CACHE FOUND");
@@ -387,43 +408,45 @@ readCache = function(url) {
 
 			// Delete the record and file
 			delete cacheManager[hashedURL];
-			file.deleteFile();	
-			
+			file.deleteFile();
+
 			// Update the cache manager
-			updateCacheManager();	
+			updateCacheManager();
 		}
 	} else {
 		//Titanium.API.info("CACHE " + hashedURL + " NOT FOUND");
 	}
-		
+
 	return result;
 };
 
-updateCacheManager = function(){
+updateCacheManager = function() {
 	Titanium.App.Properties.setObject("cachedXHRDocuments", cacheManager);
 };
 
 writeCache = function(data, url, ttl) {
-		
+
 	//Titanium.API.info("WRITING CACHE");
 
 	// hash the url
 	var hashedURL = Titanium.Utils.md5HexDigest(url);
-		
+
 	// Write the file to the disk
 	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, hashedURL);
-	
+
 	// Write the file to the disk
 	// TODO: There appears to be a bug in Titanium and makes the method
 	// below always return false when dealing with binary files
 	file.write(data);
-	
+
 	// Insert the cached object in the cache manager
-	cacheManager[hashedURL] = { "timestamp": (new Date().getTime()) + (ttl*60*1000) };
+	cacheManager[hashedURL] = {
+		"timestamp" : (new Date().getTime()) + (ttl * 60 * 1000)
+	};
 	updateCacheManager();
-		
-	//Titanium.API.info("WROTE CACHE");	
+
+	//Titanium.API.info("WROTE CACHE");
 };
 
 // Return everything
-module.exports = XHR;
+module.exports = XHR; 

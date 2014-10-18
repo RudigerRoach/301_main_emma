@@ -47,7 +47,7 @@ function populateThis(e) {
 		}
 	}
 
-	};
+};
 
 //Getters
 exports.imagePath = function() {
@@ -55,7 +55,7 @@ exports.imagePath = function() {
 	//Ti.API.info('get img: '+net.serverPath() + "/" + imgPath);
 	return net.serverPath() + "/" + imgPath;
 };
-exports.imageArray = function(){
+exports.imageArray = function() {
 	return imgPath;
 };
 exports.rangeBottom = function() {

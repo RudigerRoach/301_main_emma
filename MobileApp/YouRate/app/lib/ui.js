@@ -25,7 +25,7 @@ exports.getWaitIndicator = function(labelId) {
 		layout : 'vertical'
 	});
 	view.top = isPortrait ? platformHeight / 2 - 70 : platformHeight / 2 - 80;
-	
+
 	var indicator = Ti.UI.createActivityIndicator({
 		style : style,
 		height : Ti.UI.SIZE,
@@ -58,13 +58,13 @@ exports.getWaitIndicator = function(labelId) {
 	return view;
 };
 
-exports.getCommentLabel = function(){
+exports.getCommentLabel = function() {
 	label = Ti.UI.createLabel({
 		textid : "commentB",
 		color : 'black',
-		font: {
-			fontSize: 20,
-			fontFamily: 'Helvetica Neue'
+		font : {
+			fontSize : 20,
+			fontFamily : 'Helvetica Neue'
 		},
 		textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER
 	});
@@ -73,20 +73,20 @@ exports.getCommentLabel = function(){
 
 exports.getCommentBox = function() {
 	commentArea = Ti.UI.createTextArea({
-			value : "",
-			width : platformWidth - 40,
-			left : 20,
-			height : 50,
-			borderRadius : "8",
-		});
-		return commentArea;
+		value : "",
+		width : platformWidth - 40,
+		left : 20,
+		height : 50,
+		borderRadius : "8",
+	});
+	return commentArea;
 };
 
 exports.getCancelIcon = function() {
 	var image = Ti.UI.createImageView({
-	  image:'/universal/cancelIcon.png',
-	  width:50,
-	  height:50
+		image : '/universal/cancelIcon.png',
+		width : 50,
+		height : 50
 	});
 	return image;
 };
@@ -99,7 +99,7 @@ exports.getCommentButton = function() {
 		borderRadius : "8",
 		backgroundColor : "#bbb",
 		color : "black",
-		
+
 		textAlign : "center",
 		font : {
 			fontSize : 24,
@@ -112,26 +112,26 @@ exports.getCommentButton = function() {
 	return commentButton;
 };
 
-exports.getCommentArea = function(){
+exports.getCommentArea = function() {
 	commentArea = Ti.UI.createTextArea({
-			opacity : 50,
-			value : "",
-			top : 60,
-			width : platformWidth - 40,
-			left : 20,
-			height : 200,
-			color: "black",
-			backgroundColor:"white",
-			borderWidth:"2",
-		    borderColor:"#bbb",
-		    borderRadius:"5",
-		    textAlign:"left",
-			font: {
-				fontSize: 20,
-				fontFamily: 'Helvetica Neue'
-			}
-		});
-		return commentArea;
+		opacity : 50,
+		value : "",
+		top : 60,
+		width : platformWidth - 40,
+		left : 20,
+		height : 200,
+		color : "black",
+		backgroundColor : "white",
+		borderWidth : "2",
+		borderColor : "#bbb",
+		borderRadius : "5",
+		textAlign : "left",
+		font : {
+			fontSize : 20,
+			fontFamily : 'Helvetica Neue'
+		}
+	});
+	return commentArea;
 };
 /*
  Device information

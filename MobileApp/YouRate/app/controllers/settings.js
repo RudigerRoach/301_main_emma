@@ -2,14 +2,14 @@ $.settingsPage.open();
 
 var isIOS = require('ui').isIOS();
 
-function closePage(){
+function closePage() {
 	$.settingsPage.close();
 }
 
-function loadnames(){
+function loadnames() {
 	//$.row1.title = 'Set server Address (currently: '+Ti.App.Properties.getString('serverAddress')+')';
-	$.adrHint.text = '(Currently: '+Ti.App.Properties.getString('serverAddress')+')';
-	$.comHint.text = '(Currently: '+Ti.App.Properties.getString('commentEntry')+')';
+	$.adrHint.text = '(Currently: ' + Ti.App.Properties.getString('serverAddress') + ')';
+	$.comHint.text = '(Currently: ' + Ti.App.Properties.getString('commentEntry') + ')';
 }
 
 function setIP() {
@@ -43,23 +43,23 @@ function setIP() {
 
 	function setAdress(newAddress) {
 		Ti.App.Properties.setString('serverAddress', newAddress);
-		$.adrHint.text = '(Currently: '+Ti.App.Properties.getString('serverAddress')+')';
+		$.adrHint.text = '(Currently: ' + Ti.App.Properties.getString('serverAddress') + ')';
 		//retrieve: var value = Ti.App.Properties.getString('key');
 	}
 
 }
 
 function setCommentType() {
-		if (isIOS) {
+	if (isIOS) {
 		var dialog = Ti.UI.createAlertDialog({
 			title : 'Set comment entry method',
 			style : Ti.UI.iPhone.AlertDialogStyle.DEFAULT,
-			buttonNames : ['Show button', 'Show text box','Cancel']
+			buttonNames : ['Show button', 'Show text box', 'Cancel']
 		});
 		dialog.addEventListener('click', function(e) {
 			if (e.index == 0) {//if the button clicked whas 'Show button'
 				setType('button');
-			}else if(e.index == 1){
+			} else if (e.index == 1) {
 				setType('textbox');
 			}
 		});
@@ -67,21 +67,21 @@ function setCommentType() {
 		var textfield = Ti.UI.createTextField();
 		var dialog = Ti.UI.createAlertDialog({
 			title : 'Set comment entry method',
-			buttonNames : ['Show button', 'Show text box','Cancel']
+			buttonNames : ['Show button', 'Show text box', 'Cancel']
 		});
 		dialog.addEventListener('click', function(e) {
 			if (e.index == 0) {//if the button clicked whas 'Show button'
 				setType('button');
-			}else if(e.index == 1){
+			} else if (e.index == 1) {
 				setType('textbox');
 			}
 		});
 	}
 	dialog.show();
-	
-	function setType(newType){
+
+	function setType(newType) {
 		Ti.App.Properties.setString('commentEntry', newType);
-		$.comHint.text = '(Currently: '+Ti.App.Properties.getString('commentEntry')+')';
+		$.comHint.text = '(Currently: ' + Ti.App.Properties.getString('commentEntry') + ')';
 	}
-		
+
 }
