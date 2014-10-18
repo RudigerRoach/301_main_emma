@@ -186,7 +186,7 @@ public class FXMLrunningSessionController implements Initializable {
             descriptLabel.setText(config.imageDetails[current].toString());
             
         }
-        controller.setImages(config.images);
+
     }
     
     
@@ -240,7 +240,6 @@ public class FXMLrunningSessionController implements Initializable {
     {
         System.out.println("Running loadImages in Running session");
         imageData.clear();
-        imageData.add(new Images("piet", ""));
         for(int i =0; i< imagePaths.size();i++)
         {
             imageData.add(new Images(imagePaths.get(i).toString(),imageDescription.get(i).toString()));

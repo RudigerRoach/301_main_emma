@@ -340,14 +340,18 @@ public class FXMLDocumentController implements Initializable{
             dialogStage.setTitle("Edit Image");
             controller.insertValues(imagePaths.get(selectedIndex).toString(), imageDescription.get(selectedIndex).toString());
             dialogStage.showAndWait();
-            if(controller.valid == true)
-            {
-                handleRemoveJudge(event);
-
-                imagePaths.add(controller.imagePath);
-                imageDescription.add(controller.description);  
-                System.out.println("after add shows descript: "+ controller.description);
-            }
+                
+            
+            String imp = imagePaths.get(selectedIndex).toString();
+                imagePaths.remove(selectedIndex);
+                imageDescription.remove(selectedIndex);
+                if(controller.imagePath != null)
+                    imagePaths.add(controller.imagePath.toString());
+                else
+                    imagePaths.add(imp);
+                imageDescription.add(controller.description.toString()); 
+                
+//                System.out.println("after add shows descript: "+ controller.description);
             loadImages();
             
         }catch(Exception x){}
@@ -363,42 +367,37 @@ public class FXMLDocumentController implements Initializable{
         ImportImagesDialogController controller = loader.getController();
         Stage dialogStage = new Stage();
         dialogStage.setScene(newScene);
-        dialogStage.setTitle("Add Image");
-        //controller.setDialogStage(dialogStage);
+        dialogStage.setTitle("Add Images");
         dialogStage.showAndWait();
         if(controller.valid == true)
         {
-            int dist = controller.imagePaths.size();
             
             for(int i = 0; i < controller.imagePaths.size(); i++)
             {
-                imagePaths.add(controller.imagePaths.get(i));
-                
+                imagePaths.add(controller.imagePaths.get(i));                
             }
-            
             if(controller.imagePaths.size() < controller.descriptions.size())
             {
                 for(int i = 0; i < controller.imagePaths.size(); i++)
                 {
                     imageDescription.add(controller.descriptions.get(i));
+
                 }
-                
             }
             else
             {
                 for(int i = 0; i < controller.descriptions.size(); i++)
                 {
                     imageDescription.add(controller.descriptions.get(i));
+
                 }
-                int diff =controller.imagePaths.size() - controller.descriptions.size();
-                
+                int diff = controller.imagePaths.size() - controller.descriptions.size();
                 for(int i = 0; i < diff; i++)
                 {
                     imageDescription.add("");
+
                 }
-            }
-            
-            
+            }      
         }
         loadImages();
         
@@ -527,8 +526,5 @@ public class FXMLDocumentController implements Initializable{
                     imageTable.setItems(sortedData);
            }
     }
-
-     
-     
-     
+   
 }
