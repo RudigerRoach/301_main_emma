@@ -46,9 +46,9 @@ public class DisplayController implements Initializable {
             Logger.getLogger(DisplayController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Image image = new Image("sample.png",true);
-        imageView = new ImageView();
-        imageView.setImage(image);
+//        Image image = new Image("image1.jpg",true);
+//        imageView = new ImageView();
+//        imageView.setImage(image);
     }
     BufferedImage[] myImages;
     public void setImages(BufferedImage[] toLoad) 

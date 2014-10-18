@@ -129,6 +129,7 @@ public class FXMLrunningSessionController implements Initializable {
             
             if(config.controlledSession)
             {
+                Previous.setDisable(true);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Display.fxml"));
                 Scene newScene = new Scene(loader.load());
                 controller = loader.getController();
@@ -181,6 +182,10 @@ public class FXMLrunningSessionController implements Initializable {
                 controller.imageView.setImage(curimage);
                 controller.imageView.fitHeightProperty();
                 controller.imageView.fitWidthProperty();
+                server.nextImage();
+                imagePaths.remove(0);
+                imageDescription.remove(0);
+                loadImages();
             }
             
             descriptLabel.setText(config.imageDetails[current].toString());
