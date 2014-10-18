@@ -23,7 +23,6 @@ function populateThis(e) {
 	 This funtion is to be called in very onSuccess callback
 	 */
 	e = JSON.parse(e.data);
-	//Ti.API.info("e: " + JSON.stringify(e));
 	status = e.status;
 	sessionType = e.sessionType;
 	if (sessionType == "winner") {
@@ -52,7 +51,6 @@ function populateThis(e) {
 //Getters
 exports.imagePath = function() {
 	var net = require("Network");
-	//Ti.API.info('get img: '+net.serverPath() + "/" + imgPath);
 	return net.serverPath() + "/" + imgPath;
 };
 exports.imageArray = function() {
@@ -110,7 +108,7 @@ exports.getImage = function() {
 	var onSuccessCallback1 = function(e) {
 		populateThis(e);
 		getImgDone = true;
-		status = 1;
+		//status = 1;
 
 	};
 
@@ -129,7 +127,7 @@ exports.getImage = function() {
 	if (callcount == 1) {
 		net.getImgPost(payload, onSuccessCallback1, onErrorCallback1);
 	} else {
-		//net.getNextImgPost(payload, onSuccessCallback1, onErrorCallback1);
+		net.getImgPost(payload, onSuccessCallback1, onErrorCallback1);
 	}
 };
 

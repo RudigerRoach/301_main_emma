@@ -1,9 +1,24 @@
 var uiGenerator = require('ui');
 var page = $.noSessionPage;
-var activityIndicator = uiGenerator.getWaitIndicator('noSessionL');
+//var activityIndicator = uiGenerator.getWaitIndicator('noSessionL');
 
 function loadImage() {
 	//Show background activity with an activityindicator
+	// Create a Label.
+	var aLabel = Ti.UI.createLabel({
+		text : 'There is no open session currently running',
+		color : '#textColor',
+		font : {fontSize:myFontSize},
+		height : myHeight,
+		width : myWidth,
+		top : myTop,
+		left : myLeft,
+		textAlign : 'center'
+	});
+	
+	// Add to the parent view.
+	parentView.add(aLabel);
+	
 	page.add(activityIndicator);
 	activityIndicator.showIndicator();
 
@@ -41,7 +56,7 @@ function testStatus(service) {
 }
 
 function goForward(service) {
-	var win = Alloy.createController("index.js").getView();
+	var win = Alloy.createController("index").getView();
 	win.open();
 }
 
