@@ -16,7 +16,7 @@ var rangeTop = 50;
 var topSpace = 50;
 var cancelIcon;
 var label;
-var title = "I work";
+var title = "";
 var fullScreen = false;
 var screenLeft;
 var comments = true;
@@ -26,7 +26,7 @@ var displayAsButton = (Ti.App.Properties.getString('commentEntry') == 'button') 
 //Server calls
 rangeBottom = service.rangeBottom();
 rangeTop = service.rangeTop();
-description = service.description();
+title = service.description();
 comments = service.commentsEnabled();
 imagePath = service.imagePath();
 

@@ -10,4 +10,9 @@
     <string name="yesB">Ja</string>
     <string name="noB">Nein</string>
     <string name="winnerB">Gewinner</string>
+    <string name="yesNoSubmit">Please choose yes or no</string>    
+    <string name="winnerSubmit1">Submit as winner</string>   
+    <string name="winnerSubmit2">Are you sure that this should be the winner?</string> 
+    <string name="confirm">Confirm</string>  
+    <string name="cancel">Cancel</string>   
 </resources>

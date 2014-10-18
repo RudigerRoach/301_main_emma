@@ -9,9 +9,11 @@
     <string name="commentB">Dodaj komentarz</string>
     <string name="sliderT">Wynik:</string>
     <string name="yesB">Tak</string>
+    <string name="noB">Nie</string>
+    <string name="winnerB">Zwycięzca</string>
     <string name="yesNoSubmit">Wybierz tak lub nie</string>    
     <string name="winnerSubmit1">Przedstawić jako zwycięzca</string>   
     <string name="winnerSubmit2">Jesteś pewien, że powinien to być zwycięzcą?</string>   
-    <string name="noB">Nie</string>
-    <string name="winnerB">Zwycięzca</string>
+    <string name="confirm">Confirm</string>  
+    <string name="cancel">Cancel</string>   
 </resources>

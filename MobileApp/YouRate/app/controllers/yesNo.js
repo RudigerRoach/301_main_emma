@@ -10,14 +10,14 @@ var commentText = "";
 var chosen = -1;
 var cancelIcon;
 var label;
-var title = "I work";
+var title = "";
 var fullScreen = false;
 var comments = false;
 var imagePath = "/universal/placeholder.png";
 var screenLeft = 0;
 
 //Server calls
- description = service.description();
+ title = service.description();
  comments = service.commentsEnabled();
  imagePath = service.imagePath();
  
