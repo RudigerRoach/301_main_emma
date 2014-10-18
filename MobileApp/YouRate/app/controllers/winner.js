@@ -66,7 +66,7 @@ function doSubmit(e) {
 	});
 	dialog.addEventListener('click', function(e) {
 		if (e.index == 0) {
-			service.submitResult(""+chosen+"", "");
+			service.submitResult(chosen, "");
 			//Go to wait page
 			var win = Alloy.createController('wait').getView();
 			win.open();

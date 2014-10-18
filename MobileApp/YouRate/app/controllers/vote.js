@@ -87,7 +87,7 @@ function doSubmit(e) {
 	if (sessionType == "winner") {
 		service.submitResult(photosView.currentPage, "");
 	}
-	
+
 	//Go to wait page
 	var win = Alloy.createController('wait').getView();
 	win.open();
@@ -350,4 +350,4 @@ function addScrollableImage() {
 	$.votePage.add(photosView);
 }
 
-$.votePage.open(); 
+$.votePage.open();

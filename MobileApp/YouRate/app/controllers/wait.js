@@ -2,10 +2,6 @@ var uiGenerator = require('ui');
 var page = $.waitPage;
 var activityIndicator = uiGenerator.getWaitIndicator('waitL');
 
-Ti.Gesture.addEventListener('orientationchange', function(e) {
-	//activityIndicator.top = uiGenerator.isPortrait ? uiGenerator.platformHeight / 2 - 70 : uiGenerator.platformHeight / 2 - 80;
-});
-
 function loadImage() {
 	//Show background activity with an activityindicator
 	page.add(activityIndicator);
@@ -36,6 +32,11 @@ function testStatus(service) {
 		status = service.status();
 		if (status == "1") {
 			goForward(service);
+			
+			activityIndicator.hideIndicator();
+			activityIndicator = null;
+			//force garbage collection
+			clearInterval(timer);
 		} else if (status == "2") {
 			//Add languages!!!!!!!!!!
 			var dialog = Ti.UI.createAlertDialog({
@@ -45,22 +46,23 @@ function testStatus(service) {
 			});
 			dialog.addEventListener('click', function(e) {
 				if (e.index == 0) {
-					var win = Alloy.createController('noSession').getView();
+					var win = Alloy.createController('login').getView();
 					win.open();
 				} //else what happens?
 			});
 			dialog.show();
+			
+			activityIndicator.hideIndicator();
+			activityIndicator = null;
+			//force garbage collection
+			clearInterval(timer);
 		}
-		activityIndicator.hideIndicator();
-		activityIndicator = null;
-		//force garbage collection
-		clearInterval(timer);
+		
 	}, 1000);
 }
 
 function goForward(service) {
 	var win = Alloy.createController(service.sessionType()).getView();
-	//service.sessionType()
 	win.open();
 }
 
