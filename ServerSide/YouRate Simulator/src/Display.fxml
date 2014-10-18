@@ -10,6 +10,10 @@
 
 <AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="713.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="DisplayController">
    <children>
-      <ImageView fx:id = "picture" fitHeight="556.0" fitWidth="713.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id = "imageView" fitHeight="556.0" fitWidth="713.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true" >
+        <image>
+            <Image  url="Images/image1.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

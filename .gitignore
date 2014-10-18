@@ -103,3 +103,5 @@ sympy-plots-for-*.tex/
 #TeXmaker ignores
 *.tex.bak
 /ServerSide/EMMA Simulator/dist/
+/ServerSide/YouRate Simulator/build/
+/ServerSide/YouRate Simulator/dist/

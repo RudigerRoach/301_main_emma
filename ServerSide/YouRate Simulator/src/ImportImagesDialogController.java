@@ -62,6 +62,7 @@ public class ImportImagesDialogController implements Initializable {
         if(selectedFiles != null)
         {
             lblPhotos.setText(selectedFiles.size() + " photos are selected.");
+            selectedPhotos = selectedFiles;
             int size = selectedFiles.size();
             for(int i=0 ;i < size; i++)
             {
@@ -108,5 +109,5 @@ public class ImportImagesDialogController implements Initializable {
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
     
-    }
+    } 
 }

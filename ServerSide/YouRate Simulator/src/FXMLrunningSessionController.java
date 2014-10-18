@@ -4,24 +4,35 @@
  * and open the template in the editor.
  */
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class FXMLrunningSessionController implements Initializable {
 
@@ -40,19 +51,31 @@ public class FXMLrunningSessionController implements Initializable {
     private ImageView imageView;
     
     @FXML
-    private Image myImage;
+    public Label descriptLabel;
+    
+    public LinkedList imagePaths;
+    public LinkedList imageDescription;
+    
     
     @FXML
-    private TableView imagesRemaining;
+    private TableView<Images> imagesRemaining;
+    @FXML
+    private TableColumn<Images, String> imagePath;
+    @FXML
+    private TableColumn<Images, String> descript;
     
+    private ObservableList<Images> imageData = FXCollections.observableArrayList();
     @FXML
     protected AnchorPane AnchorPane;
     
     int current = 0;
+    int max;
     Configuration config;
     BufferedImage myImages[];
     uRateServer server;
-    LinkedList imagePaths;
+    DisplayController controller;
+    Stage bigScreen;
+
     Image currentImage;
     
     @Override
@@ -61,109 +84,113 @@ public class FXMLrunningSessionController implements Initializable {
 
     }
     
-    public void setConfig(Configuration myConfig,LinkedList imgP) throws Exception
+    public void setConfig(Configuration myConfig) throws Exception
     {
-
         config = myConfig;
         System.out.println("Config called with min of "+ config.getBotRange());
-        imagePaths = imgP;
+        max = config.images.length-1;
         
-        File file = new File(imagePaths.get(current).toString());
         Image curimage = SwingFXUtils.toFXImage(config.images[0], null);
         imageView.setImage(curimage);
         imageView.fitHeightProperty();
         imageView.fitWidthProperty();
+        
 
-        final uRateServer myServer =new uRateServer(config);
+        
+        
+        
+        descriptLabel.setText(config.imageDetails[0].toString());
+
+        server =new uRateServer(config);
             try
             {
-                myServer.startSession();
+                server.startSession();
             }
             catch(Exception ex)
             {
                 System.out.println(ex);
             }
-            
-        System.out.println("-------------------------------------" + imagePaths.get(current).toString());
-        BufferedImage originalImage = config.images[0];
-        int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-            
-        Image tagImg = SwingFXUtils.toFXImage(originalImage, null);
 
-      
-            
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Display.fxml"));
-        Scene newScene = new Scene(loader.load());
-        DisplayController controller = loader.getController();
-        Stage dialogStage = new Stage();
-        dialogStage.setScene(newScene);
-        dialogStage.setTitle("Display");
-        dialogStage.setFullScreen(true);
-        //controller.setDialogStage(dialogStage);
-        dialogStage.show();
-        
-        
         
         //Code for duel screen
-//            int primaryMon;
-//            Screen primary = Screen.getPrimary();
-//            for(int i = 0; i < Screen.getScreens().size(); i++){
-//                if(Screen.getScreens().get(i).equals(primary)){
-//                    primaryMon = i;
-//                    System.out.println("primary: " + i);
-//                    break;
-//        
-//        
-//        
-//    }
-//}
-//            After this we init and show the primary stage. It is important to do this on the primary monitor (for hiding taskbars and such things).
-//
-//            Screen screen2 = Screen.getScreens().get(primaryMon);
-//            Stage stage2 = new Stage();
-//            stage2.setScene(new Scene(new Label("primary")));
-//            //we need to set the window position to the primary monitor:
-//            stage2.setX(screen2.getVisualBounds().getMinX());
-//            stage2.setY(screen2.getVisualBounds().getMinY());
-//            stage2.setFullScreen(true);
-//            stage2.show();
-//            Now the workaround part. We create the stages for the other monitors:
-//
-//            Label label = new Label("monitor " + i);
-//            stage.setScene(new Scene(label));
-//            System.out.println(Screen.getScreens().size());
-//            Screen screen = Screen.getScreens().get(i); //i is the monitor id
-//
-//            //set the position to one of the "slave"-monitors:
-//            stage.setX(screen.getVisualBounds().getMinX());
-//            stage.setY(screen.getVisualBounds().getMinY());
-//
-//            //set the dimesions to the screen size:
-//            stage.setWidth(screen.getVisualBounds().getWidth());
-//            stage.setHeight(screen.getVisualBounds().getHeight());
-//
-//            //show the stage without decorations (titlebar and window borders):
-//            stage.initStyle(StageStyle.UNDECORATED);
-//            stage.show();
-        
-        int primaryMon;
-        Screen primary = Screen.getPrimary();
-        for(int i = 0; i < Screen.getScreens().size(); i++){
-            if(Screen.getScreens().get(i).equals(primary)){
-                primaryMon = i;
-                System.out.println("primary: " + i);
-                break;
-            }
-        }
-
+            int primaryMon;
+            Screen primary = Screen.getPrimary();
+            int sec =0;
+            for(int i = 0; i < Screen.getScreens().size(); i++)
+            {
+                if(!Screen.getScreens().get(i).equals(primary))
+                {
+                    sec = i;
+                    System.out.println("sec: " + i);
+                    break;  
+                 }
+                else sec = i;
+             }
             
+            if(config.controlledSession)
+            {
+                Previous.setDisable(true);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Display.fxml"));
+                Scene newScene = new Scene(loader.load());
+                controller = loader.getController();
+                bigScreen = new Stage();
+                bigScreen.setScene(newScene);
+                bigScreen.setTitle("Display");
+                //dialogStage.setFullScreen(true);
+                controller.setImages(config.images);
+                controller.imageView.setImage(curimage);
+                controller.imageView.fitHeightProperty();
+                controller.imageView.fitWidthProperty();
+                Screen screen = Screen.getScreens().get(sec);
+                bigScreen.setX(screen.getVisualBounds().getMinX());
+                bigScreen.setY(screen.getVisualBounds().getMinY());
+                bigScreen.setWidth(screen.getVisualBounds().getWidth());
+                bigScreen.setHeight(screen.getVisualBounds().getHeight());
+                controller.imageView.setFitHeight(screen.getVisualBounds().getHeight());
+                controller.imageView.setFitWidth(screen.getVisualBounds().getWidth());
+                curimage = SwingFXUtils.toFXImage(config.images[0], null);
+                controller.imageView.setImage(curimage);
+                controller.imageView.fitHeightProperty();
+                controller.imageView.fitWidthProperty();
+                bigScreen.initStyle(StageStyle.UNDECORATED);
+                bigScreen.show();
+            }    
     }
     
     
     
+    
+    public void addImages(LinkedList p,LinkedList d)
+    {
+        imagePaths = p;
+        imageDescription = d;
+    }
+    
     @FXML
     private void handleNext(ActionEvent event) throws IOException 
     {
+        if(current < max)
+        {
+            current++;
+            Image curimage = SwingFXUtils.toFXImage(config.images[current],null);
+            imageView.setImage(curimage);
+            imageView.fitHeightProperty();
+            imageView.fitWidthProperty();
+            
+            if(config.controlledSession)
+            {
+                controller.imageView.setImage(curimage);
+                controller.imageView.fitHeightProperty();
+                controller.imageView.fitWidthProperty();
+                server.nextImage();
+                imagePaths.remove(0);
+                imageDescription.remove(0);
+                loadImages();
+            }
+            
+            descriptLabel.setText(config.imageDetails[current].toString());
+            
+        }
 
     }
     
@@ -172,34 +199,63 @@ public class FXMLrunningSessionController implements Initializable {
     private void handlePrevious(ActionEvent event) throws IOException 
     {
         
-        System.out.println("Previous called");
-        if(current != 0)
+        if(current > 0)
+        {
             current--;
-        
-        
-//        DisplayController controller = loader.getController();
-//        Stage dialogStage = new Stage();
-//        dialogStage.setScene(newScene);
-//        dialogStage.setTitle("Display");   
-//        dialogStage.setFullScreen(true);
-        
+            Image curimage = SwingFXUtils.toFXImage(config.images[current],null);
+            imageView.setImage(curimage);
+            imageView.fitHeightProperty();
+            imageView.fitWidthProperty();
+            descriptLabel.setText(config.imageDetails[current].toString());
+            if(config.controlledSession)
+            {
+                controller.imageView.setImage(curimage);
+                controller.imageView.fitHeightProperty();
+                controller.imageView.fitWidthProperty();
+                System.out.println("Controller has image = " + controller.imageView.getImage());
+            }
+            
+        }
     }
-
     
-//    public void setServer(uRateServer s)
-//    {
-//        server = s;
-//    }
-     
-    protected void finalize ()  
+    @FXML
+    protected void finalize (ActionEvent event) throws IOException  
     {
       try
       {
           server.close();
           
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+            Scene newScene = new Scene(loader.load());
+            Stage restarter = new Stage();
+            restarter.setScene(newScene);
+            restarter.setTitle("uRate");
+            restarter.show();
+          
+          Node  source = (Node) event.getSource(); 
+            Stage stage  = (Stage) source.getScene().getWindow();
+            stage.close();
+            System.out.println("finilize called");
+            bigScreen.close();
       }
       catch(Exception x){}
         
     }
-    
+        public void loadImages()
+    {
+        System.out.println("Running loadImages in Running session");
+        imageData.clear();
+        for(int i =0; i< imagePaths.size();i++)
+        {
+            imageData.add(new Images(imagePaths.get(i).toString(),imageDescription.get(i).toString()));
+        }
+        
+        imagePath.setCellValueFactory(cellData -> cellData.getValue().imageProperty());
+        descript.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
+        
+		FilteredList<Images> filteredData = new FilteredList<>(imageData, p -> true);
+		SortedList<Images> sortedData = new SortedList<>(filteredData);
+		sortedData.comparatorProperty().bind(imagesRemaining.comparatorProperty());
+		imagesRemaining.setItems(sortedData);
+    }
 }

@@ -43,7 +43,8 @@
          <children>
             <TableView fx:id="imagesRemaining" layoutX="12.0" layoutY="59.0" prefHeight="390.0" prefWidth="191.0">
               <columns>
-                <TableColumn prefWidth="199.0" text="Image" />
+                    <TableColumn prefWidth="200.0" text="Image" fx:id="imagePath" />
+                    <TableColumn prefWidth="200.0" text="Description" fx:id="descript" />
               </columns>
             </TableView>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="34.0" prefWidth="146.0" text="Images left">
@@ -53,8 +54,8 @@
             </Label>
          </children>
       </Pane>
-      <Label layoutX="133.0" layoutY="561.0" prefHeight="51.0" prefWidth="419.0" text="A timely photo of a man and his notebook" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="Finalize" layoutX="710.0" layoutY="569.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="163.0" text="Finalize Session">
+      <Label fx:id = "descriptLabel" layoutX="133.0" layoutY="561.0" prefHeight="51.0" prefWidth="419.0" text="A timely photo of a man and his notebook" textAlignment="CENTER" wrapText="true" />
+      <Button onAction="#finalize" fx:id="Finalize" layoutX="710.0" layoutY="569.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="163.0" text="Finalize Session">
          <font>
             <Font size="15.0" />
          </font>

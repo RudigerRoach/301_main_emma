@@ -74,7 +74,15 @@ public class AddImageController implements Initializable {
     
     }
     
-
+    public void insertValues(String p,String des)
+    {
+        descript.setText(des);
+        lblIn.setText(p);
+        add.setText("change");
+        valid = true;
+        selectedFile = new File(p);
+        description = des;
+    }
     
     
     @FXML
