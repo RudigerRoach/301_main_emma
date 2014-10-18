@@ -79,7 +79,7 @@
       </Button>
       <Accordion layoutX="582.0" layoutY="162.0" />
       <Accordion layoutX="449.0" layoutY="46.0" />
-    <TitledPane expanded="false" layoutX="351.0" layoutY="288.0" prefHeight="171.0" prefWidth="335.0" text="Image Options">
+    <TitledPane expanded="false" layoutX="351.0" layoutY="288.0" prefHeight="171.0" prefWidth="335.0" text="Image Options" fx:id = "imagePane">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="68.0" prefWidth="314.0">
                <children>

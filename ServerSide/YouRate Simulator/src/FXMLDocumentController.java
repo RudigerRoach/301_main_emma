@@ -4,28 +4,50 @@
  * and open the template in the editor.
  */
 
+import com.db4o.User;
+import com.db4o.nativequery.optimization.SODAQueryBuilder;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import javafx.util.Callback;
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.thehecklers.dialogfx.DialogFX;
 import org.thehecklers.dialogfx.DialogFX.Type;
 
@@ -88,6 +110,9 @@ public class FXMLDocumentController implements Initializable{
     @FXML
     TableColumn email;
     
+    @FXML
+    private TitledPane imagePane;
+    
     
     @FXML
     private TableView imageTable;
@@ -114,9 +139,6 @@ public class FXMLDocumentController implements Initializable{
         boolean ok = true;
         
         
-        
-        
-        //Fix this
         linkedList names = new linkedList();
         linkedList name1 = new linkedList();
         linkedList name2 = new linkedList();
@@ -148,24 +170,15 @@ public class FXMLDocumentController implements Initializable{
         
         
         
-//        images[0] = ImageIO.read(new File("image1.jpg"));
-//        images[1] = ImageIO.read(new File("image2.jpg"));        
-//        images[2] = ImageIO.read(new File("image3.jpg"));
-//        images[3] = ImageIO.read(new File("image4.jpg"));   
-//        images[4] = ImageIO.read(new File("image5.jpg"));
-        
-        
-//        String[] judges = new String[5];
-//        judges[0]= "Johan";
-//        judges[1]= "test";
-//        judges[2]= "test123@test.com";
-//        judges[3]= "Test3";
-//        judges[4]= "Test4";
         
         String[] judges = new String[judgesLL.size()];
         for(int i = 0; i< judgesLL.size();i++)
             judges[i]= judgesLL.get(i).toString();
         
+        //////////////////////
+        //////////////////////
+        //////////////////////
+        //////////////////////
         
         String[] imgDetails = new String[imageDescription.size()]; 
         for(int i = 0; i< imageDescription.size();i++)
@@ -246,7 +259,7 @@ public class FXMLDocumentController implements Initializable{
         if(Normal.isSelected())
             type = "normal";
         else if (Elimination.isSelected())
-            type = "yesNo";
+            type = "elimination";
         else if (Winner.isSelected())
             type = "winner";
         else 
@@ -257,11 +270,13 @@ public class FXMLDocumentController implements Initializable{
         
         if(ok == true)
         {
+            
+            System.out.println("Judges: ");
+            
+            for(int i = 0; i < judges.length;i++)
+                System.out.println("Judges in list: "+ judges[i]);
+            
             mySession = new Configuration(names,images,judges,max,min,open,cont,imgDetails,type);
-    //        FileOutputStream saveFile=new FileOutputStream("SaveObj.sav");
-    //        ObjectOutputStream save = new ObjectOutputStream(saveFile);
-    //        save.writeObject(mySession);
-    //        save.close();
 
              
 
@@ -271,7 +286,17 @@ public class FXMLDocumentController implements Initializable{
             newStage.setScene(newScene);
             newStage.setTitle("Emma Simulator");
             FXMLrunningSessionController controller = loader.getController();
-            controller.setConfig(mySession,imagePaths);    
+            controller.setConfig(mySession);
+            newStage.initStyle(StageStyle.UNDECORATED);
+            
+            
+            /////
+            
+            
+            Node  source = (Node) event.getSource(); 
+            Stage stage  = (Stage) source.getScene().getWindow();
+            stage.close();
+            
             newStage.showAndWait();
         }
         else
@@ -334,6 +359,7 @@ public class FXMLDocumentController implements Initializable{
             for(int i = 0; i < controller.imagePaths.size(); i++)
             {
                 imagePaths.add(controller.imagePaths.get(i));
+                
             }
             
             if(controller.imagePaths.size() < controller.descriptions.size())
@@ -383,8 +409,10 @@ public class FXMLDocumentController implements Initializable{
         FileReader fr = new FileReader(selectedFile.getAbsolutePath()); 
         BufferedReader br = new BufferedReader(fr); 
         String s; 
-        while((s = br.readLine()) != null) { 
-        judgesLL.add(s);
+        while((s = br.readLine()) != null) 
+        { 
+            judgesLL.add(s);
+            System.out.println("Imported Judge: " +s);
         } 
         fr.close(); 
  
@@ -470,7 +498,14 @@ public class FXMLDocumentController implements Initializable{
         
    }    
     
-    
+//    @FXML
+//    private void imagePaneHandler(ActionEvent event) throws IOException 
+//    {
+////        imagePane.setPrefHeight(0);
+////        imagePane.setPrefWidth(0);
+//        System.out.println("imagePaneHandler called");
+//    
+//    }
     
 
      

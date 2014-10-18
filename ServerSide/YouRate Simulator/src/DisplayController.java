@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 
+import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -22,7 +24,9 @@ public class DisplayController implements Initializable {
      * Initializes the controller class.
      */
     
-    @FXML ImageView picture;
+
+    @FXML 
+    public ImageView imageView;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -35,6 +39,21 @@ public class DisplayController implements Initializable {
 //         picture.setPreserveRatio(true);
 //         picture.setSmooth(true);
 //         picture.setCache(true);
-    }    
+        Image image = new Image("sample.png",true);
+        imageView = new ImageView();
+        imageView.setImage(image);
+
+    }
+    BufferedImage[] myImages;
+    public void setImages(BufferedImage[] toLoad) 
+    {
+        System.out.println("Image :" + toLoad);
+        Image curimage = SwingFXUtils.toFXImage(toLoad[0], null);
+        imageView.setImage(curimage);
+        imageView.fitHeightProperty();
+        imageView.fitWidthProperty();
+        System.out.println("called Set Image");
+    
+    }
     
 }
