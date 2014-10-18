@@ -1,18 +1,21 @@
 <resources>
-	<string name="autoLoginL">Probeer om automaties in te teken...</string>	
+	<string name="autoLoginL">Probeer om automaties in te teken...</string>
 	<string name="loginL">Probeer om in te teken...</string>
-	<string name="waitL">Wag vir die bediener...</string>	
-    <string name="emailL">Epos adres:</string>	
-    <string name="loginB">Teken in</string>
-    <string name="submitB">Dien in</string>
-    <string name="commentB">Lewer kommentaar</string>
-    <string name="sliderT">Punte:</string>
-    <string name="yesB">Ja</string>
-    <string name="noB">Nee</string>
-    <string name="winnerB">Wenner</string>
-    <string name="yesNoSubmit">Please choose yes or no</string>    
-    <string name="winnerSubmit1">Submit as winner</string>   
-    <string name="winnerSubmit2">Are you sure that this should be the winner?</string> 
-    <string name="confirm">Confirm</string>  
-    <string name="cancel">Cancel</string>   
+	<string name="waitL">Wag vir die bediener...</string>
+	<string name="noSessionL">Geen sessie tans aan die gang nie...</string>
+	<string name="emailL">Epos adres:</string>
+	<string name="loginB">Teken in</string>
+	<string name="submitB">Dien in</string>
+	<string name="commentB">Lewer kommentaar</string>
+	<string name="sliderT">Punte:</string>
+	<string name="yesB">Ja</string>
+	<string name="noB">Nee</string>
+	<string name="winnerB">Wenner</string>
+	<string name="yesNoSubmit">Kies asb ja of nee</string>
+	<string name="winnerSubmit1">Dien in as wenner</string>
+	<string name="winnerSubmit2">Is u seker dat die die wenner moet wees?</string>
+	<string name="confirm">Bevestig</string>
+	<string name="cancel">Kanselleer</string>
+	<string name="invalidInput">Ongeldige insette</string>
+	<string name="invalidEmail">Ongeldige e-pos adres ingesleutel</string>
 </resources>

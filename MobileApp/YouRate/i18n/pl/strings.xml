@@ -5,7 +5,7 @@
 	<string name="noSessionL">Nie uruchomione sesji*...</string>
 	<string name="emailL">Adres e-mail:</string>
 	<string name="loginB">Zaloguj się</string>
-	<string name="submitB">Godzić się</string>
+	<string name="submitB">Potwierdz</string>
 	<string name="commentB">Dodaj komentarz</string>
 	<string name="sliderT">Wynik:</string>
 	<string name="yesB">Tak</string>
@@ -16,4 +16,6 @@
 	<string name="winnerSubmit2">Jesteś pewien, że powinien to być zwycięzcą?</string>
 	<string name="confirm">Potwierdz</string>
 	<string name="cancel">Anuluj</string>
+	<string name="invalidInput">Nieprawidłowe dane wejściowe</string>
+	<string name="invalidEmail">Nieprawidłowe adres e-mail wpisany</string>
 </resources>

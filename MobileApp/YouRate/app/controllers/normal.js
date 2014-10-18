@@ -48,9 +48,9 @@ $.currentImage.addEventListener('click', function(e) {
 	fullScreenImage();
 });
 //Temporary solution to hide sliderarea at page load
-$.sliderArea.addEventListener('focus', function f(e){
-        $.sliderArea.blur();
-        $.sliderArea.removeEventListener('focus', f);
+$.sliderArea.addEventListener('focus', function f(e) {
+	$.sliderArea.blur();
+	$.sliderArea.removeEventListener('focus', f);
 });
 
 //Resize all artifacts on the screen to match the screen size and orientation
@@ -67,35 +67,30 @@ function resizePage() {
 	screenLeft = $.submitButton.top;
 
 	if (comments == true) {
-		if(displayAsButton && commentButton == null)
-		{
+		if (displayAsButton && commentButton == null) {
 			commentButtonEnabled();
 			commentButton.top = screenLeft - 70;
 			screenLeft = commentButton.top;
-			$.sliderArea.blur();	
-		}else if(displayAsButton && commentButton != null)
-		{
+			$.sliderArea.blur();
+		} else if (displayAsButton && commentButton != null) {
 			commentButton.top = screenLeft - 70;
 			commentButton.width = screenWidth - 40;
 			commentArea.width = screenWidth - 40;
 			screenLeft = commentButton.top;
-			$.sliderArea.blur();	
-		}
-		else if(!displayAsButton && commentBox == null)
-		{
+			$.sliderArea.blur();
+		} else if (!displayAsButton && commentBox == null) {
 			commentsEnabled();
 			commentBox.top = screenLeft - 70;
 			commentLab.top = screenLeft - 100;
 			screenLeft = commentLab.top;
-			$.sliderArea.blur();	
-		}else if(!displayAsButton && commentBox != null)
-		{
+			$.sliderArea.blur();
+		} else if (!displayAsButton && commentBox != null) {
 			commentBox.top = screenLeft - 70;
 			commentLab.top = screenLeft - 100;
 			commentBox.width = screenWidth - 40;
 			commentArea.width = screenWidth - 40;
 			screenLeft = commentLab.top;
-			$.sliderArea.blur();	
+			$.sliderArea.blur();
 		}
 	}
 
@@ -119,36 +114,33 @@ function resizePage() {
 
 	$.scoreSlider.width = screenWidth - 40;
 	screenLeft = $.scoreSlider.top;
-	
-	if(fullScreen == false)
-	{
-		if(!isIOS){
+
+	if (fullScreen == false) {
+		if (!isIOS) {
 			$.currentImage.top = 30;
 		}
 		$.currentImage.height = screenLeft - 80;
 		$.currentImage.width = "auto";
-	}
-	else
-	{		
+	} else {
 		$.currentImage.height = screenHeight - 40 - topSpace;
 		$.currentImage.width = "auto";
-		$.currentImage.top = topSpace + 20;	
+		$.currentImage.top = topSpace + 20;
 		$.currentImage.zIndex = 5;
 	}
 }
 
 function doSubmit(e) {
-	
+
 	//$.currentImage.image = imagePath;
 	//alert("changed " + $.currentImage.image);
-	
-	//Submit result	
-	service=require('VoteSession');	
-	service.submitResult(Math.floor(Number($.scoreSlider.value)),commentText);
-    
-    //Go to wait page
-	var win=Alloy.createController('wait').getView();
- 	win.open();
+
+	//Submit result
+	service = require('VoteSession');
+	service.submitResult(Math.floor(Number($.scoreSlider.value)), commentText);
+
+	//Go to wait page
+	var win = Alloy.createController('wait').getView();
+	win.open();
 }
 
 function commentsEnabled() {
@@ -197,36 +189,33 @@ function commentButtonEnabled() {
 	$.normalPage.add(commentButton);
 }
 
-function fullScreenImage()
-{	
-	if(fullScreen == false)
-	{
+function fullScreenImage() {
+	if (fullScreen == false) {
 		var w = ui.platformWidth();
 		var h = ui.platformHeight();
 		if (!isIOS) {
 			h -= 70;
 			topSpace = 20;
-		}
-		else topSpace = 50;
-		if(title != "")
-		{
+		} else
+			topSpace = 50;
+		if (title != "") {
 			label = Ti.UI.createLabel({
 				text : title,
 				color : 'black',
-				font: {
-					fontSize: 24,
-					fontFamily: 'Helvetica Neue'
+				font : {
+					fontSize : 24,
+					fontFamily : 'Helvetica Neue'
 				},
 				textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER
 			});
 			label.top = topSpace;
 			topSpace = topSpace + 20;
-			$.normalPage.add(label);	
+			$.normalPage.add(label);
 		}
-				
+
 		$.currentImage.height = h - 40 - topSpace;
 		$.currentImage.width = "auto";
-		$.currentImage.top = topSpace + 20;	
+		$.currentImage.top = topSpace + 20;
 		$.currentImage.zIndex = 5;
 		$.scoreSlider.opacity = 0.3;
 		$.sliderLabel.opacity = 0.3;
@@ -234,35 +223,33 @@ function fullScreenImage()
 		if (comments == true) {
 			commentButton.opacity = 0.3;
 		}
-		$.submitButton.opacity = 0.3;	
-		
+		$.submitButton.opacity = 0.3;
+
 		cancelIcon = ui.getCancelIcon();
 		if (!isIOS) {
 			cancelIcon.top = 20;
-		}
-		else cancelIcon.top = 50;
+		} else
+			cancelIcon.top = 50;
 		cancelIcon.right = 20;
-		
+
 		cancelIcon.addEventListener('click', function(e) {
-			if(!isIOS){
+			if (!isIOS) {
 				$.currentImage.top = 30;
-			}
-			else {
+			} else {
 				$.currentImage.top = 60;
 			}
 			$.currentImage.height = screenLeft - 80;
 			$.currentImage.width = "auto";
 			if (comments == true) {
 				commentButton.opacity = 1;
-			}			
+			}
 			$.submitButton.opacity = 1;
 			$.scoreSlider.opacity = 1;
 			$.sliderLabel.opacity = 1;
 			$.sliderArea.opacity = 1;
-						
+
 			$.normalPage.remove(cancelIcon);
-			if(title != "")
-			{
+			if (title != "") {
 				$.normalPage.remove(label);
 			}
 			fullScreen = false;
@@ -277,5 +264,4 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 });
 
 $.normalPage.open();
-
 
