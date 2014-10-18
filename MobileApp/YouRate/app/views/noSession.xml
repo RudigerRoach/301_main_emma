@@ -3,6 +3,6 @@
 		<!-- iOS toolbar -->
 		<Toolbar id="toolbar" platform="ios">
 			<Button id="appName">uRate</Button>
-		</Toolbar>	
-    </Window>
+		</Toolbar>
+	</Window>
 </Alloy>

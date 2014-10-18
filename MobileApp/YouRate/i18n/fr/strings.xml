@@ -1,18 +1,21 @@
 <resources>
-	<string name="autoLoginL">Essayez se connecter automatiquement...</string>	
-	<string name="loginL">Essayez se connecter...</string>	
+	<string name="autoLoginL">Essayez se connecter automatiquement...</string>
+	<string name="loginL">Essayez se connecter...</string>
 	<string name="waitL">En attente de serveur...</string>
-    <string name="emailL">Addresse e-mail:</string>	
-    <string name="loginB">Connexion</string>
-    <string name="submitB">Soumettre</string>
-    <string name="commentB">Ajouter un commentaire</string>
-    <string name="sliderT">Le score:</string>
-    <string name="yesB">Oui</string>
-    <string name="noB">Non</string>
-    <string name="winnerB">Le vainqueur</string>
-    <string name="yesNoSubmit">Please choose yes or no</string>    
-    <string name="winnerSubmit1">Submit as winner</string>   
-    <string name="winnerSubmit2">Are you sure that this should be the winner?</string> 
-    <string name="confirm">Confirm</string>  
-    <string name="cancel">Cancel</string>   
+	<string name="noSessionL">Aucune session en cours d'exécution...</string>
+	<string name="emailL">Addresse e-mail:</string>
+	<string name="loginB">Connexion</string>
+	<string name="submitB">Soumettre</string>
+	<string name="commentB">Ajouter un commentaire</string>
+	<string name="sliderT">Le score:</string>
+	<string name="yesB">Oui</string>
+	<string name="noB">Non</string>
+	<string name="winnerB">Le vainqueur</string>
+	<string name="yesNoSubmit">S'il vous plaît choisir oui ou non</string>
+	<string name="winnerSubmit1">Soumettre gagnant</string>
+	<string name="winnerSubmit2">Etes-vous sûr que ce devrait être le vainqueur?</string>
+	<string name="confirm">Confirmer</string>
+	<string name="cancel">Annuler</string>
+	<string name="invalidInput">Entrée non valide</string>
+	<string name="invalidEmail">Adresse e-mail valide est entré</string>
 </resources>

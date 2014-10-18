@@ -4,17 +4,18 @@ var page = $.startPage;
 var activityIndicator = uiGenerator.getWaitIndicator('autoLoginL');
 
 //Configure app settings
-if(!Ti.App.Properties.hasProperty('commentEntry')){
-	Ti.App.Properties.setString('commentEntry', 'button'); //If the property doens't exist, default to a button
+if (!Ti.App.Properties.hasProperty('commentEntry')) {
+	Ti.App.Properties.setString('commentEntry', 'button');
+	//If the property doens't exist, default to a button
 }
 
-function displayLoginPage(){
+function displayLoginPage() {
 	//Show background activity with an activityindicator
 	page.add(activityIndicator);
 	activityIndicator.showIndicator();
-	
+
 	//Call autoLogin
-	service=require('Authentication');
+	service = require('Authentication');
 	service.autoLogin();
 	testStatus(service);
 };
@@ -22,21 +23,20 @@ function displayLoginPage(){
 function goForward(service){
 	var success = service.loginStatus();
 	activityIndicator.hideIndicator();
-	activityIndicator = null; //force garbage collector to clean up
-	
+	activityIndicator = null;
+	//force garbage collector to clean up
+
 	//If autoLogin successful
-	if (success == true) 
-	{
+	if (success == true) {
 		//The user is allowed to use the rest of the application, thus display the next page
-		var win=Alloy.createController('wait').getView();
-	 	win.open();
-	}
-	else
-	{	
+		var win = Alloy.createController('wait').getView();
+		win.open();
+	} else {
 		//If autoLogin not successful
-	    var win=Alloy.createController('login').getView(); //must be login
-	 	win.open();
- 	}
+		var win = Alloy.createController('login').getView();
+		//must be login
+		win.open();
+	}
 }
 
 function testStatus(service){
@@ -50,9 +50,10 @@ function testStatus(service){
 		}, 1000); 
 }
 
-function goVote(){
+function goVote() {
 	//For offline testing of vote page - to be taken out!
-	var win=Alloy.createController('vote').getView();
+	var win = Alloy.createController('vote').getView();
 	win.open();
 }
+
 page.open();
