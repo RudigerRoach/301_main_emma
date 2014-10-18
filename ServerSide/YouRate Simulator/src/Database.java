@@ -9,7 +9,9 @@ public interface Database {
 
     public void insert(String email, String uid);
 
-    public boolean update(String email, String uid);
+    public boolean updateEmail(String email, String uid);
+    
+    public boolean updateUID(String email, String uid);
 
     public boolean delete(String email, String uid);
 

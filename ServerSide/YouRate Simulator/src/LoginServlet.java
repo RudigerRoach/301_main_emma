@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet
                     }
                     else
                     {
-                        uRateServer.database.update(user, id);
+                        uRateServer.database.updateEmail(user, id);
                     }
                 }
                 else
@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet
 
                     if(bothInSameRecord == false)
                     {
-                        uRateServer.database.update(user, id);
+                        uRateServer.database.updateUID(user, id);
                     }
                 }
                 JSONObject jsonResponse = new JSONObject();
@@ -166,11 +166,47 @@ public class LoginServlet extends HttpServlet
             //successFull autoLogin
             if (loginSuccess == true)
             {
+                boolean userExist = uRateServer.database.userExists(userAuto);
+                if(userExist == false)
+                {
+                    boolean deviceIDExist = uRateServer.database.deviceExists(id);
+                    if(deviceIDExist == false)
+                    {
+                        JSONObject jsonResponse = new JSONObject();
+                        try 
+                        {
+                            jsonResponse.put("status", "failed");
+                        } 
+                        catch (JSONException e) 
+                        {
+                            e.printStackTrace();
+                        }
+
+                        //response to failed auto login
+                        response.setContentType("application/json;charset=UTF-8");
+                        response.getWriter().print(jsonResponse);
+                        return;
+                    }
+                    else
+                    {
+                        uRateServer.database.updateEmail(userAuto, id);
+                    }
+                }
+                else
+                {
+                    boolean bothInSameRecord = uRateServer.database.shouldAutoLogin(userAuto, id);
+
+                    if(bothInSameRecord == false)
+                    {
+                        uRateServer.database.updateUID(userAuto, id);
+                    }
+                }
                 JSONObject jsonResponse = new JSONObject();
                 try 
                 {
                     jsonResponse.put("status", "success");
                     jsonResponse.put("session_id", request.getSession().getId());
+                    
                     String email = uRateServer.database.getMail(id);
                     
                     boolean tempAllowed = true;

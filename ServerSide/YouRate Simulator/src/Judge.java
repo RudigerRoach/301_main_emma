@@ -13,6 +13,7 @@ public class Judge
     private int [] score;
     private String [] comment;
     private int currentImage;
+    private boolean hasVoted = false;
     private final String judgeName;
     
     public Judge(String _name)
@@ -60,7 +61,13 @@ public class Judge
     
     public void setImageSpecificScoreAndComment(int _index, int _score, String _comment)
     {
+        hasVoted = true;
         score[_index] = _score;
         comment[_index] = _comment;
+    }
+    
+    public boolean hasVote()
+    {
+        return hasVoted;
     }
 }

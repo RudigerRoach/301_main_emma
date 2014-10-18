@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -56,7 +57,8 @@ public class uRateServer
         tmpCompressedImage = new File[totaalImages];
         for(int i = 0; i < totaalImages;i++)
         {
-            tmpCompressedImage[i] = saveCompressedImage(images[i],"temp/" + (i+1) + ".jpg");
+            String uuid = UUID.randomUUID().toString();
+            tmpCompressedImage[i] = saveCompressedImage(images[i],"temp/" + (i+1) + uuid+ ".jpg");
         }
         if(session.getControll() == false)
         {
@@ -75,7 +77,9 @@ public class uRateServer
         for(int i = 1; i < totaalImages+1;i++)
         {
             getImage imageServlet = new getImage();
-            context.addServlet(new ServletHolder(imageServlet),"/temp/" + i + ".jpg");
+            String path = tmpCompressedImage[i-1].getAbsolutePath().replace("\\", "/");
+            String path2 = path.substring(path.indexOf("/temp"), path.length());
+            context.addServlet(new ServletHolder(imageServlet),path2);
         }
         server.start();
     }    
@@ -118,6 +122,10 @@ public class uRateServer
     public void close() throws Exception
     {
         database.close();
+        for(int i = 0; i < totaalImages;i++)
+        {
+            tmpCompressedImage[i].delete();
+        }
         if (server != null)
             server.stop();
     }

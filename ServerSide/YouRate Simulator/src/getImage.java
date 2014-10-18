@@ -22,11 +22,18 @@ public class getImage extends HttpServlet
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
-        System.out.println("asdasd");
         String imagePath = request.getRequestURI();
-        imagePath = imagePath.substring(6, imagePath.indexOf("."));
-        int number = Integer.parseInt(imagePath)-1;
-        File f = new File(uRateServer.tmpCompressedImage[number].getAbsolutePath());
+        imagePath = imagePath.substring(6, imagePath.length());
+        int j = 0;
+        for(int i = 0; i < uRateServer.totaalImages;i++)
+        {
+            if(imagePath.equals(uRateServer.tmpCompressedImage[i].getName()) == true)
+            {
+                j = i;
+                break;
+            }
+        }
+        File f = new File(uRateServer.tmpCompressedImage[j].getAbsolutePath());
 	BufferedImage bi = ImageIO.read(f);
 
         response.setContentType("image/jpg");

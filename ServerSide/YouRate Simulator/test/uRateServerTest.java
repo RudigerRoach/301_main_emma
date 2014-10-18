@@ -71,6 +71,7 @@ public class uRateServerTest extends TestCase {
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
+        uRateServer.database.delete("test123@test.com", "123");
         server.close();
     }
     
@@ -206,7 +207,9 @@ public class uRateServerTest extends TestCase {
         jsonTest.put("rangeTop", 10);
         jsonTest.put("description", "helo");
         jsonTest.put("comments", "true");
-        jsonTest.put("imgPath","temp/1.jpg");
+        String path = uRateServer.tmpCompressedImage[0].getAbsolutePath().replace("\\", "/");
+        String path2 = path.substring(path.indexOf("/temp")+1, path.length());
+        jsonTest.put("imgPath",path2);
         assertEquals("Start of session failed",jsonTest.toString(),stringResponse);
     }
     
@@ -255,43 +258,47 @@ public class uRateServerTest extends TestCase {
         assertEquals("Testing if nextImage is correct",true,true);
     }
     
-//    public void testEndOfSession() throws Exception
-//    {
-//        //Create client
-//	HttpClient client = new DefaultHttpClient();
-//        HttpPost mockRequest = new HttpPost("http://localhost:5555/login");
-//        CookieStore cookieStore = new BasicCookieStore();
-//        HttpContext httpContext = new BasicHttpContext();
-//        httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
-//        mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
-//        
-//        //Add parameters
-//        List<NameValuePair> urlParameters = new ArrayList<>();
-//        urlParameters.add(new BasicNameValuePair("email", "test"));
-//        urlParameters.add(new BasicNameValuePair("deviceUID","BD655C43-3A73-4DFB-AA1F-074A4F0B0DCE"));
-//        mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
-//        //Execute the request
-//        HttpResponse mockResponse = client.execute(mockRequest,httpContext);
-//		
-//        //Test if normal login is successful
-//        BufferedReader rd = new BufferedReader(new InputStreamReader(mockResponse.getEntity().getContent()));
-//        rd.close();
-//        HttpPost mockRequest2 = new HttpPost("http://localhost:5555/start");
-//        mockRequest2.setHeader("Content-type", "application/x-www-form-urlencoded");
-//        //Add parameters
-//        HttpResponse mockResponse2 = client.execute(mockRequest2,httpContext);
-//        rd = new BufferedReader(new InputStreamReader(mockResponse2.getEntity().getContent()));
-//        rd.close();
-//        HttpPost mockRequest1 = new HttpPost("http://localhost:5555/nextImage");
-//        mockRequest2.setHeader("Content-type", "application/x-www-form-urlencoded");
-//        //Add parameters
-//        List<NameValuePair> urlParameters1 = new ArrayList<>();
-//        urlParameters1.add(new BasicNameValuePair("deviceUID", "BD655C43-3A73-4DFB-AA1F-074A4F0B0DCE"));
-//        urlParameters1.add(new BasicNameValuePair("comment","asdf"));
-//        urlParameters1.add(new BasicNameValuePair("result","3"));
-//        mockRequest1.setEntity(new UrlEncodedFormEntity(urlParameters1,"UTF-8"));
-//        HttpResponse mockResponse1 = client.execute(mockRequest1,httpContext);
-//        rd = new BufferedReader(new InputStreamReader(mockResponse1.getEntity().getContent())); 
-//        assertEquals("Testing if login was correctly failed due to incorrect username",true,true);
-//    }
+    public void testEndOfSession() throws Exception
+    {
+        //Create client
+	HttpClient client = new DefaultHttpClient();
+        HttpPost mockRequest = new HttpPost("http://localhost:5555/login");
+        CookieStore cookieStore = new BasicCookieStore();
+        HttpContext httpContext = new BasicHttpContext();
+        httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+        mockRequest.setHeader("Content-type", "application/x-www-form-urlencoded");
+        
+        //Add parameters
+        List<NameValuePair> urlParameters = new ArrayList<>();
+        urlParameters.add(new BasicNameValuePair("email", "test123@test.com"));
+        urlParameters.add(new BasicNameValuePair("deviceUID","123"));
+        mockRequest.setEntity(new UrlEncodedFormEntity(urlParameters,"UTF-8"));
+        //Execute the request
+        HttpResponse mockResponse = client.execute(mockRequest,httpContext);
+		
+        //Test if normal login is successful
+        BufferedReader rd = new BufferedReader(new InputStreamReader(mockResponse.getEntity().getContent()));
+        rd.close();
+        HttpPost mockRequest2 = new HttpPost("http://localhost:5555/start");
+        List<NameValuePair> urlParameters2 = new ArrayList<>();
+        urlParameters2.add(new BasicNameValuePair("deviceUID", "123"));
+        mockRequest2.setEntity(new UrlEncodedFormEntity(urlParameters2,"UTF-8"));
+        mockRequest2.setHeader("Content-type", "application/x-www-form-urlencoded");
+        //Add parameters
+        HttpResponse mockResponse2 = client.execute(mockRequest2,httpContext);
+        rd = new BufferedReader(new InputStreamReader(mockResponse2.getEntity().getContent()));
+        rd.close();
+        HttpPost mockRequest1 = new HttpPost("http://localhost:5555/nextImage");
+        mockRequest2.setHeader("Content-type", "application/x-www-form-urlencoded");
+        //Add parameters
+        List<NameValuePair> urlParameters1 = new ArrayList<>();
+        urlParameters1.add(new BasicNameValuePair("deviceUID", "123"));
+        urlParameters1.add(new BasicNameValuePair("comment","asdf"));
+        urlParameters1.add(new BasicNameValuePair("result","3"));
+        mockRequest1.setEntity(new UrlEncodedFormEntity(urlParameters1,"UTF-8"));
+        HttpResponse mockResponse1 = client.execute(mockRequest1,httpContext);
+        rd = new BufferedReader(new InputStreamReader(mockResponse1.getEntity().getContent()));
+        assertEquals("Testing if login was correctly failed due to incorrect username","{\"status\":\"2\"}",rd.readLine());
+    }
+    
 }

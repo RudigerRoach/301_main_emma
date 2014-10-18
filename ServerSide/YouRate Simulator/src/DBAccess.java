@@ -37,12 +37,12 @@ public class DBAccess implements Database{
 
     @Override
     public void insert(String email, String uid) {
-        user newU = new user(email, uid);
+        user newU = new user(uid, email);
         database.store(newU);
     }
 
     @Override
-    public boolean update(String email, String uid) {
+    public boolean updateUID(String email, String uid) {
         oSet = database.queryByExample(user.class);
         for(user k : oSet){
             if(k.getEmail().compareTo(email)==0){
@@ -53,7 +53,19 @@ public class DBAccess implements Database{
         }
         return false;
     }
-
+    
+    public boolean updateEmail(String email, String uid) {
+        oSet = database.queryByExample(user.class);
+        for(user k : oSet){
+            if(k.getUID().compareTo(uid)==0){
+                k.setEmail(email);
+                database.store(k);
+                return true;
+            }
+        }
+        return false;
+    }
+    
     @Override
     public boolean delete(String email, String uid) {
         oSet = database.queryByExample(user.class);

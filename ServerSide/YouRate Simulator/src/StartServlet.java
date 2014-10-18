@@ -32,11 +32,14 @@ public class StartServlet extends HttpServlet
             while(uRateServer.start == false){}
             String judge = request.getParameter("deviceUID");
             String email = uRateServer.database.getMail(judge);
+            System.out.println(email);
             int current = 0;
+            int j = 0;
             for (int i = 0; i < uRateServer.judgesList.size();i++)
             {
                 if (uRateServer.judgesList.get(i).getJudgeName().equals(email))
                 {
+                    j = i;
                     current = uRateServer.judgesList.get(i).getCurrentImage() - 1;
                 }
             }
@@ -52,38 +55,72 @@ public class StartServlet extends HttpServlet
 //		        "imgPath": "path/to/image.jpg" //the path where the image resides on the server
                 if((uRateServer.session.getType().equals("normal") == true) || (uRateServer.session.getType().equals("yesNo") == true))
                 {
-                    jsonResponse.put("status", "1");
-                    jsonResponse.put("sessionType",uRateServer.session.getType());
-                    jsonResponse.put("rangeBottom", uRateServer.session.getBotRange());
-                    jsonResponse.put("rangeTop", uRateServer.session.getTopRange());
-                    jsonResponse.put("description", uRateServer.session.getImageDetails(0));
-                    //check hierna
-                    jsonResponse.put("comments", "true");
-                    jsonResponse.put("imgPath","temp/" + uRateServer.tmpCompressedImage[current].getName());
+                    if (current < uRateServer.totaalImages)
+                    {
+                        jsonResponse.put("status", "1");
+                        jsonResponse.put("sessionType",uRateServer.session.getType());
+                        jsonResponse.put("rangeBottom", uRateServer.session.getBotRange());
+                        jsonResponse.put("rangeTop", uRateServer.session.getTopRange());
+                        jsonResponse.put("description", uRateServer.session.getImageDetails(current));
+                        //check hierna
+                        jsonResponse.put("comments", "true");
+                        String path = uRateServer.tmpCompressedImage[current].getAbsolutePath().replace("\\", "/");
+                        String path2 = path.substring(path.indexOf("/temp")+1, path.length());
+                        jsonResponse.put("imgPath",path2);
+                    }
+                    else
+                    {
+                        jsonResponse.put("status","2");
+                    }
                 }
                 else if (uRateServer.session.getType().equals("winner") == true)
                 {
-                    jsonResponse.put("status", "1");
-                    jsonResponse.put("sessionType",uRateServer.session.getType());
-                    jsonResponse.put("rangeBottom", uRateServer.session.getBotRange());
-                    jsonResponse.put("rangeTop", uRateServer.session.getTopRange());
-                    jsonResponse.put("description", uRateServer.session.getImageDetails(0));
-                    //check hierna
-                    jsonResponse.put("comments", "true");
-                    jsonResponse.put("imgTotaal" , uRateServer.totaalImages);
-                    List < String > list = new ArrayList < String > ();
-                    for(int i = 0; i < uRateServer.totaalImages; i++)
+                    System.out.println("asdf " + uRateServer.judgesList.get(j).hasVote());
+                    if(uRateServer.judgesList.get(j).hasVote() == false)
                     {
-                       list.add("temp/" + uRateServer.tmpCompressedImage[i].getName());  
+                        jsonResponse.put("status", "1");
+                        jsonResponse.put("sessionType",uRateServer.session.getType());
+                        jsonResponse.put("rangeBottom", uRateServer.session.getBotRange());
+                        jsonResponse.put("rangeTop", uRateServer.session.getTopRange());
+                        List < String > list1 = new ArrayList < String > ();
+                        for(int i = 0; i < uRateServer.totaalImages; i++)
+                        {
+                            String path = uRateServer.session.getImageDetails(i);
+                            list1.add(path);  
+                        }
+
+                        JSONArray array1 = new JSONArray();
+                        for(int i = 0; i < list1.size();i++)
+                        {
+                            array1.put(i, list1.get(i));
+                        }
+                        jsonResponse.put("description", array1);
+                        //check hierna
+                        jsonResponse.put("comments", "true");
+                        jsonResponse.put("imgTotaal" , uRateServer.totaalImages);
+                        List < String > list = new ArrayList < String > ();
+                        for(int i = 0; i < uRateServer.totaalImages; i++)
+                        {
+                            String path = uRateServer.tmpCompressedImage[i].getAbsolutePath().replace("\\", "/");
+                            String path2 = path.substring(path.indexOf("/temp")+1, path.length());
+                            list.add(path2);  
+                        }
+
+                        JSONArray array = new JSONArray();
+                        for(int i = 0; i < list.size();i++)
+                        {
+                            array.put(i, list.get(i));
+                        }
+
+                        jsonResponse.put("imgPaths", array);
                     }
-                    
-                    JSONArray array = new JSONArray();
-                    for(int i = 0; i < list.size();i++)
+                    else
                     {
-                        array.put(i, list.get(i));
+                        jsonResponse.put("status","2");
+                        response.setContentType("application/json;charset=UTF-8");
+                        response.getWriter().print(jsonResponse);
+                        return;
                     }
-                    
-                    jsonResponse.put("imgPaths", array);
                 }
             } 
             catch (JSONException ex) 
