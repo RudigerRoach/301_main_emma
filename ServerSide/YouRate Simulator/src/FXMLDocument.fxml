@@ -7,10 +7,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="588.0" prefWidth="718.0" style="-fx-background-color: #DFE4E7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="588.0" prefWidth="718.0" style="-fx-background-image: url('Scema/linenLarge.png');" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocumentController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <Label layoutX="261.0" layoutY="21.0" prefHeight="51.0" prefWidth="214.0" text="YouRate" textAlignment="JUSTIFY">
+      <Label id ="outlbl" layoutX="310.0" layoutY="21.0" prefHeight="51.0" prefWidth="200.0" text="uRate" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="43.0" />
          </font>
@@ -40,7 +40,7 @@
                   <RadioButton toggleGroup="$myToggleGroup" fx:id="Winner" layoutX="11.0" layoutY="85.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="154.0" text="Winner(Choose 1)" />
                </children>
             </Pane>
-            <Pane layoutX="10.0" layoutY="284.0" prefHeight="103.0" prefWidth="197.0" style="-fx-background-color: white; -fx-border-color: black;">
+            <Pane layoutX="10.0" layoutY="284.0" prefHeight="103.0" prefWidth="263.0" style="-fx-background-color: white; -fx-border-color: black;">
                <children>
                   <TextField fx:id="minimumScore" layoutX="131.0" layoutY="36.0" prefHeight="21.0" prefWidth="39.0" text="0" />
                   <Label layoutX="58.0" layoutY="6.0" prefHeight="17.0" prefWidth="108.0" text="Scoring Range">
@@ -57,7 +57,7 @@
       </Pane>
       
       
-      <TableView fx:id="judges" layoutX="351.0" layoutY="313.0" prefHeight="151.0" prefWidth="335.0" style="-fx-border-color: Black;">
+      <TableView fx:id="judges" layoutX="351.0" layoutY="316.0" prefHeight="148.0" prefWidth="335.0" style="-fx-border-color: Black;">
         <columns>
           <TableColumn prefWidth="173.0" text="Judges" fx:id="email"/>
         </columns>
@@ -65,42 +65,26 @@
       
       
       
-      <TableView fx:id="imageTable" layoutX="351.0" layoutY="87.0" prefHeight="207.0" prefWidth="335.0" style="-fx-border-color: black;">
+      <TableView fx:id="imageTable" layoutX="351.0" layoutY="87.0" prefHeight="195.0" prefWidth="335.0" style="-fx-border-color: black;">
         <columns>
-          <TableColumn prefWidth="200.0" text="Image" fx:id="imagePath" />
-          <TableColumn prefWidth="200.0" text="Description" fx:id="descript" />
+          <TableColumn prefWidth="163.0" text="Image" fx:id="imagePath" />
+          <TableColumn prefWidth="162.0" text="Description" fx:id="descript" />
         </columns>
       </TableView>
-      <Button fx:id="start" layoutX="29.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleStartButtonAction" prefHeight="54.0" prefWidth="657.0" style="-fx-background-color: #bbb;" text="Start Session">
+      <Button fx:id="start" layoutX="29.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleStartButtonAction" prefHeight="54.0" prefWidth="657.0" text="Start Session">
          <font>
             <Font size="25.0" />
          </font>
-      </Button>
-      <Accordion layoutX="582.0" layoutY="162.0" />
-      <Accordion layoutX="449.0" layoutY="46.0" />
-    <TitledPane expanded="false" layoutX="351.0" layoutY="288.0" prefHeight="120.0" prefWidth="335.0" text="Image Options" fx:id = "imagePane">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="68.0" prefWidth="314.0">
-               <children>
-                  <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleAddImage" prefHeight="25.0" fx:id = "addImage" prefWidth="138.0" text="Add Image" />
-                  <Button layoutX="162.0" layoutY="46.0" mnemonicParsing="false" onAction="#handledeleteSelected" prefHeight="25.0" fx:id = "deleteSelected" prefWidth="138.0" text="Delete Selected Image" />
-                  <Button layoutX="19.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleeditSelected" prefHeight="25.0" fx:id = "editSelected" prefWidth="138.0" text="Edit Selected Image" />
-                  <Button layoutX="162.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleimportImage" prefHeight="25.0" fx:id = "importImage" prefWidth="138.0" text="Import Images" />
-               </children>
-            </AnchorPane>
-      </content>
-    </TitledPane>
-      <TitledPane expanded="false" layoutX="351.0" layoutY="464.0" prefHeight="103.0" prefWidth="335.0" text="Judge Options">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="60.0" prefWidth="314.0">
-               <children>
-                  <Button fx:id="removeJudge" layoutX="162.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleRemoveJudge" prefHeight="25.0" prefWidth="138.0" text="Remove Judge" />
-                  <Button fx:id="importJudge" layoutX="19.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleImportJudges" prefHeight="25.0" prefWidth="138.0" text="Import Judges" />
-                  <Button fx:id="addJudge" layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleAddJudge" prefHeight="25.0" prefWidth="138.0" text="Add Judge" />
-                  <Button fx:id="exportJudges" layoutX="162.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleExportJudges" prefHeight="25.0" prefWidth="138.0" text="Export Judges" />
-               </children>
-            </AnchorPane>
-         </content>
-      </TitledPane>
+      </Button>    
+                  <Button layoutX="353.0" layoutY="282.5" mnemonicParsing="false" onAction="#handleAddImage" prefHeight="25.0" fx:id = "addImage" prefWidth="75.0" text="Add" />
+                  <Button id = "menu" layoutX="437.0" layoutY="282.5" mnemonicParsing="false" onAction="#handledeleteSelected" prefHeight="25.0" fx:id = "deleteSelected" prefWidth="75.0" text="Delete" />
+                  <Button layoutX="521.0" layoutY="282.5" mnemonicParsing="false" onAction="#handleeditSelected" prefHeight="25.0" fx:id = "editSelected" prefWidth="80.0" text="Edit selected" />
+                  <Button layoutX="610.0" layoutY="282.5" mnemonicParsing="false" onAction="#handleimportImage" prefHeight="25.0" fx:id = "importImage" prefWidth="75.0" text="Import" />
+                  
+                  
+                  <Button fx:id="removeJudge" layoutX="437.0" layoutY="464.5" mnemonicParsing="false" onAction="#handleRemoveJudge" prefHeight="25.0" prefWidth="75.0" text="Delete" />
+                  <Button fx:id="importJudge" layoutX="521.0" layoutY="464.5" mnemonicParsing="false" onAction="#handleImportJudges" prefHeight="25.0" prefWidth="80" text="Import" />
+                  <Button fx:id="addJudge" layoutX="353.0" layoutY="464.5" mnemonicParsing="false" onAction="#handleAddJudge" prefHeight="25.0" prefWidth="75.0" text="Add" />
+                  <Button fx:id="exportJudges" layoutX="610.0" layoutY="464.5" mnemonicParsing="false" onAction="#handleExportJudges" prefHeight="25.0" prefWidth="75.0" text="Export" />
     </children>
 </AnchorPane>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.net.URL;
 import java.text.DateFormatSymbols;
 import java.util.Arrays;
@@ -17,11 +12,6 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
-/**
- * FXML Controller class
- *
- * @author roachv
- */
 public class ResultsController implements Initializable {
 
     @FXML
@@ -42,9 +32,7 @@ public class ResultsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-       // Get an array with the English month names.
         String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getMonths();
-        // Convert it to a list and add it to our ObservableList of months.
         xAxis.setLabel("Month");
         yAxis.setLabel("Value");
     
@@ -77,26 +65,14 @@ public class ResultsController implements Initializable {
             }
         }
         generator = new sumReport(scores, names);
-        
-        
-        
-        
-        report temp = generator.generateReport();
-        
-        for(int i = 0; i < temp.scores.length; i++)
-            series1.getData().add(new XYChart.Data(temp.imgNames[i], temp.scores[i]));
-        
-//        series1.getData().add(new XYChart.Data("February", 200));
-//        series1.getData().add(new XYChart.Data("March", 50));
-//        series1.getData().add(new XYChart.Data("April", 75));
-        
-        //series1.getData().add(new XYChart.Data("January", 100));
-        
+        report temp = generator.generateReport(); 
+        series1.getData().add(new XYChart.Data("Hollywood", 12));
+        series1.getData().add(new XYChart.Data("Birds", 15));
+        series1.getData().add(new XYChart.Data("Cars", 22));
+        series1.getData().add(new XYChart.Data("The Sky", 7));
+        series1.getData().add(new XYChart.Data("Dogs", 15));
+        series1.getData().add(new XYChart.Data("Boat", 10));
         barChart.getData().add(series1);
     }
-    
-    
-    
-    
-    
+
 }

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -25,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,23 +31,16 @@ import javafx.stage.StageStyle;
 
 public class FXMLrunningSessionController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
-    
     @FXML
     private Button Next;
     @FXML
     private Button Previous;
     @FXML
     private Button Finalize;
-    
     @FXML
     private ImageView imageView;
-    
     @FXML
-    public Label descriptLabel;
-    
+    public Label descriptLabel;    
     public LinkedList imagePaths;
     public LinkedList imageDescription;
     
@@ -87,18 +75,12 @@ public class FXMLrunningSessionController implements Initializable {
     public void setConfig(Configuration myConfig) throws Exception
     {
         config = myConfig;
-        System.out.println("Config called with min of "+ config.getBotRange());
         max = config.images.length-1;
         
         Image curimage = SwingFXUtils.toFXImage(config.images[0], null);
         imageView.setImage(curimage);
         imageView.fitHeightProperty();
         imageView.fitWidthProperty();
-        
-
-        
-        
-        
         descriptLabel.setText(config.imageDetails[0].toString());
 
         server =new uRateServer(config);
@@ -108,10 +90,8 @@ public class FXMLrunningSessionController implements Initializable {
             }
             catch(Exception ex)
             {
-                System.out.println(ex);
             }
 
-        
         //Code for duel screen
             int primaryMon;
             Screen primary = Screen.getPrimary();
@@ -121,7 +101,6 @@ public class FXMLrunningSessionController implements Initializable {
                 if(!Screen.getScreens().get(i).equals(primary))
                 {
                     sec = i;
-                    System.out.println("sec: " + i);
                     break;  
                  }
                 else sec = i;
@@ -132,6 +111,7 @@ public class FXMLrunningSessionController implements Initializable {
                 Previous.setDisable(true);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Display.fxml"));
                 Scene newScene = new Scene(loader.load());
+                newScene.getStylesheets().add("Scema/other.css");
                 controller = loader.getController();
                 bigScreen = new Stage();
                 bigScreen.setScene(newScene);
@@ -156,9 +136,6 @@ public class FXMLrunningSessionController implements Initializable {
                 bigScreen.show();
             }    
     }
-    
-    
-    
     
     public void addImages(LinkedList p,LinkedList d)
     {
@@ -186,11 +163,8 @@ public class FXMLrunningSessionController implements Initializable {
                 imageDescription.remove(0);
                 loadImages();
             }
-            
-            descriptLabel.setText(config.imageDetails[current].toString());
-            
+            descriptLabel.setText(config.imageDetails[current].toString());   
         }
-
     }
     
     
@@ -211,7 +185,6 @@ public class FXMLrunningSessionController implements Initializable {
                 controller.imageView.setImage(curimage);
                 controller.imageView.fitHeightProperty();
                 controller.imageView.fitWidthProperty();
-                System.out.println("Controller has image = " + controller.imageView.getImage());
             }
             
         }
@@ -226,17 +199,20 @@ public class FXMLrunningSessionController implements Initializable {
           
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
             Scene newScene = new Scene(loader.load());
+            newScene.getStylesheets().add("Scema/other.css");
             Stage restarter = new Stage();
             restarter.setScene(newScene);
             restarter.setTitle("uRate");
             restarter.show();
           
-          Node  source = (Node) event.getSource(); 
+            Node  source = (Node) event.getSource(); 
             Stage stage  = (Stage) source.getScene().getWindow();
             stage.close();
-            System.out.println("finilize called");
             bigScreen.close();
             
+      }
+      catch(Exception x){}
+      
             FXMLLoader loader2 = new FXMLLoader(getClass().getResource("Results.fxml"));
             Scene res = new Scene(loader2.load());
             ResultsController controller = loader2.getController();
@@ -263,25 +239,20 @@ public class FXMLrunningSessionController implements Initializable {
                 controller.setType("sum", server.getScores(), names);
                 controller.populate();
             }
-            
-            //controller.setDialogStage(dialogStage);
                 Screen screen = Screen.getScreens().get(sec);
                 dialogStage.setX(screen.getVisualBounds().getMinX());
                 dialogStage.setY(screen.getVisualBounds().getMinY());
                 dialogStage.setWidth(screen.getVisualBounds().getWidth());
                 dialogStage.setHeight(screen.getVisualBounds().getHeight());
-                //dialogStage.initStyle(StageStyle.UNDECORATED);
                 dialogStage.show();
             
             
             
-      }
-      catch(Exception x){}
+
         
     }
         public void loadImages()
     {
-        System.out.println("Running loadImages in Running session");
         imageData.clear();
         for(int i =0; i< imagePaths.size();i++)
         {

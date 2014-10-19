@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,22 +10,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javax.imageio.ImageIO;
 
-/**
- * FXML Controller class
- *
- * @author Endzeit
- */
 public class DisplayController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
     
-
     @FXML 
     public ImageView imageView;
+    
+    @FXML
+    public HBox hbox;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) 
@@ -45,10 +33,6 @@ public class DisplayController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(DisplayController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-//        Image image = new Image("image1.jpg",true);
-//        imageView = new ImageView();
-//        imageView.setImage(image);
     }
     BufferedImage[] myImages;
     public void setImages(BufferedImage[] toLoad) 

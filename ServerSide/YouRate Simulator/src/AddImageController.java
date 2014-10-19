@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -18,19 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Endzeit
- */
-
 public class AddImageController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
-    
-    
+ 
     @FXML
     private Button browse;
     
@@ -43,7 +26,6 @@ public class AddImageController implements Initializable {
     @FXML private Label lblIn;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
     
     String imagePath;
@@ -85,7 +67,6 @@ public class AddImageController implements Initializable {
         description = des;
     }
     
-    
     @FXML
     private void addImage(ActionEvent event) throws IOException 
     {
@@ -97,7 +78,6 @@ public class AddImageController implements Initializable {
         Node  source = (Node)  event.getSource(); 
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
-    
     }
     
 }

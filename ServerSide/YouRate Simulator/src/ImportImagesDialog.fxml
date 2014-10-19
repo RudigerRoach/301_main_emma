@@ -21,7 +21,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="26.0" prefWidth="194.0" text="Browse for images">
+            <Label prefHeight="26.0" prefWidth="212.0" text="Browse for images">
                <font>
                   <Font size="17.0" />
                </font>
@@ -29,16 +29,16 @@
                   <Insets bottom="25.0" />
                </GridPane.margin>
             </Label>
-            <Button fx:id="add" onAction="#addImage" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="96.0" text="Add" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Button fx:id="add" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addImage" prefHeight="35.0" prefWidth="96.0" text="Add" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin>
             </Button>
-            <Label fx:id = "lblPhotos" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="212.0" GridPane.columnIndex="1">
+            <Label fx:id="lblPhotos" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="212.0" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets top="25.0" />
                </GridPane.margin></Label>
-            <Label prefHeight="26.0" prefWidth="211.0" text="Browse for description file(.txt)" GridPane.rowIndex="1">
+            <Label prefHeight="26.0" prefWidth="211.0" text="Browse for description file" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
@@ -46,15 +46,15 @@
                   <Insets bottom="25.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id = "lblFile" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="208.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="lblFile" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="208.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets top="25.0" />
                </GridPane.margin></Label>
-            <Button onAction="#browseForFile" mnemonicParsing="false" text="Browse" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" onAction="#browseForFile" text="Browse" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="25.0" />
                </GridPane.margin></Button>
-            <Button onAction="#browseForImages" mnemonicParsing="false" text="Browse" GridPane.columnIndex="1">
+            <Button mnemonicParsing="false" onAction="#browseForImages" text="Browse" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets bottom="25.0" />
                </GridPane.margin></Button>

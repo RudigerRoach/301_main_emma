@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -88,12 +82,8 @@ public class FXMLDocumentController implements Initializable{
     
     @FXML
     private void handleStartButtonAction(ActionEvent event) throws IOException, Exception {
-        System.out.println("You called me!");
-        
         String problems = "";
-        boolean ok = true;
-        
-        
+        boolean ok = true;  
         linkedList names = new linkedList();
         linkedList name1 = new linkedList();
         linkedList name2 = new linkedList();
@@ -114,24 +104,26 @@ public class FXMLDocumentController implements Initializable{
         name4.next = name5;
         
         BufferedImage[] images = null;
+        int notbuff=0;
         if(imagePaths.isEmpty() != true)
         {
             images = new BufferedImage[imagePaths.size()];
             for(int i = 0; i< imagePaths.size();i++)
+            {
+                try
+                {
                 images[i]= ImageIO.read(new File(imagePaths.get(i).toString()));
-            System.out.println("image in 0 : " +images[0]);
+                }
+                catch(Exception x){notbuff++;}
+            }
         }
-        
-        
-        
-        
         
         String[] judges = new String[judgesLL.size()];
         for(int i = 0; i< judgesLL.size();i++)
             judges[i]= judgesLL.get(i).toString();
         
         String[] imgDetails = new String[imageDescription.size()]; 
-        for(int i = 0; i< imageDescription.size();i++)
+        for(int i = 0; i< imageDescription.size()-notbuff;i++)
             imgDetails[i]= imageDescription.get(i).toString();
         
         String minStr = minimumScore.getText();
@@ -209,11 +201,6 @@ public class FXMLDocumentController implements Initializable{
         if(ok == true)
         {
             
-            System.out.println("Judges: ");
-            
-            for(int i = 0; i < judges.length;i++)
-                System.out.println("Judges in list: "+ judges[i]);
-             
             //Create Configuration
             mySession = new Configuration(names,images,judges,max,min,open,cont,imgDetails,type,comments);
 
@@ -221,6 +208,7 @@ public class FXMLDocumentController implements Initializable{
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLrunningSession.fxml"));
             Scene newScene = new Scene(loader.load());
+            newScene.getStylesheets().add("Scema/other.css");
             Stage newStage = new Stage();
             newStage.setScene(newScene);
             newStage.setTitle("Emma Simulator");
@@ -249,17 +237,20 @@ public class FXMLDocumentController implements Initializable{
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddImage.fxml"));
         Scene newScene = new Scene(loader.load());
+        newScene.getStylesheets().add("Scema/other.css");
         AddImageController controller = loader.getController();
         Stage dialogStage = new Stage();
         dialogStage.setScene(newScene);
         dialogStage.setTitle("Add Image");
-        //controller.setDialogStage(dialogStage);
         dialogStage.showAndWait();
         if(controller.valid == true)
         {
+            try
+            {
             imagePaths.add(controller.imagePath);
             imageDescription.add(controller.description);  
-            System.out.println("after add shows descript: "+ controller.description);
+            }
+            catch(Exception x){}
         }
         loadImages();
     }
@@ -267,10 +258,13 @@ public class FXMLDocumentController implements Initializable{
     @FXML
     private void handledeleteSelected(ActionEvent event) throws IOException 
     {
-        int selectedIndex = imageTable.getSelectionModel().getSelectedIndex();
-        System.out.println("item in table is at index " + selectedIndex);
-        imagePaths.remove(selectedIndex);
-        imageDescription.remove(selectedIndex);
+        try
+        {
+            int selectedIndex = imageTable.getSelectionModel().getSelectedIndex();
+            imagePaths.remove(selectedIndex);
+            imageDescription.remove(selectedIndex);
+        }
+        catch(Exception x){}
         loadImages();
     }
     
@@ -280,9 +274,9 @@ public class FXMLDocumentController implements Initializable{
         try
         {
             int selectedIndex = imageTable.getSelectionModel().getSelectedIndex();
-            System.out.println("item in table is at index " + selectedIndex);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddImage.fxml"));
             Scene newScene = new Scene(loader.load());
+            newScene.getStylesheets().add("Scema/other.css");
             AddImageController controller = loader.getController();
             Stage dialogStage = new Stage();
             dialogStage.setScene(newScene);
@@ -299,8 +293,6 @@ public class FXMLDocumentController implements Initializable{
                 else
                     imagePaths.add(imp);
                 imageDescription.add(controller.description.toString()); 
-                
-//                System.out.println("after add shows descript: "+ controller.description);
             loadImages();
             
         }catch(Exception x){}
@@ -313,6 +305,7 @@ public class FXMLDocumentController implements Initializable{
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ImportImagesDialog.fxml"));
         Scene newScene = new Scene(loader.load());
+        newScene.getStylesheets().add("Scema/other.css");
         ImportImagesDialogController controller = loader.getController();
         Stage dialogStage = new Stage();
         dialogStage.setScene(newScene);
@@ -320,12 +313,17 @@ public class FXMLDocumentController implements Initializable{
         dialogStage.showAndWait();
         if(controller.valid == true)
         {
-            
+            int notAdded = 0;
             for(int i = 0; i < controller.imagePaths.size(); i++)
             {
-                imagePaths.add(controller.imagePaths.get(i));                
+                int spot = controller.imagePaths.get(i).toString().indexOf(".") + 1;
+                        String ext = controller.imagePaths.get(i).toString().substring(spot);
+                if(ext.equals("jpg")||ext.equals("png"))
+                    imagePaths.add(controller.imagePaths.get(i));
+                else notAdded++;
             }
-            if(controller.imagePaths.size() < controller.descriptions.size())
+
+            if(controller.imagePaths.size()-notAdded < controller.descriptions.size())
             {
                 for(int i = 0; i < controller.imagePaths.size(); i++)
                 {
@@ -340,7 +338,7 @@ public class FXMLDocumentController implements Initializable{
                     imageDescription.add(controller.descriptions.get(i));
 
                 }
-                int diff = controller.imagePaths.size() - controller.descriptions.size();
+                int diff = (controller.imagePaths.size()-notAdded) - controller.descriptions.size();
                 for(int i = 0; i < diff; i++)
                 {
                     imageDescription.add("");
@@ -355,10 +353,14 @@ public class FXMLDocumentController implements Initializable{
     @FXML
     private void handleRemoveJudge(ActionEvent event) throws IOException 
     {
-        int selectedIndex = judges.getSelectionModel().getSelectedIndex();
-        System.out.println("item in table is at index " + selectedIndex);
-        judgesLL.remove(selectedIndex);
-        loadJudges();
+        try
+        {
+            int selectedIndex = judges.getSelectionModel().getSelectedIndex();
+            judgesLL.remove(selectedIndex);
+            loadJudges();
+        }
+        catch(Exception x){}
+        
     }
     
     @FXML
@@ -369,16 +371,19 @@ public class FXMLDocumentController implements Initializable{
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         myChooser.getExtensionFilters().add(extFilter);
         File selectedFile = myChooser.showOpenDialog(fileGetter);
+        try
+        {    
+            FileReader fr = new FileReader(selectedFile.getAbsolutePath()); 
+            BufferedReader br = new BufferedReader(fr); 
+            String s; 
+            while((s = br.readLine()) != null) 
+            { 
+                judgesLL.add(s);
+            } 
+            fr.close(); 
+        }
+        catch(Exception x){}
         
-        FileReader fr = new FileReader(selectedFile.getAbsolutePath()); 
-        BufferedReader br = new BufferedReader(fr); 
-        String s; 
-        while((s = br.readLine()) != null) 
-        { 
-            judgesLL.add(s);
-            System.out.println("Imported Judge: " +s);
-        } 
-        fr.close(); 
         loadJudges();
         
         
@@ -390,6 +395,7 @@ public class FXMLDocumentController implements Initializable{
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddJudgeDialog.fxml"));
         Scene newScene = new Scene(loader.load());
+        newScene.getStylesheets().add("Scema/other.css");
         AddJudgeDialogController controller = loader.getController();
         Stage dialogStage = new Stage();
         dialogStage.setScene(newScene);
