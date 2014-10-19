@@ -63,7 +63,7 @@ High Level Use Case Diagram
 \item Usability \\
 99 \% of users should be able to use the system with little to no prior training.
 \item Scalability \\
-The deployed system must be able to operate effectively under the load of 50 concurrent users. The 50 users will be handled by Jetty which creates a thread for each person that connects to certain servlet at a point in time thus it will be able to handle the concurrency. It will be tested by creating a thread pool of 50 threads and doing 50 unit tests concurrently. If further scalability is needed it could be achieved since jetty supports clustering.
+The deployed system must be able to operate effectively under the load of 50 concurrent users. The 50 users will be handled by Jetty which creates a thread for each person that connects to certain servlet at a point in time thus it will be able to handle the concurrency. It will be tested by creating a thread pool of 50 threads and doing 50 unit tests concurrently.
 \item Installability \\
 It should be easy to install the server side component and the effort to get it running each club night should be minimal. There will be a computer at the event running the EMMA server component and our server should be installed on it. The application should also be easy to download and install on the judges phone.
 \item Performance requirements \\
@@ -93,7 +93,7 @@ The mobile application will have to go through a web-service which will be the p
 \item JIRA Framework for the SCRUM agile method.
 \item Appcelerator Titanium framework which is an open-source software development kit for cross-platform mobile development.
 \item Jetty for hosting server and servlet handling.
-\item Jasmine framework to run javascript unit  testing in the Titanium framework.
+\item TiJasmine framework to run javascript unit  testing in the Titanium framework.
 \item JUnit for java unit testing framework.
 \end{itemize}
 \subsection{Technologies and languages}
@@ -130,24 +130,12 @@ Create Judging Session Use Case Diagram
 
 \subsubsection{Voting}
 If a user logs in before the event starts, a loading screen will be displayed until the event starts. The server will inform the user's application when the event starts. The server will then pass through the first image and the details about the image. The details will contain the image name, the bottom and top score ranges as well as if comments must be enabled. The users will vote for the image and will be able to leave a comment if the comments are enabled. The server will either have a time limit per image or the server will check if all users have submitted their vote. If not all users have submitted their vote, the server will notify those users. If all users have submitted their vote, the next image and its details will be displayed. This will continue until all images have been scored. The user will be notified that voting is done.
-\\\\
-\textbf{Number based scoring\\}
-The server sends the image name, current image path, the bottom and top score ranges as well as if comments must be enabled  to the application. The user can choose to move the slider to change the score or he can click on the score text area to change the score by typing in the score on the on-screen keyboard. When the user is satisfied with the score he gave, he should click on the submit button. The server will then receive the score and the following image will be send to the application when ready or the user will be notified that the session is complete. If the session is complete the user will be logged out and taken to the login screen.
-\\\\
-\textbf{Elimination round\\}
-The server sends the image name, current image path as well as if comments must be enabled to the application. The user can click on the Yes or No button. When the user is satisfied with his choice, he should click on the submit button. The server will then receive his choice and the following image will be send to the application when ready or the user will be notified that the session is complete. If the session is complete the user will be logged out and taken to the login screen.
-\\\\
-\textbf{Choose a winner\\}
-The server sends a list of image names as well as an array containing all the image paths to the application. The user can swipe through the images on his own time and select any image as the winner. When the user is satisfied with his choice, he should click on the submit button. The server will then receive his choice and the following image will be send to the application when ready or the user will be notified that the session is complete. If the session is complete the user will be logged out and taken to the login screen.
-\\  
+
 \begin{center}
 \advance\leftskip-1.cm
 \includegraphics[width=80mm]{Pictures/Vote.jpg} \\
 Voting Use Case Diagram 
 \end{center}
-
-\subsubsection{Internationalisation}
-The application is able to handle different languages. The languages are device dependant, thus the application text will be displayed in the language that the device is currently set to. The default language is English, thus if the device is set to an unsupported language the application will default to English. The following languages are supported: English, Afrikaans, French and Dutch.
 
 \subsection{Use case prioritization}
 Critical Use Cases are the main cases that the system is made up of namely: Login, Create Judging Session and Voting. Without these cases the system will have limited to no functionality which will lead to a system that is not required by anyone.
@@ -229,6 +217,57 @@ Junit netbeans plugin for the server side.
 \item Have about 70 percent test coverage on the server side. 
 \end{itemize}
 \includegraphics[scale=0.55]{Pictures/results.jpg}
+
+\section{Project management}
+\subsection{Software development process}
+We followed the scrum software development methodology. Its agility, in terms of requirements, meant that the project was able to grow during development, while we where discovering new requirements from the client.
+\subsection{Issue management}
+On the clients suggestion, we used the Jira issue tracking system, combined with git and gitHub for version control.
+\pagebreak
+\subsection{Team profile}
+Melany Barnes:
+\begin{itemize}
+\item Team Lead.
+\item Developing the bulk of the mobile app front-end.
+\end{itemize}
+Dieter Doman:
+\begin{itemize}
+\item Developing the back-end of the server app.
+\end{itemize}
+Johan Esterhuyse:
+\begin{itemize}
+\item Developing the front end for the server app.
+\item Paying special attention to documentation and diagrams.
+\end{itemize}
+Rudiger Roach:
+\begin{itemize}
+\item Developing the back-end of the mobile app.
+\item Developing the database for the server app.
+\item Assisted in development of the mobile app front-end.
+\end{itemize}
+\subsection{Project progress}
+We aimed to provide burndown charts for the entire project progress but unfortunately The issue tracking system ran from a server at the clients' residence and it experienced a lot of down-time. Luckily we can provide burndown charts for the following sprints:
+\begin{itemize}
+\item Authentication\\
+\includegraphics[width=80mm]{Pictures/Auth.png}
+\item Auto login\\
+\includegraphics[width=80mm]{Pictures/ALchart.png}.
+\item Voting with 1 image\\
+\includegraphics[width=80mm]{Pictures/v1i.png}
+\end{itemize}
+\subsection{un-implemented functionality}
+\begin{itemize}
+\item Displaying results after voting has completed after.
+\item the mobile app is unaware of a server crash and will wait indefinitely in this case.
+\end{itemize}
+\subsection{Main risks and challenges faced}
+\begin{itemize}
+\item Getting to know Jira and issue tracking.
+\item Getting to know the Appcelerator platform.
+\item Getting to know JavaFX using FXML.
+\item Multi platform support.
+\item Multi resolution support.
+\end{itemize}
 \section{Glossary}
 EMMA - Entry and Member Management Application\\
 His - Refers to his/her\\
