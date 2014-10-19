@@ -6,6 +6,7 @@ var isIOS = ui.isIOS();
 
 //declare variables and use defaults for testing
 var commentButton = null;
+var commentBox = null;
 var commentText = "";
 var chosen = -1;
 var cancelIcon;
@@ -15,6 +16,7 @@ var fullScreen = false;
 var comments = false;
 var imagePath = "/universal/placeholder.png";
 var screenLeft = 0;
+var displayAsButton = (Ti.App.Properties.getString('commentEntry') == 'button') ? true : false;
 
 //Server calls
 title = service.description();
@@ -39,13 +41,39 @@ function resizePage() {
 	$.submitButton.opacity = 0.3;
 	screenLeft = $.submitButton.top;
 
-	if (comments == true) {
+	if (comments == true) {/*
 		if (commentButton == null) {
 			commentsEnabled();
 		}
 		commentButton.top = screenLeft - 70;
 		commentButton.width = screenWidth - 40;
-		screenLeft = commentButton.top;
+		screenLeft = commentButton.top;*/
+		
+		if (displayAsButton && commentButton == null) {
+			commentButtonEnabled();
+			commentButton.top = screenLeft - 70;
+			screenLeft = commentButton.top;
+			$.sliderArea.blur();
+		} else if (displayAsButton && commentButton != null) {
+			commentButton.top = screenLeft - 70;
+			commentButton.width = screenWidth - 40;
+			commentArea.width = screenWidth - 40;
+			screenLeft = commentButton.top;
+			$.sliderArea.blur();
+		} else if (!displayAsButton && commentBox == null) {
+			commentsEnabled();
+			commentBox.top = screenLeft - 70;
+			commentLab.top = screenLeft - 100;
+			screenLeft = commentLab.top;
+			$.sliderArea.blur();
+		} else if (!displayAsButton && commentBox != null) {
+			commentBox.top = screenLeft - 70;
+			commentLab.top = screenLeft - 100;
+			commentBox.width = screenWidth - 40;
+			commentArea.width = screenWidth - 40;
+			screenLeft = commentLab.top;
+			$.sliderArea.blur();
+		}
 	}
 
 	$.yesButton.top = screenLeft - 100;
@@ -109,21 +137,49 @@ function doNo() {
 }
 
 function commentsEnabled() {
-	commentButton = ui.getCommentButton();
+	commentLab = ui.getCommentLabel();
+	commentBox = ui.getCommentBox();
 	commentArea = ui.getCommentArea();
-
-	commentButton.addEventListener('click', function(e) {
-		$.yesNoPage.add(commentArea);
+	commentArea.addEventListener('setFocus', function(e) {
 		commentArea.focus();
+	});
+	commentBox.addEventListener('focus', function(e) {
+		$.normalPage.add(commentArea);
+		commentArea.fireEvent('setFocus');
 	});
 	commentArea.addEventListener('blur', function(e) {
 		commentText = commentArea.value;
-		$.yesNoPage.remove(commentArea);
+		commentBox.value = commentText;
+		commentArea.blur();
+		$.normalPage.remove(commentArea);
 	});
 	commentArea.addEventListener('return', function(e) {
 		commentArea.blur();
 	});
-	$.yesNoPage.add(commentButton);
+	$.normalPage.add(commentLab);
+	$.normalPage.add(commentBox);
+}
+
+function commentButtonEnabled() {
+	commentButton = ui.getCommentButton();
+	commentArea = ui.getCommentArea();
+
+	commentArea.addEventListener('setFocus', function(e) {
+		commentArea.focus();
+	});
+	commentButton.addEventListener('click', function(e) {
+		$.normalPage.add(commentArea);
+		commentArea.fireEvent('setFocus');
+	});
+	commentArea.addEventListener('blur', function(e) {
+		commentText = commentArea.value;
+		commentArea.blur();
+		$.normalPage.remove(commentArea);
+	});
+	commentArea.addEventListener('return', function(e) {
+		commentArea.blur();
+	});
+	$.normalPage.add(commentButton);
 }
 
 function fullScreenImage() {

@@ -77,7 +77,16 @@ exports.getCommentBox = function() {
 		width : platformWidth - 40,
 		left : 20,
 		height : 50,
+		borderWidth : "1",
+		borderColor : "#bbb",
 		borderRadius : "8",
+		backgroundColor : "#bbb",
+		textAlign : "left",
+		color : "black",
+		font : {
+			fontSize : 20,
+			fontFamily : 'Helvetica Neue'
+		}
 	});
 	return commentArea;
 };
@@ -99,7 +108,6 @@ exports.getCommentButton = function() {
 		borderRadius : "8",
 		backgroundColor : "#bbb",
 		color : "black",
-
 		textAlign : "center",
 		font : {
 			fontSize : 24,
@@ -120,12 +128,11 @@ exports.getCommentArea = function() {
 		width : platformWidth - 40,
 		left : 20,
 		height : 200,
-		color : "black",
-		backgroundColor : "white",
-		borderWidth : "2",
+		borderWidth : "1",
 		borderColor : "#bbb",
-		borderRadius : "5",
-		textAlign : "left",
+		borderRadius : "8",
+		backgroundColor : "#bbb",
+		color : "black",
 		font : {
 			fontSize : 20,
 			fontFamily : 'Helvetica Neue'

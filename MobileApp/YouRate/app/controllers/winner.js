@@ -37,11 +37,11 @@ function resizePage() {
 	}
 	screenLeft = screenHeight;
 
+	$.submitButton.opacity = 0.3;
 	$.submitButton.top = screenHeight - 70;
 	$.submitButton.width = screenWidth - 40;
 	screenLeft = $.submitButton.top;
 
-	$.winnerButton.opacity = 0.3;
 	$.winnerButton.top = screenLeft - 100;
 	$.winnerButton.width = screenWidth - 40;
 	screenLeft = $.winnerButton.top;
@@ -89,7 +89,7 @@ function doSubmit(e) {
 
 $.winnerButton.addEventListener('click', function(e) {	
 	chosen = photosView.currentPage;
-	$.winnerButton.opacity = 1;
+	$.submitButton.opacity = 1;
 	$.winnerButton.borderWidth = 3;
 	$.winnerButton.borderColor = "black";
 });
