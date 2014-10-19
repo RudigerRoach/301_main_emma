@@ -5,9 +5,9 @@ var service = require('VoteSession');
 var isIOS = ui.isIOS();
 var updateSlider = false;
 var firstload = true;
-//a boolean that will ONLY be true up untill the page has completed drawing for the first time
+//A boolean that will ONLY be true up untill the page has completed drawing for the first time
 
-//declare variables and use defaults for testing
+//Declare variables and use defaults for testing
 var commentButton = null;
 var commentBox = null;
 var commentText = "";

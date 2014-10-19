@@ -1,7 +1,3 @@
-"#votePage": {
-	backgroundColor: "#DFE4E7",
-	exitOnClose: true
-},
 "#currentImage": 
 {
 	top: 60,

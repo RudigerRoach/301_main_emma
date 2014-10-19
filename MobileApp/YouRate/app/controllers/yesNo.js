@@ -1,10 +1,8 @@
-//CHECK FULLSCREEN OPACITIES
-
 var ui = require('ui');
 var service = require('VoteSession');
 var isIOS = ui.isIOS();
 
-//declare variables and use defaults for testing
+//Declare variables and use defaults for testing
 var commentButton = null;
 var commentBox = null;
 var commentText = "";
@@ -41,14 +39,7 @@ function resizePage() {
 	$.submitButton.opacity = 0.3;
 	screenLeft = $.submitButton.top;
 
-	if (comments == true) {/*
-		if (commentButton == null) {
-			commentsEnabled();
-		}
-		commentButton.top = screenLeft - 70;
-		commentButton.width = screenWidth - 40;
-		screenLeft = commentButton.top;*/
-		
+	if (comments == true) {		
 		if (displayAsButton && commentButton == null) {
 			commentButtonEnabled();
 			commentButton.top = screenLeft - 70;

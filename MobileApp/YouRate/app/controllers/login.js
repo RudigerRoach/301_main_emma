@@ -34,10 +34,7 @@ function doLogin()
 	service = require('Authentication');
 	service.login(email);
 
-	//INFINITE LOOP???
 	testStatus(service);
-
-	//goForward(service);
 };
 
 function goForward(service) {

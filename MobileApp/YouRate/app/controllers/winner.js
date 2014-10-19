@@ -4,10 +4,10 @@ var isIOS = ui.isIOS();
 var updateSlider = false;
 var screenLeft;
 
-//declare variables and use defaults for testing
+//Declare variables and use defaults for testing
 var photosView = null;
 var screenLeft;
-var chosen = -1;
+var chosen = "-1";
 var cancelIcon;
 var label;
 var im;
@@ -37,7 +37,10 @@ function resizePage() {
 	}
 	screenLeft = screenHeight;
 
-	$.submitButton.opacity = 0.3;
+	if(chosen == "-1")
+	{
+		$.submitButton.opacity = 0.3;
+	}
 	$.submitButton.top = screenHeight - 70;
 	$.submitButton.width = screenWidth - 40;
 	screenLeft = $.submitButton.top;

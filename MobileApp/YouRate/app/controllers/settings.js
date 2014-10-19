@@ -20,7 +20,7 @@ function setIP() {
 			buttonNames : [L('ok'), L('cancel')]
 		});
 		dialog.addEventListener('click', function(e) {
-			if (e.index != 1) {//if the button clicked whas not 'cancel'
+			if (e.index != 1) {//If the button clicked was not 'cancel'
 				setAdress(e.text);
 			}
 		});
@@ -33,7 +33,7 @@ function setIP() {
 			buttonNames : [L('confirm'), L('cancel')]
 		});
 		dialog.addEventListener('click', function(e) {
-			if (e.index != 1) {//if the button clicked whas not 'cancel'
+			if (e.index != 1) {//If the button clicked was not 'cancel'
 				setAdress(textfield.value);
 			}
 		});
@@ -55,7 +55,7 @@ function setCommentType() {
 			buttonNames : [L('btn'), L('txt'), L('cancel')]
 		});
 		dialog.addEventListener('click', function(e) {
-			if (e.index == 0) {//if the button clicked whas 'Show button'
+			if (e.index == 0) {//If the button clicked was 'Show button'
 				setType('button');
 			} else if (e.index == 1) {
 				setType('textbox');
@@ -68,7 +68,7 @@ function setCommentType() {
 			buttonNames : [L('btn'), L('txt'), L('cancel')]
 		});
 		dialog.addEventListener('click', function(e) {
-			if (e.index == 0) {//if the button clicked whas 'Show button'
+			if (e.index == 0) {//If the button clicked was 'Show button'
 				setType('button');
 			} else if (e.index == 1) {
 				setType('textbox');
