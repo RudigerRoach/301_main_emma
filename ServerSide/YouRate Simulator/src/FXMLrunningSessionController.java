@@ -236,7 +236,7 @@ public class FXMLrunningSessionController implements Initializable {
 //            else
 //            {
                 controller.setName("Final Scores");
-                controller.setType("sum", server.getScores(), names);
+//                controller.setType("sum", server.getScores(), names);
                 controller.populate();
 //            }
                 Screen screen = Screen.getScreens().get(sec);
