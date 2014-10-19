@@ -208,6 +208,7 @@ During our test we had a user group of 6 random people. We run a the 3 different
 \item Add an comment and submit your winner.
 \end{enumerate}
 \paragraph{}
+\includegraphics[scale=0.55]{Pictures/results.jpg}
 \subsection{How tests where executed}
 \paragraph{}
 Junit netbeans plugin for the server side.
@@ -216,7 +217,6 @@ Junit netbeans plugin for the server side.
 \item Have about 60 percent test coverage on the mobile side.
 \item Have about 70 percent test coverage on the server side. 
 \end{itemize}
-\includegraphics[scale=0.55]{Pictures/results.jpg}
 
 \section{Project management}
 \subsection{Software development process}
@@ -268,6 +268,109 @@ We aimed to provide burndown charts for the entire project progress but unfortun
 \item Multi platform support.
 \item Multi resolution support.
 \end{itemize}
+\section{User manual for server}
+\subsection{Creating a session}
+\begin{enumerate}
+\item Specify the Session type:
+\begin{enumerate}
+\item Normal is a session where the user rates each picture based on general impression.
+\item Yes/No is a session where the user states whether they think a picture should go to the next round or not.
+\item Winner is a session where the user chooses one winner and the picture with the most votes wins.
+\end{enumerate}
+\item Specify if the session is a controlled session or not.
+\begin{enumerate}
+\item If the creator of the session would like to guide the judges through voting then tick the box.
+\item If the creator of the session would like judges to judge on their own time then don't tick the box.
+\end{enumerate}
+\item Specify if the session should be open to all judges.
+\begin{enumerate}
+\item If anyone can judge then tick the box.
+\item If only specific people may judge then don't tick the box.
+\end{enumerate}
+\item Specify whether comments should be enabled.
+\begin{enumerate}
+\item If you want the judges to give their opinion then tick the box.
+\item If you don't want judges to give their opinion then don't tick the box.
+\end{enumerate}
+\item Specify the minimum and maximum scores.
+\begin{enumerate}
+\item Minimum has to be smaller than maximum.
+\end{enumerate}
+\item Add Images to the voting session.
+\begin{enumerate}
+\item Click the "+" button to add a single image.
+\begin{enumerate}
+\item Click browse and select an image.
+\item Type in a description.
+\end{enumerate}
+\item Click the "++" button to import multiple images.
+\begin{enumerate}
+\item Click the browse next to the "select images" and select the images.
+\item Click the browse next to the "select description file" and select the description file.
+\begin{enumerate}
+\item The description file is a file which specifies the details for each image one line at a time.
+\end{enumerate}
+\end{enumerate}
+\item Click the gear button to edit a selected image.
+\begin{enumerate}
+\item First select the image.
+\item Click the gear.
+\item Specify the changes.
+\end{enumerate}
+\item Click the "-" button to delete a selected image.
+\begin{enumerate}
+\item First select the image.
+\item Click the "-" button to remove the selected image.
+\end{enumerate}
+\end{enumerate}
+\item Add Judges to the voting session(only neccesary if open judging(see 3. of manual) is not enabled).
+\begin{enumerate}
+\item Click the "+" button to add a judge.
+\begin{enumerate}
+\item Specify the judges email address and click add.
+\end{enumerate}
+\item Click the "-" button to remove the selected judge.
+\begin{enumerate}
+\item First select the judge.
+\item Click the "-" button to remove the selected judge.
+\end{enumerate}
+\item Click the "++" button to import judges.
+\begin{enumerate}
+\item Click browse and select a judges file.
+\begin{enumerate}
+\item A judges file is a file that specifies the email addresses of judges one at a time.
+\end{enumerate}
+\end{enumerate}
+\item Click the ">>" button to export images.
+\begin{enumerate}
+\item Browse to where you want to save the file and click save.
+\end{enumerate}
+\end{enumerate}
+\item Click "Start Session" in order to start running a session.
+\begin{enumerate}
+\item If any data is missing, the creator will be informed.
+\end{enumerate}
+\end{enumerate}
+\subsection{Controlling the session:}
+\begin{enumerate}
+\item Click the "Next" button in order to preview the next image.
+\begin{enumerate}
+\item If this is a controlled session(See session creation point 2), this will take the judges(using app) to the next image.
+\end{enumerate}
+\item Click the "Previous" button to go back to the previous image.
+\begin{enumerate}
+\item This is not possible if the session is controlled(See session creation point 2).
+\end{enumerate}
+\item When all judges are done voting click on "Finalize Session".
+\begin{enumerate}
+\item This will end the judging and then display the results.
+\end{enumerate}
+\end{enumerate}
+\subsection{Importing project for further development}
+Since by the client's request the only wanted an netbeans project. Thus open project in netbeans after pulling from our git repository and import the all the external libraries under external libraries folder.
+\subsection{Installing the server}
+\paragraph{}
+Run following command after building project in netbeans(which will create jar file in dist folder) in command line in the dist folder: "java -jar YouRate Simulator.jar"
 \section{Glossary}
 EMMA - Entry and Member Management Application\\
 His - Refers to his/her\\
