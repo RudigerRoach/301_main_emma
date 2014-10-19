@@ -373,6 +373,44 @@ Since by the client's request the only wanted an netbeans project. Thus open pro
 \subsection{Installing the server}
 \paragraph{}
 Run following command after building project in netbeans(which will create jar file in dist folder) in command line in the dist folder: "java -jar YouRate Simulator.jar"
+\section{User manual for mobile application}
+\paragraph{}
+When the application opens up the app will first try to automatically log in (1.1). If the user has logged in using the device before, the server will recognise the device and automatically log the user into the app. If automatic login fails, the user will be redirected to the login screen.
+\paragraph{}
+Waiting screens with different messages might be encountered:
+\begin{itemize}
+\item Attempting automatic login… (See 1.1)
+\item Attempting to log in… (See 1.2)
+\item Waiting for server…  (See 1.3)
+\end{itemize}
+\paragraph{}
+The email address is validated, thus a valid email address must be entered. A message will be displayed if an invalid email address was entered and the login button was clicked. If the email address is valid the app will try to log in and a waiting screen (1.2) will be displayed. When the user is logged in successfully, waiting screen (1.3) will be shown. When an image on the server is ready to be displayed, the application will continue to the correct type of voting page (1.4, 1.5, 1.6)
+\paragraph{}
+Number based scoring (1.4):
+\paragraph{}
+The score can be changed by moving the slider or by clicking on the score text area. When a user clicks on the text area, the device onscreen keyboard will pop up and the user can enter a score.
+\paragraph{}
+\advance\leftskip-1.3cm
+\includegraphics[scale=0.3]{Pictures/ScoreKeyboard.png}
+\paragraph{}
+\includegraphics[scale=0.3]{Pictures/ScoreSlider.png}
+\paragraph{}
+Elimination round (1.5): 
+The user can choose between yes or no per image and then click on the submit button to submit their result.
+\paragraph{}
+\includegraphics[scale=0.3]{Pictures/YesNo.png}
+\paragraph{}
+Choose a winner (1.6):
+The user can swipe through the images and choose 1 as the winner and then click on the submit button to submit their result.
+\paragraph{}
+Changing the settings:
+The settings can be changed by clicking the device hardware menu button, if the device does not have a hardware menu button a settings icon will be displayed on the screen. The settings page will look as follows:
+\paragraph{}
+\advance\leftskip-1.3cm
+\includegraphics[scale=0.3]{Pictures/Settings.png}
+\paragraph{}
+The server address can be changed by clicking on “Set Server Address”. To successfully connect to the server, the correct server address must be entered. Example address: 192.168.0.100 or www.uRate.com
+To change the comment entry method, the “Set comment entry method” can be clicked. Comments can be entered via clicking a button or by having a textbox always visible on the screen.
 \section{Glossary}
 EMMA - Entry and Member Management Application\\
 His - Refers to his/her\\
