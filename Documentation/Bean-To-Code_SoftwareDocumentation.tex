@@ -100,9 +100,9 @@ The mobile application will have to go through a web-service which will be the p
 \begin{itemize}
 \item Java
 \item JavaScript
-\item XML
 \item db40 Object database
 \item JavaFX
+\item FXML
 \end{itemize}
 
 \pagebreak
@@ -194,6 +194,41 @@ Voting Activity Diagram
 \end{center}
 
 \subsection{Domain objects}
+\section{Testing Information}
+\subsection{Unit testing}
+\paragraph{}For unit testing we used Jasmine framework for the mobile side of our system which is a javascript unit testing framework. We used an mock java server for mobile unit testing and mock data to test specific functions in the code.
+\paragraph{} For the server side component of our system we used a JUnit testing framework. Used HTTP default clients to perform mock networks calls for the tests and mock data to test certain components of the server.
+\paragraph{}Mock data was set up to test the pre- and post conditions of the software contract.
+\subsection{Usability testing}
+\paragraph{}Our mobile side was developed focusing on user centered development. Through out the design and implementing of the mobile side users where consulted in short feedback cycles getting there inputs and new ideas how to make the application usable as possible.
+\paragraph{}
+During our test we had a user group of 6 random people. We run a the 3 different types of sessions with them. We gave them some tasks to do such as rotating the screen, change the language, evaluate the flow of voting. 
+\paragraph{} 
+\advance\leftskip-1.3cm
+\includegraphics[scale=0.55]{Pictures/ConsentForm.pdf}
+\pagebreak
+\paragraph{} Task that needed to be performed
+\begin{enumerate}
+\item Change the IP in the settings tab
+\item Change the comment setting in settings tab
+\item Login into the session
+\item Submit one score using textbox
+\item Submit one score using slidebar
+\item Finish the session
+\item For yes no session push yes then no then submit.
+\item Scroll between photos to select a winner
+\item Add an comment and submit your winner.
+\end{enumerate}
+\paragraph{}
+\subsection{How tests where executed}
+\paragraph{}
+Junit netbeans plugin for the server side.
+\subsection{Test coverage}
+\begin{itemize}
+\item Have about 60 percent test coverage on the mobile side.
+\item Have about 70 percent test coverage on the server side. 
+\end{itemize}
+\includegraphics[scale=0.55]{Pictures/results.jpg}
 \section{Glossary}
 EMMA - Entry and Member Management Application\\
 His - Refers to his/her\\
