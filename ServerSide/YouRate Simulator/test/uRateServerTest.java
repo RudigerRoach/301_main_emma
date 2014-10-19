@@ -64,7 +64,7 @@ public class uRateServerTest extends TestCase {
         BufferedImage[] tmp3 = new BufferedImage[2];
         tmp3[0] = ImageIO.read(new File("image1.jpg"));
         tmp3[1] = ImageIO.read(new File("image2.jpg"));
-        Configuration tmp = new Configuration(tmp2, tmp3, _judges,10,0,false,false,tmp1,"normal");
+        Configuration tmp = new Configuration(tmp2, tmp3, _judges,10,0,false,false,tmp1,"normal",true);
         server = new uRateServer(tmp);
     }
     

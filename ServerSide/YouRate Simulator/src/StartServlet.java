@@ -63,7 +63,7 @@ public class StartServlet extends HttpServlet
                         jsonResponse.put("rangeTop", uRateServer.session.getTopRange());
                         jsonResponse.put("description", uRateServer.session.getImageDetails(current));
                         //check hierna
-                        jsonResponse.put("comments", "true");
+                        jsonResponse.put("comments", uRateServer.session.getCommentsEnabled());
                         String path = uRateServer.tmpCompressedImage[current].getAbsolutePath().replace("\\", "/");
                         String path2 = path.substring(path.indexOf("/temp")+1, path.length());
                         jsonResponse.put("imgPath",path2);

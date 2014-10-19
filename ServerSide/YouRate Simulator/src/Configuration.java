@@ -20,8 +20,9 @@ public class Configuration
     Boolean controlledSession = true;
     String[] imageDetails;
     String type;
+    Boolean commentsEnabled;
     
-    public Configuration(linkedList _imageID, BufferedImage[] _images, String[] _judges,int _topRange,int _botRange, Boolean _openSession,Boolean _controlledSession,String[] _imageDetails,String _type )
+    public Configuration(linkedList _imageID, BufferedImage[] _images, String[] _judges,int _topRange,int _botRange, Boolean _openSession,Boolean _controlledSession,String[] _imageDetails,String _type,Boolean _commentsEnabled )
     {
         imageID = _imageID;
         images = _images;
@@ -32,6 +33,7 @@ public class Configuration
         controlledSession = _controlledSession;
         imageDetails = _imageDetails;
         type = _type;
+        commentsEnabled = _commentsEnabled;
     }
 
     Configuration() 
@@ -47,6 +49,10 @@ public class Configuration
         else openSession = false;
     }
     
+    public Boolean getCommentsEnabled()
+    {
+        return commentsEnabled;
+    }
     public Boolean getSessionType()
     {
         if (openSession)

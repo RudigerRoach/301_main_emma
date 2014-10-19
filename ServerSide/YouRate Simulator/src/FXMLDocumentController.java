@@ -197,7 +197,7 @@ public class FXMLDocumentController implements Initializable{
         if(Normal.isSelected())
             type = "normal";
         else if (Elimination.isSelected())
-            type = "elimination";
+            type = "yesNo";
         else if (Winner.isSelected())
             type = "winner";
         else 
@@ -215,7 +215,7 @@ public class FXMLDocumentController implements Initializable{
                 System.out.println("Judges in list: "+ judges[i]);
              
             //Create Configuration
-            mySession = new Configuration(names,images,judges,max,min,open,cont,imgDetails,type);
+            mySession = new Configuration(names,images,judges,max,min,open,cont,imgDetails,type,comments);
 
              
 
