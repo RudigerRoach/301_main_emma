@@ -184,27 +184,27 @@ Voting Activity Diagram
 \subsection{Domain objects}
 \section{Testing Information}
 \subsection{Unit testing}
-\paragraph{}For unit testing we used Jasmine framework for the mobile side of our system which is a javascript unit testing framework. We used an mock java server for mobile unit testing and mock data to test specific functions in the code.
-\paragraph{} For the server side component of our system we used a JUnit testing framework. Used HTTP default clients to perform mock networks calls for the tests and mock data to test certain components of the server.
+\paragraph{}For unit testing we used the Jasmine framework for the mobile side of our system which is a javascript unit testing framework. We used an mock java server for mobile unit testing and mock data to test specific functions in the code.
+\paragraph{} For the server side component of our system we used a JUnit testing framework. Using HTTP default clients to perform mock network calls for the tests and mock data to test certain components of the server.
 \paragraph{}Mock data was set up to test the pre- and post conditions of the software contract.
 \subsection{Usability testing}
-\paragraph{}Our mobile side was developed focusing on user centered development. Through out the design and implementing of the mobile side users where consulted in short feedback cycles getting there inputs and new ideas how to make the application usable as possible.
+\paragraph{}Our mobile side was developed focusing on user centered development. Throughout the design and implementing of the mobile side users where consulted in short feedback cycles, getting there inputs and new ideas on how to make the application as usable as possible.
 \paragraph{}
-During our test we had a user group of 6 random people. We run a the 3 different types of sessions with them. We gave them some tasks to do such as rotating the screen, change the language, evaluate the flow of voting. 
+During our test we had a user group of 6 random people. We run the 3 different types of sessions with them. We gave them some tasks to do such as rotating the screen, change the language, and to evaluate the flow of voting. 
 \paragraph{} 
 \advance\leftskip-1.3cm
 \includegraphics[scale=0.55]{Pictures/ConsentForm.pdf}
 \pagebreak
 \paragraph{} Task that needed to be performed
 \begin{enumerate}
-\item Change the IP in the settings tab
-\item Change the comment setting in settings tab
-\item Login into the session
-\item Submit one score using textbox
-\item Submit one score using slidebar
-\item Finish the session
-\item For yes no session push yes then no then submit.
-\item Scroll between photos to select a winner
+\item Change the server address in the settings tab.
+\item Change the comment setting in the settings tab.
+\item Login into the session.
+\item Submit one score using a textbox.
+\item Submit one score using a slidebar.
+\item Finish the session.
+\item For an elimination session, push yes then no then submit.
+\item Scroll between photos to select a winner.
 \item Add an comment and submit your winner.
 \end{enumerate}
 \paragraph{}
@@ -212,10 +212,11 @@ During our test we had a user group of 6 random people. We run a the 3 different
 \subsection{How tests where executed}
 \paragraph{}
 Junit netbeans plugin for the server side.
+TiJasmine modules and manual mock-server execution for the mobile side.   
 \subsection{Test coverage}
 \begin{itemize}
-\item Have about 60 percent test coverage on the mobile side.
-\item Have about 70 percent test coverage on the server side. 
+\item Approximately 60 percent test coverage on the mobile side.
+\item Approximately 70 percent test coverage on the server side. 
 \end{itemize}
 
 \section{Project management}
@@ -255,18 +256,18 @@ We aimed to provide burndown charts for the entire project progress but unfortun
 \item Voting with 1 image\\
 \includegraphics[width=80mm]{Pictures/v1i.png}
 \end{itemize}
-\subsection{un-implemented functionality}
+\subsection{Un-implemented functionality}
 \begin{itemize}
 \item Displaying results after voting has completed after.
-\item the mobile app is unaware of a server crash and will wait indefinitely in this case.
+\item The mobile app is unaware of a server crash and will wait indefinitely in this case.
 \end{itemize}
 \subsection{Main risks and challenges faced}
 \begin{itemize}
 \item Getting to know Jira and issue tracking.
 \item Getting to know the Appcelerator platform.
 \item Getting to know JavaFX using FXML.
-\item Multi platform support.
-\item Multi resolution support.
+\item Multi-platform support.
+\item Multi-screen-resolution support.
 \end{itemize}
 \section{User manual for server}
 \subsection{Creating a session}
