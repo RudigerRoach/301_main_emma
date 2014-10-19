@@ -64,7 +64,7 @@ function setCommentType() {
 	} else {
 		var textfield = Ti.UI.createTextField();
 		var dialog = Ti.UI.createAlertDialog({
-			title : 'entryMethod',
+			titleid : 'entryMethod',
 			buttonNames : [L('btn'), L('txt'), L('cancel')]
 		});
 		dialog.addEventListener('click', function(e) {

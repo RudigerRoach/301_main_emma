@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-    <id>com.YouRate.www</id>
-    <name>YouRate</name>
+    <id>com.uRate.www</id>
+    <name>uRate</name>
     <version>1.0</version>
     <publisher>searcher</publisher>
-    <url>http://www.yourate.com</url>
+    <url>http://www.urate.com</url>
     <description>not specified</description>
     <copyright>2014 by searcher</copyright>
     <icon>appicon.png</icon>
