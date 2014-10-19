@@ -227,18 +227,18 @@ public class FXMLrunningSessionController implements Initializable {
                 names[i] = imagePaths.get(i).toString().substring(last+1);
             }
             
-            if(config.type == "normal")
-            {
-                controller.setName("Final Scores");
-                controller.setType("average", server.getScores(), names);
-                controller.populate();
-            }
-            else
-            {
+//            if(config.type == "normal")
+//            {
+//                controller.setName("Final Scores");
+//                controller.setType("average", server.getScores(), names);
+//                controller.populate();
+//            }
+//            else
+//            {
                 controller.setName("Final Scores");
                 controller.setType("sum", server.getScores(), names);
                 controller.populate();
-            }
+//            }
                 Screen screen = Screen.getScreens().get(sec);
                 dialogStage.setX(screen.getVisualBounds().getMinX());
                 dialogStage.setY(screen.getVisualBounds().getMinY());
