@@ -44,7 +44,7 @@ function testStatus(service) {
 				titleid : 'votingTitle'
 			});
 			dialog.addEventListener('click', function(e) {
-				var win = Alloy.createController('noSession').getView();
+				var win = Alloy.createController('login').getView();
 				win.open();
 			});
 			dialog.show();
