@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="588.0" prefWidth="718.0" style="-fx-background-image: url('Scema/linenLarge.png');" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocumentController">
+    <children>
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <Label id ="outlbl" layoutX="310.0" layoutY="21.0" prefHeight="51.0" prefWidth="200.0" text="uRate" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="43.0" />
+         </font>
+      </Label>
+      <Pane layoutX="30.0" layoutY="88.0" prefHeight="401.0" prefWidth="284.0" style="-fx-background-color: white; -fx-border-color: black;">
+         <children>
+            <CheckBox fx:id="controlledSession" layoutX="11.0" layoutY="176.0" mnemonicParsing="false" text="Navigation Controlled" />
+            <CheckBox fx:id="openSession" layoutX="10.0" layoutY="211.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="263.0" text="Open Judging(Anyone can Judge)" />
+            <CheckBox fx:id="commentsEnabled" layoutX="11.0" layoutY="245.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="244.0" text="Comments Enabled" />
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="197.0" text="Session Configurations">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Pane layoutX="10.0" layoutY="42.0" prefHeight="112.0" prefWidth="263.0" style="-fx-border-color: black;">
+               <children>
+                  <Label layoutX="54.0" layoutY="6.0" prefHeight="17.0" prefWidth="120.0" text="Session Type">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                    <fx:define>
+                    <ToggleGroup fx:id="myToggleGroup"/>
+                    </fx:define>
+                  <RadioButton toggleGroup="$myToggleGroup" fx:id="Normal" layoutX="11.0" layoutY="32.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="138.0" text="Normal" />
+                  <RadioButton toggleGroup="$myToggleGroup" fx:id="Elimination" layoutX="11.0" layoutY="57.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="161.0" text="Elimination(Yes/No)" />
+                  <RadioButton toggleGroup="$myToggleGroup" fx:id="Winner" layoutX="11.0" layoutY="85.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="154.0" text="Winner(Choose 1)" />
+               </children>
+            </Pane>
+            <Pane layoutX="10.0" layoutY="284.0" prefHeight="103.0" prefWidth="263.0" style="-fx-background-color: white; -fx-border-color: black;">
+               <children>
+                  <TextField fx:id="minimumScore" layoutX="131.0" layoutY="36.0" prefHeight="21.0" prefWidth="39.0" text="0" />
+                  <Label layoutX="58.0" layoutY="6.0" prefHeight="17.0" prefWidth="108.0" text="Scoring Range">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="8.0" layoutY="38.0" prefHeight="20.0" prefWidth="120.0" text="Minimum Score" />
+                  <Label layoutX="8.0" layoutY="75.0" prefHeight="17.0" prefWidth="108.0" text="Maximum Score" />
+                  <TextField fx:id="maximumScore" layoutX="131.0" layoutY="71.0" prefHeight="23.0" prefWidth="39.0" text="10" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      
+      
+      <TableView fx:id="judges" layoutX="351.0" layoutY="316.0" prefHeight="148.0" prefWidth="335.0" style="-fx-border-color: Black;">
+        <columns>
+          <TableColumn prefWidth="173.0" text="Judges" fx:id="email"/>
+        </columns>
+      </TableView>
+      
+      
+      
+      <TableView fx:id="imageTable" layoutX="351.0" layoutY="87.0" prefHeight="195.0" prefWidth="335.0" style="-fx-border-color: black;">
+        <columns>
+          <TableColumn prefWidth="163.0" text="Image" fx:id="imagePath" />
+          <TableColumn prefWidth="162.0" text="Description" fx:id="descript" />
+        </columns>
+      </TableView>
+      <Button fx:id="start" layoutX="29.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleStartButtonAction" prefHeight="54.0" prefWidth="657.0" text="Start Session">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>    
+                  <Button layoutX="353.0" layoutY="282.5" mnemonicParsing="false" onAction="#handleAddImage" prefHeight="25.0" fx:id = "addImage" prefWidth="75.0" text="Add" />
+                  <Button id = "menu" layoutX="437.0" layoutY="282.5" mnemonicParsing="false" onAction="#handledeleteSelected" prefHeight="25.0" fx:id = "deleteSelected" prefWidth="75.0" text="Delete" />
+                  <Button layoutX="521.0" layoutY="282.5" mnemonicParsing="false" onAction="#handleeditSelected" prefHeight="25.0" fx:id = "editSelected" prefWidth="80.0" text="Edit selected" />
+                  <Button layoutX="610.0" layoutY="282.5" mnemonicParsing="false" onAction="#handleimportImage" prefHeight="25.0" fx:id = "importImage" prefWidth="75.0" text="Import" />
+                  
+                  
+                  <Button fx:id="removeJudge" layoutX="437.0" layoutY="464.5" mnemonicParsing="false" onAction="#handleRemoveJudge" prefHeight="25.0" prefWidth="75.0" text="Delete" />
+                  <Button fx:id="importJudge" layoutX="521.0" layoutY="464.5" mnemonicParsing="false" onAction="#handleImportJudges" prefHeight="25.0" prefWidth="80" text="Import" />
+                  <Button fx:id="addJudge" layoutX="353.0" layoutY="464.5" mnemonicParsing="false" onAction="#handleAddJudge" prefHeight="25.0" prefWidth="75.0" text="Add" />
+                  <Button fx:id="exportJudges" layoutX="610.0" layoutY="464.5" mnemonicParsing="false" onAction="#handleExportJudges" prefHeight="25.0" prefWidth="75.0" text="Export" />
+    </children>
+</AnchorPane>
