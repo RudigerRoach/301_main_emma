@@ -1,0 +1,32 @@
+<resources>
+	<string name="autoLoginL">Der Versuch automatisch login</string>
+	<string name="loginL">Der Versuch login...</string>
+	<string name="waitL">Warten auf server...</string>
+	<string name="noSessionL">No session currently running...</string>
+	<string name="emailL">Email addresse:</string>
+	<string name="loginB">Inloggen</string>
+	<string name="submitB">Einsenden</string>
+	<string name="commentB">äußern</string>
+	<string name="sliderT">Partitur:</string>
+	<string name="yesB">Ja</string>
+	<string name="noB">Nein</string>
+	<string name="winnerB">Gewinner</string>
+	<string name="yesNoMessage">Kies ja of nein</string>
+	<string name="please">Maak een keuze</string>
+	<string name="winnerMessage">Kies een winnaar</string>
+	<string name="winnerSubmit1">Submit as winner</string>
+	<string name="winnerSubmit2">Are you sure that this should be the winner?</string>
+	<string name="confirm">Bevestigen</string>
+	<string name="cancel">Annuleren</string>
+	<string name="invalidInput">Invalid input</string>
+	<string name="invalidEmail">Invalid email address entered</string>
+	<string name="error">Fout</string>
+	<string name="error2">Fout:</string>
+	<string name="ok">Ok</string>
+	<string name="newAddress">Set nieuwe adres</string>	
+	<string name="btn">Toon knop</string>	
+	<string name="txt">Wys teks boks</string>	
+	<string name="entryMethod">Set reactie invoermethode</string>
+	<string name="votingTitle">Stem sessie</string>
+	<string name="votingMessage">Stem sessie afgerond</string>
+</resources>

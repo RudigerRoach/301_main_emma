@@ -1,0 +1,23 @@
+"#table[platform=ios]":{
+	top: 50,
+	backgroundImage: '/universal/bg.png'
+},
+".trow":{
+	backgroundImage: '/universal/bg.png'
+},
+".rowLabel":{
+	left: 5,
+	font: {
+		fontSize: 20,
+		fontFamily: 'Helvetica Neue'
+	},
+	color: 'white'
+}
+".rowHint":{
+	left: 5,
+	font: {
+		fontSize: 14,
+		fontFamily: 'Helvetica Neue'
+	},
+	color: 'lightgray'
+}

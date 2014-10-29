@@ -1,0 +1,40 @@
+"#currentImage": 
+{
+	top: 60,
+	borderRadius: "5",
+    width: "200", 
+    height: "200"
+},
+"#toolbar[platform=ios]": {
+	backgroundColor: "black",
+	top: "0",
+	padding: "10",
+	borderTop: false,
+	borderBottom: true,
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: "100"
+},
+"#scoreSlider": {	
+	color: "black",
+	left:20
+},
+"#sliderLabel": {	
+	textid: 'sliderT',
+	width: "110",
+	height: "30",
+	color: "black",
+	font: { 
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	textAlign: 'center',
+	shadowColor: "#aaa"
+}
+"#sliderArea": {	
+    width:50,
+    height:30
+}
+

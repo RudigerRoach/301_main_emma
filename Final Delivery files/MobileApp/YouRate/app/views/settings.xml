@@ -1,0 +1,23 @@
+<Alloy>
+	<Window id="settingsPage" onOpen="loadnames" >
+		<Toolbar platform="ios" top="0" padding="10" borderBottom="true" height="100" >
+			<!-- The Items tag sets the Toolbar.items property. -->
+			<Items>
+				<FlexSpace/>
+				<Label top="10">Settings</Label>
+				<FlexSpace/>
+				<Button top="10" id="btnDone" title="Done" style="Ti.UI.iPhone.SystemButtonStyle.DONE" onClick="closePage"/>
+			</Items>
+		</Toolbar>
+		<TableView id="table">
+			<TableViewRow id="adrRow" class="trow" layout="vertical" onClick="setIP">
+				<Label id="adrTitle" class="rowLabel">Set Server Address</Label>
+				<Label id="adrHint" class="rowHint" >(Currently: )</Label>
+			</TableViewRow>
+			<TableViewRow id="comRow" class="trow" layout="vertical" onClick="setCommentType">
+				<Label id="comTitle" class="rowLabel">Set comment entry method</Label>
+				<Label id="comHint" class="rowHint" >(Currently: Show button)</Label>
+			</TableViewRow>
+		</TableView>
+	</Window>
+</Alloy>

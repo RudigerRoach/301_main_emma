@@ -1,0 +1,13 @@
+<Alloy>
+	<Window id="loginPage">
+		<!-- iOS toolbar -->
+		<Toolbar id="toolbar" platform="ios">
+			<Button id="appName">uRate</Button>
+		</Toolbar>
+		
+		<!-- iOS and Android -->
+		<Label id="emailLabel"></Label>	
+        <TextArea id="textArea" keyboardType="Titanium.UI.KEYBOARD_EMAIL">
+		<Button id="loginButton" onClick="doLogin"></Button>
+    </Window>
+</Alloy>

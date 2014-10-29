@@ -1,0 +1,32 @@
+<resources>
+	<string name="autoLoginL">Próba automatycznego logowania...</string>
+	<string name="loginL">Próbuje się zalogować...</string>
+	<string name="waitL">Oczekiwanie na serwer...</string>
+	<string name="noSessionL">Nie uruchomione sesji*...</string>
+	<string name="emailL">Adres e-mail:</string>
+	<string name="loginB">Zaloguj się</string>
+	<string name="submitB">Potwierdz</string>
+	<string name="commentB">Dodaj komentarz</string>
+	<string name="sliderT">Wynik:</string>
+	<string name="yesB">Tak</string>
+	<string name="noB">Nie</string>
+	<string name="winnerB">Zwycięzca</string>
+	<string name="yesNoSubmit">Wybierz tak lub nie</string>
+	<string name="please">Wybierz</string>
+	<string name="winnerMessage">Proszę wybrać zwycięzca</string>
+	<string name="winnerSubmit1">Przedstawić jako zwycięzca</string>
+	<string name="winnerSubmit2">Jesteś pewien, że powinien to być zwycięzcą?</string>
+	<string name="confirm">Potwierdz</string>
+	<string name="cancel">Anuluj</string>
+	<string name="invalidInput">Nieprawidłowe dane</string>
+	<string name="invalidEmail">Nieprawidłowe adres e-mail wpisany</string>
+	<string name="error">Błąd</string>
+	<string name="error2">Błąd:</string>
+	<string name="ok">Dobrze</string>
+	<string name="newAddress">Ustawić nowy adres</string>	
+	<string name="btn">Pokaż przycisk</string>	
+	<string name="txt">Pokazać pole tekstowe</string>	
+	<string name="entryMethod">Sposób wejścia zestaw komentarz</string>
+	<string name="votingTitle">Głosowanie sesji</string>
+	<string name="votingMessage">Sesja Głosowanie zakończone</string>
+</resources>

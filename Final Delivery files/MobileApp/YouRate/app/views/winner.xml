@@ -1,0 +1,12 @@
+<Alloy>
+	<Window id="winnerPage" onFocus="resizePage">
+		<!-- iOS toolbar -->
+		<Toolbar id="toolbar" platform="ios">
+			<Button id="appName">uRate</Button>
+		</Toolbar>
+
+		<!-- iOS and Android -->
+		<Button id="submitButton" onClick="doSubmit">Submit</Button>
+		<Button id="winnerButton">Choose as winner</Button>
+	</Window>
+</Alloy>

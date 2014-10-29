@@ -1,0 +1,32 @@
+<resources>
+	<string name="autoLoginL">Attempting automatic login...</string>
+	<string name="loginL">Attempting to log in...</string>
+	<string name="waitL">Waiting for server...</string>
+	<string name="noSessionL">No session currently running...</string>
+	<string name="emailL">Email address:</string>
+	<string name="loginB">Login</string>
+	<string name="submitB">Submit</string>
+	<string name="commentB">Add comment</string>
+	<string name="sliderT">Score:</string>
+	<string name="yesB">Yes</string>
+	<string name="noB">No</string>
+	<string name="winnerB">Winner</string>
+	<string name="yesNoMessage">Please choose yes or no</string>
+	<string name="winnerMessage">Please choose a winner</string>
+	<string name="please">Please choose</string>
+	<string name="winnerSubmit1">Submit as winner</string>
+	<string name="winnerSubmit2">Are you sure that this should be the winner?</string>
+	<string name="confirm">Confirm</string>
+	<string name="cancel">Cancel</string>
+	<string name="invalidInput">Invalid input</string>
+	<string name="invalidEmail">Invalid email address entered</string>
+	<string name="error">Error</string>
+	<string name="error2">Error:</string>
+	<string name="ok">Ok</string>
+	<string name="newAddress">Set new address</string>	
+	<string name="btn">Show button</string>	
+	<string name="txt">Show text box</string>	
+	<string name="entryMethod">Set comment entry method</string>	
+	<string name="votingTitle">Voting session</string>
+	<string name="votingMessage">Voting session completed</string>
+</resources>

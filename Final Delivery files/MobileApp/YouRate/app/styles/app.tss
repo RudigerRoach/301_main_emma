@@ -1,0 +1,46 @@
+"Window[platform=android]":{
+	backgroundImage:'/universal/bg.png'
+},
+"Window[platform=ios]":{
+	backgroundImage:'/universal/bg.png',
+},
+"TextArea":{
+	color: "black",
+	backgroundColor:"white",
+	borderWidth:"2",
+    borderColor:"#bbb",
+    borderRadius:"5",
+    textAlign:"left",
+	font: {
+		fontSize: 20,
+		fontFamily: 'Helvetica Neue'
+	}
+},
+"#appName": 
+{
+    color: "black", 
+    textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	top: "10",
+    width: "150", 
+    height: "35"
+},
+"#submitButton": {
+	titleid: 'submitB',
+	borderWidth: "1",
+	borderColor: "#bbb", 
+	borderRadius: "8",
+	backgroundColor: "#bbb",
+	color: "black", 
+	textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: 50,
+	left: 20
+}
+

@@ -1,0 +1,53 @@
+"#loginPage": {
+	backgroundColor: "#DFE4E7",
+	exitOnClose: true
+},
+"#emailLabel": {
+	textid: 'emailL',
+	width: "200",
+	height: "50",
+	color: "black",
+	top: "50",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	textAlign: 'center'
+},
+"#textArea": 
+{
+    textAlign: "center", 
+    value: "",
+    top: "100", 
+    width: "250", 
+    height: "40",
+},
+"#loginButton": 
+{
+	titleid: 'loginB',
+	borderWidth: "1",
+	borderColor: "#bbb", 
+	borderRadius: "8",
+	backgroundColor: "#bbb",
+    color: "black", 
+    textAlign: "center",
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	}, 
+    top: "160", 
+    width: "170", 
+    height: "40"
+},
+"#toolbar[platform=ios]": {
+	backgroundColor: "black",
+	top: "0",
+	padding: "10",
+	borderTop: false,
+	borderBottom: true,
+	font: {
+		fontSize: 24,
+		fontFamily: 'Helvetica Neue'
+	},
+	height: "100"
+}
