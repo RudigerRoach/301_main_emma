@@ -43,6 +43,7 @@ function setIP() {
 	function setAdress(newAddress) {
 		Ti.App.Properties.setString('serverAddress', newAddress);
 		$.adrHint.text = '(Currently: ' + Ti.App.Properties.getString('serverAddress') + ')';
+		require('Network').setAddress(Ti.App.Properties.getString('serverAddress'));
 	}
 
 }

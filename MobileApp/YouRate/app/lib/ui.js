@@ -133,6 +133,7 @@ exports.getCommentArea = function() {
 		borderRadius : "8",
 		backgroundColor : "#bbb",
 		color : "black",
+		zindex: 10,
 		font : {
 			fontSize : 20,
 			fontFamily : 'Helvetica Neue'

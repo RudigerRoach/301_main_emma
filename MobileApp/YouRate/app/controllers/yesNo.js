@@ -25,6 +25,8 @@ $.currentImage.addEventListener('click', function(e) {
 	fullScreenImage();
 });
 
+$.submitButton.opacity = 0.3;
+
 //Resize all artifacts on the screen to match the screen size and orientation
 function resizePage() {
 	var screenWidth = ui.platformWidth();
@@ -36,7 +38,6 @@ function resizePage() {
 
 	$.submitButton.top = screenHeight - 70;
 	$.submitButton.width = screenWidth - 40;
-	$.submitButton.opacity = 0.3;
 	screenLeft = $.submitButton.top;
 
 	if (comments == true) {		
@@ -44,26 +45,22 @@ function resizePage() {
 			commentButtonEnabled();
 			commentButton.top = screenLeft - 70;
 			screenLeft = commentButton.top;
-			$.sliderArea.blur();
 		} else if (displayAsButton && commentButton != null) {
 			commentButton.top = screenLeft - 70;
 			commentButton.width = screenWidth - 40;
 			commentArea.width = screenWidth - 40;
 			screenLeft = commentButton.top;
-			$.sliderArea.blur();
 		} else if (!displayAsButton && commentBox == null) {
 			commentsEnabled();
 			commentBox.top = screenLeft - 70;
 			commentLab.top = screenLeft - 100;
 			screenLeft = commentLab.top;
-			$.sliderArea.blur();
 		} else if (!displayAsButton && commentBox != null) {
 			commentBox.top = screenLeft - 70;
 			commentLab.top = screenLeft - 100;
 			commentBox.width = screenWidth - 40;
 			commentArea.width = screenWidth - 40;
 			screenLeft = commentLab.top;
-			$.sliderArea.blur();
 		}
 	}
 
@@ -135,20 +132,20 @@ function commentsEnabled() {
 		commentArea.focus();
 	});
 	commentBox.addEventListener('focus', function(e) {
-		$.normalPage.add(commentArea);
+		$.yesNoPage.add(commentArea);
 		commentArea.fireEvent('setFocus');
 	});
 	commentArea.addEventListener('blur', function(e) {
 		commentText = commentArea.value;
 		commentBox.value = commentText;
 		commentArea.blur();
-		$.normalPage.remove(commentArea);
+		$.yesNoPage.remove(commentArea);
 	});
 	commentArea.addEventListener('return', function(e) {
 		commentArea.blur();
 	});
-	$.normalPage.add(commentLab);
-	$.normalPage.add(commentBox);
+	$.yesNoPage.add(commentLab);
+	$.yesNoPage.add(commentBox);
 }
 
 function commentButtonEnabled() {
@@ -159,18 +156,18 @@ function commentButtonEnabled() {
 		commentArea.focus();
 	});
 	commentButton.addEventListener('click', function(e) {
-		$.normalPage.add(commentArea);
+		$.yesNoPage.add(commentArea);
 		commentArea.fireEvent('setFocus');
 	});
 	commentArea.addEventListener('blur', function(e) {
 		commentText = commentArea.value;
 		commentArea.blur();
-		$.normalPage.remove(commentArea);
+		$.yesNoPage.remove(commentArea);
 	});
 	commentArea.addEventListener('return', function(e) {
 		commentArea.blur();
 	});
-	$.normalPage.add(commentButton);
+	$.yesNoPage.add(commentButton);
 }
 
 function fullScreenImage() {

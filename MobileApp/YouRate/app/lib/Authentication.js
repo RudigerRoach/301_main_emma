@@ -11,6 +11,11 @@ var autologinIsDone = false;
 var sessionObj = require('alloy').Globals.sessionObj;
 var debug = false;
 
+exports.updateNetwork =function(){
+	net = null;
+	net = require("Network");
+};
+
 exports.loginStatus = function() {
 	return returnStatus;
 };
@@ -77,7 +82,7 @@ exports.login = function(email) {
 		//Login failed
 		loginIsDone = true;
 	};
-
+	
 	net.loginPost(payload, onSuccessCallback, onErrorCallback);
 };
 

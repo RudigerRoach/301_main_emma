@@ -34,3 +34,9 @@ exports.getNextImgPost = function(payload, onSuccessCallback, onErrorCallback) {
 exports.resultPost = function(payload, onSuccessCallback, onErrorCallback) {
 	xhr.post(submitVoteURL, payload, onSuccessCallback, onErrorCallback);
 };
+exports.setAddress = function(newaddress)
+{
+	netAddress = 'http://' + Ti.App.Properties.getString('serverAddress');
+	Ti.API.info('setting new address: '+netAddress);
+	
+};
