@@ -93,16 +93,22 @@ The mobile application will have to go through a web-service which will be the p
 \item JIRA Framework for the SCRUM agile method.
 \item Appcelerator Titanium framework which is an open-source software development kit for cross-platform mobile development.
 \item Jetty for hosting server and servlet handling.
-\item Jasmine framework to run javascript unit  testing in the Titanium framework.
+\item TiJasmine framework to run javascript unit  testing in the Titanium framework.
 \item JUnit for java unit testing framework.
 \end{itemize}
 \subsection{Technologies and languages}
 \begin{itemize}
 \item Java
 \item JavaScript
+<<<<<<< HEAD
 \item XML
 \item db40 Object database
 \item JavaFX
+=======
+\item db40 Object database
+\item JavaFX
+\item FXML
+>>>>>>> FETCH_HEAD
 \end{itemize}
 
 \pagebreak
@@ -194,6 +200,234 @@ Voting Activity Diagram
 \end{center}
 
 \subsection{Domain objects}
+\section{Testing Information}
+\subsection{Unit testing}
+\paragraph{}For unit testing we used the Jasmine framework for the mobile side of our system which is a javascript unit testing framework. We used an mock java server for mobile unit testing and mock data to test specific functions in the code.
+\paragraph{} For the server side component of our system we used a JUnit testing framework. Using HTTP default clients to perform mock network calls for the tests and mock data to test certain components of the server.
+\paragraph{}Mock data was set up to test the pre- and post conditions of the software contract.
+\subsection{Usability testing}
+\paragraph{}Our mobile side was developed focusing on user centered development. Throughout the design and implementing of the mobile side users where consulted in short feedback cycles, getting there inputs and new ideas on how to make the application as usable as possible.
+\paragraph{}
+During our test we had a user group of 6 random people. We run the 3 different types of sessions with them. We gave them some tasks to do such as rotating the screen, change the language, and to evaluate the flow of voting. 
+\paragraph{} 
+\advance\leftskip-1.3cm
+\includegraphics[scale=0.55]{Pictures/ConsentForm.pdf}
+\pagebreak
+\paragraph{} Task that needed to be performed
+\begin{enumerate}
+\item Change the server address in the settings tab.
+\item Change the comment setting in the settings tab.
+\item Login into the session.
+\item Submit one score using a textbox.
+\item Submit one score using a slidebar.
+\item Finish the session.
+\item For an elimination session, push yes then no then submit.
+\item Scroll between photos to select a winner.
+\item Add an comment and submit your winner.
+\end{enumerate}
+\paragraph{}
+\includegraphics[scale=0.55]{Pictures/results.jpg}
+\subsection{How tests where executed}
+\paragraph{}
+Junit netbeans plugin for the server side.
+TiJasmine modules and manual mock-server execution for the mobile side.   
+\subsection{Test coverage}
+\begin{itemize}
+\item Approximately 60 percent test coverage on the mobile side.
+\item Approximately 70 percent test coverage on the server side. 
+\end{itemize}
+
+\section{Project management}
+\subsection{Software development process}
+We followed the scrum software development methodology. Its agility, in terms of requirements, meant that the project was able to grow during development, while we where discovering new requirements from the client.
+\subsection{Issue management}
+On the clients suggestion, we used the Jira issue tracking system, combined with git and gitHub for version control.
+\pagebreak
+\subsection{Team profile}
+Melany Barnes:
+\begin{itemize}
+\item Team Lead.
+\item Developing the bulk of the mobile app front-end.
+\end{itemize}
+Dieter Doman:
+\begin{itemize}
+\item Developing the back-end of the server app.
+\end{itemize}
+Johan Esterhuyse:
+\begin{itemize}
+\item Developing the front end for the server app.
+\item Paying special attention to documentation and diagrams.
+\end{itemize}
+Rudiger Roach:
+\begin{itemize}
+\item Developing the back-end of the mobile app.
+\item Developing the database for the server app.
+\item Assisted in development of the mobile app front-end.
+\end{itemize}
+\subsection{Project progress}
+We aimed to provide burndown charts for the entire project progress but unfortunately The issue tracking system ran from a server at the clients' residence and it experienced a lot of down-time. Luckily we can provide burndown charts for the following sprints:
+\begin{itemize}
+\item Authentication\\
+\includegraphics[width=80mm]{Pictures/Auth.png}
+\item Auto login\\
+\includegraphics[width=80mm]{Pictures/ALchart.png}.
+\item Voting with 1 image\\
+\includegraphics[width=80mm]{Pictures/v1i.png}
+\end{itemize}
+\subsection{Un-implemented functionality}
+\begin{itemize}
+\item Displaying results after voting has completed after.
+\item The mobile app is unaware of a server crash and will wait indefinitely in this case.
+\end{itemize}
+\subsection{Main risks and challenges faced}
+\begin{itemize}
+\item Getting to know Jira and issue tracking.
+\item Getting to know the Appcelerator platform.
+\item Getting to know JavaFX using FXML.
+\item Multi-platform support.
+\item Multi-screen-resolution support.
+\end{itemize}
+\section{User manual for server}
+\subsection{Creating a session}
+\includegraphics[scale=0.5]{Pictures/serverMain.jpg}
+\begin{enumerate}
+\item Specify the Session type:
+\begin{enumerate}
+\item Normal is a session where the user rates each picture based on general impression.
+\item Yes/No is a session where the user states whether they think a picture should go to the next round or not.
+\item Winner is a session where the user chooses one winner and the picture with the most votes wins.
+\end{enumerate}
+\item Specify if the session is a controlled session or not.
+\begin{enumerate}
+\item If the creator of the session would like to guide the judges through voting then tick the box.
+\item If the creator of the session would like judges to judge on their own time then don't tick the box.
+\end{enumerate}
+\item Specify if the session should be open to all judges.
+\begin{enumerate}
+\item If anyone can judge then tick the box.
+\item If only specific people may judge then don't tick the box.
+\end{enumerate}
+\item Specify whether comments should be enabled.
+\begin{enumerate}
+\item If you want the judges to give their opinion then tick the box.
+\item If you don't want judges to give their opinion then don't tick the box.
+\end{enumerate}
+\item Specify the minimum and maximum scores.
+\begin{enumerate}
+\item Minimum has to be smaller than maximum.
+\end{enumerate}
+\item Add Images to the voting session.
+\begin{enumerate}
+\item Click the "+" button to add a single image.
+\begin{enumerate}
+\item Click browse and select an image.
+\item Type in a description.
+\end{enumerate}
+\item Click the "++" button to import multiple images.
+\begin{enumerate}
+\item Click the browse next to the "select images" and select the images.
+\item Click the browse next to the "select description file" and select the description file.
+\begin{enumerate}
+\item The description file is a file which specifies the details for each image one line at a time.
+\end{enumerate}
+\end{enumerate}
+\item Click the gear button to edit a selected image.
+\begin{enumerate}
+\item First select the image.
+\item Click the gear.
+\item Specify the changes.
+\end{enumerate}
+\item Click the "-" button to delete a selected image.
+\begin{enumerate}
+\item First select the image.
+\item Click the "-" button to remove the selected image.
+\end{enumerate}
+\end{enumerate}
+\item Add Judges to the voting session(only neccesary if open judging(see 3. of manual) is not enabled).
+\begin{enumerate}
+\item Click the "add" button to add a judge.
+\begin{enumerate}
+\item Specify the judges email address and click add.
+\end{enumerate}
+\item Click the "delete" button to remove the selected judge.
+\begin{enumerate}
+\item First select the judge.
+\item Click the "-" button to remove the selected judge.
+\end{enumerate}
+\item Click the "import" button to import judges.
+\begin{enumerate}
+\item Click browse and select a judges file.
+\begin{enumerate}
+\item A judges file is a file that specifies the email addresses of judges one at a time.
+\end{enumerate}
+\end{enumerate}
+\item Click the "export" button to export images.
+\begin{enumerate}
+\item Browse to where you want to save the file and click save.
+\end{enumerate}
+\end{enumerate}
+\item Click "Start Session" in order to start running a session.
+\begin{enumerate}
+\item If any data is missing, the creator will be informed.
+\end{enumerate}
+\end{enumerate}
+\subsection{Controlling the session:}
+\includegraphics[scale=0.5]{Pictures/serverRunning.jpg}
+\begin{enumerate}
+\item Click the "Next" button in order to preview the next image.
+\begin{enumerate}
+\item If this is a controlled session(See session creation point 2), this will take the judges(using app) to the next image.
+\end{enumerate}
+\item Click the "Previous" button to go back to the previous image.
+\begin{enumerate}
+\item This is not possible if the session is controlled(See session creation point 2).
+\end{enumerate}
+\item When all judges are done voting click on "Finalize Session".
+\begin{enumerate}
+\item This will end the judging and then display the results.
+\end{enumerate}
+\end{enumerate}
+\subsection{Importing project for further development}
+Since by the client's request the only wanted an netbeans project. Thus open project in netbeans after pulling from our git repository and import the all the external libraries under external libraries folder.
+\subsection{Installing the server}
+\paragraph{}
+Run following command after building project in netbeans(which will create jar file in dist folder) in command line in the dist folder: "java -jar YouRate Simulator.jar"
+\section{User manual for mobile application}
+\paragraph{}
+When the application opens up the app will first try to automatically log in (1.1). If the user has logged in using the device before, the server will recognise the device and automatically log the user into the app. If automatic login fails, the user will be redirected to the login screen.
+\paragraph{}
+Waiting screens with different messages might be encountered:
+\begin{itemize}
+\item Attempting automatic login… (See 1.1)
+\item Attempting to log in… (See 1.2)
+\item Waiting for server…  (See 1.3)
+\end{itemize}
+\paragraph{}
+The email address is validated, thus a valid email address must be entered. A message will be displayed if an invalid email address was entered and the login button was clicked. If the email address is valid the app will try to log in and a waiting screen (1.2) will be displayed. When the user is logged in successfully, waiting screen (1.3) will be shown. When an image on the server is ready to be displayed, the application will continue to the correct type of voting page (1.4, 1.5, 1.6)
+\paragraph{}
+Number based scoring (1.4):
+\paragraph{}
+The score can be changed by moving the slider or by clicking on the score text area. When a user clicks on the text area, the device onscreen keyboard will pop up and the user can enter a score.
+\paragraph{}
+\includegraphics[scale=0.3]{Pictures/ScoreKeyboard.png}
+\paragraph{}
+\includegraphics[scale=0.3]{Pictures/ScoreSlider.png}
+\paragraph{}
+Elimination round (1.5): 
+The user can choose between yes or no per image and then click on the submit button to submit their result.
+\paragraph{}
+\includegraphics[scale=0.3]{Pictures/YesNo.png}
+\paragraph{}
+Choose a winner (1.6):
+The user can swipe through the images and choose 1 as the winner and then click on the submit button to submit their result.
+\paragraph{}
+Changing the settings:
+The settings can be changed by clicking the device hardware menu button, if the device does not have a hardware menu button a settings icon will be displayed on the screen. The settings page will look as follows:
+\paragraph{}
+\includegraphics[scale=0.3]{Pictures/Settings.png}
+\paragraph{}
+The server address can be changed by clicking on “Set Server Address”. To successfully connect to the server, the correct server address must be entered. Example address: 192.168.0.100 or www.uRate.com
+To change the comment entry method, the “Set comment entry method” can be clicked. Comments can be entered via clicking a button or by having a textbox always visible on the screen.
 \section{Glossary}
 EMMA - Entry and Member Management Application\\
 His - Refers to his/her\\
